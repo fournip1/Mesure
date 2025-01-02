@@ -1,0 +1,858 @@
+%\documentclass[a4paper,11pt,answers]{article}
+%
+%\usepackage{paf_simple_V2}
+%
+%\title{Transformée de Fourier}
+%\date{2017}
+%
+%\begin{document}
+%\maketitle\section{Produit de convolution et applications}
+
+\section{Convolution}
+
+Sauf indication contraire, on se place dans $\R^d$ muni de la mesure de Lebesgue.
+
+\subsection{Définition, premières propriétés}
+
+\begin{de}[Convolution]
+Soient $f$ et $g$ deux fonctions mesurables et $x \in \R^d$. On suppose que: $t \mapsto f(t) g(x-t)$ est intégrable.
+
+\medskip
+Alors, on pose $f*g(x) = \displaystyle{\int} f(t) g(x-t) \, \mathrm d \lambda(t)$.
+\end{de}
+
+
+\begin{listremarques}
+\item
+Il existe plein de conditions différentes garantissant l'existence de ce produit de convolution. La plus large étant celle de la définition.
+\end{listremarques}
+
+\begin{prop}[Premières propriétés]
+(Mêmes hypothèses et notations)
+
+Si $f * g(x)$ existe alors $g*f (x)$ existe aussi et $g*f (x) = f*g (x)$.
+
+\medskip
+Si $h$ est une autre fonction mesurable telle que $f*h(x)$ existe alors, pour tout $(\lambda;~\mu) \in \C^2$, $f*\left ( \lambda g + \mu h\right ) (x)$ existe aussi et on a:
+\[
+f*\left ( \lambda g + \mu h\right ) (x) = \lambda f*g(x) + \mu f*h(x)
+\]
+\end{prop}
+
+\begin{proof}
+La commutativité se prouve à l'aide d'un changement de variable et la linéarité provient de la linéarité de l'intégrale.
+\end{proof}
+
+Nous allons maintenant voir un cas particulier: les fonctions $\L^1$.
+
+\begin{prop}[Convolution $\L^1$ et $\L^1$]
+Soient $f$ et $g$ deux fonctions de $\L^1$.
+
+Alors, pour presque tout $x$, $f*g(x)$ existe.
+
+\medskip
+De plus, $f*g$ est de classe $\L^1$ et on a:
+\[
+\norm{f*g} \leq \norm{f}_1 \times \norm{g}_1
+\]
+\end{prop}
+
+\begin{proof}
+On utilise le théorème de Fubini-Tonelli.
+
+Ainsi, pour tout $x$, $ \displaystyle{\int} \abs{f(t)g(x-t)} \mathrm d \lambda(t)$ est $\lambda$-mesurable et positive.
+
+De plus:
+\[
+\displaystyle{\int} \mathrm d \lambda(x)
+\displaystyle{\int} \mathrm d \lambda(t) \abs{f(t)g(x-t)} = \displaystyle{\int} \mathrm d \lambda(t)
+\displaystyle{\int} \mathrm d \lambda(x) \abs{f(t)g(x-t)} = \norm{g}_1 \norm{f}_1
+\]
+
+On en déduit que $(t;~x) \mapsto f(t)g(x-t)$ est intégrable sur $\R^2$ muni de la mesure produit.
+
+En particulier, $f*g(x)$ existe pour presque tout $x$ et est de classe $L^1$ et on a:
+\[
+\norm{f*g} \leq \norm{f}_1 \times \norm{g}_1
+\]
+\end{proof}
+
+
+Une propriété importante de la convolution $\L^1$: l'associativité.
+
+
+\begin{prop}[Associativité]
+Soient $f$, $g$ et $h$ trois fonctions $\L^1$. Alors $(f*g)*h = f*(g*h)$.
+\end{prop}
+
+\begin{proof}
+On sait que $f*g$ est $\L^1$ donc, pour presque tout $x$, $(f*g)*h(x)$ existe. 
+
+\medskip
+En particulier, on a:
+\begin{align*}
+(f*g)*h(x) & = \displaystyle{\int} \mathrm d \lambda(t) h(x-t) \displaystyle{\int} \mathrm d \lambda(u) f(u) g(t-u) \\
+ & = \displaystyle{\int} \displaystyle{\int}  h(x-t) f(u) g(t-u) \mathrm d \lambda(t) \mathrm d \lambda(u)
+\end{align*}
+
+De même, pour presque tout $x$, $f*(g*h)(x)$ existe et on a:
+\begin{align*}
+f*(g*h)(x) & = \displaystyle{\int} \mathrm d \lambda(t) f(t) \displaystyle{\int} \mathrm d \lambda(u) g(u) h(x-t-u) \\
+ & = \displaystyle{\int} \displaystyle{\int}  f(t) g(u) h(x-t-u) \mathrm d \lambda(t) \mathrm d \lambda(u) \\
+ & = \displaystyle{\int} \displaystyle{\int}  f(u) g(t) h(x-t-u) \mathrm d \lambda(t) \mathrm d \lambda(u)  \text{ on  pose }v=t+u \\
+  & = \displaystyle{\int} \displaystyle{\int}  f(u) g(v-u) h(x-v) \mathrm d \lambda(v) \mathrm d \lambda(u) \text{ on  pose }v=t \\
+  & = \displaystyle{\int} \displaystyle{\int}  f(u) g(t-u) h(x-t) \mathrm d \lambda(t) \mathrm d \lambda(u) 
+  & = (f*g)*h(x)
+\end{align*}
+\end{proof}
+
+
+
+\subsection{Régularisation}
+
+On raisonne ici sur des fonctions de $\R$ dans $\R$ muni de la tribu des boréliens.
+
+\subsubsection{Une fonction $\mathbf{\mathcal{C}^{\infty}}$ à support compact}
+
+\begin{lem}[Construction d'une fonction $\mathbf{\mathcal{C}^{\infty}}$ à support compact]
+\label{exemple_cinfty}
+Soit la fonction $\phi: x \mapsto 
+\begin{cases}0 \text{ si }x \leq 0\\
+\e^{-1/x} \text{ si }x>0
+\end{cases}$
+
+Alors la fonction $\phi$ est $\mathcal{C}^{\infty}$.
+
+Et ainsi, la fonction:
+\[
+g: x \mapsto \phi(1-x) \times \phi(1+x)
+\]
+est de classe $\mathcal{C}^{\infty}$ à support compact.
+\end{lem}
+
+\begin{proof}
+On peut prouver par récurrence que, pour tout $n$, il existe un polynôme $P_n$ tel que, pour tout $x > 0$:
+\[
+\phi^{(n)}(x) = P_n\left(\frac{1}{x}\right) \e^{-1/x}
+\]
+
+En particulier, cela montre que $\lim \limits_{\substack{x \to 0\\x>0}} \phi^{(n)}(x) = \phi^{(n)}(0)$. On en déduit que $\phi$ est bien $\mathcal{C}^{\infty}$.
+
+Et, par construction, $g$ est également $\mathcal{C}^{\infty}$ et à support sur $[-1;~1]$.
+\end{proof}
+
+\subsubsection{Approximations de l'unité}
+
+\begin{de}[Suite approximante de l'unité]
+Soit $\left(g_n\right)_{n \in \N}$ une suite de fonctions $L^1$.
+
+On dit que cette suite est une approximation de l'unité lorsque:
+\begin{itemize}
+\item[$\bullet$] $\sup \limits_{n \in \N} \norm{g_n}_1 < +\infty$;
+\item[$\bullet$] pour tout $n$, $\displaystyle{\int} g_n = 1$;
+\item[$\bullet$] pour tout $\eta > 0$, $\lim \limits_{n \to +\infty} \displaystyle{\int} \abs{g_n(t)} \times \mathbb{1}_{t > \eta} \mathrm d \lambda(t) = 0$
+\end{itemize}
+\end{de}
+
+On peut aisément fabriquer une suite approximante de l'unité à partir d'une fonction positive $L^1$.
+
+\begin{prop}[Création d'une suite approximante de l'unité]
+Soit $f$ une fonction positive de classe $L^1$ non identiquement nulle. 
+
+On pose $\tilde{f} = \dfrac{f}{\norm{f}_1}$ et pour tout $n \in \N^*$, $f_n: t \mapsto n\tilde{f}(nt)$.
+
+Alors $f_n$ est une suite approximante de l'unité.
+\end{prop}
+
+\begin{proof}
+Par construction, pour tout $n$, $\norm{f_n} = \displaystyle{\int} f_n = 1$ (cela s'obtient avec un changement de variable $t \mapsto \frac{t}{n}$).
+
+De plus, pour tout $\eta	>0$, par un changement de variable et compte-tenu de ce qui précède:
+\[
+\displaystyle{\int_{t>\eta}} f_n(t) \mathrm d \lambda(t) = 1-\displaystyle{\int_{t \leq \eta}} f_n(t) \mathrm d \lambda(t) = 1-\displaystyle{\int_{u \leq n \eta}} \tilde{f}(u) \mathrm d \lambda(u)
+\]
+
+Or, par le théorème de convergence monotone, $\lim \limits_{n \to +\infty} \displaystyle{\int_{u \leq n \eta}} \tilde{f}(u) \mathrm d \lambda(u) = 1$, ce qui permet de conclure.
+\end{proof}
+
+
+
+\subsubsection{Le cas des fonctions à support compact}
+
+\begin{prop}[Fonctions continues à support compact ou à limite nulle en l'infini]
+On définit les ensembles $\mathcal{C}_k$ et $\mathcal{C}_0$ des fonctions définies sur $\R^d$.
+
+\[
+f \in \mathcal{C}_k \iff f \text{ est continue et } \exists K \subset \R^d/ \, K \text{ est compact et }\forall x \notin K, \, f(x)=0
+\]
+
+
+\[
+f \in \mathcal{C}_0 \iff f \text{ est continue et } \lim \limits_{\abs{x} \to +\infty} f(x)=0
+\]
+
+On peut alors munir ces deux ensembles de la norme infinie et ils constituent dans ce cas des $\R$-espaces vectoriels.
+
+De plus, toute fonction appartenant à l'un de ces ensembles est uniformément continue.
+
+Enfin, l'espace $\mathcal{C}_0$ est complet.
+\end{prop}
+
+
+\begin{proof}
+Il est assez évident que $\mathcal{C}_k \subset \mathcal{C}_0$. On va donc montrer qu'une fonction $f$ de $\mathcal{C}_0$ est bornée, uniformément continue.
+
+Considérons une telle fonction $f$. On sait qu'il existe un disque $\overline{D(0;~R)}$ en dehors duquel la fonction $\abs{f}$ est majorée par $1$ (en raison de sa limite en l'infini). Sur ce compact, $\abs{f}$ est également majorée. Ainsi, $f$ est bornée.
+
+Soit $\varepsilon > 0$ quelconque et soit $\rho > 0$ tel que pour tout $x \notin \overline{D(0;~\rho)}$, $\abs{f(x)} \leq \dfrac{\varepsilon}{2}$. Sur $\overline{D(0;~\rho+1)}$, $f$ est uniformément continue en raison du théorème de Heine. 
+
+Donc $\exists 1 \geq \eta >0$ tel que, $\forall (x;~y) \in \overline{D(0;~\rho+1)}^2$, $\abs{f(x)-f(y)} \leq \varepsilon$.
+
+En particulier, pour tout $\left(x;~y\right)/ \, \abs{x-y} \leq \eta$, on distingue des cas:
+\begin{itemize}
+\item[$\bullet$] Si $x \notin \overline{D(0;~\rho)}$ et si $y \notin \overline{D(0;~\rho)}$ en raison de l'inégalité triangulaire et on a ainsi $\abs{f(x)-f(y)} \leq \dfrac{\varepsilon}{2}+\dfrac{\varepsilon}{2} = \varepsilon$.
+\item[$\bullet$] Si $x \notin \overline{D(0;~\rho)}$ et si $y \in \overline{D(0;~\rho)}$ alors on sait que $x \in \overline{D(0;~\rho+1)}$ en raison de l'inégalité triangulaire. On a donc également $\abs{f(x)-f(y)} \leq \varepsilon$ car les deux éléments sont dans $\overline{D(0;~\rho+1)}$.
+\item[$\bullet$] Enfin, si $x \in \overline{D(0;~\rho)}$ alors $y \in \overline{D(0;~\rho+1)}$ en raison de l'inégalité triangulaire et dans ce cas $\abs{f(x)-f(y)} \leq \varepsilon$ car les deux éléments sont dans $\overline{D(0;~\rho+1)}$.
+\end{itemize}
+
+Finalement, dans tous les cas, $\abs{f(x)-f(y)} \leq \varepsilon$, ce qui prouve que $f$ est uniformément continue.
+
+La stabilité par addition et multiplication par un réel sont faciles à montrer.
+
+Reste donc à prouver que, si $\left(f_n\right)_{n \in \N}$ est une suite de Cauchy de $\mathcal{C}_0$ alors cette suite converge dans $\mathcal{C}_0$.
+
+Il est évident que $f_n$ converge simplement. Soit $f$ sa limite. 
+
+Pour tout $\varepsilon > 0$, il existe $N$ tel que pour tout $p \geq N$, pour tout $n \geq N$, pour tout $x$, $\abs{f_p(x)-f_n(x)} \leq \varepsilon$. Ce qui donne par passage à la limite sur $p$: 
+
+$\abs{f(x)-f_n(x)} \leq \varepsilon$, ce qui prouve que $f_n$ converge uniformément vers $f$ et donc que $f$ est continue et bornée.
+
+Reste à prouver que $f$ a pour limite $0$ en $+\infty$. Mais cela est relativement simple.
+
+En effet, pour tout $\varepsilon>0$, il existe $N$ tel que $\norm{f_N-f}_{\infty} \leq \dfrac{\varepsilon}{2}$.
+
+Or $f_N \in \mathcal{C}_0$ donc il existe $A>0$ tel que $\abs{x} > A \Longrightarrow \abs{f_N(x)} \leq \dfrac{\varepsilon}{2}$. 
+
+En particulier, $\abs{f(x)} \leq \abs{f_N(x)-f(x)} + \abs{f_N(x)} \leq \dfrac{\varepsilon}{2}+\dfrac{\varepsilon}{2}=\varepsilon$.
+\end{proof}
+
+
+\begin{de}[Convolution par des fonctions à support compact]
+Soit $p \geq 1$ un nombre et $n$ un entier. 
+
+Soit $g$ une fonction $\mathcal{C}^n$ à support compact et $f$ une fonction $L^p$.
+
+Alors la fonction suivante est $\mathcal{C}^n$:
+\[
+f*g: x \mapsto \displaystyle{\int} f(t)g(x-t) \mathrm d \lambda(t)
+\]
+
+En particulier, pour tout $1 \leq k \leq n$:
+\[
+(f*g)^{(k)}(x) = \displaystyle{\int} f(t)g^{(k)}(x-t) \mathrm d \lambda(t)
+\]
+\end{de}
+
+\begin{proof}
+La mesurabilité et la définition de $f*g$ sont des conséquences du théorème de Fubini-Tonelli.
+
+Supposons que $K$ est un support compact de $g$. C'est à dire que $K$ est un compact tel, pour tout $x \notin K$, $g(x)=0$.
+
+Pour tout $k \leq k \leq n$, on note $M_k = \max \abs{g^{(k)}}$.
+
+Notons ainsi que, pour tout $q \geq 1$, $g$ est $L^q$ car $\abs{g^q} \leq M^q \mathbb{1}_K$. l'inégalité de Hölder nous garantit donc l'existence de $f*g$.
+
+Posons $\theta: (x;~t) \mapsto f(t)g(x-t)$. Cette application est $n$ fois dérivable par rapport à $x$. De plus, pour tout $x$, et pour tout $1 \leq k \leq n$
+$\abs{\dfrac{\partial^k}{\partial x^k} \theta(x;~t)} \leq M_k \mathbb{1}_K \abs{f(t)}$ qui est de classe $L^1$, toujours d'après Hölder.
+
+Le théorème de convergence dominée nous garantit donc que $f*g$ est dérivable $k$ fois et que $(f*g)^{(k)}(x) = \displaystyle{\int} f(t)g^{(k)}(x-t) \mathrm d \lambda(t)$.
+
+Reste à prouver que $(f*g)^{(n)}$ est continue pour conclure. Pour cela, on va juste supposer que $g$ est continue à support compact et prouver que $f*g$ est continue, cela suffira.
+
+Pour tout $x$ et $y$, d'après l'inégalité triangulaire:
+\[
+\abs{f*g(y)-f*g(x)} \leq \displaystyle{\int} \abs{f(t)} \abs{g(y-t)-g(x-t)} \mathrm d \lambda(t)
+\]
+
+On pose maintenant $q$ tel que $\dfrac{1}{p} + \dfrac{1}{q} = 1$
+
+Soit $g_y: t \mapsto g(y-t)$ et $g_x: t \mapsto g(x-t)$. L'inégalité de Hölder donne:
+\[
+\abs{f*g(y)-f*g(x)} \leq \norm{f}_p \times \norm{g_y-g_x}_q
+\]
+
+On pose $\tilde{K} = \left\{x+h, \, \abs{h} \leq 1 \text{ et }x \in K\right\}$. $\tilde{K}$ est également un compact.
+
+Comme $g$ est continue à support compact, elle est donc uniformément continue. Par conséquent, pour tout $\varepsilon > 0$, il existe $\eta>0$ éventuellement plus petit que 1, tel que, pour tout $u$ et $v$ tels que $\abs{v-u} \leq \eta$, on a $\norm{f}_p^q \times \abs{g(v)-g(u)}^q \times \lambda\left(\tilde{K}\right) \leq \varepsilon^q$. 
+
+Ainsi, par construction, pour tout $x$ et $y$ tels que $\abs{y-x} \leq \eta \leq 1$, la fonction $g_x-g_y$ a pour support un ensemble de mesure au plus égal à $\tilde{K}$ (en raison de l'invariance de la mesure de Lebesgue par translation et symétrie) et on a donc:
+\[
+\norm{f}_p \times \norm{g_x-g_y}_q \leq \varepsilon
+\]
+
+Ainsi, on vérifie que $f*g$ est continue, ce qui achève la démonstration.
+\end{proof}
+
+\subsubsection{Densité des fonctions $\mathcal{C}^{\infty}$ à support compact dans $L^p$}
+
+On utilise ici un résultat établi page \pageref{densite_intervalles}.
+
+\begin{prop}[Approximation d'une indicatrice par convolution]
+On reprend ici la fonction $g$ définie au paragraphe \ref{exemple_cinfty}. On pose $\tilde{g} = \dfrac{g}{\norm{g}_1}$
+
+On considère $\chi = \mathbb{1}_{[a;~b]}$ et, pour tout $n \in \N^*$, $g_n: t \mapsto n\tilde{g}(nt)$.
+
+Alors, pour tout $p \in [1;~+\infty]$, $g_n*\chi \underset{L^p}{\longrightarrow} \chi$.
+\end{prop}
+
+\begin{proof}
+Nous allons exploiter le théorème de convergence dominée $L^p$.
+
+\medskip
+Remarquons que, pour tout $n$, le support de $g_n$ est $\left [ \frac{-1}{n};~\frac{1}{n}\right ]$. Ainsi, pour $x > b + \frac{1}{n}$ ou $x < a - \frac{1}{n}$, il est impossible d'avoir simultanément $\abs{t} \leq \frac{1}{n}$ et $(x-t) \in [a;~b]$, ce qui entraîne que le support de $\chi * g_n$ est inclus dans $\left [a-1;~b+1 \right ]$.
+
+\medskip
+Remarquons aussi que, pour tout $x$, $0 \leq \chi * g_n (x) \leq 1$. Nous sommes donc dans les conditions d'application du théorème de convergence dominée $\L^p$. Il suffit maintenant de montrer que $\chi * g_n$ converge simplement presque partout vers $\chi$. 
+
+
+Or, pour $x>a$ ou $x<b$, il existe $N$ tel que, pour tout $n \geq N$, $x \notin \left [ a-\frac{1}{n};~b+\frac{1}{n}  \right ]$, ce qui entraîne $\chi * g_n(x) = 0$.
+
+
+Et, pour $x \in ]a;~b[$, il existe $N$ tel que, pour tout $n \geq N$, $\left [ x - \frac{1}{n};~x + \frac{1}{n}\right ] \subset [a;~b]$, ce qui entraîne $\chi * g_n(x) = 1$.
+\end{proof}
+
+\begin{cor}[Densité des fonctions $\mathcal{C}^{\infty}$]
+Pour $p \in [1;~+\infty[$, $\mathcal{C}^{\infty}_k$, les fonctions de classe $\mathcal{C}^{\infty}$ à support compact, sont denses dans $\L^p$
+\end{cor}
+
+\begin{proof}
+Les combinaisons linéaires d'indicatrices d'intervalles sont denses dans $\L^p$. Or, d'après ce que l'on vient de prouver par l'approximation de l'unité, on sait que les fonctions $\mathcal{C}^{\infty}_k$ sont denses dans les combinaisons linéaires d'indicatrices d'intervalles. Cela permet de conclure.
+\end{proof}
+
+\subsubsection{Étude de l'opérateur de translation}
+
+Dans ce paragraphe, on peut éventuellement se placer dans $\R^d$ sans que cela nuise au raisonnement qui va suivre.
+
+\begin{de}[Opérateur de translation]
+Soit $f$ une fonction et $x \in \R^d$. On pose $\tau_x[f]: \, t \mapsto f(t-x)$.
+\end{de}
+
+Quelques propriétés élémentaires.
+
+\begin{prop}[Propriétés de la transation]
+Soit $p \in [1;~+\infty]$ et $x \in \R^d$.
+
+\medskip
+Alors, $\tau_x$ est linéaire. De plus, pour tout $f \in \L^p$, on a $\tau_x[f] \in \L^p$ et $\norm{\tau_x(f)}_p = \norm{f}_p$.
+
+\medskip
+Enfin, pour $p< +\infty$, on vérifie $\norm{\tau_x[f] - f}_p \underset{x \to 0}{\longrightarrow} 0$.
+\end{prop}
+
+\begin{proof}
+Seul le dernier point est délicat. Nous allons exploiter la densité des fonction $\mathcal{C}_k$ dans $\L^p$. 
+
+\medskip
+Considérons ainsi une fonction $f$ à support compact $K$. Nous savons que $f$ est uniformément continue. Considérons l'ensemble $\tilde{K} = \left \{t/ \, t-x \in K \text{ avec } \norm{x} \leq 1 \right \}$. 
+
+Remarquons que $\tilde{K}$ est de mesure finie. 
+
+Sortons maintenant $\varepsilon>0$. Il existe $0 < \eta \leq 1$ tel que, pour tout $\norm{x} < \eta$, et pour tout $t$, 
+
+$\lambda\left ( \tilde{K}\right ) \norm{f(t-x) - f(t)}^p < \varepsilon^p$. On en déduit:
+\[
+\norm{\tau_x(f) - f}_p = \left ( \displaystyle{\int} \abs{f(x-t) - f(t) }^p \, \mathrm d \lambda(t) \right )^{1/p}  \leq \varepsilon
+\]
+
+Ce qui permet de conclure pour ce cas particulier.
+
+\medskip
+Considérons maintenant $f \in \L^p$ quelconque. On sait qu'il existe une suite de fonctions $(f_n)$ continues à support compact qui convergent dans $\L^p$ vers $f$. 
+
+En particulier, pour tout $\varepsilon>0$, il existe $n$ tel que $\norm{f_n-f}_p \leq \frac{\varepsilon}{3}$. Mais alors, pour tout $x$:
+\[
+\norm{\tau_x(f) - f}_p \leq \norm{\tau_x(f) - \tau_x(f_n)}_p + \norm{\tau_x(f_n) - f_n}_p + \norm{f_n - f}_p \leq \frac{2\varepsilon}{3} + \norm{\tau_x{f_n} - f_n}_p
+\]
+
+Et comme $f_n$ est continue à support compact, on peut exploiter ce qui vient d'être fait!
+\end{proof}
+
+\subsubsection{Résultats généraux sur les approximations de l'unité}
+
+\begin{prop}[Approximation de l'unité, cas général]
+Soit $f$ une fonction de classe $\L^1$. Soit $(g_n)$ une suite approximante de l'unité.
+
+\medskip
+Alors $g_n * f$ converge vers $f$ dans $\L^1$.
+
+\medskip
+Si $f$ est uniformément continue alors $g_n * f$ converge uniformément vers $f$.
+\end{prop}
+
+\begin{proof}
+Pour tout $n$, on a:
+\[
+\norm{g_n*f - f}_1 = \displaystyle{\int} \abs{\displaystyle{\int} g_n(x) f(t-x) \, \mathrm d \lambda(x) - f(t)} \, \mathrm d \lambda(t) = \displaystyle{\int} \abs{\displaystyle{\int} g_n(x) (f(t-x)-f(t)) \, \mathrm d \lambda(x)} \, \mathrm d \lambda(t)
+\]
+
+Ce qui donne, après application du théorème de Fubini:
+\[
+\norm{g_n*f - f}_1 \leq \displaystyle{\int}  \abs{g_n(x)} \displaystyle{\int} \abs{f(t-x)-f(t)} \, \mathrm d \lambda(t) \, \mathrm d \lambda(x) = \displaystyle{\int} \abs{g_n(x)} \norm{\tau_x(f) - f}_1 \, \mathrm d \lambda(x)
+\]
+
+Notons $M>0$ un majorant des $\left (\norm{g_n}_1\right )$.
+
+Soit $\varepsilon>0$. Il existe $\eta>0$ tel que, pour tout $\norm{x} < \eta$, $\norm{\tau_x(f) - f}_1 < \frac{\varepsilon}{2M}$.
+
+On en déduit:
+\[
+\norm{g_n*f - f}_1  \leq \displaystyle{\int} \mathbb{1}_{\norm{x}<\eta} \abs{g_n(x)} \frac{\varepsilon}{2M}  \, \mathrm d \lambda(x) + \displaystyle{\int} 2 \times \mathbb{1}_{\norm{x} \geq \eta} \abs{g_n(x)} \norm{f}_1 \,  \mathrm d \lambda(x)
+\]
+
+D'après notre hypothèse sur les suites approximantes de l'unité, il existe $N$ tel que, pour tout $n \geq N$, $\displaystyle{\int} \mathbb{1}_{\norm{x} \geq \eta} \abs{g_n(x)}  \,  \mathrm d \lambda(x) < \frac{\varepsilon}{4 \norm{f}_1}$. Ce qui donne, par construction:
+\[
+\norm{g_n*f - f}_1 < \varepsilon
+\]
+
+Considérons maintenant le cas où $f$ est uniformément continue. On reprend ce qui précède, pour tout $t$:
+\[
+\abs{g_n*f(t) - f(t)} = \abs{\displaystyle{\int} g_n(x) (f(t-x)-f(t)) \, \mathrm d \lambda(x)} \leq \displaystyle{\int} \abs{g_n(x))} \abs{f(t-x)-f(t)} \, \mathrm d \lambda(x)
+\]
+
+Comme $f$ est uniformément continue, il existe $\eta > 0$ tel que, pour tout $\norm{x} < \eta$, et pour tout $t$, 
+
+$\abs{f(t-x)-f(t)} < \frac{\varepsilon}{2M}$. On achève la majoration de la même manière en séparant l'espace selon les cas $\norm{x} < \eta$ et $\norm{x} \geq \eta$ et on obtient ainsi la convergence uniforme.
+\end{proof}
+
+\subsection{Des cas plus généraux}
+
+\begin{de}[Convolution $L^p$ et $L^q$]
+Soient $p$ et $q$ deux éléments de $[1;~+\infty]$ tels que $\dfrac{1}{p}+\dfrac{1}{q}=1$.
+
+Soient deux fonctions $f$, $g$ appartenant respectivement aux espaces $L^p$ et $L^q$.
+
+Alors, pour tout $x$, la fonction
+$
+f*g: x \mapsto \displaystyle{\int} f(t)g(x-t) \mathrm d \lambda(t)
+$
+appartient à $\mathcal{C}_0$.
+\end{de}
+
+\begin{proof}
+Notons que $f*g$ est bornée pour tout $x$ en raison de l'inégalité de Hölder.
+
+On exploite maintenant la densité des fonctions continues à support compact dans $L^p$.
+
+Soient $f_n$ et $g_n$ des fonctions continues à support compact qui tendent respectivement vers $f$ et $g$ dans $L^p$ et $L^q$.
+
+D'après ce qui précède, pour tout $n$, $f_n*g_n$ est continue et à support compact. En particulier, $f_n*g_n \in \mathcal{C}_0$.
+
+De plus, en utilisant l'inégalité triangulaire et l'inégalité de Hölder, on obtient, pour tout $x$:
+\[
+\abs{f_n*g_n(x) - f*g(x)} \leq \norm{f_n}_p\norm{g_n-g}_q+\norm{g}_q \norm{f_n-f}_p
+\]
+
+Cette inégalité nous prouve que $f_n*g_n$ converge uniformément vers $f*g$.
+
+Par conséquent $f*g \in \mathcal{C}_0$. 
+\end{proof}
+
+
+
+\begin{theo}[Convolution $L^p \times L^q$, cas général]
+Soient $(p;~q) \in [1;~+\infty[^2$ tels que $\dfrac{1}{p}+\dfrac{1}{q} > 1$.
+
+Soient $f$ et $g$ deux fonctions respectivement $L^p$ et $L^q$.
+
+On pose $r$ le nombre tel que $\dfrac{1}{p}+\dfrac{1}{q} = 1 + \dfrac{1}{r}$.
+
+Alors:
+\begin{itemize}
+\item[$\bullet$] $r \geq \max(p;~q) \geq 1$;
+\item[$\bullet$] $f*g$ existe pour presque tout $x$;
+\item[$\bullet$] $f*g$ est de classe $L^r$.
+\end{itemize}
+
+De plus:
+\[
+\norm{f*g}_r \leq \norm{f}_p \times \norm{f}_q
+\]
+\end{theo}
+
+\begin{proof}
+Notons que $\dfrac{1}{q} \leq 1$ et $\dfrac{1}{p} \leq 1$. Ainsi:
+
+$0 < \dfrac{1}{r} = \dfrac{1}{p}+\dfrac{1}{q}-1 \leq \dfrac{1}{p}$ et $\dfrac{1}{r} \leq \dfrac{1}{q}$, ce qui permet d'en déduire la première inégalité.
+
+On va supposer que $f$ et $g$ sont à valeurs positives, sans nuire à la généralité du problème, en raison du théorème de Fubini et de l'inégalité triangulaire.
+
+Remarquons que $\dfrac{1}{p}-\dfrac{1}{r}+\dfrac{1}{q}-\dfrac{1}{r}+\dfrac{1}{r} = 1$ et comme $\dfrac{1}{p}-\dfrac{1}{r} \geq 0$ et $\dfrac{1}{q}-\dfrac{1}{r} \geq 0$, cela nous place dans les conditions d'application de l'inégalité de Hölder généralisée.
+
+On pose ainsi, $\dfrac{1}{\alpha} = \dfrac{1}{p}-\dfrac{1}{r} \iff \alpha = \dfrac{pr}{r-p}$, $\dfrac{1}{\beta} = \dfrac{1}{q}-\dfrac{1}{r} \iff \beta = \dfrac{qr}{r-q}$, de sorte que $\dfrac{1}{\alpha}+\dfrac{1}{\beta}+\dfrac{1}{r}=1$.
+
+Ainsi, pour tout $x$,
+\begin{align*}
+f*g(x) & =\displaystyle{\int} f(t)g(x-t) \, \mathrm d \lambda(t) \\
+ & = \displaystyle{\int} f(t)^{1-p/r}g(x-t)^{1-q/r}f(t)^{p/r}g(x-t)^{q/r} \, \mathrm d \lambda(t) \\
+ & = \displaystyle{\int} f(t)^{1-p/r}g(x-t)^{1-q/r}f(t)^{p/r}g(x-t)^{q/r} \, \mathrm d \lambda(t) \\
+ & \leq \left(\displaystyle{\int} f(t)^{\alpha \times (r-p)/r}\right)^{1/\alpha} \times \left(\displaystyle{\int} g(x-t)^{\beta\times (r-q)/r} \, \mathrm d \lambda(t)\right)^{1/\beta} \times \left(\displaystyle{\int} f(t)^{r \times p/r} g(x-t)^{r \times q/r} \, \mathrm d \lambda(t)\right)^{1/r} \\
+  & \leq \norm{f}_p^{p/\alpha} \times \norm{g}_q^{q/\beta} \times   \left(f^p*g^q(x)\right)^{1/r}
+ \end{align*}
+ 
+Or, d'après ce qui précède, nous savons que $f^p*g^q$ existe et est $L^1$ car $f^p$ et $g^q$ le sont. Cela nous prouve que $f*g(x)$ existe pour presque tout $x$.
+
+D'autre part, on en déduit:
+\[
+\left(f*g(x)\right)^r \leq \norm{f}_p^{pr/\alpha} \times \norm{g}_q^{qr/\beta} f^p*g^q(x)
+\] 
+
+Mais on sait que $\dfrac{pr}{\alpha} = r-p$ et $\dfrac{qr}{\beta} = r-q$ 
+
+Ainsi,
+\[
+\displaystyle{\int} \left(f*g(x)\right)^r \, \mathrm d \lambda(x) \leq \norm{f}_p^{r-p} \times \norm{g}_q^{r-q} \times \displaystyle{\int} f^p*g^q(x) \mathrm d \lambda(x) \leq \norm{f}_p^r \times \norm{f}_q^r
+\]
+
+Finalement, on a bien:
+\[
+\norm{f*g}_r \leq \norm{f}_p \times \norm{f}_q
+\]
+\end{proof}
+
+
+\section{Transformée de Fourier: définitions et premières propriétés}
+
+Dans toute la suite, on munit $\R$ de la tribu des Boréliens et de la mesure de Lebesgue.
+
+\subsection{Définition générale}
+
+\begin{de}[Transformée de Fourier d'une mesure, d'une fonction]
+Soit $f$ une fonction de $\R$ dans $\R$ de classe $L^1$ et soit $\mu$ une mesure finie sur $\R$. 
+
+La transformée de Fourier de $f$ est la fonction:
+\[\widehat{f}: \omega \mapsto \displaystyle{\int} \e^{\im \omega t} f(t) \mathrm d \lambda(t)\]
+
+La transformée de Fourier de $\mu$ est la fonction:
+\[\widehat{\mu}: \omega \mapsto \displaystyle{\int} \e^{\im \omega t}  \mathrm d \mu(t)\]
+\end{de}
+
+\begin{proof}
+Ces deux fonctions sont bien définies. En effet, pour tout $t$ et pour tout $\omega$, 
+$\abs{\e^{\im \omega t} f(t)} \leq \abs{f(t)}$ qui est $\lambda-$intégrable et d'autre part $\abs{\e^{\im \omega t}} \leq 1$ qui est $\mu-$intégrable.
+\end{proof}
+
+\subsection{Transformée de Fourier d'une fonction: propriétés}
+
+\begin{prop}[Premières propriétés de la transformée de Fourier]
+On peut définir une application 
+\[
+\begin{array}{llcl}
+\phi: & L^1(\R,~\R) & \to & \mathcal{C}_b(\R,~\C) \\
+ & f & \mapsto & \widehat{f}
+\end{array}
+\]
+
+De plus, $\phi$ est linéaire et continue.
+%En ce qui concerne les transformées de Fourier de mesures, $\widehat{\mu}$ est également continue.
+\end{prop}
+
+
+\begin{proof}
+Il faut commencer par prouver que $\widehat{f}$ et $\widehat{\mu}$ sont continues.
+
+Or, pour tout $\omega_1$ et $\omega_2$, 
+\begin{align*}
+\abs{\widehat{f}(\omega_1)-\widehat{f}(\omega_2)} & = \abs{\displaystyle{\int} \e^{\im \omega_1 t} f(t) \mathrm d \lambda(t) - \displaystyle{\int} \e^{\im \omega_2 t} f(t) \mathrm d \lambda(t)} \\
+ & \leq \displaystyle{\int} \abs{\e^{\im \omega_1 t}-\e^{\im \omega_2 t}} \abs{f(t)}  \mathrm d \lambda(t)
+\end{align*}
+
+Soit $A>0$ tel que $\displaystyle{\int_{\R-[-A;~A]}} \abs{f} \leq \dfrac{\varepsilon}{3}$. 
+
+En raison de la convergence croissante de la suite $\mathbb{1}_{[-n;~n]} \abs{f}$ vers $\abs{f}$, un tel nombre $A$ existe.
+
+En particulier, on en déduit:
+\[
+\abs{\widehat{f}(\omega_1)-\widehat{f}(\omega_2)} \leq \dfrac{2 \varepsilon}{3} + \displaystyle{\int_{[-A;~A]}} \abs{\e^{\im \omega_1 t}-\e^{\im \omega_2 t}} \abs{f(t)}  \mathrm d \lambda(t)
+\]
+
+Or, pour tout $t$:
+\[
+\abs{\e^{\im \omega_1 t}-\e^{\im \omega_2 t}} \leq \abs{\omega_1 t - \omega_2 t}
+\]
+
+En particulier, pour tout $t \in [-A;~A]$:
+\[
+\abs{\e^{\im \omega_1 t}-\e^{\im \omega_2 t}} \leq A \abs{\omega_1  - \omega_2}
+\]
+
+Ainsi:
+\[
+\abs{\widehat{f}(\omega_1)-\widehat{f}(\omega_2)} \leq \dfrac{2 \varepsilon}{3} + A \abs{\omega_1  - \omega_2} \norm{f}_1
+\]
+
+On en déduit, pour $\norm{f}_ \neq 0$ pour $\abs{\omega_1  - \omega_2} < \dfrac{\varepsilon}{3 A \norm{f}_1}$, on obtient:
+\[
+\abs{\widehat{f}(\omega_1)-\widehat{f}(\omega_2)} < \varepsilon
+\]
+
+Et si $\norm{f}_1=0$, la majoration est triviale puisque dans ce cas $\widehat{f}=0$.
+
+
+Remarquons que, pour tout $\omega$, $\abs{\widehat{f}(\omega)} \leq \norm{f}_1$. On en déduit que $\widehat{f}$ est bien bornée. L'inégalité précédente montre en particulier que 
+\[
+\norm{\widehat{f}}_{\infty} \leq \norm{f}_1
+\]
+
+%Par des techniques similaires, on prouve que $\widehat{\mu}$ est également continue.
+
+La linéarité de la transformée de Fourier est simple à prouver.
+
+Reste à prouver que $\phi$ est bien continue. 
+
+Mais nous venons de noter que, pour tout fonction $f$, $\norm{\widehat{f}}_{\infty} \leq \norm{f}_1$, ce qui prouve que $\phi$ est bornée. 
+
+Comme elle est linéaire, on en déduit qu'elle est continue (et même 1 lipschitzienne pour être précis).
+\end{proof}
+
+
+\begin{lem}[$\widehat{f}$ appartient à $\mathcal{C}_0$ dans le cas où $f$ est une indicatrice d'intervalle.]
+Soit $[a;~b]$ une intervalle fermé borné. Alors $\widehat{\mathbb{1}_{[a;~b]}}$ appartient à $\mathcal{C}_0$.
+\end{lem}
+
+\begin{proof}
+On sait déjà que $\widehat{\mathbb{1}_{[a;~b]}}$ est continue. Il suffit de prouver par exemple que la partie réelle de la transformée de Fourier tend vers $0$ en $+\infty$. La partie imaginaire et le lieu $-\infty$ se traitant de manière similaire.
+\[
+\lim \limits_{\lambda \to + \infty} \int_{[a;~b]} \cos(\lambda t) \; \mathrm d t = 0
+\]
+
+
+Mais cela est facile. 
+
+En effet, la fonction $t \mapsto \cos(\lambda t)$ est périodique de période $\dfrac{2\pi}{\lambda}$ et son intégrale est nulle sur une période.
+
+Sur l'intervalle $[a;~b]$, il y a $\ent{\dfrac{\lambda(b-a)}{2\pi}}$ périodes. 
+
+Notons $b_\lambda$ le nombre $a + \ent{\dfrac{\lambda(b-a)}{2\pi}} \times \dfrac{2\pi}{\lambda} \leq b$.
+
+On a donc:
+\[
+\abs{\int_{[a;~b]} \cos(\lambda t) \; \mathrm d t} = \abs{\int_{[b_\lambda;~b]}  \cos(\lambda t) \; \mathrm d t} \leq (b-b_{\lambda}) 
+\]
+
+Or, $b - b_{\lambda} = (b-a) - \ent{\dfrac{\lambda(b-a)}{2\pi}} \times \dfrac{2\pi}{\lambda}$ et on montre facilement par encadrement que $\lim \limits_{\lambda \to +\infty} \ent{\dfrac{\lambda(b-a)}{2\pi}} \times \dfrac{2\pi}{\lambda} = (b-a)$. On obtient donc la limite escomptée.
+\end{proof}
+
+
+
+%
+%
+%\begin{lem}[$\widehat{f}$ appartient à $\mathcal{C}_0$]
+%Si $f$ est continue et intégrable alors $\widehat{f}$ appartient à $\mathcal{C}_0$.
+%\end{lem}
+%
+%\begin{proof}
+%On va prouver que $\lim \limits_{\abs{\omega} \to +\infty} \Im\left(\widehat{f}(\omega)\right)  = \lim \limits_{\abs{\omega} \to +\infty} \displaystyle{\int} \sin(\omega t) f(t) \mathrm d \lambda(t) = 0$.
+%
+%Ensuite, il suffira de remarquer que $\widehat{f}(-\omega) = \overline{\widehat{f}(\omega)}$ pour en déduire que $\lim \limits_{\abs{\omega} \to +\infty} \Re\left(\widehat{f}(\omega)\right) = 0$.
+%
+%Soit $\varepsilon > 0$. Il existe $A>0$ tel que $\displaystyle{\int_{\R-[-A;~A]}} \abs{f} < \dfrac{\varepsilon}{3}$.
+%
+%On cherche donc à contrôler l'intégrale sur $[-A;~A]$. 
+%
+%Notons que, pour tout entier $n$, et pour tout $\omega>0$, la fonction $t \mapsto \sin(\omega t)$ est négative sur $\left](2n-1) \frac{\pi}{\omega};~2n \frac{\pi}{\omega} \right]$ et est positive sur $\left]2n \frac{\pi}{\omega};~(2n+1) \frac{\pi}{\omega} \right]$.
+%
+%Notons également que $f$ est uniformément continue sur $[-A-1;~A+1]$. 
+%
+%Or, pour $\omega$ suffisamment grand, on peut recouvrir $[-A;~A]$ avec des intervalles de la forme $\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right[$ sans recouvrir $[-A-1;~A+1]$.
+%
+%Sur chacun des intervalles $\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right[$, en raison du signe de la fonction $t \mapsto \sin(\omega t)$, on a:
+%\[
+%\dfrac{\pi}{\omega} \left(\min \limits_{\left[2n \frac{\pi}{\omega};~(2n+1) \frac{\pi}{\omega} \right]} f - \max \limits_{\left[(2n-1) \frac{\pi}{\omega};~2n \frac{\pi}{\omega} \right]} f\right) \leq \displaystyle{\int_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]}} \sin(\omega t) f(t) \mathrm d \lambda(t)
+%\]
+%et:
+%\[
+%\displaystyle{\int_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]}} \sin(\omega t) f(t) \mathrm d \lambda(t) \leq \dfrac{\pi}{\omega} \left(\max \limits_{\left[2n \frac{\pi}{\omega};~(2n+1) \frac{\pi}{\omega} \right]} f - \min \limits_{\left[(2n-1) \frac{\pi}{\omega};~2n \frac{\pi}{\omega} \right]} f\right)
+%\]
+%
+%On obtient donc la majoration:
+%\[
+%\abs{\displaystyle{\int_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]}} \sin(\omega t) f(t) \mathrm d \lambda(t)} \leq  \dfrac{\pi}{\omega} \left(\max \limits_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]} f - \min \limits_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]} f \right)
+%\]
+%
+%Et comme $f$ est uniformément continue sur $[-A-1;~A+1]$, on sait qu'il existe $M>0$ tel que si $\omega > M$, pour tout intervalle du recouvrement, on a:
+%\[
+%\left(\max \limits_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]} f - \min \limits_{\left[(2n-1) \frac{\pi}{\omega}; ~ (2n+1) \frac{\pi}{\omega}\right]} f \right) <  \dfrac{\varepsilon}{3(A+1)}
+%\]
+%
+%
+%En sommant ainsi sur le recouvrement de $[-A;~A]$, on obtient:
+%\[
+%\abs{\displaystyle{\int_{[-A;~A]}} \sin(\omega t) f(t) \mathrm d \lambda(t)} < \dfrac{\varepsilon}{3} + \dfrac{\varepsilon}{3} < \varepsilon
+%\]
+%
+%Le cas $\omega < 0$ se traite de manière semblable.
+%\end{proof}
+
+\begin{theo}[$\widehat{f}$ appartient à $\mathcal{C}_0$]
+Si $f$ est $L^1$ alors $\widehat{f}$ appartient à $\mathcal{C}_0$.
+\end{theo}
+
+\begin{proof}
+On exploite le lemme qui précède. Ainsi les transformées de Fourier de combinaisons linéaires d'indicatrices de compact sont de classe $\mathcal{C}_0$. Or ces fonctions sont denses dans $L^1$.
+
+Soit ainsi $f$ une fonction de $L^1$ et $f_n$ une suite de combinaison linéaires d'indicatrices de compact qui converge vers $f$ dans $L^1$.
+
+D'après la continuité de la transformée de Fourier, on  en déduit que $\lim \widehat{f_n} = \widehat{f} \in \mathcal{C}_0$.
+\end{proof}
+
+
+\begin{prop}[Transformée de Fourier et produit de convolution]
+Soient deux fonctions $f$ et $g$ appartenant à $L^1$.
+
+Alors $\widehat{f*g}$ existe et vérifie
+\[
+\widehat{f*g} = \widehat{f} \times \widehat{g}
+\]
+\end{prop}
+
+
+\begin{proof}
+$f*g$ est dans $L^1$ puisque $f$ et $g$ sont dans $L^1$. La transformée de Fourier de $f*g$ existe donc. 
+
+D'autre part, les transformées de Fourier de $f$ et $g$ existent puisque ces deux fonctions sont également dans $L^1$.
+
+Calculons la transformée de Fourier de $f*g$
+\begin{align*}
+\widehat{f*g}(\omega) & = \displaystyle{\int} \e^{\im \omega x} \mathrm d \lambda(x) \displaystyle{\int} d \lambda(t) \, f(t)g(x-t) \\
+ & = \displaystyle{\int}  \displaystyle{\int} \e^{\im \omega x} f(t)g(x-t) \, d \lambda(t) d \lambda(x) \\
+ & = \displaystyle{\int}  \displaystyle{\int} \e^{\im \omega (x-t+t)} f(t)g(x-t) \, d \lambda(t) d \lambda(x) \\ 
+  & = \displaystyle{\int}  \displaystyle{\int} \e^{\im \omega (x-t)} \e^{\im \omega t} f(t)g(x-t) \, d \lambda(t) d \lambda(x)
+\end{align*}
+
+Faisons maintenant un changement de variable dans $\R^2$: 
+
+$(t;~x) \mapsto (t;~u)$ avec $u=x-t$.
+
+On obtient ainsi, par application du théorème de Fubini-Tonelli:
+\begin{align*}
+\widehat{f*g}(\omega) & = \displaystyle{\int}  \displaystyle{\int} \e^{\im \omega u} \e^{\im \omega t} f(t)g(u) \, d \lambda(t) d \lambda(u) \\
+ & = \left( \displaystyle{\int}  \e^{\im \omega u} g(u) d \lambda(u) \right) \left( \displaystyle{\int} \e^{\im \omega t} f(t) \, d \lambda(t) \right) \\
+ & = \widehat{f}(\omega) \widehat{g}(\omega)
+\end{align*}
+
+\end{proof}
+
+\begin{prop}[Transformée de Fourier et dérivation]
+Soit une fonction $f \in L^1$ et $n$ fois dérivables et dont les dérivées appartiennent à $L^1$.
+
+Alors, pour tout $O \leq k \leq n$ on vérifie
+\[
+\widehat{f^{(k)}}: \omega \mapsto \left(-\im \omega\right)^k \widehat{f}(\omega)
+\]
+\end{prop}
+
+
+\begin{proof}
+On fait une récurrence sur $n$ et $k$ assez directe...
+
+On calcule
+\[
+\widehat{f'}(\omega) =  \displaystyle{\int} \e^{\im \omega x} f'(x) \mathrm d \lambda(x)
+\]
+
+Ici, on va utiliser des techniques d'intégration par partie. On pose:
+
+$
+\begin{cases}
+u' = f' \\
+v =  \e^{\im \omega x}
+\end{cases}
+$
+
+On obtient
+
+$
+\begin{cases}
+u = f \\
+v' =  \im \omega \e^{\im \omega x}
+\end{cases}
+$
+
+Et ainsi:
+\[
+\widehat{f'}(\omega) = \lim \limits_{x \to +\infty} \left[\e^{\im \omega x} f(x)-\e^{-\im \omega x} f(-x)\right] - \im \omega \displaystyle{\int} \e^{\im \omega x} f(x) \mathrm d \lambda(x)
+\]
+
+Or $\lim \limits_{x \to +\infty} \left[\e^{\im \omega x} f(x)-\e^{-\im \omega x} f(-x)\right] = 0$ car $f'$ est $L^1$.
+
+On obtient donc bien:
+\[
+\widehat{f'}(\omega) = - \im \omega \widehat{f}(\omega)
+\]
+\end{proof}
+
+\begin{prop}[Dérivation de la transformée de Fourier]
+Soit une fonction $f$ de classe $L^1$. On suppose que, pour tout $1 \leq k \leq n$, $x \mapsto x^k f(x)$ est de classe $L^1$.
+
+Alors la transformée de Fourier de $f$ est $n$ fois dérivable et on a 
+\[
+\dfrac{\partial ^k \widehat{f}(\omega)}{\partial \omega^k} = \displaystyle{\int} \left(\im x\right)^k f(x) \e^{\im \omega x} \mathrm d \lambda(x)
+\]
+\end{prop}
+
+\begin{proof}
+C'est une application directe du théorème de convergence dominée.
+\end{proof}
+
+Une conséquence de ce dernier résultat concerne les transformées de Fourier de noyaux gaussiens.
+
+\begin{prop}[Transformée de Fourier d'un noyau Gaussien]
+Soit la fonction $g : x \mapsto \dfrac{1}{\sqrt{2 \pi}} \e^{-x^2/2}$.
+
+Alors, $\widehat{g}$ est infiniment dérivable et vérifie l'équation différentielle:
+\[
+\widehat{g}'(\omega) + \omega \widehat{g}(\omega) = 0
+\]
+avec la condition initiale:
+\[
+\widehat{g}(0)=1
+\]
+
+Et ainsi, on a:
+\[
+\widehat{g}(\omega) = \e^{-\omega^2/2}
+\]
+\end{prop}
+
+
+\begin{proof}
+En raison des croissances comparées, pour tout $k \in \N$, $x \mapsto x^k g(x)$ est continue et tend vers $0$ en $+\infty$ et $-\infty$. 
+
+La règle de comparaison de Riemann nous permet d'en déduire que ces fonctions sont intégrables.
+
+En particulier, d'après ce qui précède, $\widehat{g} \in \mathcal{\infty}_0$.
+
+D'autre part:
+\begin{align*}
+\widehat{g}'(\omega) & = \dfrac{1}{\sqrt{2 \pi}}\displaystyle{\int} \im x \e^{\im \omega x -x^2/2} \\
+ & = \dfrac{\im}{\sqrt{2 \pi}}\left[\displaystyle{\int} \left(x- \im \omega\right) \e^{\im \omega x -x^2/2} \mathrm d \lambda(x) +
+ \displaystyle{\int} \im \omega \e^{\im \omega x -x^2/2} \mathrm d \lambda(x)\right] \\
+ & = \dfrac{\im}{\sqrt{2 \pi}}\left[\left[-\e^{\im \omega x -x^2/2}\right]_{-\infty}^{+\infty} +
+\im \omega  \displaystyle{\int} \e^{\im \omega x -x^2/2} \mathrm d \lambda(x)\right] \\
+ & = 0 - \dfrac{\omega}{\sqrt{2\pi}} \displaystyle{\int} \e^{\im \omega x -x^2/2} \mathrm d \lambda(x) \\
+ & = -\omega \widehat{g}(\omega)
+\end{align*}
+
+Et on a également $\widehat{g}(0) = \displaystyle{\int} g =1$.
+
+La seule solution de cette équation différentielle est la fonction 
+\[
+\widehat{g}: \omega \mapsto \e^{-\omega^2/2}
+\]
+
+\end{proof}
+
+
+
+
+

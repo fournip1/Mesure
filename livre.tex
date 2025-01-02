@@ -1,0 +1,126 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO 					  	                          	 %
+% theorème de Riesz       	                          	 %
+% convergences de mesures: propriété des frontières   	 %
+% quadratures: finir Romberg											 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[a4paper,11pt]{book}
+
+\usepackage[trou]{paf_ellipses_A4}
+
+\newcolumntype{T}{>{\centering}m{2cm}|}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ici, on utilise le package fancyhdr pour les entêtes customisés %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]%
+{\markboth{CH.\thechapter~\MakeUppercase{#1}}{}}
+\renewcommand{\sectionmark}[1]%
+{\markright{\thesection~\MakeUppercase{#1}}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour éviter la justification verticale %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\raggedbottom
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% FIN ENTETE %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Théorie de la mesure et applications}
+\author{Pierre-Alexandre Fournié}
+\date{2018} 
+
+\begin{document}
+ 
+\frontmatter
+ 
+\maketitle
+
+
+\thispagestyle{empty} 
+
+
+\mainmatter
+
+\cleardoublepage
+\chapter{Introduction à la théorie de la mesure}
+\thispagestyle{empty}
+\input{Chapitres/introduction_mesure}
+
+
+\cleardoublepage
+\chapter{L'intégrale de Lebesgue}
+\thispagestyle{empty}
+\input{Chapitres/integration_lebesgue}
+
+% compléter Riesz
+\cleardoublepage
+\chapter{La mesure de Lebesgue}
+\thispagestyle{empty}
+\input{Chapitres/mesure_lebesgue}
+
+\cleardoublepage
+\chapter{L'intégrale de Riemann}
+\thispagestyle{empty}
+\input{Chapitres/integrale_riemann}
+
+\cleardoublepage
+\chapter{Méthodes de quadratures}
+\thispagestyle{empty}
+\input{Chapitres/quadratures}
+
+\cleardoublepage
+\chapter{Compléments sur l'intégration}
+\thispagestyle{empty}
+\input{Chapitres/complements_integration}
+
+\cleardoublepage
+\chapter{Convolution et transformée de Fourier}
+\thispagestyle{empty}
+\input{Chapitres/convolution}
+
+
+\cleardoublepage
+\chapter{Espace de Schwartz, transformée de Fourier et mesures}
+\chaptermark{Espace de Schwartz, suites de mesures}
+\thispagestyle{empty}
+\input{Chapitres/schwartz}
+
+\cleardoublepage
+\chapter{Probabilites}
+\thispagestyle{empty}
+\input{Chapitres/probabilites}
+
+
+\cleardoublepage
+\chapter{Séries de Fourier}
+\thispagestyle{empty}
+\input{Chapitres/series_fourier}
+
+\cleardoublepage
+\chapter{Intégrale de Kurtzweil-Henstock}
+\thispagestyle{empty}
+\input{Chapitres/integrale_KH}
+
+ 
+\cleardoublepage
+\tableofcontents
+\thispagestyle{empty}
+\end{document}

@@ -1,0 +1,966 @@
+Ce document définit une intégrale qui améliore considérablement la formulation du théorème fondamental de l'analyse, qui possède une propriété de convergence monotone, de convergence dominée. En outre, la classe de fonctions ainsi intégrables est plus vaste que la classe des fonctions Lebesgue-intégrables.
+
+\section{Définition et premières propriétés de l'intégrale de Kurzweil-Henstock}
+
+\subsection{Définitions}
+
+\begin{de}[Subdivision pointée]
+Soit $[a;~b]$ un intervalle.
+
+\medskip
+Une subdivision pointée $D$ est la donnée de $N+1$ points $a=a_0<a_1<\cdots<a_N=b$ et de $N$ points $x_1$, $x_2$, $\cdots$, $x_N$ tels que pour tout $i \in \intint{0}{N-1}$, $x_i \in [a_{i};~a_{i+1}]$.
+
+\medskip
+On pourra également désigner une subdivision pointée par le un N-uplet de couples $D=([a_i;~a_{i+1}];~x_i)_{0 \leq i \leq N-1}$.
+
+
+\medskip
+Comme dans le cas des subdivisions classiques, on définit l'inclusion d'une subdivision dans une autre de manière \og naturelle. \fg{}
+
+Ainsi, pour deux subdivisions pointées $D=([a_i;~a_{i+1}];~x_i)_{0 \leq i \leq N-1}$ et $D'=([\alpha_i;~\alpha_{i+1}];~t_i)_{0 \leq i \leq Q-1}$, on écrira $D \subset D'$ lorsque:
+\begin{itemize}
+\item[$\bullet$]
+pour tout $i \in \intint{1}{N-1}$, il existe $j \in \intint{1}{Q-1}$ tel que $a_i = \alpha_j$;
+\item[$\bullet$]
+pour tout $i \in \intint{0}{N-1}$, il existe $j \in \intint{0}{Q-1}$ tel que $x_i = t_j$;
+\end{itemize}
+\end{de}
+
+
+\begin{de}[Jauge, subdivision $\delta$-fine]
+Une jauge sur $[a;~b]$ est une fonction sur $[a;~b]$ à valeurs strictement positives.
+
+On dit qu'une subdivision pointée $D = ([a_i;~a_{i+1}];~x_i)_{0 \leq i \leq N-1}$ sur $[a;~b]$ est $\delta$-fine lorsque pour tout $0\leq i \leq N-1$:
+\[
+a_{i+1}-a_i \leq \delta(x_i)
+\]
+\end{de}
+
+
+\begin{lem}[Existence de subdivision pointée $\delta$-fine]
+Soit $\delta$ une jauge sur $[a;~b]$.
+
+Alors il existe une subdivision $\delta$-fine de $[a;~b]$.
+\end{lem}
+
+\begin{proof}
+Considérons l'ensemble des intervalles $]x-\delta(x);~x+\delta(x)[$ pour $x \in [a;~b]$. Leur union recouvre $[a;~b]$ qui est compact.
+
+Il existe ainsi une famille finie $(x_i)_{0 \leq i \leq n-1}$ telle que:
+\begin{itemize}
+\item[$\bullet$]
+$\bigcup \limits_{1 \leq i \leq n} ]x_i-\delta(x_i);~x_i+\delta(x_i)[$ recouvre $[a;~b]$;
+\item[$\bullet$]
+les $x_i$ sont distincts deux à deux, rangés par ordre croissants;
+\item[$\bullet$]
+aucun des sous-intervalles $]x_i-\delta(x_i);~x_i+\delta(x_i)[$ n'est inclus dans un autre.
+\end{itemize}
+
+On pose ensuite $a_0 =a$, $a_n = b$ et pour tout $1 \leq i \leq n-1$, $a_n$ un nombre quelconque de $]x_{i}-\delta(x_{i});~x_{i-1}+\delta(x_{i-1})[$ tel que $x_i>a_n>x_{i-1}$.
+
+On obtient ainsi, par construction, une distribution pointée $\delta$-fine.
+\end{proof}
+
+\begin{de}[Somme de Riemann associée à une subdivision pointée]
+Soit $D = ([a_i;~a_{i+1}];~x_i)_{0 \leq i \leq N-1}$ une subdivision pointée et $f$ une fonction définie sur $[a;~b]$ et à valeurs dans $\R$. On note 
+\[
+S_D[f] = \displaystyle{\sum \limits_{0 \leq k \leq N-1}} (a_{i+1}-a_i) f(x_i)
+\]
+\end{de}
+
+
+Notons que, pour une subdivision pointée $D$ donnée, l'application $S_D: f \mapsto S_D[f]$ est une forme linéaire (et positive si $E = \R$).
+
+\begin{de}[Intégrale de Kurtzweil-Henstock]
+Soit $f: [a;~b] \to \R$. On dit que $f$ est intégrable au sens de Kurtzweil-Henstock lorsqu'il existe un nombre note $\int_a^b f$ tel que, pour tout $\varepsilon>0$, il existe une jauge $\delta$ telle que pour toute subdivision $D$, $\delta$- fine, on a:
+\[
+\norm{S_D[f]-\int_a^b f} < \varepsilon
+\]
+
+De plus, le nombre $\int_a^b f$ est unique.
+\end{de}
+
+\begin{proof}
+Il faut montrer l'unicité. Soient ainsi $A \neq B$ deux nombres vérifiant la définition. Pour $\varepsilon = \dfrac{\abs{B-A}}{3}$, il existe deux jauges $\delta_A$ et $\delta_B$ telles que pour toutes subdivisions pointées $D_A$ et $D_B$ respectivement $\delta_A$ et $\delta_B$ fines, on a:
+\[
+\norm{S_{D_A}[f] - A} < \dfrac{\abs{B-A}}{3} \quad \text{ et }\norm{S_{D_B}[f] - B} < \dfrac{\abs{B-A}}{3}
+\]
+
+En particulier, en posant $\delta = \min(\delta_A;~\delta_B)$, et pour toute subdivision $E$ $\delta-$fine, on a $E$ qui est à la fois $\delta_A$ et $\delta_B$ fine. En particulier, l'inégalité triangulaire donne:
+\[
+\abs{B-A} \leq \norm{S_{E}[f] - A} + \norm{S_{E}[f] - B} < \dfrac{2\abs{B-A}}{3}
+\]
+
+Ceci constitue une absurdité!
+\end{proof}
+
+
+Cette intégrale est bien une généralisation de l'intégrale de Riemann comme l'explique la proposition qui suit.
+
+\begin{prop}[Lien avec l'intégrale de Riemann]
+Si $f$ est une fonction Riemann-intégrable sur $[a;~b]$ alors $f$ est KH intégrable sur $[a;~b]$ et dans ce cas l'intégrale de $f$ sur $[a;~b]$ de Riemann et de Kurzweil-Henstock sont confondues.
+\end{prop}
+
+La réciproque est fausse.
+
+\medskip
+La preuve s'appuie sur l'équivalence suivante que nous rappelons et qui est valable pour les fonctions à valeurs dans $\R^d$ avec $d \in \N^*$
+
+\begin{de}[Deux manières de définir l'intégrale de Riemann pour les fonctions à valeurs dans $\R^d$]
+Soit $[a;~b]$ un intervalle et $f$ une fonction définie sur $[a;~b]$ et à valeurs dans $\R^d$. Alors les deux définitions suivantes de l'intégrale de Riemann sont équivalentes:
+
+\begin{itemize}
+\item[\bf Définition classique]
+On dit que $f$ est Riemann intégrable sur $[a;~b]$ lorsqu'il existe deux suites de fonctions en escaliers $\varphi_n$ et $\psi_n$ à valeurs respectivement dans $\R^d$ et $\R^+$ telles que:
+\begin{itemize}
+\item[$\bullet$]
+pour tout $n$, $\norm{f - \varphi_n} \leq \psi_n$;
+\item[$\bullet$]
+$\lim \limits_{n \to +\infty} \in_a^b \psi_n = 0$.
+\end{itemize}
+Dans ce cas $\int_a^b \varphi_n$ converge et cette limite ne dépend pas du choix des deux suites. On note $\int_a^b f$ cette limite.
+\item[\bf Définition avec les subdivisions]
+On dit que $f$ est Riemann intégrable sur $[a;~b]$ lorsqu'il existe un nombre $A$ tel que pour tout $\varepsilon>0$ il existe $\eta>0$ tel que, pour toute subdivision pointée $D$ de pas inférieur à $\eta$, on a
+\[
+\norm{S_D[f] - A} < \varepsilon
+\]
+
+Dans ce cas, on appelle intégrale de $f$ sur $[a;~b]$ le nombre $\int_a^b f = A$.
+\end{itemize}
+\end{de}
+
+
+Dans le cas d'une fonction $f$ à valeurs dans un espace de Banach quelconque, la première définition entraîne la seconde. En revanche, je n'ai pas réussi à prouver que la seconde entraîne la première. 
+
+En revanche, pour $\R^d$, c'est possible et cela peut se faire par exemple à l'aide des sommes de Darbout sur chacune des coordonnées.
+
+\begin{proof}
+Revenons à la preuve que la Riemann intégrabilité entraîne la KH intégrabilité.
+
+Cela est trivial. Supposons $f$ Riemann intégrable. Pour tout $\varepsilon>0$, nous savons qu'il existe $\eta>0$ telle que pour toute subdivision pointée $D$ de pas inférieur à $\eta$, on a
+\[
+\norm{S_D[f]-\int_a^b f} < \varepsilon
+\]
+
+Pour montrer la KH intégrabilité, il suffit donc de considérer la jauge constante égale à $\eta$.
+\end{proof}
+
+
+On va maintenant trouver un contre exemple de fonction KH intégrable qui n'est pas Riemann intégrable: c'est la fonction de Dirichlet $\mathbb{1}_\Q$ sur $[0;~1]$. Tout le problème ici, c'est de trouver la bonne jauge.
+
+Soit ainsi $\varepsilon>0$. On pose $(x_n)_{n \in \N}$ les rationnels de $[0;~1]$. 
+
+Pour tout $n \in \N$, on pose $\delta(x_n) = \frac{\varepsilon}{2^{n+1}}$ et $\delta(x) = 1$ si $x \notin \Q$.
+
+Soit $D = \left ([a_i;~a_{i+1}];~t_i\right )_{0 \leq i \leq n-1}$ une distribution pointée $\delta-$fine. Alors:
+\begin{align*}
+S_D[f] & = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} (a_{i+1}-a_i) \mathbb{1}_{\Q}(t_i) \\
+ & = \displaystyle{\sum \limits_{\substack{0 \leq i \leq n-1\\ t_i \in \Q}}} (a_{i+1}-a_i)
+\end{align*}
+
+Par construction de la jauge, on en déduit:
+\[
+0 \leq S_D[f] < \varepsilon
+\]
+
+Cela permet de prouver que la fonction de Dirichlet est KH-intégrable et d'intégrale nulle.
+
+\subsection{Les propriétés habituelles de l'intégrale}
+
+
+\begin{prop}[Linéarité de l'intégrale]
+Soient $f$ et $g$ deux fonctions à valeurs dans $\R^d$ et KH-intégrables sur $[a;~b]$. Soit $\lambda \in \R$.
+
+Alors $f + \lambda g$ est KH-intégrable et on a
+\[
+\int_a^b (f + \lambda g) = \int_a^b f + \lambda \int_a^b g
+\]
+\end{prop}
+
+
+\begin{proof}
+On va bien sûr exploiter la linéarité des sommes de Riemann.
+
+Soit $\varepsilon>0$. Il existe deux jauges $\delta_f$ et $\delta_g$ telles que pour toutes subdivisions pointées $D_f$ et $D_g$ respectivement $\delta_f$ et $\delta_g$ fines, on a
+\[
+\norm{S_{D_f}[f] - \int_a^b f} < \dfrac{\varepsilon}{2} \quad \text{ et } \quad \norm{S_{D_g}[g] - \int_a^b g} < \dfrac{\varepsilon}{2 (\abs{\lambda}+1)}
+\]
+
+Considérons maintenant la jauge $\delta=\min(\delta_f;~\delta_g)$. Pour toute subdivision pointée $E$ $\delta-$fine, $E$ est à la fois $\delta_f$ et $\delta_g$ fine.
+
+En particulier, on a:
+\[
+\norm{S_E[f + \lambda g] - \left ( \int_a^b f + \lambda \int_a^b g \right )} = \norm{S_E[f]-\int_a^b f + \lambda \left ( S_E[g] - \int_a^b g\right )} < \dfrac{\varepsilon}{2} + \dfrac{\varepsilon \abs{\lambda}}{2 (\abs{\lambda}+1)} \leq \varepsilon
+\]
+
+Cela achève la démonstration.
+\end{proof}
+
+La proposition qui suit porte sur les fonctions à valeurs réelles.
+
+\begin{prop}[Positivité de l'intégrale]
+Soit $f$ une fonction positive, définie sur $[a;~b]$, et KH-intégrable.
+
+Alors:
+\[
+\int_a^b f \geq 0
+\]
+
+En particulier, si $g$ et $h$ sont deux fonctions KH intégables sur $[a;~b]$ telles que pour tout $x$ de $[a;~b]$ $g(x) \geq h(x)$ alors:
+\[
+\int_a^b g \geq \int_a^b h
+\]
+\end{prop}
+
+
+\begin{proof}
+Si $f$ est positive, toutes les sommes de Riemann sont positives. En particulier, il est impossible que l'intégrale de $f$ soit strictement négative (il suffirait de prendre $\varepsilon = -\int_a^b f$ pour aboutir à une absurdité).
+
+La seconde partie de la proposition se montre avec la linéarité de l'intégrale et la première partie. En effet, dans ce cas $g-h$ est une fonction positive.
+\end{proof}
+
+Un corollaire concerne bien sûr l'inégalité de la moyenne dans le cas où $f$ est bornée. 
+
+\subsection{Critère de Cauchy et relation de Chasles}
+
+La notation KHC n'est pas officielle.
+
+\begin{theo}[Critère de Kurzweil-Henstock-Cauchy]
+Soit $f$ une fonction définie sur un intervalle $[a;~b]$.
+
+On dit que $f$ vérifie le critère de Kurzweil-Henstock-Cauchy lorsque pour tout $\varepsilon>0$, il existe une jauge $\delta$ telle que pour toutes subdivisions pointées $D$ et $D'$ $\delta-$fines, on ait:
+\[
+\norm{S_D[f]-S_{D'}[f]} < \varepsilon
+\]
+
+De plus, une fonction est KH intégrable si et seulement si elle vérifie le critère de KHC.
+\end{theo}
+
+\begin{proof}
+Le sens direct est évident et se fait avec les techniques de contrôle habituelles en utilisant l'inégalité triangulaire sur 
+\[
+\norm{S_D[f]- S_{D'}[f]} \leq \norm{S_D[f]- \int_a^b f} + \norm{S_{D'}[f]- \int_a^b f}
+\]
+
+Montrons le sens réciproque. Pour ce faire, il faut fabriquer une suite de Cauchy de subdivisions \og de plus en plus fines \fg{}. 
+
+On pose ainsi, pour tout entier $n$, $\varepsilon_n = \dfrac{1}{n+1}$. 
+
+Soit une suite de jauges $(\delta_n)$ telles que, pour tout $n$, et pour toutes subdivisions $D_n$ et $D'_n$ $\delta_n-$fines on a:
+\[
+\norm{S_{D_n}[f]- S_{D_n'}[f]} < \varepsilon
+\]
+
+On fabrique maintenant, par récurrence, une suite décroissante de jauges $(\eta_n)$ en posant $\eta_0 = \delta_0$ et, pour tout $n \in \N^*$, $\eta_n = \min(\delta_n;~\eta_{n-1}$.
+
+Par construction pour tout $n$ et pour tout $p$ et pour tout subdivision $D$ on a les propriétés suivantes:
+\begin{itemize}
+\item[$\bullet$]
+$D$ est $\eta_n-$fine entraîne $D$ est $\delta_n-$fine;
+\item[$\bullet$]
+$D$ est $\eta_{n+p}-$fine entraîne $D$ est $\eta_n-$fine (et donc $\delta_n-$fine d'après le point précédent).
+\end{itemize}
+
+Finalement, soit une suite $(D_n)$ de subdivisions telle que, pour tout $n$, $D_n$ est $\eta_n-$fines. On obtient ainsi, pour tout $p \in \N$:
+\[
+\norm{S_{D_{n+p}}[f]-S_{D_n}[f]} < \varepsilon_n
+\]
+
+En particulier, la suite $(S_{D_n}[f])$ est de Cauchy dans $\R^d$ qui est complet et donc converge.
+
+On pose $A$ la limite de cette suite. Pour tous entiers $n$ et $p$ et pour toute subdivision $E_n$ qui est $\eta_n-$fine, on a
+\[
+\norm{S_{D_{n+p}}[f]-S_{E_n}[f]} < \varepsilon_n
+\]
+
+Par passage à la limite sur $p$, cela donne:
+\[
+\norm{A-S_{E_n}[f]} \leq \varepsilon_n
+\]
+
+Cela permet donc de conclure: $A$ correspond bien à l'intégrale KH de $f$ puisque $\varepsilon_n$ peut être arbitrairement petit.
+\end{proof}
+
+On va maintenant se doter de la relation de Chasles.
+
+\begin{de}[Deux conventions pour l'intégrale]
+Soit $f$ une fonction KH intégrable sur $[a;~b]$. On pose:
+\[
+\int_b^a f = -\int_a^b f
+\]
+
+De même, pour tout $c \in [a;~b]$, on pose $\in_c^c f = 0$.
+\end{de}
+
+On va également énoncer deux lemmes.
+
+\begin{lem}[Intégrabilité sur un sous-intervalle]
+Soient $a \leq c<d \leq b$ quatre nombres et $f$ une fonction définie sur $[a;~b]$ et à valeurs dans $\R^d$.
+
+Si $f$ est intégrable sur $[a;~b]$ et si $f$ est KH intégrable sur $[a;~b]$ alors $f$ est KH intégrable sur $[c;~d]$.
+\end{lem}
+
+\begin{proof}
+On va montrer que si $f$ vérifie le critère de Cauchy sur $[a;~b]$ alors $f$ vérifie aussi le critère de Cauchy sur $[c;~d]$.
+
+Soit ainsi $\varepsilon>0$ un nombre. On sait qu'il existe une jauge $\delta$ sur $[a;~b]$ telle que pour toutes subdivisions pointées $D$ et $D'$ $\delta-$fines de $[a;~b]$, on a
+\[
+\norm{S_D[f]-S_{D'}[f]} < \varepsilon
+\]
+
+En particulier, pour toutes subdivisions $E$ et $E'$ de $[c;~d]$ qui sont $\delta-$fines, et pour tout subdivisions $F$ et $G$ respectivement de $[a;~c]$ et $[d;~b]$ là encore $\delta$-fines, on pose $D = F \cup E \cup G$ et $D' = F \cup E' \cup G$.
+
+Par construction, on a $D$ et $D'$ qui sont $\delta-$fines et de plus, on vérifie aisément que 
+\[
+\norm{S_D[f]-S_{D'}[f]} = \norm{S_E[f]-S_{E'}[f]} < \varepsilon
+\]
+
+On en déduit que $f$ vérifie bien le critère de Cauchy sur $[c;~d]$, ce qui permet de conclure.
+
+Ici, on n'a pas traité le cas éventuel où $c=a$ ou $d=b$ qui s'élimine facilement en considérant une subdivision $F$ ou $G$ vide!
+\end{proof}
+
+\begin{lem}[Relation de Chasles, première version]
+Soient $a<b<c$ trois nombres. Si $f$ est KH intégrable sur $[a;~b]$ et $[b;~c]$ alors $f$ est KH intégrable sur $[a;~c]$ et on a
+\[
+\int_a^b f + \int_a^c f = \int_a^c f
+\]
+\end{lem}
+
+\begin{proof}
+Tout le problème ici consiste à fabriquer la jauge sur $[a;~b]$ à partir des jauges sur $[a;~b]$ et $[b;~c]$.
+
+Soit ainsi $\varepsilon>0$. On suppose qu'on a deux jauges $\delta_b$ sur $[a;~b]$ et $\delta_c$ sur $[b;~c]$ telles que
+pour toutes subdivisions pointées $D$ et $E$ respectivement de $[a;~b]$ et $[b;~c]$ qui soient respectivement $\delta_b$ et $\delta_c$ fines on ait
+\[
+\norm{S_D[f]- \int_a^b f} < \dfrac{\varepsilon}{3} \quad \text{ et }\quad \norm{S_E[f]- \int_b^c f} < \dfrac{\varepsilon}{3}
+\]
+
+Tout le problème maintenant c'est de fabriquer une jauge $\delta$ sur $[a;~c]$ de telle sorte que chaque subdivision $D$ $\delta-$fine soit $\delta_b$ fine sur $[a;~b]$ et $\delta_c-$fine sur $[b;~c]$. Il se pose alors le problème de la jonction en $b$. En effet, on veut que les sous-intervalles débutant sur $[a;~b]$ ne s'achèvent pas sur $[b;~c]$ et que les sous-intervalles de $[b;~c]$ ne débutent pas sur $[a;~b]$ car les jauges $\delta_b$ et $\delta_c$ ne portent que sur des subdivisions respectivement propres à $[a;~b]$ et $[b;~c]$.
+
+\medskip
+Pour circonvenir cette contrainte, on fabrique $\delta$ de sorte que, pour chaque $x$ appartenant à $[a;~c] \backslash \{b\}$, $\delta(x)$ soit inférieur à la distance entre $x$ et $b$, c'est à dire $\abs{b-x}$. Il faut également régler le problème éventuel du saut en $b$.
+
+On pose ainsi, pour tout $x \in [a;~c] \backslash \{b\}$, $\delta(x) = \min\left (\delta_b(x);~\delta_c(x);\abs{b-x}\right )$ et $\delta(b) = \min(\delta_b(b);~\delta_c(b))$
+
+Ainsi, un sous-intervalle qui \og pointerait \fg{} sur $b$ ne serait pas non plus problématique car il serait l'union de deux sous-intervalles compatibles avec les jauges $\delta_b$ (à gauche) et $\delta_c$ (à droite).
+
+Pour une telle jauge $\delta$ et pour toute subdivision pointée $F$ $\delta-$fine, on a bien, par construction:
+\[
+\abs{S_F[f]- \int_a^b f - \int_a^c f} < \dfrac{2\varepsilon}{3}
+\]
+
+%En effet, la somme de Riemann $S_F$ peut être séparée en deux sommes de Riemann pour l'intervalle $[a;~c]$ d'une part et pour l'intervalle $[b;~c]$ d'autre par.
+\end{proof}
+
+
+À l'aide des conventions énoncées plus haut et des deux lemmes, on obtient la relation de Chasles \og classique \fg{}
+
+\begin{theo}[Relation de Chasles]
+Soit $E$ une fonction définie et HK-intégrable sur un intervalle $I$. Alors, pour tout $(a;~b~c) \in I^3$, on a
+\[
+\int_a^b f + \int_b^c f = \int_a^c f
+\]
+\end{theo}
+
+Pour prouver ce résultat, on analyse les cas possibles. C'est un peu fastidieux mais faisable.
+
+\subsection{Le théorème fondamental de l'analyse}
+
+\subsubsection{Énoncé et preuve}
+
+Dans le cadre de l'intégrale de Kurzweil-Henstock, le théorème fondamental de l'analyse prend une forme bien plus souple et agréable.
+
+
+\begin{theo}[Théorème fondamental de l'analyse]
+Soit $f$ une fonction définie et dérivable sur $[a;~b]$. 
+
+Alors $f'$ est KH-intégrable sur $[a;~b]$ et:
+\[
+\int_a^b f' = f(b)-f(a)
+\]
+\end{theo}
+
+
+Avant de se lancer dans la preuve, on rappelle qu'une fonction $f$ est dérivable en $x$ lorsque pour tout $h$ suffisamment petit
+\[
+f(x+h)-f(x) = hf'(x)+h\varepsilon(h) \text{ avec }\varepsilon(0) = 0 \text{ et }\varepsilon\text{ continue en }0
+\]
+
+Remarquons également que si $a=a_0 < a_1 < \cdots < a_n=b$ sont $n+1$ nombres, on a 
+\[
+f(b)-f(a) = \displaystyle{\sum \limits_{0 \leq k \leq n-1}} \left (f(a_{k+1})-f(a_k)\right )
+\]
+
+Ces deux remarques nous donnent un moyen assez simple de contrôler $\abs{S_D[f']-(f(b)-f(a))}$ et nous permettent de faire la démonstration sans trop de difficulté.
+
+\begin{proof}
+Soit $\varepsilon>0$. Pour tout $x \in [a;~b]$, il existe $\delta(x)>0$ tel que 
+
+pour tout $t \in ]x-\delta(x);~x+\delta(x)[ \cap [a;~b]$, on a
+\[
+\abs{f'(x)(t-x)-(f(t)-f(x))} \leq \dfrac{\varepsilon}{b-a} \times \abs{t-x}
+\]
+
+On a ainsi construit une jauge $\delta$. Soit ainsi une subdivision pointée $D=\left ([a_i;~a_{i+1}];~x_i\right )_{0 \leq i \leq n-1}$ qui est $\delta-$fine.
+
+\medskip
+On va maintenant contrôler
+\begin{align*}
+\abs{S_D[f']-(f(b)-f(a))} & = \abs{S_D[f']-\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \left (f(a_{i+1})-f(a_i)\right )} \\
+ & = \abs{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \left [f'(x_i)(a_{i+1}-a_i)-\left (f(a_{i+1})-f(a_i)\right )\right ] } \\
+ & \leq \displaystyle{\sum \limits_{0 \leq i \leq n-1}} \abs{f'(x_i)(a_{i+1}-a_i)-\left (f(a_{i+1})-f(a_i)\right )}
+\end{align*}
+
+Pour tout $0 \leq i \leq n-1$, travaillons sur le i-ème terme:
+\begin{align*}
+\abs{f'(x_i)(a_{i+1}-a_i)-\left (f(a_{i+1})-f(a_i)\right )} & = \abs{f'(x_i)(a_{i+1}-x_i)+f'(x_i)(x_i-a_i)-\left (f(a_{i+1})-f(x_i)\right )-\left (f(x_i)-f(a_i)\right )} \\
+ & \leq \abs{f'(x_i)(a_{i+1}-x_i)-\left (f(a_{i+1})-f(x_i)\right )} + \abs{f'(x_i)(x_i-a_i) - \left (f(x_i)-f(a_i)\right )} \\
+ & \leq \dfrac{\varepsilon}{b-a} (a_{i+1}-x_i) + \dfrac{\varepsilon}{b-a} (x_i-a_i)  = \dfrac{\varepsilon}{b-a} (a_{i+1}-a_i)
+\end{align*}
+
+Finalement, on obtient:
+\[
+\abs{S_D[f']-(f(b)-f(a))} \leq \dfrac{\varepsilon}{b-a} \, \displaystyle{\sum \limits_{0 \leq i \leq n-1}} (a_{i+1}-a_i) = \varepsilon
+\]
+\end{proof}
+
+
+\subsubsection{Un exemple pathologique}
+
+En considérant l'exemple de $f: x \mapsto x^2 \sin\left (\frac{1}{x^2} \right )$ prolongée en $0$ par $f(0)=0$; on peut prouver qu'on dispose d'une fonction continue et dérivable sur $\R$.
+
+Cependant la dérivée de $f$ sur $\R^*$ vaut:
+\[
+f': x \mapsto \dfrac{-2\cos \left ( \frac{1}{x^2}\right )}{x}+2x\sin\left ( \frac{1}{x^2}\right )
+\]
+
+Cette dérivée n'est pas bornée sur un intervalle fermé contenant $0$ donc $f'$ n'est pas Riemann intégrable sur cet intervalle. Pourtant, $f'$ est KH intégrable d'après le théorème qui précède.
+
+Pire que cela, on peut montrer que la fonction $x \mapsto \abs{\dfrac{-2\cos \left ( \frac{1}{x^2}\right )}{x}}$ n'est pas Lebesgue intégrable sur cet intervalle alors que la fonction $x \mapsto 2x\sin\left ( \frac{1}{x^2}\right )$ l'est. 
+
+En particulier, cela implique que $f'$ en tant que somme de fonction convergente et divergente n'est pas Lebesgue-intégrable.
+
+\section{Des résultats de convergence}
+
+\subsection{Un premier exemple}
+
+On sait que l'intégrale de Riemann impropre $\int_0^1 \frac{\mathrm d t}{2\sqrt{t}}$ vaut $1$. 
+
+En particulier cela signifie que la fonction $f: t \mapsto \dfrac{\mathbb{1}_{]0;~1]}(t)}{2\sqrt{t}}$ prolongée par exemple par $f(0)=0$ est Lebesgue-intégrable sur $[0;~1]$.
+
+Mais est-elle KH intégrable? La réponse est oui et nous allons le prouver \og à la main \fg{} afin d'essayer de découvrir des propriétés sympathiques de convergence.
+
+
+Soit ainsi $\varepsilon>0$ un nombre. 
+
+On veut fabriquer  une jauge $\delta$ sur $[0;~1]$ telle que pour toute subdivision pointée $D$ $\delta-$fine on ait 
+\[
+\abs{S_D[f]-1} < \varepsilon
+\]
+
+
+C'est ici que l'on exploite l'intégrale impropre en tant que limite d'intégrales de Riemann \og classiques. \fg{}
+
+Ainsi, il existe $\eta>0$ tel que $0 \leq \int_0^\eta f < \dfrac{\varepsilon}{2}$. Soit maintenant $\rho>0$, tel que pour tout subdivision pointée $D$ de $[\eta;~1]$ de pas inférieur à $\rho$, on a:
+\[
+\int_\eta^1 f - S_D[f] < \dfrac{\varepsilon}{2}
+\]
+
+On fabrique ainsi $\delta$ en posant pour tout $x \in ]0;\eta]$, $\delta(x) = x \dfrac{\rho}{\eta}$ et pour tout $x \geq \eta$, $\delta(x) = \rho$ et enfin $\delta(0) = \eta$.
+
+Par construction, cette jauge vérifie le cahier des charges.
+
+\subsection{Lemme de Henstock}
+
+Ce lemme permet de contrôler la valeur de $\int_a^b f$ sur un ensemble d'intervalles disjoints contrôlés par une jauge.
+
+\begin{lem}[Henstock]
+Soit $[a;~b]$ un intervalle et $f$ une fonction KH intégrable. 
+
+Soit $\varepsilon>0$ et $\delta$ une jauge associée à $\varepsilon$.
+
+
+Alors, pour tout ensemble d'intervalle fermés bornées deux à deux disjoints, inclus dans $[a;~b]$, $([\alpha_i;~\beta_i])_{0 \leq i \leq n-1}$ associés à des points $(x_i)$ et vérifiant pour tout $i$, $\beta_i-\alpha_i \leq \delta(x_i)$, on a
+\begin{align*}
+\abs{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \left (f(x_i) (\beta_i-\alpha_i) - \int_{\alpha_i}^{\beta_i} f \right )} & \leq \varepsilon  \\
+\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \abs{f(x_i) (\beta_i-\alpha_i) - \int_{\alpha_i}^{\beta_i} f } & \leq 2\varepsilon 
+\end{align*}
+\end{lem}
+
+\begin{proof}
+On va commencer par prouver la première inégalité. On commence par compléter les trous formés par les $F_i=[\alpha_i;~\beta_i]$. Soient ainsi les intervalles fermés $(G_j)_{0 \leq j \leq p-1}=([\mu_j;~\nu_j])_{0 \leq j \leq p-1}$ inclus dans $[a;~b]$ qui complètent les $F_i$, c'est à dire tels que:
+\begin{itemize}
+\item[$\bullet$]
+\[
+\left (\bigcup \limits_{0 \leq j \leq p-1} G_j \right ) \cup \left ( \bigcup \limits_{0 \leq i \leq n-1} F_i \right ) = [a;~b]
+\]
+\item[$\bullet$]
+$\forall (i;~j) \in \intint{0}{n-1} \times \intint{0}{p-1}, \; \mathring{F_i} \cap \mathring{G_j} = \emptyset$
+\end{itemize}
+
+Soit $\eta>0$ quelconque. Pour tout $0 \leq j \leq p-1$, soit $\delta_j$ une jauge sur $G_j$ telle $\delta_j \leq \delta$ et telle que pour toute subdivision $D_j$ $\delta_j-$fine on a $\abs{\int_{\mu_j}^{\nu_j} - S_{D_j}[f]} < \dfrac{\eta}{p}$.
+
+Considérons enfin la subdivision pointée $D$ obtenue par réunion des $(D_j)_{0 \leq j \leq p-1}$ et des $(x_i;~[\alpha_i;~\beta_i])_{0 \leq i \leq n-1}$. Par construction $D$ est $\delta-$fine.
+
+De plus, en notant $\Delta_F = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} \left (f(x_i) (\beta_i-\alpha_i) - \int_{\alpha_i}^{\beta_i} f \right )$ et $\Delta_G = \displaystyle{\sum \limits_{0 \leq j \leq p-1}} \left (S_{D_j}[f] - \int_{\mu_i}^{\nu_i} f \right )$, on a par construction, $\Delta_F + \Delta_G = S_D[f] - \int_a^b = \Delta$.
+
+En particulier, on sait que $\abs{\Delta} < \varepsilon$ et, par l'inégalité triangulaire, $\abs{\Delta_G} < \eta$.
+
+On en déduit que:
+\[
+\abs{\Delta_F} = \abs{\Delta - \Delta_G} < \varepsilon + \eta
+\]
+
+Et comme $\eta>0$ est arbitraire, on en déduit la première inégalité du lemme de Henstock.
+
+Pour la seconde inégalité, on sépare les termes positifs et négatifs de $\Delta_F$. La somme des termes positifs est majorée par $\varepsilon$, de même que la somme des termes négatifs est minorée par $-\varepsilon$. La somme des valeurs absolues est donc majorée par $2\varepsilon$.
+\end{proof}
+
+Un corollaire facile du lemme.
+
+\begin{cor}[Fonction définie par une intégrale]
+Soit $f$ une fonction KH intégrable sur un intervalle $[a;~b]$. Alors:
+\[
+\varphi: x \mapsto \int_a^x f \text{ est continue}
+\]
+\end{cor}
+
+
+\begin{proof}
+Soit $x \in [a;~b]$. Soit $\varepsilon>0$ et $\delta$ la jauge associée à $\dfrac{\varepsilon}{2}$.
+
+Pour tout $y$ de l'intervalle $[x-\delta;~x+\delta] \cap [a;~b]$, on a 
+\[
+(y-x)f(x) - \dfrac{\varepsilon}{2} \leq f(y)-f(x) = \int_x^y f \leq (y-x)f(x) + \dfrac{\varepsilon}{2}
+\]
+
+Et ainsi, il existe $0 < \eta < \delta(x)$ tel que pour tout $y$ de l'intervalle $[x-\eta;~x+\eta] \cap [a;~b]$, on a
+\[
+\varepsilon < f(y)-f(x) < \varepsilon
+\]
+\end{proof}
+
+\subsection{Intégrales généralisées}
+
+On va maintenant s'intéresser dans un premier temps aux résultats étendant l'intégrale de Kurzweil-Henstock sur des intervalles ouverts. Il s'agit donc déjà de définir une jauge pour des intervalles de longueur potentiellement infinie.
+
+\begin{de}[Jauge pour des intervalles de longueur infinie, somme de Riemann associée et intégrale KH]
+On s'intéresse ici à un intervalle $[a;~+\infty[$ avec $a \in \R$. 
+
+Une jauge $\delta$ sur cet intervalle est une fonction strictement positive définie sur $[a;~+\infty]$. 
+
+Une subdivision pointée $D$ $\delta-$fine est un $n+1$-uplet $(x_i;~I_i)_{0 \leq i \leq n}$ avec:
+\begin{itemize}
+\item[$\bullet$]
+pour tout $i \leq n-1$, $x_i \in [a;~+\infty[$ et $I_i$ et $I_i = [\alpha_i;~\alpha_{i+1}]$ tel que $\alpha_{i+1}-\alpha_i \leq \delta(x_i)$;
+\item[$\bullet$]
+$x_n = +\infty$ et $I_n = [\alpha_n;~+\infty[$ avec $\alpha_n \geq \dfrac{1}{\delta(+\infty)}$;
+\item[$\bullet$]
+$\alpha_0 = a$.
+\end{itemize}
+
+
+De plus, on pose, par convention, que la somme de Riemann de cette subdivision est 
+\[
+S_D[f] = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} f(x_i) (\alpha_{i+1}-\alpha_i)
+\]
+
+Enfin, on dira qu'une fonction est KH intégrable sur $[a;~+\infty[$ lorsqu'il existe un nombre $A$ tel que, pour tout $\varepsilon>0$, il existe une jauge $\delta$ sur $[a;~+\infty]$ telle que, pour tout subdivision pointée $D$ $\delta-$fine on ait:
+\[
+\abs{S_D[f]-A} < \varepsilon
+\]
+
+On dira que $A$ est l'intégrale de $f$.
+\end{de}
+
+\begin{de}[Jauge pour un intervalle $[a;~b[$]
+Si $b\in \R$, on définit une subdivision pointée $\delta-$fine sur $[a;~b[$ de la même manière que sur $[a;~b]$ en imposant $f(b)=0$.
+\end{de}
+
+% ajouter le lemme sur la modification d'un ensemble dénombrable de points.
+
+\begin{prop}[Propriétés de cette extension de l'intégrale KH]
+Les propriétés suivantes de l'intégrale KH sur un segment reste inchangées:
+\begin{itemize}
+\item[$\bullet$]
+Elle est linéaire, positive;
+\item[$\bullet$]
+Le critère de Cauchy s'énonce de manière identique et reste une condition nécessaire et suffisante de KH intégrabilité;
+\item[$\bullet$]
+Pour tout intervalle $[c;~d] \subset [a;~+\infty[$, si $f$ est intégrable sur $[a;~+\infty[$ alors $f$ est intégrable sur $[c;~d]$;
+\item[$\bullet$]
+Si $f$ est intégrable sur $[a;~c]$ et sur $[c;~+\infty[$ alors elle est intégrable sur $[a;~+\infty[$.
+\item[$\bullet$]
+Les conventions associées à la relation de Chasles et la relation de Chasles reste identique.
+\item[$\bullet$]
+Le lemme de Henstock reste valable.
+\end{itemize}
+\end{prop}
+
+Avec cette convention, la notion d'intégrale généralisée de Riemann prend une forme beaucoup plus agréable.
+
+\begin{prop}[Intégrale généralisée: deux formes]
+Soit un intervalle $[a;~b[$ avec éventuellement $b = +\infty$. On suppose que, pour tout $a \leq c < b$, $f$ est KH-intégrable sur $[a;~c]$ et que $\lim \limits_{c \overset{<}{\to} b} \int_a^c f$ existe. Alors:
+\[
+f \text{ est KH intégrable sur $[a;~b[$ et }\int_a^b f = \lim \limits_{c \overset{<}{\to} b} \int_a^c f
+\]
+
+Réciproquement, si $f$ est KH intégrable sur $[a;~b[$ alors
+\[
+\int_a^b f = \lim \limits_{c \overset{<}{\to} b} \int_a^c f
+\]
+\end{prop}
+
+\begin{proof}
+On va supposer $b \in \R$. Soit $A = \lim \limits_{c \overset{<}{\to} b} \int_a^c f$. Soit enfin $\varepsilon>0$.
+
+Il existe $a < c_0 < b$ tel que pour tout $x \in [c_0;~b[$ on ait $\abs{A-\int_a^x f} < \dfrac{\varepsilon}{2}$. Soit également la jauge $\delta_{-1}$ définie sur $[a;~c_0]$ telle que pour toute subdivision $D_{-1}$ $\delta_{-1}-$fine de $[a;~{c_0}]$, on ait:
+\[
+\abs{S_{D_{-1}}[f] - \int_a^{c_0} f} < \dfrac{\varepsilon}{4}
+\]
+
+Soit maintenant une suite strictement croissante $(c_n)$ telle que $\lim \uparrow c_n = b$. On pose par exemple $c_n = \dfrac{n}{n+1}b + \dfrac{1}{n+1}c_0$.
+
+Ensuite, on fabrique une suite de jauges $(\delta_n)$ des intervalles $[c_n;~c_{n+1}]$ telles que, pour tout $n$, et pour toute subdivision pointée $D_n$ $\delta_n$ fine, on ait:
+\[
+\abs{S_{D_n}[f] - \int_{c_n}^{c_{n+1}}f } < \dfrac{\varepsilon}{2^{n+3}}
+\]
+
+Cette construction permet de fabriquer une jauge $\delta$, en posant $c_{-1}=a$.
+
+Pour tout $x \in [a;~b]$, on distingue ainsi quatre cas:
+\begin{itemize}
+\item[$\bullet$]
+ou bien il existe un unique entier $n \in \N \cup \{-1\}$ tel que $x \in ]c_n;~c_{n+1}[$ et on pose alors $\delta(x) = \min\left (\delta_n(x);~(c_{n+1}-x);~(x-c_n)\right )$;
+\item[$\bullet$]
+ou bien il existe un entier $n \in \N$ tel que $x=c_n$ et on pose alors $\delta(x) = \min\left(\delta_n(c_n);~\delta_{n-1}(c_n) \right)$;
+\item[$\bullet$]
+ou bien $x=a$ et on pose $\delta(x) = \delta_{-1}(a)$;
+\item[$\bullet$]
+ou bien $x=b$ et on pose $\delta(x) = (b-c_0)$.
+\end{itemize}
+
+Soit maintenant une subdivision $D = (x_i;~[\alpha_i;~\alpha_{i+1}])_{0 \leq i \leq n-1}$ de $[a;~b]$ $\delta-$fine. Par construction, on a forcément $x_{n-1} = \alpha_n = b$ et il existe donc un unique $p$ tel que $\alpha_{n-1} \in [c_p;~c_{p+1}[$. On va maintenant examiner la valeur de 
+\[
+\abs{S_D[f]-A} \leq \abs{S_D[f]-\int_a^{\alpha_{n-1}} f} +  \abs{\int_a^{\alpha_{n-1}} f - A}
+\]
+
+On sait que  $\abs{\int_a^{\alpha_{n-1}} f - A} < \dfrac{\varepsilon}{2}$ par définition de $c_0$. 
+
+On réarrange ensuite la somme $S_D[f]$ en $p+1$ sous-sommes étant chacune relatives à des subdivisions $(D_i)_{-1 \leq i \leq p-1}$ $\delta_i-$fines des intervalles $[c_i;~c_{i+1}]$ avec un résidu $S_{D_p}[f]$ $\delta_p-$fin relatif à l'intervalle $[c_p;~\alpha_p]$. On exploite également la relation de Chasles sur l'intégrale $\int_a^{\alpha_{n-1}} f$.
+
+On obtient ainsi:
+\[
+\abs{S_D[f]-\int_a^{\alpha_{n-1}} f} \leq \sum \limits_{-1 \leq i \leq p}\abs{S_{D_i}[f] - \int_{c_i}^{c_{i+1}}f} + \abs{S_{D_p}[f] - \int_{c_p}^{\alpha_{n-1}}f}
+\]
+
+Par construction pour les $p+1$ premiers termes et en exploitant le lemme de Henstock pour le dernier terme, on obtient:
+\[
+\abs{S_D[f]-\int_a^{\alpha_{n-1}} f} < \sum \limits_{-1 \leq i \leq p} \dfrac{\varepsilon}{2^{p+3}} < \dfrac{\varepsilon}{2}
+\]
+
+Finalement, on a bien:
+\[
+\abs{S_D[f]-A} < \varepsilon
+\]
+
+Le cas où $b=+\infty$ se traite de manière identique.
+
+On va maintenant examiner la réciproque. Cette fois-ci, on suppose $b = +\infty$ (pour changer) et on suppose donc que $f$ est KH intégrable sur $[a;~+\infty[$ et pour alléger, on pose $A = \int_a^{+\infty} f$
+
+Soit ainsi $\varepsilon>0$. On part sur la même approche. Soit $\delta$ la jauge de $[a;~+\infty]$ $\dfrac{\varepsilon}{2}-$fine. Soit $c = \dfrac{1}{\delta(+\infty)}$. Pour tout $x \geq c$, examinons $\abs{\int_a^x - A}$.
+
+On sait qu'il existe une jauge $\delta_x$ de $[a;~x]$ plus fine que $\delta$ et telle que pour toute subdivision $D_x$ $\delta_x-$fine on ait:
+\[
+\abs{S_{D_x}[f]-\int_a^x f} < \dfrac{\varepsilon}{2}
+\]
+
+Soit maintenant la subdivision $D$ obtenue en ajoutant à $D_x$ l'intervalle $[x;~+\infty[$ qui pointe sur $+\infty$.
+
+$D$ est $\delta-$fine et on a $S_{D_x}[f] = S_D[f]$. Par conséquent, l'inégalité triangulaire donne
+\[
+\abs{\int_a^x f - A} \leq \abs{\int_a^x f - S_{D_x}[f]} + \abs{S_{D_x}[f] - A} < \varepsilon
+\]
+\end{proof}
+
+Dans l'intégrale sur un intervalle semi-ouvert $[a;~b[$ avec $b \in \R$, on a fixé $f(b)=0$. Il est donc naturel de se demander si cette convention est un biais potentiel pour la théorie, en particulier, dans le cas d'une fonction \og classiquement intégrable \fg{} sur $[a;~b]$ avec $f(b) \neq 0$. 
+
+Cela change-t-il quelque chose de modifier ponctuellement des valeurs de $f$? 
+
+\begin{lem}[Modification d'un ensemble dénombrable de points]
+Soit une fonction $f$ définie sur un intervalle $[a;~b]$ et KH intégrable sur ce même intervalle.
+
+Soit $(c_n)_{n \in \N}$ un ensemble dénombrable de points distincts deux à deux de $[a;~b]$ et $(m_n)_{n \in \N}$ une suite de nombres.
+
+On pose $\tilde{f}$ la fonction modifiée $\tilde{f}: x \mapsto \begin{cases}
+f(x) \text{ si }x \notin (c_n)_{n \in \N} \\
+m_n \text{ si }x=c_n
+\end{cases}$.
+
+Alors $\tilde{f}$ est KH intégrable et son intégrale est identique à celle de $f$.
+\end{lem}
+
+
+\begin{proof}
+Là encore, il s'agit pour un $\varepsilon>0$ de construire une jauge adaptée.  Soit $\delta_0$ la jauge $\dfrac{\varepsilon}{2}$ adaptée pour $f$. 
+
+Il faut maintenant s'assurer que les sauts potentiels sur les points de $(c_n)$ soient contrôlables.
+
+Soit $n \in \N$, pour tout intervalle $[\alpha;~\beta]$ contenant $c_n$, on a
+\[
+\abs{(\beta-\alpha)\tilde{f}(c_n) - (\beta-\alpha)\tilde{f}(c_n)} \leq (\beta-\alpha) \abs{m_n-f(c_n)} \leq \delta(c_n) \abs{m_n-f(c_n)}
+\]
+
+Cela nous donne donc l'idée pour la jauge \og prolongée \fg{}. On pose ainsi, pour tout $n \in \N$,\\
+$\delta(c_n) = \min \left (\delta(c_n);~\dfrac{\varepsilon}{2^{n+2} \delta(c_n) \left ( \abs{m_n-f(c_n)} + 1\right )} \right )$.
+
+Et pour tout $x \notin (c_n)_{n \in \N}$, on pose $\delta(x) = \delta_0(x)$.
+
+Soit ainsi une subdivision pointée $D$ $\delta-$fine. On a
+\[
+\abs{S_D\left [\tilde{f}\right ]-\int_a^b f} \leq \abs{S_D\left [\tilde{f}\right ] - S_D[f]}+\abs{S_D\left [f\right ]-\int_a^b f}
+\]
+
+Par construction de la jauge au niveau des sauts, on a $\abs{S_D\left [\tilde{f}\right ] - S_D[f]} < \displaystyle{\sum \limits_{n \in \N}} \dfrac{\varepsilon}{2^{n+2}} = \dfrac{\varepsilon}{2}$. Finalement, on a bien
+\[
+\abs{S_D\left [\tilde{f}\right ]-\int_a^b f} < \varepsilon
+\]
+\end{proof}
+
+\subsection{Convergence monotone}
+
+\begin{theo}[Théorème de convergence monotone]
+Soit $(f_n)_{n \in \N}$ une suite de fonctions croissantes KH-intégrables sur un intervalle $[a;~b]$.
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$]
+la suite $\lim \uparrow \int_a^b f_n < +\infty$;
+\item[$\bullet$]
+$\lim \uparrow f_n$ ne prend que des valeurs finies.
+\end{itemize}
+
+Alors $\lim \uparrow f_n$ est KH intégrable et
+\[
+\lim \uparrow \int_a^b f_n = \int_a^b \left (\lim \uparrow f_n\right )
+\]
+\end{theo}
+
+\begin{proof}
+Encore une fois, c'est sur la jauge qu'il faut travailler.
+
+Soit $A = \lim \uparrow \int_a^b f_n$ et soit $f = \lim \uparrow f$. 
+
+Soit également $\varepsilon>0$. 
+
+On sait qu'il existe un rang $p$ tel que 
+\[
+0 \leq A - \int_a^b f_p < \dfrac{\varepsilon}{4}
+\]
+
+On suppose d'autre part que l'on a construit une suite de jauges $(\delta_n)_{n \in \N}$ telles que, pour tout $n$, $\delta_n$ est $\dfrac{\varepsilon}{2^{n+3}}-$adaptée à $(f_n)$.
+
+On va maintenant fabriquer notre jauge $\delta$:
+
+Pour tout $x$, il existe un rang $n \geq p$ tel que $f(x)-f_n(x) < \dfrac{\varepsilon}{4(b-a)}$. On pose alors $\delta(x) = \delta_n(x)$.
+
+Considérons maintenant une subdivision $D=(x_i;~[\alpha_i;~\alpha_{i+1}])_{0 \leq i \leq N-1}$ $\delta-$fine. À chaque $x_i$, on associe le rang $n_i$ qui a servi à fabriquer la jauge de $x_i$.
+On a donc:
+\[
+\abs{S_D[f]-A} \leq \displaystyle{\sum \limits_{0 \leq i \leq N-1}} (f(x_i)-f_{n_i}(x_i)) (\alpha_{i+1}-\alpha_i) + \abs{\displaystyle{\sum \limits_{0 \leq i \leq N-1}} f_{n_i}(x_i)(\alpha_{i+1}-\alpha_i) - A}
+\]
+
+Par construction, on a $\displaystyle{\sum \limits_{0 \leq i \leq N-1}} (f(x_i)-f_{n_i}(x_i)) (\alpha_{i+1}-\alpha_i) < \dfrac{\varepsilon}{4}$. 
+
+Reste à contrôler le second terme... Pour ce faire, on va considérer la fonction $\tilde{f}$ dont la restriction sur chaque $]\alpha_i;~\alpha_{i+1}[$ est $f_{n_i}$ et qui vaut par exemple $0$ sur les $\alpha_i$. Par construction, on a
+\[
+\displaystyle{\sum \limits_{0 \leq i \leq N-1}} f_{n_i}(x_i)(\alpha_{i+1}-\alpha_i) = S_D\left [ \tilde{f}\right ]
+\]
+
+
+De plus, $\tilde{f}$ est KH intégrable (comme somme de fonctions KH intégrables) et on a $0 \leq A-\int_a^b \tilde{f} \leq A-\int_a^b f_p < \dfrac{\varepsilon}{4}$ en raison de la croissance de $(f_n)$.
+
+Ainsi, on a une première inégalité sur le second terme:
+\[
+\abs{\displaystyle{\sum \limits_{0 \leq i \leq N-1}} f_{n_i}(x_i)(\alpha_{i+1}-\alpha_i) - A} \leq \abs{S_D\left [ \tilde{f}\right ]-\int_a^b \tilde{f}} + \abs{\int_a^b \tilde{f} - A} < \dfrac{\varepsilon}{4} + \abs{S_D\left [ \tilde{f}\right ]-\int_a^b \tilde{f}}
+\]
+
+Travaillons enfin sur le dernier terme à contrôler
+\[
+S_D\left [ \tilde{f}\right ]-\int_a^b \tilde{f} = \displaystyle{\sum \limits_{0 \leq i \leq N-1}} \left (f_{n_i}(x_i) \left ( \alpha_{i+1}-\alpha_i\right ) - \int_{\alpha_i}^{\alpha_{i+1}} f_{n_i}\right )
+\]
+
+On réalise une partition sur les différentes valeurs des $(n_i)_{0 \leq i \leq N-1}$. Supposons par exemple que les $(n_i)$ prennent les valeurs deux à deux distinctes $(m_k)_{0 \leq k \leq q-1}$. 
+
+Pour tout $0 \leq k \leq q-1$, on pose $I_k$ l'ensemble d'indices tels que pour tout $i \in I_k$, $n_i = m_k$, de sorte que les $(I_k)_{0 \leq k \leq q-1}$ réalisent une partition de $\intint{0}{N-1}$.
+
+On réécrit ainsi la somme précédente en regroupant les termes selon cette partition:
+\[
+\displaystyle{\sum \limits_{0 \leq i \leq N-1}} \left (f_{n_i}(x_i) \left ( \alpha_{i+1}-\alpha_i\right ) - \int_{\alpha_i}^{\alpha_{i+1}} f_{n_i}\right ) = \displaystyle{\sum \limits_{0 \leq k \leq q-1}} \, \sum \limits_{i \in I_k} \left (f_{m_k}(x_i) \left ( \alpha_{i+1}-\alpha_i\right ) - \int_{\alpha_i}^{\alpha_{i+1}} f_{m_k}\right )
+\]
+
+On peut alors appliquer le lemme de Henstock à chacun des regroupements de la partition. On obtient donc:
+\[
+\abs{S_D\left [ \tilde{f}\right ]-\int_a^b \tilde{f}} \leq \displaystyle{\sum \limits_{0 \leq k \leq q-1}} \abs{\sum \limits_{i \in I_k} \left (f_{m_k}(x_i) \left ( \alpha_{i+1}-\alpha_i\right ) - \int_{\alpha_i}^{\alpha_{i+1}} f_{m_k}\right )} \leq \displaystyle{\sum \limits_{0 \leq k \leq q-1}} \dfrac{\varepsilon}{2^{m_k+3}} < \dfrac{\varepsilon}{4}
+\]
+
+Finalement, on a 
+\[
+\abs{S_D[f]-A} < \dfrac{3\varepsilon}{4} < \varepsilon
+\]
+\end{proof}
+
+
+\subsection{Convergence dominée}
+
+Avant toute chose, remarquons que lorsque $f$ et $\abs{f}$ sont KH intégrables alors l'inégalité triangulaire s'applique:
+\[
+\int \abs{f} \geq \abs{\int f}
+\]
+
+\begin{lem}[Critère de convergence pour la valeur absolue]
+Soit $f$ une fonction KH intégrable sur un intervalle $[a;~b]$ (ou $[a;~b[$ ou $]a;~b]$ ou $]a;~b[$).
+
+On note $\mathcal{D}$ l'ensemble des subdivisions (non pointées) de cet intervalle.
+
+Alors $\abs{f}$ est KH intégrable si et seulement si l'ensemble $\left \{ \displaystyle{\sum \limits_{I \in D}} \abs{\int_I f}; \text{ avec }D  \in \mathcal{D}\right \}$ est majoré.
+
+De plus, dans ce cas:
+\[
+\int_a^b \abs{f} = \sup \limits_{D \in \mathcal{D}} \displaystyle{\sum \limits_{I \in D}} \abs{\int_I f}
+\]
+\end{lem}
+
+Montrons ce lemme qui nous servira à prouver très facilement la convergence monotone.
+
+\begin{proof}
+Le sens direct est évident. En effet, supposons que $\abs{f}$ est KH intégrable. La relation de Chasles et l'inégalité triangulaire donnent, pour tout $D \in \mathcal{D}$:
+\[
+\displaystyle{\sum \limits_{I \in D}} \abs{\int_I f} \leq \displaystyle{\sum \limits_{I \in D}} \in_I \abs{f} = \int_a^b \abs{f}
+\]
+
+Attaquons-nous maintenant à la réciproque. Soit ainsi la borne supérieure de l'ensemble $\left \{ \displaystyle{\sum \limits_{I \in D}} \abs{\int_I f}; \text{ avec }D  \in \mathcal{D}\right \}$ que l'on notera $A$ et soit $\varepsilon>0$.
+
+En raison de la définition de borne supérieure, il existe ainsi une subdivision $D=(I_k)_{0 \leq k \leq N-1} \in \mathcal{D}$ telle que:
+\[
+A-\dfrac{\varepsilon}{2}<\displaystyle{\sum \limits_{0 \leq k \leq N-1}} \abs{\int_{I_k} f} \leq A
+\]
+
+Pour tout $k \in \intint{0}{N-1}$, il existe une jauge $\delta_k$ de l'intervalle $I_k$ telle que pour tout subdivision pointée $D_k$ de $I_k$ qui est $\delta_k-$fine on a:
+\[
+\abs{S_{D_k}[f]-\int_{I_k}f} < \dfrac{\varepsilon}{4N}
+\]
+
+
+On fabrique maintenant une jauge $\delta$ sur $[a;~b]$ (ou $[a;~b[$ ou $]a;~b]$ ou $]a;~b[$) en recollant toutes ces jauges, avec la technique déjà utilisée pour prouver la relation de Chasles. Soit ainsi $E$ une subdivision pointée $\delta-$fine.
+
+Par construction, $E$ \og imbriquée \fg{} dans $D$, en ce sens que $E$ est formée de la réunion de subdivisions pointées $E_k$ $\delta_k-$fines des intervalles $I_k$. 
+
+Pour tout $k \in \intint{0}{N-1}$, on note ainsi $E_k =  = \left (x_i^{(k)};~[\alpha_i^{(k)};~\alpha_{i+1}^{(k)}]\right )_{0 \leq i \leq n_k-1}$
+
+
+Montrons maintenant que la quantité $S_E\left [\abs{f}\right ]$ n'est pas trop éloignée de $A$. En raison de la relation de Chasles, de l'inégalité triangulaire et de la définition de borne supérieure, on a:
+\begin{equation}
+\label{borne_sup}
+A \geq 
+\displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{\int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f} \geq \displaystyle{\sum \limits_{0 \leq k \leq N-1}} \abs{\int_{I_k} f} >
+A - \dfrac{\varepsilon}{2}
+\end{equation}
+
+
+
+On va donc étudier:
+\begin{align*}
+\abs{S_E\left [\abs{f}\right ] - \displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{\int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f}} & = \abs{\displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}}\left [\abs{f\left (x_i^{(k)}\right )}\left( \alpha_{i+1}^{(k)} - \alpha_i^{(k)}\right ) - \abs{\int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f}\right ]} \\
+ & \leq \displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{f\left (x_i^{(k)}\right )\left( \alpha_{i+1}^{(k)} - \alpha_i^{(k)}\right ) - \int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f}
+\end{align*}
+
+On exploite ensuite le lemme de Henstock. On a la majoration suivante, pour chacune des sommes sur les intervalles $I_k$:
+\[
+\displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{f\left (x_i^{(k)}\right )\left( \alpha_{i+1}^{(k)} - \alpha_i^{(k)}\right ) - \int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f} \leq 2 \times \dfrac{\varepsilon}{4N} = \dfrac{\varepsilon}{2N}
+\]
+
+On en déduit un contrôle de la différence entre $S_E\left [\abs{f}\right ]$ et $\displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{\int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f}$.
+\begin{equation}
+\label{henstock}
+\abs{S_E\left [\abs{f}\right ] - \displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{\int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f}} \leq \displaystyle{\sum \limits_{0 \leq k \leq N-1}} \; \displaystyle{\sum \limits_{0 \leq i \leq n_k-1}} \abs{f\left (x_i^{(k)}\right )\left( \alpha_{i+1}^{(k)} - \alpha_i^{(k)}\right ) - \int_{\alpha_i^{(k)}}^{\alpha_{i+1}^{(k)}} f} \leq N \times \dfrac{\varepsilon}{2N}
+\end{equation}
+
+
+
+Ce qui permet d'obtenir, en exploitant les inégalités \ref{borne_sup} et \ref{henstock}, on obtient:
+\[
+A + \dfrac{\varepsilon}{2} \geq S_E\left [\abs{f}\right ] > A-\varepsilon
+\]
+
+On a donc bien prouvé que $\abs{f}$  était intégrable et d'intégrale $A$.
+\end{proof}
+
+Un corollaire important: le principe de domination.
+
+\begin{cor}[Domination]
+Soient $f$ et $g$ deux fonctions KH intégrables sur un intervalle. 
+
+On suppose que sur cet intervalle on a $\abs{f} \leq g$. Alors $\abs{f}$ est KH intégrable.
+\end{cor}
+
+\begin{proof}
+Très simple. On reprend les hypothèses et notations du critère de convergence. Ainsi, il est immédiat que si $\abs{f}$ est intégrable alors l'ensemble $\left \{ \displaystyle{\sum \limits_{I \in D}} \abs{\int_I f}; \text{ avec }D  \in \mathcal{D}\right \}$ est majoré par $\int_a^b g$ en raison de l'inégalité triangulaire et de l'hypothèse de domination. Ainsi $\abs{f}$ est intégrable.
+\end{proof}
+
+On peut également retrouver des résultats de l'intégration de Lebesgue comme le lemme de Fatou qui permettent d'obtenir un théorème de convergence dominée. Nous ne le ferons pas ici. 
+
+En revanche, nous allons maintenant montrer un moyen de définir rapidement la mesure de Lebesgue à l'aide de l'intégrale KH sur un intervalle fermé borné. Le passage aux intervalles quelconques s'obtiendra par convergence monotone sur la suite croissante d'intervalles $[-n;~n]$ et ne sera pas détaillé ici.
+
+Avant cela, deux résultats qui portent sur le maximum de deux fonctions.
+
+\begin{lem}[Intégrabilité de $f^+$ et $f^-$]
+Soit $f$ une fonction KH intégrable sur un intervalle. 
+
+Alors $\abs{f}$ si et seulement si $f^+$ et $f^-$ sont KH intégrables.
+\end{lem}
+
+\begin{proof}
+C'est évident en remarquant que $\abs{f} = f^++f^-$ et que $f^+ = \dfrac{\abs{f}+f}{2}$ et $f^- = \dfrac{\abs{f}-f}{2}$
+\end{proof}
+
+\begin{prop}[Intégrabilité du maximum et du minimum de deux fonctions]
+Soient $f$ et $g$ deux fonctions KH intégrables sur un intervalle. On suppose que $\abs{f-g}$ est KH intégrable.
+
+Alors $\max(f;~g)$ et $\min(f;~g)$ sont intégrables.
+\end{prop}
+
+\begin{proof}
+C'est évident d'après le lemme qui précède. En effet, $\max(f;~g) = g+(f-g)^+$ et $\min(f;~g) = f-(f-g)^+$
+\end{proof}
+
+
+
+\begin{theo}[Mesure de Lebesgue: une définition à l'aide des intégrales KH]
+On se place sur un intervalle fermé borné $[a;~b]$.
+
+Alors, pour tout borélien $A$ de $[a;~b]$, $\mathbb{1}_A$ est intégrable sur $[a;~b]$ et de plus $\lambda(A) = \int_a^b \mathbb{1}_A$ définit la mesure de Lebesgue de $A$.
+\end{theo}
+
+Pour prouver ce théorème, on va utiliser des arguments de classes monotones (pour l'unicité) et de stabilite (pour l'existence).
+
+\begin{proof}
+Il est clair que si $A$ est un intervalle de $[a;~b]$, $\mathbb{1}_A$ est KH intégrable et que dans ce cas l'intégrale et la mesure de Lebesgue coïncident.
+
+Il est clair également que si $\mathbb{1}_A$ est KH intégrable alors $1-\mathbb{1}_A$ est également KH intégrable. Cela montre la stabilité par complémentaire.
+
+On va maintenant montrer la stabilité par intersection. Mais cela est simple compte-tenu de ce qui précède. En effet, $\mathbb{1}_{A \cap B} = \min(\mathbb{1}_A;~\mathbb{1}_B)$.
+
+Comme on a stabilité par complémentaire et par intersection alors on a stabilité par union et différence.
+
+Reste à prouver la stabilité par passage à la limite supérieure pour achever cette démonstration. Mais cela est évident en raison du théorème de convergence monotone. Ainsi, si $(A_n)$ est une suite croissante d'ensembles KH intégrables, on sait que $\int_a^b \mathbb{1}_{A_n}$ est majorée par $b-a$, ce qui permet de conclure.
+
+Les boréliens sont donc KH intégrables.
+
+De plus, il est clair que l'intégrable est $\sigma-$additive.
+
+Enfin, comme l'intégrale et la mesure de Lebesgue coïncident sur tous les intervalles de $[a;~b]$, ils coïncident sur les boréliens par application du théorème des classes monotones (voir le premier chapitre).
+\end{proof}
+
+

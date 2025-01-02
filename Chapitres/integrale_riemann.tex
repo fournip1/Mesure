@@ -1,0 +1,697 @@
+
+
+Dans toute la suite $E$ désigne un espace de Banach et $[a;~b]$ est un intervalle fermé avec $a<b$.
+
+\section{Définition}
+
+\subsection{Fonctions en escalier}
+
+
+\begin{de}[Subdivision d'un intervalle fermé bornée, pas]
+On dit que $\sigma = (a_i)_{0 \leq i \leq n}$ est un subdivision de $[a;~b]$ lorsque l'on a $a = a_0 < a_1 < a_2 < \cdots < a_n = b$.
+
+Le nombre $\max\left\{a_{i+1}-a_i,~0\leq i \leq n-1\right\}$ s'appelle le pas de la subdivision.
+\end{de}
+
+
+\begin{de}[Fonction en escalier, subdivision adaptée, intégrale de fonction en escalier]
+Soit $f: [a;~b] \to E$ une fonction.
+
+On dit que $f$ est en escalier lorsqu'il existe une subdivision $\sigma = (a_i)_{0 \leq i \leq n}$ de $[a;~b]$ telle que, pour tout $0 \leq i \leq n-1$, $f$ est constante sur chacun des $]a_i;~a_{i+1}[$; c'est à dire lorsqu'il existe des éléments de $E$ notés $\left(y_i\right)_{0 \leq i \leq n-1}$ tels que $f_{|]a_i;~a_{i+1}[} = y_i \times \mathbb{1}_{]a_i;~a_{i+1}[}$.
+
+Dans ce cas, on définit l'intégrale de Riemann $f$ sur $[a;~b]$ par
+\[
+\displaystyle{\int_a^b}  = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} y_i(a_{i+1}-a_i)
+\]
+
+Et on dit que $\sigma$ est une subdivision adaptée à $f$ en ce sens que $f$ est constante sur chacun des $]a_i;~a_{i+1}[$. En particulier la valeur de l'intégrale ne dépend pas de la subdivision adaptée choisie.
+\end{de}
+
+Pour aborder correctement cette notion, il faut donc détailler les propriétés des subdivisions.
+
+\begin{de}[Finesse de subdivision]
+Soient $\sigma$ et $\sigma'$ deux subdivisions de $[a;~b]$. On dit que $\sigma'$ est plus fine que $\sigma$ lorsque $\sigma \subset \sigma'$. La finesse définit une relation d'ordre partielle sur l'ensemble des subdivisions de $[a;~b]$.
+
+Dans ce cas, le pas de $\sigma'$ est inférieur au pas de $\sigma$.
+\end{de}
+
+
+\begin{prop}[Subdivision la plus grossière pour une fonction en escalier]
+Soit $f$ une fonction en escalier sur $[a;~b]$. Il existe une subdivision adaptée la plus grossière $\sigma$ avec le sens suivant:
+
+Toute subdivision adaptée à $f$ est plus fine que $\sigma$.
+
+Plus généralement, si $\sigma'$ est une subdivision adaptée à $f$ alors toute subdivision $\sigma''$ plus fine que $\sigma$ est également adaptée.
+\end{prop}
+
+\begin{proof}
+Soit $\sigma = (a_i)_{0 \leq i \leq n}$ une subdivision adaptée à $f$.
+
+Pour tous les $i \in \intint{1}{n-1}$ tels que $f\left(]a_{i-1};a_i[\right)=f(a_i)=f\left(]a_i;a_{i+1}[\right)$, on supprime $a_i$ de $\sigma$. On obtient ainsi une subdivision $\tilde{\sigma} = (\alpha_i)_{0 \leq i \leq r}$ plus grossière que $\sigma$.
+
+On peut affirmer que toute subdivision $\sigma' = (\beta_i)_{0 \leq i \leq p}$ adaptée à $f$ est plus fine que $\tilde{\sigma}$. Pourquoi? 
+
+On sait que $\alpha_0 \in \sigma'$ et $\alpha_r \in \sigma'$. Supposons maintenant par l'absurde qu'il existe $i \in \intint{1}{r-1}$ tel que $\alpha_i \notin \sigma'$. Dans ce cas, il existe $j \in \intint{0}{p-1}$ tel que $\alpha_i \in ]\beta_j;~\beta_{j+1}[$. Mais dans ce cas, on aurait $f\left(]\alpha_{i-1};~\alpha_i[\right)=f(\alpha_i)=f\left(]\alpha_i;\alpha_{i+1}[\right)$ car $f$ est constante sur $]\beta_j;~\beta_{j+1}[$.
+
+On aboutirait donc, par construction, à une situation absurde.
+
+La dernière partie de la proposition est évidente.
+\end{proof}
+
+Cette petite réflexion permet de revenir sur l'unicité de l'intégrale de Riemann d'une fonction en escalier.
+
+\begin{proof}
+Soit $\sigma =(a_i)_{0 \leq i \leq n}$ une subdivision adaptée à $f$ avec $(y_i)_{0 \leq i \leq n-1}$ les valeurs de $f$ correspondantes et $\tilde{\sigma} = (\alpha_i)_{0 \leq i \leq r}$ la subdivision adaptée la plus grossière avec $(\widetilde{y}_i)_{0 \leq i \leq r-1}$ les valeurs de $f$ correspondantes.
+
+Alors, 
+\[
+\displaystyle{\sum \limits_{0 \leq i \leq n-1}} y_i(a_{i+1}-a_i) = \displaystyle{\sum \limits_{0 \leq i \leq r-1}} \widetilde{y}_i(\alpha_{i+1}-\alpha_i)
+\]
+
+En effet, pour tout $i \in \intint{0}{r-1}$, on pose $(a_{j_k})_{1 \leq k \leq n_i}$ les éléments de $\sigma$ appartenant à $]\alpha_i;~\alpha_{i+1}]$. On vérifie alors, par construction, que:
+\[\displaystyle{\sum \limits_{1 \leq k \leq n_i}} y_{j_k-1}(a_{j_k}-a_{j_{k}-1}) = y_i(\alpha_{i+1}-\alpha_i)\]
+
+En réarrangeant ainsi les termes de la première somme \og par paquets \fg{}, on obtient le résultat escompté.
+\end{proof}
+
+
+\begin{prop}[Propriétés des fonctions en escalier, linéarité de l'intégrale]
+Soient $f$ et $g$ deux fonctions en escalier sur $[a;~b]$ et à valeurs dans $E$ un espace de Banach.
+
+Soit $\lambda$ un scalaire.
+
+Alors $f+\lambda g$ est une fonction en escalier.
+
+En particulier l'ensemble des fonctions en escalier est un sous-espace vectoriel des fonctions de $[a;~b]$ dans $E$ et, sur cet espace vectoriel, l'intégrale de Riemann est une application linéaire.
+
+Enfin, une fonction en escalier est bornée.
+\end{prop}
+
+\begin{proof}
+Si $\sigma_f$ et $\sigma_g$ sont des subdivisions adaptées respectivement à $f$ et à $g$ alors $\sigma_f \cup \sigma_g$ est une subdivision adaptée aux deux fonctions à la fois.
+
+Partant de cette remarque, sur $\sigma_f \cup \sigma_g = (a_i)_{0 \leq i \leq n}$, il est clair que $f+\lambda g$ est en escalier car, pour tout $i \in \intint{0}{n-1}$, $\left(f+\lambda g\right)_{|]a_i;~a_{i+1}[} = f_{|]a_i;~a_{i+1}[} + \lambda g_{|]a_i;~a_{i+1}[}$ et cette restriction est donc constante.
+
+L'application de la formule de l'intégrale à $f + \lambda g$ permet de conclure quant à la linéarité de l'intégrale.
+
+Une fonction en escalier est bien sûr bornée car elle ne prend qu'un nombre fini de valeurs.
+\end{proof}
+
+\begin{prop}[Majoration de la norme de l'intégrale d'une fonction en escalier]
+Soit $f$ une fonction en escalier à valeurs dans $E$ et $\sigma=(a_i)_{0 \leq i \leq n}$ une subdivision adaptée à $f$ et $(y_i)_{0 \leq i \leq n-1}$ les valeurs de $f$ associées.
+
+Alors
+\[
+\norm{\displaystyle{\int_a^b} f} \leq \displaystyle{\int_a^b} \norm{f}
+\]
+et, en particulier:
+\[
+\norm{\displaystyle{\int_a^b} f} \leq \abs{b-a} \norm{f}_{\infty}
+\]
+Avec $\norm{f}_{\infty} = \max \limits_{x \in [a;~b]} \norm{f(x)}$.
+\end{prop}
+
+\begin{proof}
+Ce sont des conséquences assez directes de l'inégalité triangulaire.
+\end{proof}
+
+\subsection{Intégrale de fonctions}
+
+\begin{prop}[Fonctions en escalier à valeurs réelles]
+Si $f$ et $g$ sont deux fonctions en escalier à valeurs réelles alors 
+\begin{itemize}
+\item[$\bullet$] $fg$ est en escalier;
+\item[$\bullet$] $\min(f,g)$ est en escalier;
+\item[$\bullet$] $\max(f,g)$ est en escalier.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+Cela se prouve très facilement en considérant une subdivision adaptée à $f$ et $g$.
+\end{proof}
+
+\begin{de}[Intégrale de fonction]
+Soit $f$ une fonction de $[a;~b]$ dans $E$. On dit que $f$ admet une intégrale lorsqu'il existe une suite de fonctions en escaliers $\varphi_n$ à valeurs dans $E$ et une suite de fonctions en escaliers $\psi_n$ à valeurs dans $\R^{+}$ telles que:
+\begin{itemize}
+\item[$\bullet$] pour tout $n$ et pour tout $x$ de $[a;~b]$, $\norm{\varphi_n(x)-f(x)} \leq \psi_n(x)$;
+\item[$\bullet$] $\lim \limits_{n \to +\infty} \displaystyle{\int_a^b} \psi_n = 0$.
+\end{itemize}
+
+Dans ce cas, $\lim \limits_{n \to +\infty} \displaystyle{\int_a^b} \varphi_n$ existe et on pose:
+\[
+\displaystyle{\int_a^b} f = \lim \limits_{n \to +\infty} \displaystyle{\int_a^b} \varphi_n
+\]
+
+En particulier cette définition ne dépend pas des suites $\varphi_n$ et $\psi_n$ choisies.
+\end{de}
+
+\begin{proof}
+On va commencer par prouver la convergence puis l'unicité.
+
+C'est ici qu'intervient la complétude de $E$.
+
+Pour tout $n$ et $p$, 
+\[\norm{\displaystyle{\int_a^b} \varphi_{n+p} - \displaystyle{\int_a^b} \varphi_{n}} \leq  \displaystyle{\int_a^b} \norm{\varphi_{n+p}-\varphi_{n}}\]
+
+Or, pour tout $x$, $\norm{\varphi_{n+p}-\varphi_{n}} \leq \norm{\varphi_{n+p}(x)-f(x)}+\norm{f(x)-\varphi_{n}} \leq \psi_{n+p}(x)+\psi_{n}(x)$. Finalement,
+\[
+\norm{\displaystyle{\int_a^b} \varphi_{n+p} - \displaystyle{\int_a^b} \varphi_{n}} \leq \displaystyle{\int_a^b} \psi_{n} + \displaystyle{\int_a^b} \psi_{n+p}
+\]
+
+Cette inégalité permet de prouver que la suite $\displaystyle{\int_a^b} \varphi_{n}$ est de Cauchy puisque la suite $\displaystyle{\int_a^b} \psi_{n}$ tend vers $0$.
+
+Reste à prouver maintenant l'unicité.
+
+On considère donc $\tilde{\varphi}_n$ et $\tilde{\psi}_n$ un couple de suites de fonctions vérifiant les deux hypothèses de la définition.
+
+Par des techniques semblables, on peut prouver, pour tout $n$, que
+\[
+\norm{\displaystyle{\int_a^b} \varphi_{n} - \displaystyle{\int_a^b} \widetilde{\varphi}_{n}} \leq \displaystyle{\int_a^b} \psi_{n} + \displaystyle{\int_a^b} \widetilde{\psi}_{n}
+\]
+
+Et là encore, on peut conclure quant à l'unicité de la limite!
+
+
+\end{proof}
+
+\begin{prop}[Propriétés des fonctions qui admettent une intégrale de Riemann]
+Ces fonctions forment un sous-espace vectoriel des fonctions bornées de $[a;~b]$ dans $E$. 
+
+De plus, l'intégrale est une application linéaire sur cet espace.
+\end{prop}
+
+\begin{proof}
+Cela se prouve très facilement avec quelques inégalités triangulaires.
+
+Ainsi, si $f_1$ et $f_2$ admettent des intégrales, que l'on associe à $f_1$ les suites de fonctions en $\varphi_n^{(1)}$ escalier et $\psi_n^{(1)}$, que l'on associe à $f_2$ les suites de fonctions en $\varphi_n^{(2)}$ escalier et $\psi_n^{(2)}$, on peut vérifier que les suites $\varphi_n^{(1)} + \lambda \varphi_n^{(2)}$ et $\psi_n^{(1)} + \norm{\lambda} \psi_n^{(2)}$ vérifient pour tout $x$ de $[a;~b]$
+\[\norm{(f_1 + \lambda f_2)(x) - \left(\varphi_n^{(1)} + \lambda \varphi_n^{(2)}\right)(x)} \leq \left(\psi_n^{(1)} + \norm{\lambda} \psi_n^{(2)}\right)(x)\]
+et qu'on a bien $\lim \limits_{n \to +\infty} \displaystyle{\int_a^b} \left(\psi_n^{(1)} + \norm{\lambda} \psi_n^{(2)}\right) = 0$.
+
+Par passage à la limite et grâce à la linéarité de l'intégrale sur les fonctions en escalier, on peut conclure.
+
+Pour finir, il est clair que, pour tout $x$,
+
+$\norm{f(x)} \leq \norm{\varphi_0(x)} + \psi_O(x)$, ce qui prouve qu'une fonction qui admet une intégrale est minorée en norme par une fonction bornée de $\R^{+}$. Elle est donc bornée.
+\end{proof}
+
+Un lemme qui sera utile pour la suite.
+
+\begin{lem}[Construction d'une suite \og optimale \fg{} de fonctions en escaliers]
+Soit $f$ une fonction intégrable au sens de Riemann sur un intervalle $[a;~b]$.
+
+Alors, il est possible de construire les suites $\varphi_n$ et $\psi_n$ de fonctions en escalier telle sorte que 
+\begin{itemize}
+\item[$\bullet$] pour tout $n$, et pour tout $t \in [a;~b], \, \norm{f(t)-\varphi_n(t)} \leq \psi_n(t)$;
+\item[$\bullet$] $\psi_n$ est la plus petite fonction en escalier compte-tenu de $\varphi_n$;
+\item[$\bullet$] $\psi_n$ décroit vers une fonction d'intégrale nulle.
+\end{itemize}
+
+En particulier, les suites $\psi_n$ et $\varphi_n$ sont bornées.
+\end{lem}
+
+
+\begin{proof}
+On considère une suite $\varphi_n$ et $\psi_n$ vérifiant les hypothèses de la définition de l'intégrale.
+
+On sait que $f$ est bornée. 
+
+Au rang $0$: on considère $\sigma_0$ la subdivision la plus grossière adaptée à $\varphi_0$. 
+
+Sur chacun des sous-intervalles ouverts de $\sigma_0$, on détermine la valeur de $\tilde{\psi}_0$ comme étant la borne supérieure de $\norm{f-\varphi_0}$. Enfin, on pose $\tilde{\varphi_0} = \varphi_0$. Sur les points de la subdivision, on définit $\tilde{\phi}_0 = f$.
+
+On suppose construite ainsi la suite jusqu'à un certain rang $n$.
+
+Au rang $n+1$, on considère la subdivision $\sigma_{n+1}$ la pus grossière adaptée à $\varphi_{n+1}$ et $\tilde{\phi}_n$.
+
+Sur chacun des sous-intervalles de cette subdivision, on choisit la valeur de $\tilde{\varphi}_{n+1}$ entre $\varphi_{n+1}$ et $\tilde{\phi}_n$ de telle sorte que la borne supérieure de $\norm{f-\tilde{\phi}_{n+1}}$ soit minimale et on pose $\tilde{\psi}_{n+1}$ cette borne supérieure.
+
+Par construction, on dispose donc d'une suite $\tilde{\psi}_n$ inférieure à $\psi_n$ et d'une suite $\tilde{\varphi}_n$ qui vérifient les hypothèses de la définition de l'intégrale et qui satisfont les conditions du lemme!
+\end{proof}
+
+\begin{theo}[Mesure de Lebesgue et intégrale de Riemann]
+Soit $f$ une fonction intégrable au sens de Riemann et à valeurs dans $E$.
+
+Alors, $f$ est presque partout limite simple d'une suite de fonctions en escaliers. 
+
+En particulier, si $E= \R$ ou  $\C$, $f$ est alors mesurable au sens de Lebesgue. 
+\end{theo}
+
+\begin{proof}
+On reprend les notations et hypothèses de l'intégrabilité au sens de Riemann.
+
+Notons qu'une fonction en escalier à valeurs réelles est mesurable, comme combinaisons linéaires de fonctions mesurables. D'autre part,il est clair que l'intégrale de Riemann d'une telle fonction coïncide avec l'intégrale de Lebesgue.
+
+En particulier, on peut utiliser le théorème de convergence monotone et on obtient:
+\[
+\lim \downarrow \displaystyle{\int_a^b} \psi_n = \lim \downarrow \displaystyle{\int_{[a;~b]}} \psi_n(x) \, \mathrm d \lambda(x) = \displaystyle{\int_{[a;~b]}} \lim \downarrow \psi_n(x) \, \mathrm d \lambda(x)
+\]
+
+Par conséquent, la fonction $\lim \downarrow \psi_n$ est presque partout nulle.
+
+Mais comme, pour tout $x$, $\norm{\varphi_n(x)-f(x} \leq \psi_n(x)$, on en déduit la convergence simple presque partout.
+
+Dans le cas réel, cette remarque nous montre que $f$ est mesurable.
+\end{proof}
+
+\begin{prop}[Produit de fonctions intégrables]
+Soit $f$ et $\theta$ deux fonctions définies sur $[a;~b]$ à valeurs respectivement dans $E$ et $\R$.
+
+Si $f$ et $\theta$ sont intégrables au sens de Riemann alors $\theta f$ l'est aussi.
+\end{prop}
+
+\begin{proof}
+Soient $\left(\varphi_n,~\psi_n\right)$ et $\left(\rho_n,~\chi_n\right)$ les suites de fonctions en escaliers associées aux intégrales de $f$ et $\theta$. Pour tout $n$ et pour tout $t \in [a;~b]$:
+\[
+\norm{\theta(t)f(t)-\rho_n(t)\varphi_n(t)} \leq \norm{\theta(t)f(t)-\rho_n(t)f(t)}+ \norm{\rho_n(t)f(t)-\rho_n(t)\varphi_n(t)} \leq \norm{f(t)} \times \chi_n(t) + \norm{\rho_n(t)} \times \psi_n(t)
+\]
+
+On peut conclure car on sait que $f$ et $\rho_n$ sont bornées, indépendamment de $n$ et $t$.
+\end{proof}
+
+\section{Applications}
+
+\subsection{Comparaison séries-intégrales}
+
+\begin{lem}[Règle de Riemann sur les séries à termes positifs]
+Soit $\displaystyle{\sum \limits_{n \in \N}} a_n$ une série à termes positifs.
+
+S'il existe $\alpha>1$ tel que $n^{\alpha}a_n \underset{n \to +\infty}{\longrightarrow} 0$ alors la série converge.
+
+S'il existe $0 \leq \alpha < 1$ tel que $n^{\alpha}a_n \underset{n \to +\infty}{\cancel{\longrightarrow}} 0$ alors la série diverge.
+\end{lem}
+
+On rappelle que l'on connaît la nature des séries de Riemann $\sum \frac{1}{n^\alpha}$ grâce à l'étude de la série $\sum \frac{1}{n}$ et grâce aux comparaisons séries-intégrales.
+
+\begin{proof}
+Le cas $\alpha>1$ est facile car on a alors $a_n = o\left ( \frac{1}{n^{\alpha}}\right )$.
+
+On va s'intéresser au cas $0 \leq \alpha < 1$ et supposer $n^{\alpha}a_n \underset{n \to +\infty}{\cancel{\longrightarrow}} 0$. En particulier, il existe $\eta>0$ et une extractrice $\varphi$ telle que $\varphi(n)^{\alpha} \times a_{\varphi(n)} \geq \eta$, ce qui donne $a_{\varphi(n)} \geq \frac{\eta}{\varphi{n}^{\alpha}}$. Or la série des $\sum \frac{1}{n^{\alpha}}$ tend vers $+\infty$, ce qui permet de conclure!
+\end{proof}
+
+
+\subsection{Intégrale de Riemann et suites}
+
+\begin{theo}[Convergence]
+Soit une suite de fonctions $f_n$ définies sur un intervalle $[a;~b]$ et à valeurs dans un espace de Banach $E$.
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] les $f_n$ sont Riemann intégrables;
+\item[$\bullet$] la suite $f_n$ converge uniformément vers une fonction $f$;
+\item[$\bullet$] $f$ est Riemann intégrable.
+\end{itemize}
+
+Alors
+\[
+\lim \limits_{n \to +\infty} \displaystyle{\int_a^b} f_n = \displaystyle{\int_a^b} f
+\]
+\end{theo}
+
+
+\begin{proof}
+Soit $\varepsilon > 0$. Il existe $N$ tel que, pour tout $n \geq N$, $\norm{f_n-f}_{\infty} < \dfrac{\varepsilon}{b-a}$, ce qui entraîne:
+\[
+\norm{\displaystyle{\int_a^b} f_n-\displaystyle{\int_a^b} f} \leq (b-a) \norm{f_n-f}_{\infty} < \varepsilon
+\]
+\end{proof}
+
+Une conséquence de ce théorème concerne la dérivation sous le signe intégrale.
+
+\begin{theo}[Dérivation et intégrale de Riemann]
+Soit $I$ un intervalle ouvert et $f$ une fonction définie sur $[a;~b] \times I$ à valeurs dans $\R$.
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] pour tout $y$ de $I$, la fonction $x \mapsto f(x;~y)$ est Riemann intégrable;
+\item[$\bullet$] pour tout $x$ de $[a;~b]$, la fonction $y \mapsto f(x;~y)$ est dérivable;
+\item[$\bullet$] pour tout $y$ de $I$, la fonction $y \mapsto \dfrac{\partial f(x;~y)}{\partial y}$ est Riemann intégrable;
+\item[$\bullet$] la fonction $(x;~y) \mapsto \dfrac{\partial f(x;~y)}{\partial y}$ est uniformément continue sur $[a;~b] \times I$.
+\end{itemize}
+
+Alors, la fonction $y \mapsto \displaystyle{\int_a^b} f(x;~y) \mathrm d x$ est dérivable et sa dérivée est $y \mapsto \displaystyle{\int_a^b} \dfrac{\partial f(x;~y)}{\partial y} \mathrm d x$.
+\end{theo}
+
+\begin{proof}
+On pose $\varphi: y \mapsto \displaystyle{\int_a^b} f(x;~y) \mathrm d x$.
+
+Pour tout $y$ de $I$, on considère une suite $h_n$ de réels non nuls tels que, pour tout $n$, $h_n+y \in I$ et $\lim \limits_{n \to +\infty} h_n = 0$.
+
+Alors, pour tout $n$, $\dfrac{\varphi(y+h_n)-\varphi(y)}{h_n} -  \displaystyle{\int_a^b} \dfrac{ \partial f(x;~y)}{\partial y} \mathrm d x = \displaystyle{\int_a^b} \left(\dfrac{f(x;~y+h_n)-f(x;~y)}{h_n} - \dfrac{\partial f(x;~y)}{\partial y} \right)\mathrm d x$ en raison de la linéarité de l'intégrale.
+
+On conclut ensuite grâce à l'uniforme continuité de la dérivée partielle.
+\end{proof}
+
+\subsection{Le cas des dimensions finies}
+
+On rappelle qu'en dimension finie, toutes les normes sont équivalentes.
+
+\subsubsection{Le cas réel}
+
+On étudie ici le cas où l'espace image est $\R$. On dispose alors d'une formulation équivalente beaucoup plus commode.
+
+\begin{lem}[Premier critère d'intégration au sens de Riemann pour les fonctions à valeur réelle]
+Une fonction $f: [a;~b] \to \R$ est intégrable au sens de Riemann si et seulement s'il existe deux suites de fonctions en escalier $\left(\varphi_n^b\right)_{n \in \N}$ et $\left(\varphi_n^h\right)_{n \in \N}$ telles que:
+\begin{itemize}
+\item[$\bullet$]  pour tout $x$ de $[a;~b]$, et pour tout $n$, $\varphi_n^b(x) \leq f(x) \leq \varphi_n^h(x)$;
+\item[$\bullet$]  la suite $\varphi_n^b$ est croissante et la suite $\varphi_n^h$ est décroissante;
+\item[$\bullet$]  $\lim \limits_{n \to +\infty} \displaystyle{\int_a^b} \left(\varphi_n^h - \varphi_n^b\right) = 0$
+\end{itemize}
+
+\end{lem}
+
+\begin{proof}
+On reprend les conditions d'existence d'intégrale avec les mêmes notations.
+
+On a alors pour tout $n$ et tout $x$, $\varphi_n(x) - \psi_n(x) \leq f(x) \leq \varphi_n(x) + \psi_n(x)$.
+
+On pose ainsi $\varphi_0^h(x) = \varphi_0(x) + \psi_0(x)$ et $\varphi_0^b(x) = \varphi_0(x) - \psi_0(x)$.
+
+On suppose que l'on a construit jusqu'à un certain rang $n$ la suite des $\varphi_n^h$ et $\varphi_n^b$. Au rang $n+1$, il suffit de poser 
+
+$\varphi_{n+1}^h = \min\left(\varphi_n^h,~\varphi_{n+1}+ \psi_{n+1}\right)$ et $\varphi_{n+1}^b = \max\left(\varphi_n^b,~\varphi_{n+1} - \psi_{n+1}\right)$ qui sont des fonctions en escalier.
+
+On fabrique ainsi par récurrence les suites $\varphi_n^h$ et $\varphi_n^b$ et ces suites valident par construction le sens direct du lemme.
+
+Le sens réciproque est évident. Il suffit pour cela de poser $\psi_n = \varphi_n^h - \varphi_n^b$.
+\end{proof}
+
+De plus, dans le cas réel, l'intégrale de Riemann est positive.
+
+\begin{prop}[Positivité de l'intégrale]
+Soient $f$ et $g$ deux fonctions Riemann intégrables sur $[a;~b]$ et à valeurs réelles.
+
+Si, pour tout $x \in [a;~b]$, $f(x) \leq g(x)$ alors $\displaystyle{\int_a^b} f \leq \displaystyle{\int_a^b} g$.
+\end{prop}
+
+\begin{proof}
+Cela se prouve en intégrant $g-f$ qui est positive et en utilisant la linéarité.
+\end{proof}
+
+\begin{de}[Sommes de Darboux de $f$ associées à une subdivision]
+Soit $f$ une fonction de $[a;~b]$ dans $\R$ bornée.
+
+Soit $\sigma = (a_i)_{0 \leq i \leq n}$ une subdivision de $[a;~b]$.
+
+Pour tout $i \in \intint{0}{n-1}$, on pose 
+\begin{align*}
+M_i & = \sup \limits_{]a_i;~a_{i+1}[} f\\
+\overline{M_i} & = \sup \limits_{[a_i;~a_{i+1}[} f\\
+m_i & = \inf \limits_{]a_i;~a_{i+1}[} f\\
+\overline{m_i} & = \inf \limits_{[a_i;~a_{i+1}[} f\\
+\end{align*}
+
+On définit alors 
+\begin{align*}
+S_\sigma^h & = \displaystyle{\sum \limits_{i \in \intint{0}{n-1}}} M_i \times \mathbb{1}_{]a_i;~a_{i+1}[} +  \displaystyle{\sum \limits_{i \in \intint{0}{n}}} f(a_i) \times \mathbb{1}_{a_i} \\
+S_\sigma^d & = \displaystyle{\sum \limits_{i \in \intint{0}{n-1}}} m_i \times \mathbb{1}_{]a_i;~a_{i+1}[} +  \displaystyle{\sum \limits_{i \in \intint{0}{n}}} f(a_i) \times \mathbb{1}_{a_i} \\
+\overline{S_\sigma^h} & = \displaystyle{\sum \limits_{i \in \intint{0}{n-1}}} \overline{M_i} \times \mathbb{1}_{[a_i;~a_{i+1}[} +  \displaystyle{\sum \limits_{i \in \intint{1}{n}}} f(a_i) \times \mathbb{1}_{a_i} \\
+\overline{S_\sigma^d} & = \displaystyle{\sum \limits_{i \in \intint{0}{n-1}}} \overline{m_i} \times \mathbb{1}_{[a_i;~a_{i+1}[} +  \displaystyle{\sum \limits_{i \in \intint{1}{n}}} f(a_i) \times \mathbb{1}_{a_i} 
+\end{align*}
+
+\end{de}
+
+\begin{proof}
+L'existence de ces sommes est garantie par le fait que $f$ soit bornée.
+\end{proof}
+
+Cette construction justifie la proposition suivante
+
+\begin{prop}[Propriété fondamentale des sommes de Darboux]
+On reprend les mêmes notations et hypothèses que dans la définition.
+
+Pour toutes fonctions en escaliers $\varphi^h$ et $\varphi^b$ associées à $\sigma$ et telles que $\varphi^b \leq f \leq \varphi^h$, on a
+\[
+\varphi^b \leq S_\sigma^b  \leq f \leq S_\sigma^h \leq \varphi^h
+\]
+\end{prop}
+
+
+\begin{proof}
+Pour tout $i \in \intint{0}{n-1}$, et pour tout $x \in ]a_i;~a_{i+1}[$, on a
+
+$y_i^b \leq f(x)$ et $f(x) \leq y_i^h$ où $y_i^b$ et $y_i^h$ représentent les valeurs (constantes) de $\varphi^b$ et $\varphi^h$ sur l'intervalle considéré.
+
+Par passage à la borne inférieure sur $f(x)$ dans la première inégalité et à la borne supérieure dans la seconde, on obtient le résultat escompté.
+\end{proof}
+
+Par construction les sommes de Darboux réalisent un encadrement optimal de $f$ par des fonctions en escalier pour une subdivision donnée. On en déduit ainsi le corollaire.
+
+\begin{cor}[Sommes de Darboux et encadrement d'intégrale]
+On reprend les mêmes notations. Pour toute subdivision $\sigma$ et pour toute fonction $f$ intégrable:
+\[
+\displaystyle{\int_a^b}  S_\sigma^b  \leq \displaystyle{\int_a^b} f \leq \displaystyle{\int_a^b} S_\sigma^h
+\]
+
+En particulier:
+\[
+\left(\inf \limits_{[a;~b]} f\right) \times (b-a) \leq \displaystyle{\int_a^b} f  \leq \left(\sup \limits_{[a;~b]} f\right) \times (b-a)
+\]
+\end{cor}
+
+\begin{prop}[Sommes de Darboux et subdivisions plus fines]
+On reprend les mêmes hypothèses.
+
+Soit $\sigma \subset \sigma'$ deux subdivisions.
+
+Alors:
+\[
+S_\sigma^b \leq S_{\sigma'}^b \leq f \leq S_{\sigma'}^h \leq S_{\sigma}^h
+\]
+et
+\[
+\overline{S_\sigma^b} \leq \overline{S_{\sigma'}^b} \leq f \leq \overline{S_{\sigma'}^h} \leq \overline{S_{\sigma}^h}
+\]
+\end{prop}
+
+\begin{proof}
+C'est évident par construction des sommes de Darboux.
+\end{proof}
+
+\begin{theo}[Convergence des sommes de Darboux vers l'intégrale]
+Soit $f$ une fonction bornée de $[a;~b]$ dans $\R$.
+
+$f$ est intégrable au sens de Riemann si et seulement si, pour tout $\varepsilon > 0$, il existe un nombre $\eta > 0$ tel que, pour toute subdivision $\sigma$ de pas inférieur à $\eta$, 
+\[
+\displaystyle{\int_a^b} \left(S_\sigma^h - S_\sigma^b\right) < \varepsilon
+\]
+\end{theo}
+
+\begin{proof}
+Le sens réciproque est évident.
+
+Montrons le sens direct. Ainsi, on suppose $f$ intégrable au sens de Riemann.
+
+On va considère deux suites de fonctions en escaliers $\varphi_n^h$ et $\varphi_n^b$ telles qu'exposées dans le lemme du début de ce paragraphe.
+
+Soit $\varepsilon > 0$ un nombre.
+
+On sait qu'il existe $n$ tel que $\displaystyle{\int_a^b} \left(\varphi_n^h-\varphi_n^b\right) < \dfrac{\varepsilon}{2}$
+
+Soit $\sigma=(a_i)_{0 \leq i \leq p}$ la subdivision adaptée à ces deux fonctions en escalier.
+
+On pose enfin $M$ un majorant de $\abs{\varphi_n^b}$ et $\abs{\varphi_n^h}$ sur $[a;~b]$.
+
+Pour tout intervalle, $]c;~d[ \subset ]a;~b[$, on sait que  
+
+$\displaystyle{\int_c^d} \left(\sup \limits_{]c;~d[} f -\inf \limits_{]c;~d[} f\right) \leq 2M(d-c)$.
+
+Fort de cette remarque, et du fait que $\varphi_n^h$ et $\varphi_n^b$ contiennent au plus $p+1$ sauts, on va poser $\eta = \dfrac{\varepsilon}{4M(p+1)}$.
+
+Pour toute subdivision $\sigma'=(\alpha_i)_{0 \leq i \leq q}$ de pas plus fin que $\eta$, la majoration de 
+$
+\displaystyle{\int_a^b} \left(S_{\sigma'}^h - S_{\sigma'}^b\right)
+$ se fait en distinguant deux cas sur les $i \in \intint{0}{q-1}$:
+\begin{itemize}
+\item[$\bullet$] s'il existe $j \in \intint{0}{p-1}$ tel que $]\alpha_i;~\alpha_{i+1}[ \subset ]a_j;~a_{j+1}[$, alors
+
+$\displaystyle{\int_{\alpha_i}^{\alpha_{i+1}}} \left(S_{\sigma'}^h - S_{\sigma'}^b\right) \leq \displaystyle{\int_{\alpha_i}^{\alpha_{i+1}}} \left(\varphi_n^h-\varphi_n^b\right)$
+
+\item[$\bullet$] s'il existe $j \in \intint{1}{p-1}$ tel que $a_j \in ]\alpha_i;~\alpha_{i+1}[$, alors
+
+$\displaystyle{\int_{\alpha_i}^{\alpha_{i+1}}} \left(S_{\sigma'}^h - S_{\sigma'}^b\right) \leq 2 M \left(\alpha_{i+1}-\alpha_{i+1}\right) \leq 2M \eta  = \dfrac{\varepsilon}{2(p+1)}$ 
+\end{itemize}
+
+Mais on rappelle qu'il y a au plus $p+1$ discontinuités, correspondant au cas \no2.
+
+En sommant sur tous les $i \in \intint{0}{q-1}$, on obtient la majoration recherchée:
+\[
+\displaystyle{\int_a^b} \left(S_{\sigma'}^h - S_{\sigma'}^b\right) \leq \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2}
+\]
+\end{proof}
+
+On peut prouver que ce théorème s'étend aussi aux sommes de Darboux \og étendues \fg{} $\overline{S_\sigma^h}$ et $\overline{S_\sigma^b}$.
+
+Une des conséquences de ce théorème concerne les sommes de Riemann, sujet sur lequel nous ne nous étendrons pas.
+
+\begin{de}[Sommes de Riemann, subdivisions pointées]
+Une subdivision pointée d'un intervalle $[a;~b]$ est la donnée d'une subdivision $\sigma = (a_i)_{0 \leq i \leq n}$ de $[a;~b]$ et de nombres $t = (t_i)_{0 \leq i \leq n-1}$ tels que pour tout $i \in \intint{0}{n-1}$, $t_i \in [a_i;~a_{i+1}]$.
+
+Pour toute subdivision pointée $(\sigma;~t)$ de $[a;~b]$, on construit la somme de Riemann associée à la fonction $f$ de la manière suivante:
+
+\[
+R_{\sigma,~t}(f) = \displaystyle{\sum \limits_{i \in \intint{0}{n-1}}} (a_{i+1}-a_i)f(t_i)
+\]
+\end{de}
+
+On a alors le théorème suivant
+
+\begin{theo}[Sommes de Riemann et intégration]
+Une fonction $f$ est intégrable au sens de Riemann sur $[a;~b]$ si et seulement si il existe un nombre $\displaystyle{\int_a^b} f$ tel que, pour tout $\varepsilon>0$, il existe $\eta>0$ tel que, pour toute subdivision pointée $(\sigma;~t)$ de $[a;~b]$ de pas inférieur à $\eta$, on a
+\[
+\abs{R_{\sigma,~t}(f) - \displaystyle{\int_a^b} f} < \varepsilon
+\]
+\end{theo}
+
+\begin{proof}
+C'est une conséquence assez immédiate des sommes de Darboux.
+\end{proof}
+
+\subsubsection{Extension aux espaces de dimensions finies}
+
+On suppose cette fois que $f$ est à valeurs dans un espace $E$ de dimension finie, notée $n$.
+
+On peut alors étendre ce qui précède concernant les sommes de Riemann.
+
+\begin{cor}[Sommes de Riemann et intégration pour un espace de dimension finie]
+Une fonction $f$ est intégrable au sens de Riemann sur $[a;~b]$ si et seulement si il existe un nombre $\displaystyle{\int_a^b} f$ tel que, pour tout $\varepsilon>0$, il existe $\eta>0$ tel que, pour toute subdivision pointée $(\sigma;~t)$ de $[a;~b]$ de pas inférieur à $\eta$, on a
+\[
+\norm{R_{\sigma,~t}(f) - \displaystyle{\int_a^b} f} < \varepsilon
+\]
+\end{cor}
+
+\begin{proof}
+Soit $\left(e_i\right)_{1 \leq i \leq n}$ une base de $E$ et $f^{(i})$ les coordonnées de $f$ sur chacun des $e_i$.
+
+Nous savons que toutes les normes de $E$ sont équivalentes. Nous choisissons la norme infinie associée à cette base.
+
+Si $f$ est Riemann intégrable, il existe deux suites de fonctions en escaliers $\varphi_n$ et $\psi_n$ telles que
+\begin{itemize}
+\item[$\bullet$] pour tout $t \in [a;~b], \, \norm{\varphi_n(t)-f(t)}_{\infty} \leq \psi_n(t)$;
+\item[$\bullet$] $\displaystyle{\int_a^b} \psi_n \underset{n \to +\infty}{\longrightarrow} 0$.
+\end{itemize}
+
+
+En considérant les coordonnées de $\varphi_n$ sur chacun des $e_i$, fonctions notées $\varphi_n^{(i)}$, on est ramené au cas réel pour chacune des coordonnées. 
+
+Ainsi, pour tout $\varepsilon>0$ et pour tout $i$, il existe un nombre $\displaystyle{\int_a^b} f^{(i)}$ et nombre $\eta_i>0$ tel que pour toute subdivision pointée $(\sigma_i;~t_i)$ de pas inférieur à $\eta_i$, on a
+\[
+\abs{R_{\sigma_i,~t_i}(f^{(i)}) - \displaystyle{\int_a^b} f^{(i)}} < \varepsilon
+\]
+
+En considérant, $\eta = \min \limits_{1 \leq i \leq n} \left(\eta_i\right)$, on obtient le résultat escompté.
+
+La réciproque se traite de la même manière, en raisonnant sur les coordonnées.
+\end{proof}
+
+\subsubsection{Formules de changement de variable}
+
+Dans toute la suite $E$ désigne un $\R$-espace vectoriel de dimension $n$.
+
+\begin{de}[Chemin, équivalence de chemins]
+Un chemin $\Gamma$ est une application $\mathcal{C}^1$ d'un intervalle non vide $[a;~b]$ vers $E$.
+
+On dit que deux chemins $\Gamma$ et $\tilde{\Gamma}$ définis respectivement de $[a;~b]$ et $\left [\tilde{a};~\tilde{b}\right ]$ vers $\R^n$ sont équivalents lorsqu'il existe un $\mathcal{C}^1-$difféomorphisme $\phi: [a;~b] \to \left [\tilde{a};~\tilde{b}\right ]$ tel que 
+\[
+\Gamma \circ \phi = \tilde{\Gamma}
+\]
+\end{de}
+
+
+\begin{proof}
+La relation d'équivalence est assez facilement prouvée: la réflexivité est évidente, la transitivité et la symétrie ne sont pas très compliquées à prouver.
+\end{proof}
+
+
+\begin{theo}[Intégrale d'une fonction sur un chemin]
+Soit $f: E \to E$ une fonction. Soit $\Gamma$ une chemin défini sur un intervalle $[a;~b]$.
+
+Dans le cas où la fonction $f \circ  \Gamma$ est Riemann-intégrable, on posera:
+\[
+\displaystyle{\int_{\Gamma}} f = \displaystyle{\int_a^b} \Gamma'(t) f \circ  \Gamma(t) \mathrm d t
+\]
+
+De plus, si $\Gamma$ et $\tilde{\Gamma}$ sont équivalents, alors $f \circ \tilde{\Gamma}$ est également Riemann-intégrable et on vérifie:
+\[
+\displaystyle{\int_{\Gamma}} f = \displaystyle{\int_{\tilde{\Gamma}}} f
+\]
+\end{theo}
+
+\begin{proof}
+On sait que le produit de deux fonctions Riemann-intégrable l'est aussi, ce qui nous prouve l'existence de $\displaystyle{\int_{\Gamma}} f$.
+
+Reste à prouver l'égalité concernant les deux chemins équivalents. On va pour cela utiliser la caractérisation à l'aide subdivisions pointées.
+
+On suppose donc que $\tilde{\Gamma}: [\tilde{a};~\tilde{b}] \underset{\phi}{\longrightarrow} [a;~b] \underset{\Gamma}{\longrightarrow} \C$ où $\phi$ est un $\mathcal{C}^1-$difféomorphisme.
+
+On considère alors une subdivision pointée $(\sigma;~t)$ de $[\tilde{a};~\tilde{b}]$ et la somme de Riemann associée:
+\[
+R_{\sigma,~t}(f) = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} \tilde{\Gamma}'\left(\tilde{t}_i\right) \times f\circ \tilde{\Gamma}\left(\tilde{t_i}\right) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right)
+\]
+
+On pose, pour la suite $a_i = \phi\left(\tilde{a}_i\right)$ et $t_i = \phi\left(\tilde{t}_i\right)$. En utilisant définition de $\tilde{\Gamma}$, ainsi que la dérivation composée on obtient:
+\[
+R_{\sigma,~t}(f) = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} \phi'\left(\tilde{t}_i\right) \times \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right)
+\]
+
+Mais, d'après l'égalité des accroissements finis, on sait que, pour tout $i$, il existe $\tilde{c}_i \in \left]\tilde{a}_i;~\tilde{a}_{i+1}\right[$ tel que $\left(\phi\left(\tilde{a}_{i+1}\right)-\phi\left(\tilde{a}_i\right)\right) = \phi'\left (\tilde{c}_i\right ) \times \left (\tilde{a}_{i+1}-\tilde{a}_i\right )$. Or $\phi'$ ne s'annule pas. On en déduit:
+\[
+R_{\sigma,~t}(f) = \displaystyle{\sum \limits_{0 \leq i \leq n-1}} \dfrac{\phi'\left(\tilde{t}_i\right)}{\phi'\left(\tilde{c}_i\right)} \times \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right)
+\]
+On va maintenant utiliser deux arguments: d'une part l'uniforme continuité de $\phi'$ sur $\left [\tilde{a};~\tilde{b}\right ]$ et d'autre part, le fait que $\abs{\phi'}$ possède un minimum. 
+
+On pose ainsi $m = \min \limits_{\left [\tilde{a};~\tilde{b}\right ]} \abs{\phi'}>0$ et $M$ un majorant de $\Gamma' \times f \circ \Gamma$ sur $[a;~b]$.
+
+Pour tout $\varepsilon > 0$, il existe $\eta > 0$ tel que si la subdivision pointée $(\sigma;~t)$ est de pas inférieur à $\eta$, on a, pour tout $i$, 
+\[
+\abs{\phi'\left(\tilde{t}_i\right)-\phi'\left(\tilde{c}_i\right)} \leq \dfrac{m \varepsilon}{2 \times M \times (b-a)}
+\]
+Ce qui donne, par construction:
+\[
+\abs{\dfrac{\phi'\left(\tilde{t}_i\right)}{\phi'\left(\tilde{c}_i\right)}-1} \leq \dfrac{\varepsilon}{2 \times M \times (b-a)}
+\]
+En raison de la définition de $\displaystyle{\int_{\Gamma}} f$, il existe un nombre $\eta'>0$ éventuellement plus petit que $\eta$ tel que, si le pas de la subdivision pointée $(\sigma;~t)$ est plus petit que $\eta'$ alors le pas de l'image de cette subdivision par $\phi$ sera suffisamment petit pour que l'on ait:
+\[
+\norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}}  \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right) - \displaystyle{\int_{\Gamma}} f} \leq \dfrac{\varepsilon}{2}
+\]
+En effet, il suffit de constater que le pas de la subdivision image est contrôlé par le maximum de $\phi'$ en raison de l'inégalité des accroissements finis.
+
+On obtient dans ce cas:
+
+\begin{multline*}
+\norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \tilde{\Gamma}'\left(\tilde{t}_i\right) \times f\circ \tilde{\Gamma}\left(\tilde{t_i}\right) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right) - \displaystyle{\int_{\Gamma}} f}  \\
+\leq \norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \tilde{\Gamma}'\left(\tilde{t}_i\right) \times f\circ \tilde{\Gamma}\left(\tilde{t_i}\right) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right) - \displaystyle{\sum \limits_{0 \leq i \leq n-1}}   \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right)} \\
++ \norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right)- \displaystyle{\int_{\Gamma}} f}\\
+\leq \norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \tilde{\Gamma}'\left(\tilde{t}_i\right) \times f\circ \tilde{\Gamma}\left(\tilde{t_i}\right) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right) - \displaystyle{\sum \limits_{0 \leq i \leq n-1}}   \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right)} + \dfrac{\varepsilon}{2}
+\end{multline*}
+
+Or, par construction, en utilisant l'inégalité triangulaire:
+\begin{multline*}
+\norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \tilde{\Gamma}'\left(\tilde{t}_i\right) \times f\circ \tilde{\Gamma}\left(\tilde{t_i}\right) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right) - \displaystyle{\sum \limits_{0 \leq i \leq n-1}}   \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right)} = \\
+\norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \left( \dfrac{\phi'\left(\tilde{t}_i\right)}{\phi'\left(\tilde{c}_i\right)}-1 \right) \times   \Gamma'(t_i) \times f\circ \Gamma(t_i) \times \left(a_{i+1}-a_i\right)} \\
+\leq \dfrac{\varepsilon}{2 \times M \times (b-a)} \times M \times \displaystyle{\sum \limits_{0 \leq i \leq n-1}} \abs{a_{i+1}-a_i} = \dfrac{\varepsilon}{2}
+\end{multline*}
+
+Finalement, on a bien
+\[
+\norm{\displaystyle{\sum \limits_{0 \leq i \leq n-1}} \tilde{\Gamma}'\left(\tilde{t}_i\right) \times f\circ \tilde{\Gamma}\left(\tilde{t_i}\right) \times \left(\tilde{a}_{i+1}-\tilde{a}_i\right) - \displaystyle{\int_{\Gamma}} f} \leq \varepsilon
+\]
+\end{proof}
+
+
+\begin{cor}[Changement de variable]
+Soit une fonction $f$ définie sur un intervalle $[a;~b]$ et à valeurs dans $E$ un espace vectoriel de dimension finie. 
+
+On suppose que $f$ est Riemann-intégrable.
+
+Soit $\phi$ un $\mathcal{C}^1$-difféomorphisme de $[a;~b]$ dans $\left[\tilde{a};~\tilde{b}\right]$.
+
+Alors $\dfrac{1}{\phi'} \times f \circ \phi^{-1}$ est Riemann intégrable sur $\left[\tilde{a};~\tilde{b}\right]$ et 
+\[
+\displaystyle{\int_{\tilde{a}}^{\tilde{b}}} \dfrac{1}{\phi'} \times f \circ \phi^{-1} = \displaystyle{\int_{a}^{b}} f
+\]
+\end{cor}
+
+
+
+
+

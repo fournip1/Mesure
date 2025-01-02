@@ -1,0 +1,946 @@
+%\documentclass[a4paper,11pt,answers]{article}
+%
+%\usepackage{paf}
+%
+%\title{Intégrale de Lebesgue}
+%\date{2017}
+%
+%\begin{document}
+%\maketitle
+
+\section{Fonctions mesurables}
+
+\subsection{Fonctions et ensembles: résultat préliminaire}
+
+\begin{prop}[Image réciproque]
+Soit $E$ et $F$ deux ensembles et $f: E \to F$ une application.
+
+Soient $\left(F_{i}\right)_{i \in I}$ une famille quelconque d'éléments de $\mathcal{P}(F)$ et soit $L \subset F$ un sous-ensemble de $F$.
+
+Alors:
+\begin{align*}
+f^{-1}\left<\bigcup \limits_{i \in I} F_i \right> & = \bigcup \limits_{i \in I} f^{-1}\left< F_i \right> \\
+f^{-1}\left<\bigcap \limits_{i \in I} F_i \right> & = \bigcap \limits_{i \in I} f^{-1}\left< F_i \right> \\
+f^{-1}\left< F - L \right> & = E-f^{-1}\left< L \right>
+\end{align*}
+\end{prop}
+
+\begin{proof}
+On raisonne par équivalences:
+\begin{align*}
+\text{D'une part}:\\
+x \in f^{-1}\left<\bigcup \limits_{i \in I} F_i \right> & \iff f(x) \in \bigcup \limits_{i \in I} F_i \\
+ & \iff \exists i \in I/ \, f(x) \in F_i \\
+ & \iff \exists i \in I/ \, x \in f^{-1}\left<F_i\right>\\
+ & \iff x \in \bigcup \limits_{i \in I} f^{-1}\left< F_i \right> \\
+\text{D'autre part}:\\
+x \in f^{-1}\left<\bigcap \limits_{i \in I} F_i \right> & \iff f(x) \in \bigcap \limits_{i \in I} F_i \\
+ & \iff \forall i \in I/ \, f(x) \in F_i \\
+ & \iff \forall i \in I/ \, x \in f^{-1}\left<F_i\right>\\
+ & \iff x \in \bigcap \limits_{i \in I} f^{-1}\left< F_i \right> \\
+\text{Et enfin}:\\
+f^{-1}\left< F - L \right> & \iff f(x) \in F-L \\
+  & \iff f(x) \notin L\\
+  & \iff x \notin f^{-1}<L> \\
+  & \iff x \in E-f^{-1}<L>
+\end{align*}
+
+\end{proof}
+
+En particulier les unions, intersections et passage au complémentaire sont conservés par l'image réciproque. Mais cela ne fonctionne pas pour l'image directe.
+
+On va pour cela considérer $\sin: \R \to \R$. 
+
+On pose $I_1 = \left[-\dfrac{\pi}{2};~\dfrac{\pi}{2}\right]$ et $I_2 = \left[\dfrac{\pi}{2};~\dfrac{3\pi}{2}\right]$.
+
+On a $I_1 \cap I_2 \left \{ \dfrac{\pi}{2} \right \}$ et $\sin(I_1)=[-1;~1]=\sin(I_2)$. Ainsi, on n'a pas $\sin(I_1) \cap \sin(I_2) = \sin\left(I_1 \cap I_2\right)$. 
+
+Le passage au complémentaire ne fonctionne pas non plus par image directe!
+
+On en déduit le résultat suivant.
+
+\begin{prop}[Transport de tribu]
+Soit $E$ un espace et $(F;~\mathcal{T})$ un espace mesuré.
+
+On suppose que $f: E \to F$ est une application.
+
+Alors l'ensemble $\mathcal{S} = \left \{ f^{-1}<T>, \, T \in \mathcal{T} \right \}$ constitue une tribu de $E$.
+
+De même, si on considère un espace mesuré $(E;~\mathcal{S})$, un espace $F$ et une application $g: E \to F$, on peut fabriquer une tribu sur $F$ en considérant $\left \{ T \subset F/ \, g^{-1}<T> \in \mathcal{S}\right \}$. C'est la tribu image par $g$.
+\end{prop}
+
+
+\begin{proof}
+Cela se prouve très facilement en considérant la proposition qui précède.
+\end{proof}
+
+
+\subsection{Définition}
+
+Soient $(E;~\mathcal{S})$ et $(E;~\mathcal{T})$ deux espaces mesurables.
+
+On dit que $g: E \to F$ est mesurable lorsque, pour tout $T \in \mathcal{T}$, $g^{-1}<T> \in \mathcal{S}$.
+
+Dit autrement, $g$ est mesurable si et seulement si la tribu  des $\left \{g^{-1}<T>, \, T \in \mathcal{T}  \right \}$ est incluse dans $\mathcal{S}$.
+
+\subsection{Compléments sur les tribus}
+
+\subsubsection{Transport de tribu, tribu engendrée}
+
+On en déduit une caractérisation de la mesurabilité de $g$ dans le cas où $\mathcal{T}$ est générée par une famille:
+
+\begin{prop}[Famille génératrice et mesurabilité d'une fonction]
+Soient $(E;~\mathcal{S})$ et $(E;~\mathcal{T})$ deux espaces mesurables.
+
+Soit $g: E \to F$ une fonction.
+
+On suppose enfin que $\mathcal{T}$ est générée par une famille $\mathcal{C}$.
+
+Alors, $g$ est mesurable si et seulement si pour tout $C \in \mathcal{C}$, $g^{-1}<C> \in \mathcal{S}$.
+\end{prop}
+
+\begin{proof}
+Le sens direct est évident. Examinons le sens réciproque.
+
+On suppose que pour tout $C \in \mathcal{C}$, $g^{-1}<C> \in \mathcal{S}$.
+
+$\mathcal{S}$ contient $g^{-1}<\mathcal{C}>$, elle contient donc la tribu engendrée par $g^{-1}<\mathcal{C}>$.
+
+On va maintenant prouver que la tribu engendrée par $g^{-1}<\mathcal{C}>$ est en fait $g^{-1}<\mathcal{T}>$.
+\end{proof}
+
+\begin{lem}[Image réciproque d'un tribu engendrée par une famille]
+On reprend les mêmes hypothèses.
+
+Alors la tribu engendrée par $g^{-1}\left<\mathcal{C}\right>$ est l'image réciproque de la tribu engendrée par $\mathcal{C}$.
+\end{lem}
+
+\begin{proof}
+On pose $\mathcal{S}$ la tribu engendrée par $g^{-1}\left<\mathcal{C}\right>$ et $\tilde{\mathcal{S}}$ la tribu image réciproque de la tribu engendrée par $\mathcal{C}$.
+
+$\tilde{\mathcal{S}}$ contient $g^{-1}\left<\mathcal{C}\right>$. On a donc $\mathcal{S} \subset \tilde{\mathcal{S}}$.
+
+Pour prouver l'inclusion réciproque, on considère $\mathcal{H}$ la tribu image de $\mathcal{S}$ par $g$. Cette tribu contient $\mathcal{C}$. Et ainsi, la tribu engendrée par  $\mathcal{C}$ est incluse dans $\mathcal{H}$.
+
+Par image réciproque, on en déduit $\tilde{\mathcal{S}} \subset \mathcal{S}$.
+
+Finalement, on a bien $\tilde{\mathcal{S}} = \mathcal{S}$.
+\end{proof}
+
+\subsubsection{Propriétés des boréliens}
+
+On rappelle à toutes fins utiles que l'\emph{ensemble des rationnels est dénombrable}.
+
+On munit $\R$ de la tribu des Boréliens.
+
+Notons que cette tribu peut être engendrée par plusieurs types d'intervalles comme l'exprime cette proposition
+\begin{prop}[Familles générant la tribu des boréliens]
+Toutes les familles suivantes génèrent la tribu des boréliens:
+\begin{itemize}
+\item[$\mathcal{F}_1$] les intervalles $]a;~b[$ avec $a<b$ réels;
+\item[$\mathcal{F}_2$] les intervalles $]a;~b[$ avec $a<b$ rationnels;
+\item[$\mathcal{F}_3$] les intervalles $]a;~+\infty[$ avec $a$ rationnel;
+\item[$\mathcal{F}_4$] les intervalles $]-\infty;~b[$ avec $b$ rationnel;
+\item[$\mathcal{F}_5$] les intervalles $]-\infty;~b[$ avec $b<0$ rationnel et les intervalles $]a;~+\infty[$ avec $a>0$ rationnel.
+\item[$\mathcal{F}_6$ à $\mathcal{F}_{10}$] toutes les familles ci-dessus en remplaçant les intervalles ouverts par des intervalles fermés.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+On note $\mathcal{T}_n$ la tribu engendrée par la famille $\mathcal{F}_n$.
+
+Le principe général de cette démonstration est de montrer les inclusions successives des familles $\mathcal{F}_{n+1}$ dans les tribus $\mathcal{T}_n$, ce qui prouvera $\mathcal{T}_{n+1} \subset\mathcal{T}_n$ puis de terminer la boucle en prouvant $\mathcal{F}_5 \subset \mathcal{T}_1$.
+
+$\mathcal{F}_2 \subset \mathcal{F}_1 \subset \mathcal{T}_1$.
+
+D'autre part, pour tout $a$ rationnel, il existe un entier $N>a$ et on ainsi
+
+$]a;~+\infty[ =\bigcup \limits_{n \geq N} ]a;~n[$
+
+Cela prouve que $\mathcal{F}_3 \subset \mathcal{T}_2$.
+
+Pour la troisième implication, on considère $b$ rationnel. Pour tout $c<b$ rationnel, le complémentaire de $]c;~+\infty[$ est $]-\infty;~c]$ qui est dans $\mathcal{T}_3$. En remarquant que 
+
+$]-\infty;~b[ = \bigcup \limits_{c<b} ]-\infty;~c]$, c'est gagné, on a prouvé que $\mathcal{F}_4 \subset \mathcal{T}_3$.
+
+Considérons maintenant la quatrième implication.
+
+Les intervalles $]-\infty;~b[$ avec $b<0$ sont dans $\mathcal{F}_4 \subset \mathcal{T}_4$. Par le jeu des complémentaires, les intervalles $[c;~+\infty[$ aussi, avec $c>0$. En notant que, pour tout $a>0$,
+
+$
+]a;~+\infty[ = \bigcup \limits_{c>a} [c;~+\infty[
+$, on a montré que $\mathcal{F}_5 \subset \mathcal{T}_4$.
+
+Reste à prouver la dernière implication, c'est à dire $\mathcal{F}_1 \subset \mathcal{T}_5$.
+
+Par le jeu des complémentaires et des intersections, on montre que $\mathcal{T}_5$ contient tous les intervalles de la forme $[d;~c[$, $[c;~b]$, $]b;~a]$ où $d<c<0<b<a$ sont quatre rationnels.
+
+Considérons deux réels $x<y$. On doit distinguer trois cas.
+
+Si $x < y \leq 0$, on note que $]x;~y[ = \bigcup \limits_{\substack{x<a<b<y\\(a;~b) \in \Q}} [a;~b[$.
+
+Si $x < 0 < y$, on note que $]x;~y[ = \bigcup \limits_{\substack{x<a<0<b<y\\(a;~b) \in \Q}} [a;~b]$.
+
+Si $0 \leq x < y$, on note que $]x;~y[ = \bigcup \limits_{\substack{x<a<b<y\\(a;~b) \in \Q}} ]a;~b]$.
+
+
+Finalement, on a donc $\mathcal{F}_1 \subset \mathcal{T}_5$.
+\end{proof}
+
+
+\subsection{Fonctions mesurables à valeurs réelles}
+
+\begin{prop}[Opérations sur les fonctions mesurables à valeurs réelles]
+Soit $(E;~\mathcal{T})$ un ensemble mesurable.
+
+$f$ et $g$ sont deux fonctions mesurables à valeurs réelles. $\lambda$ est un réel. Alors
+\begin{itemize}
+\item[$\bullet$] $\lambda f$ est mesurable;
+\item[$\bullet$] $f+g$ est mesurable;
+\item[$\bullet$] $f g$ est mesurable;
+\item[$\bullet$] $f^{+}$ est mesurable;
+\item[$\bullet$] $f^{-}$ est mesurable;
+\item[$\bullet$] $\abs{f}$ est mesurable;
+\item[$\bullet$] si $f$ ne s'annule pas alors $\dfrac{1}{f}$ est mesurable.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+On va le prouver en utilisant ce qui précède ainsi que la caractérisation des fonctions mesurables dans le cas où la tribu d'arrivée est générée par une famille.
+
+Pour le premier point, si $\lambda$ est nul c'est évident. Si $\lambda$ est positif, pour tout $a$, $\lambda f(x)>a \iff f(x) > \dfrac{a}{\lambda}$. 
+
+On en déduit que l'image réciproque de $]a;~+\infty[$ par $\lambda f$ est $f^{-1}\left< \left]\dfrac{a}{\lambda};~+\infty\right[ \right>$, ce qui permet de conclure car $f$ est mesurable.
+
+Pour le second point, on va utiliser la caractérisation par les intervalles $]a;~+\infty[$ avec $a$ rationnel. 
+
+On considère donc $x$ tel que $f(x)+g(x)>a$. Il existe des nombres $r>0$ tel que $f(x)+g(x)>a+r$. On a alors $g(x)>g(x)-r$ et $f(x)>a-g(x)+r$, c'est à dire $f(x)>a-\left(g(x)-r\right)$. Réciproquement, si $f(x)>a-\left(g(x)-r\right)$ alors $f(x)+g(x)>a+r>a$. En prenant $r$ tel que $g(x)-r$ est rationnel, on  prouve que
+\[
+f(x)+g(x)>a \iff \exists b \in \Q/ \, g(x)>b \text{ et }f(x)>b-a
+\]
+
+En particulier, $(f+g)^{-1}\left<]a;~+\infty[\right> = \bigcup \limits_{b \in Q} f^{-1}\left<]a-b;~+\infty[\right> \cap g^{-1}\left<]b;~+\infty[\right>$, ce dernier ensemble étant une union dénombrable d'intersections finies d'éléments de $\mathcal{T}$ puisque $f$ et $g$ sont mesurables!
+
+Pour le produit, on va considérer la caractérisation par la famille $\mathcal{F}_5$. Prenons par exemple $b<0$ et considérons $x$ tel que $f(x)g(x)<b$. Alors il existe des nombres $\eta>1$ tels que $f(x)g(x)<\eta b$.
+
+Il nous faut alors distinguer deux cas. 
+
+Si $g(x)>0$, alors $g(x) > \dfrac{g(x)}{\eta}$. Pour $\eta$ bien choisi, ce dernier nombre est rationnel et on le note $c$. Dans ce cas, $f(x)<\dfrac{\eta b}{g(x)} = \dfrac{b}{c}$.
+
+Si $g(x)>0$ alors $f(x)>0$ et donc $f(x) > \dfrac{f(x)}{\eta}$. Pour $\eta$ bien choisi, $\dfrac{f(x)}{\eta}$ est rationnel et on note $c$ ce nombre. Et là, on a $g(x)>\dfrac{\eta b}{g(x)} = \dfrac{b}{c}$.
+
+Finalement:
+\[(fg)^{-1}\left<]-\infty;~b[\right> = \bigcup \limits_{c \in \Q^{+}_{*}} \left(g^{-1}\left<]c;~+\infty[\right> \cap f^{-1}\left<\left]-\infty;~\tfrac{b}{c}\right[\right>\right) \cup \left(f^{-1}\left<]c;~+\infty[\right> \cap g^{-1}\left<\left]-\infty;~\tfrac{b}{c}\right[\right>\right)\]
+
+
+De la même manière, on prouve que, pour $a>0$:
+\[(fg)^{-1}\left<]a;~+\infty[\right> = \bigcup \limits_{c \in \Q^{+}_{*}} \left(g^{-1}\left<]c;~+\infty[\right> \cap f^{-1}\left<\left]\tfrac{a}{c};~+\infty\right[\right>\right) \cup \left(f^{-1}\left<]-\infty;~-c[\right> \cap g^{-1}\left<\left]-\infty;~-\tfrac{a}{c}\right[\right>\right)\]
+
+Pour la partie positive, notons que 
+$\left(f^{+}\right)^{-1}\left<]a;~+\infty[\right>  = \begin{cases}f^{-1}\left<]a;~+\infty[\right> \text{ si $a \geq 0$}\\ f^{-1}\left<[0;~+\infty[\right> \text{ si $a < 0$}\end{cases}$, ce qui permet de conclure.
+
+La partie négative se traite de manière similaire.
+
+La valeur absolue s'obtient en notant que $\abs{f} = f^{+} + f^{-}$.
+
+Pour finir, l'inverse se traite en utilisant la caractérisation par la famille $\mathcal{F}_5$. 
+
+Pour $a>0$, $\left(\dfrac{1}{f}\right)^{-1}\left<]a;~+\infty[\right> = f^{-1}\left<\left]0;~\tfrac{1}{a}\right[\right>$ et, pour $b<0$, 
+
+$\left(\dfrac{1}{f}\right)^{-1}\left<]-\infty;~b[\right> = f^{-1}\left<\left]\tfrac{1}{b};~0\right[\right>$.
+\end{proof}
+
+On suppose que l'on complète maintenant les réels avec $+\infty$ et $-\infty$, avec tout ce que cela suppose d’ambiguïté pour les opérations usuelles. On note $\overline{\R}$ ce nouvel ensemble sur lequel on peut définir la même tribu des boréliens.
+
+\begin{prop}[Limite d'une suite de fonctions mesurables monotones.]
+Soit $f_n$ une suite croissante de fonctions mesurables de $\left(E;~\mathcal{T}\right)$ dans $\R$.
+
+Alors $\lim \uparrow f_n$ est une fonction mesurable de $E$ dans $\overline{R}$.
+
+Ce résultat s'étend aux suites décroissantes de fonctions mesurables.
+\end{prop}
+
+\begin{proof}
+Soit $f = \lim \uparrow f_n$. En raison du théorème de convergence monotone, $f$ existe.
+
+De plus, en raison du sens de variation de $f_n$, pour tout $a$, $f^{-1}\left<]a;~+\infty[\right> = \bigcup \limits_{n \in N} f^{-1}\left<]a;~+\infty[\right>$. Cela permet de conclure puisque les $f_n$ sont mesurables.
+
+Le cas des suites décroissantes se traitent en remarquant que $f_n$ mesurable $\iff -f_n$ mesurable et $f_n$ décroissante $\iff -f_n$ croissante.
+\end{proof}
+
+\begin{prop}[Borne supérieure d'une suite de fonctions mesurables]
+On considère $f_n$ une suite de fonctions mesurables. Alors, pour tout $n$, les fonctions $\sup f_n: x \mapsto \sup\left\{f_p(x), \, p \geq n\right\}$ et $\inf f_n: x \mapsto \inf\left\{f_p(x), \, p \geq n\right\}$ sont mesurables
+\end{prop}
+
+\begin{proof}
+Le cas de $\inf f_n$ se traite également par passage à l'opposé en remarquant que $\inf f_n = -\sup (-f_n)$.
+
+Le cas du $\sup f_n$ n'est pas compliqué. En effet, prouvons que, pour tout $a$, 
+
+$\left(\sup f_n\right)^{-1}\left<]a;~+\infty[\right> = \bigcup \limits_{p \geq n} f^{-1}\left<]a;~+\infty[\right>$.
+
+Si $\left(\sup f_n\right)(x)>a$, il existe $p \geq n$ tel que $\left(\sup f_n\right)(x) \geq f_p(x) > a$. Réciproquement, s'il existe $p \geq n$ tel que $f_p(x)>a$ alors $\left(\sup f_n\right)(x) \geq f_p(x) > a$.
+\end{proof}
+
+\begin{theo}[Convergence simple de suites de fonctions]
+Soit $f_n$ une suite de fonctions mesurables qui converge simplement vers une fonction $f$ à valeurs dans $\overline{R}$.
+
+Alors $f$ est mesurable.
+\end{theo}
+
+\begin{proof}
+Cela se prouve en notant que $f = \lim \limits_{n \to +\infty} \downarrow \sup f_n = \lim \limits_{n \to +\infty} \uparrow \inf f_n$.
+\end{proof}
+
+\section{Fonctions échelonnées positives}
+
+\subsection{Définition}
+
+On considère $\left(E;~\mathcal{T}\right)$ un espace mesurable.
+
+On dit qu'une fonction $f: E \to \C$ est échelonnée lorsque il existe une partition $\left( T_k \right)_{1 \leq n}$ de $E$ par des éléments de $\mathcal{T}$ et des nombres positifs $\left(\alpha_k\right)_{1 \leq k \leq n}$ tels que
+\[
+f = \displaystyle{\sum \limits_{1 \leq k \leq n}} \alpha_k \mathbb{1}_{T_k}
+\]
+
+On note $\mathcal{E}(E;~\R^{+})$, l'ensemble des fonctions échelonnées de $E$ dans $\R^{+}$.
+
+
+\begin{prop}[Propriétés des fonctions échelonnées]
+L'ensemble des fonctions échelonnées est stable par produit et combinaisons linéaires.
+\end{prop}
+
+\begin{proof}
+Il suffit de se référer aux propriétés des fonctions indicatrices plus bas.
+\end{proof}
+
+\begin{prop}[Fonctions indicatrices]
+Soit $L$ et $M$ deux sous ensembles d'un ensemble $E$.
+
+Alors
+\begin{align*}
+\mathbb{1}_L \times \mathbb{1}_M & = \mathbb{1}_{L \cap M} \\
+\mathbb{1}_{M-L} & = \mathbb{1}_{M} - \mathbb{1}_{L} \qquad \text{ si }L \subset M \\
+\mathbb{1}_L + \mathbb{1}_M & = 2 \times \mathbb{1}_{L \cap M}+\mathbb{1}_{L-\left(L \cap M\right)}+\mathbb{1}_{M-\left(L \cap M\right)} \qquad \text{ et ces trois ensembles sont disjoints.}\\
+\mathbb{1}_{L \cup M} & = \mathbb{1}_{L} + \mathbb{1}_{M} - \mathbb{1}_{L \cap M} \\
+\mathbb{1}_{\overline{L}} & = 1-\mathbb{1}_{L}
+\end{align*}
+\end{prop}
+
+\begin{proof}
+Cela se prouve très facilement par disjonction de cas.
+\end{proof}
+
+\subsection{Intégrale de fonction échelonnée positive}
+
+On considère maintenant $\left(E;~\mathcal{T};~\mathcal{\mu}\right)$ un espace mesuré et $f$ une fonction échelonnée de $E$ vers $\R^{+}$ en utilisant les mêmes notations qu'au paragraphe précédent.
+
+L'intégrale de $f$ est le nombre
+\[
+\displaystyle{\int} f(x) \, \mathrm d \mu(x) = \displaystyle{\sum \limits_{1 \leq k \leq n}} \alpha_k \mu(T_k) 
+\]
+
+\begin{prop}[Propriétés de base des fonctions échelonnées]
+Soient $f$ et $g$ deux fonctions échelonnées positives. Soit $\alpha \geq 0$ un nombre.
+
+On a 
+\[
+\int (f + \alpha g) = \int f + \alpha \int g
+\]
+
+Si, de plus, pour tout $x$, $f(x) \leq g(x)$ alors
+\[
+\int f \leq \int g
+\]
+\end{prop}
+
+\section{Intégrale d'une fonction positive}
+
+Dans tout ce paragraphe, on considère les espaces $\left(E;~ \mathcal{T};~\mu\right)$ et $\left(\R^{+};~ \mathcal{B}\right)$ où $\mathcal{B}$ est la tribu trace des boréliens sur $\R^{+}$.
+
+\subsection{Définition}
+
+\begin{theo}[Définition de l'intégrale]
+Soit une fonction $f$ mesurable de $E$ dans $\R^{+}$.
+
+Alors il existe une suite croissante $f_n$ de fonctions échelonnées qui tendent vers $f$.
+
+On définit alors l'intégrale de $f$ par 
+\[
+\displaystyle{\int f(x)  \, \mathrm d \mu(x)} = \lim \uparrow \displaystyle{\int f_n(x)  \,  \mathrm d \mu(x)}
+\]
+
+De plus, ce nombre ne dépend pas de la suite $f_n$ de fonctions échelonnées choisie.
+\end{theo}
+
+\begin{proof}
+On va construire cette suite $f_n$ puis on montrera l'unicité.
+
+Soit $n$ un entier. Pour tout $1 \leq k \leq 2^{2n}$, on pose 
+
+$T_k^{(n)} = f^{-1}\left<\left[\dfrac{k-1}{2^n};~\dfrac{k}{2^n}\right[\right>$. C'est une partition de $E$ d'éléments de $mathcal{T}$.
+
+Puis on définit
+
+$f_n = \displaystyle{\sum \limits_{1 \leq k \leq 2^{2n}}} \dfrac{k-1}{2^n} \mathbb{1}_{T_k^{(n)}}$
+
+C'est une suite croissante par construction.
+
+Montrons la convergence simple. Soit $x \in E$.
+
+Il existe $p$ tel que $2^{p}>f(x)$. Par construction, ensuite, pour tout $n \geq p$, $0 \leq f(x)-f_n(x) \leq 2^{-n}$. Il suffit pour cela d'écrire l'approximation par défaut de $f(x)$ en base 2 au n-ième digit près.
+
+Pour finir, il nous faut montrer l'unicité. On considère donc deux suites croissantes $g_n$ et $f_n$ de fonctions échelonnées qui tendent simplement vers $f$.
+
+Soit $\eta \in ]0;~1[$ un nombre. 
+
+Pour tout entier $n$ et pour tout $x$ de $E$, il existe un rang $n'$ tel que, pour tout $p \geq n'$, 
+
+$\eta f_n(x) \leq g_n(x)$.
+
+On fixe maintenant $n$ et $\eta \in ]0;~1[$ et on note $S_p = \left \{ x / \, g_p(x) \geq \eta f_n(x)\right \}$.
+
+D'après la remarque qui précède, $S_p$ est une suite croissante d'éléments de $\mathcal{T}$ qui tendent vers $E$. En particulier, on a
+\[
+\displaystyle{\int} g_p(x)  \,  \mathrm d \mu(x) \geq \displaystyle{\int} \mathbb{1}_{S_p} g_p(x)  \,  \mathrm d \mu(x) \geq \eta \displaystyle{\int} \mathbb{1}_{S_p} f_n(x)  \, \mathrm d \mu(x)
+\]
+
+D'après la propriété de convergence monotone pour la mesure, on en déduit, par passage à la limite quand $p$ tend vers l'infini:
+\[
+\lim \limits_{p \to +\infty} \uparrow \displaystyle{\int} g_p(x)  \,  \mathrm d \mu(x) \geq \eta \displaystyle{\int} f_n(x)  \,  \mathrm d \mu(x)
+\]
+
+En faisant tendre $\eta$ vers $1$ puis $n$ vers l'infini, on obtient que 
+
+$\lim \limits_{p \to +\infty} \uparrow \displaystyle{\int} g_p(x)  \,  \mathrm d \mu(x) \geq \lim \limits_{p \to +\infty} \uparrow \displaystyle{\int} f_p(x)  \,  \mathrm d \mu(x)$.
+
+Mais, comme $f$ et $g$ jouent des rôles symétriques, cela permet de conclure.
+\end{proof}
+
+\subsection{Propriétés de base}
+
+\begin{prop}[Opérations sur les fonctions positives]
+Soient $f$ et $g$ deux fonctions mesurables de $E$ dans $\R^{+}$. Soit $\alpha \geq 0$ un réel.
+
+Alors
+\[
+\displaystyle{\int} (f+ \alpha g) = \displaystyle{\int} f+\alpha \displaystyle{\int} g
+\]
+
+Si, pour tout $x$, $f(x) \geq g(x)$ et si $\displaystyle{\int} g < +\infty$ alors 
+\[
+\displaystyle{\int} (f-g) = \displaystyle{\int} f- \displaystyle{\int} g
+\]
+
+Enfin,
+\[
+f \geq g \Longrightarrow  \displaystyle{\int} f \geq \displaystyle{\int} g
+\]
+\end{prop}
+
+
+\begin{proof}
+Soient $f_n$ et $g_n$ des suites croissantes de fonctions échelonnées qui tendent respectivement vers $f$ et $g$.
+
+$f_n+\alpha g_n$ tend vers $f+\alpha g$. Or, pour tout $n$, d'après les propriétés des fonctions échelonnées, 
+\[
+\displaystyle{\int} (f_n+ \alpha g_n) = \displaystyle{\int} f_n+\alpha \displaystyle{\int} g_n
+\]
+
+Par passage à la limite sur $n$, on obtient le premier résultat.
+
+Pour le second résultat, on utilise le premier. En effet,
+\[
+\displaystyle{\int} (f-g) + \displaystyle{\int} g = \displaystyle{\int} (f-g+g) = \displaystyle{\int} f
+\]
+
+On peut ensuite soustraire l'égalité par $\displaystyle{\int} g$ puisque $\displaystyle{\int} g < +\infty$.
+
+Pour montrer la dernière implication, on considère deux cas. 
+
+Si $\displaystyle{\int} f = +\infty$, l'inégalité est vraie.
+
+Si $\displaystyle{\int} f < +\infty$, toute suite croissante $g_n$ de fonctions échelonnées positive qui tend vers $g$ vérifie $\displaystyle{\int} g_n \leq \displaystyle{\int} f < +\infty$. En particulier, on en déduit que $\displaystyle{\int} g < +\infty$ et on peut donc utiliser le fait que $\displaystyle{\int} f - \displaystyle{\int} g = \displaystyle{\int} (f-g) \geq 0$
+\end{proof}
+
+
+\subsection{Les grands théorèmes de convergence, cas positif}
+
+\begin{theo}[Convergence monotone, pour les fonctions positives]
+Soit $f_n$ une suite croissante de fonctions positives mesurables.
+
+Alors, $\lim \uparrow \displaystyle{\int} f_n =  \displaystyle{\int} \left(\lim \uparrow f_n\right)$.
+\end{theo}
+
+La formulation de ce théorème rend possible que $f =  \lim \uparrow f_n$ puisse prendre des valeurs infinies. 
+
+On raisonne donc ici sur $\overline{R^{+}}$ et on étend les fonctions échelonnées à $\overline{R^{+}}$, avec pour convention:
+\[
+\displaystyle{\int} +\infty \times \mathbb{1}_F(x)  \, \mathrm d \mu(x) = 0 \text{ si et seulement si $\mu(F)=0$.}
+\]
+
+\begin{proof}
+Il est évident que $\lim \uparrow \displaystyle{\int} f_n  \leq \displaystyle{\int} \left(\lim \uparrow f_n\right)$ en raison de la positivité de l'intégrale.
+
+On note $f = \lim \uparrow f_n$.
+
+Notons $\tilde{E} = \left \{ x/ \, f(x)=+\infty \right \}$ puis distinguons deux cas.
+
+Si $\mu\left(\tilde{E}\right) > 0$, alors $\displaystyle{\int} f = +\infty$. Il s'agit donc de montrer que $\lim \uparrow \displaystyle{\int} f_n = +\infty$.
+
+Pour tout $M > 0$, on pose $H_n = \left\{ x / \, f_n(x) \geq M \right \}$. C'est une suite croissante d'éléments de $\mathcal{T}$. De plus, on vérifie que 
+$\displaystyle{\int} f_n \geq M \mu(H_n)$. Par passage à la limite sur $n$, on en déduit
+\[
+\lim \uparrow \displaystyle{\int} f_n \geq M \mu\left(\lim \uparrow H_n\right)
+\]
+
+Or $\tilde{E} \subset \lim \uparrow H_n$ et ainsi $\lim \uparrow \displaystyle{\int} f_n \geq M \mu\left(\tilde{E}\right)$
+
+En faisant tendre $M$ vers l'infini, on obtient le résultat escompté.
+
+Considérons maintenant le second cas. 
+
+Si $\mu\left(\tilde{E}\right) = 0$, on a $\displaystyle{\int} f = \displaystyle{\int} \mathbb{1}_{E-\tilde{E}} f$.
+
+On applique maintenant sur $E-\tilde{E}$ une technique déjà utilisée lorsque l'on a défini l'intégrale d'une fonction positive. On considère ainsi, pour tout $\eta \in ]0;~1[$, l'ensemble 
+
+$E_n = \left\{ x \in E-\tilde{E}/ \, f_n(x) \geq \eta f(x) \right \}$.
+
+On sait que $\lim \uparrow E_n = E - \tilde{E}$. De plus,
+\[
+\displaystyle{\int} f_n \geq \displaystyle{\int} \left(\mathbb{1}_{E_n} f_n\right) \geq \eta \displaystyle{\int} \left(\mathbb{1}_{E_n} f\right)
+\]
+
+Il faudrait maintenant pouvoir écrire $\lim \uparrow \displaystyle{\int} \left(\mathbb{1}_{E_n} f\right) = \displaystyle{\int} \left(\lim \uparrow \mathbb{1}_{E_n} f\right)$ pour conclure.
+
+Pour cela, on va établir un lemme.
+\end{proof}
+
+
+\begin{lem}[Limite croissante d'ensembles et intégrale]
+Soit $T \subset E$ un élément de $\mathcal{T}$ et soit $f$ une fonction mesurable de $E$ dans $\R^{+}$.
+
+Soit de plus $T_n$ une suite croissante d'éléments de $\mathcal{T}$ telle que $\lim \uparrow T_n = T$.
+
+Alors:
+\[
+\lim \uparrow \displaystyle{\int} \left(\mathbb{1}_{T_n} f \right) = \displaystyle{\int} \left(\mathbb{1}_{T} f \right)
+\]
+\end{lem}
+
+\begin{proof}
+Soit $\varphi_n$ une suite croissante de fonctions échelonnées positives qui tend vers $f$.
+
+On a déjà prouvé précédemment que pour tout $\eta$ de $]0;~1[$, il existe $n$, tel que 
+
+$\displaystyle{\int} \left(\mathbb{1}_{T} \varphi_n \right) \geq  \eta \displaystyle{\int} \left( \mathbb{1}_{T} f \right)$.
+
+Pour ce même $\eta$, il existe un rang $p$, tel que $\displaystyle{\int} \left(\mathbb{1}_{T_p}\varphi_n\right) \geq  \eta \displaystyle{\int} \mathbb{1}_{T} \varphi_n \geq \eta^2 \displaystyle{\int} \left(\mathbb{1}_{T}f\right)$. On en déduit ainsi que, pour tout $\eta$, il existe $p$ tel que pour tout $k \geq p$
+\[
+\displaystyle{\int} \left(\mathbb{1}_{T_p}f\right) \geq \displaystyle{\int} \left(\mathbb{1}_{T_p}\varphi_n\right) \geq \eta^2 \displaystyle{\int} \left(\mathbb{1}_{T} f\right)
+\]
+
+Donc, pour tout $\eta$ de $]0;~1[$, $\lim \uparrow \displaystyle{\int} \left(\mathbb{1}_{T_p}f\right) \geq \eta^2 \displaystyle{\int} f$.
+
+En faisant tendre $\eta$ vers $1$, on obtient le résultat escompté.
+\end{proof}
+
+\begin{prop}[Convergence monotone dans le cas de suite décroissante, pour les fonctions positives]
+Soit $f_n$ une suite décroissante de fonctions mesurables positives.
+
+On suppose qu'il existe $n$ tel que $\displaystyle{\int} f_n < +\infty$.
+
+Alors $\displaystyle{\int} f_n = \displaystyle{\int} \left(\lim \downarrow f_n\right)$
+\end{prop}
+
+\begin{proof}
+Pour tout $k \geq n$, on pose $\tilde{f}_k = f_n-f_k$.  
+
+$\tilde{f}_k$ est une suite croissante de fonctions positives mesurables et on a donc $\lim \limits_{k} \uparrow \displaystyle{\int} (f_n - f_k) = \displaystyle{\int} \left( \lim \limits_{k} \uparrow (f_n - f_k) \right)$ et comme, pour tout $k \geq n$, $\displaystyle{\int} f_k < +\infty$, on peut utiliser la propriété sur les intégrales de différences de fonctions pour obtenir le résultat escompté.
+\end{proof}
+
+L'hypothèse que l'intégrale soit finie est importante.  Pour s'en convaincre, considérer la suite $f_n = \mathbb{1}_{\left]0;~\tfrac{1}{n}\right[}$ avec la mesure de comptage.
+
+\begin{prop}[Intégrale nulle]
+Soit $f$ une fonction mesurable de $E$ dans $\R^{+}$.
+
+\[
+\displaystyle{\int} f = 0 \iff \mu\left\{x / \, f(x) \neq 0 \right \} = 0
+\]
+\end{prop}
+
+
+\begin{proof}
+La réciproque est aisée. En effet, d'après les conventions énoncées plus haut. Si on note $\tilde{E} = \left\{x / \, f(x) \neq 0 \right \}$, on a $\mu\left(\tilde{E}\right) = 0$ et donc pour toute fonction échelonnée $\varphi$, $\displaystyle{\int} \left(\mathbb{1}_{\tilde{E}} \times \varphi \right) = 0$. 
+
+Ainsi, $\displaystyle{\int} f = \displaystyle{\int} \left(\mathbb{1}_{\tilde{E}} \times f\right) + \left(\mathbb{1}_{E-\tilde{E}} \times f\right) = 0 + 0$
+
+Pour le sens direct, pour tout $n$, on pose $M_n = \left\{ x / \, f(x) \geq \dfrac{1}{n}\right \}$.
+
+Ainsi, $\displaystyle{\int} f \geq \dfrac{1}{n} \mu(L_n)$ et ainsi, on a $\mu(L_n)=0$.
+
+$L_n$ étant une suite croissante d'ensemble mesurables, on peut utiliser le théorème de convergence monotone pour les mesure. On en déduit:
+\[
+\mu\left(\lim \uparrow L_n\right) = 0
+\]
+
+Or $\lim \uparrow L_n = \left\{ x / f(x) \neq 0\right \}$, ce qui permet de conclure.
+\end{proof}
+
+On énonce maintenant un lemme utile pour démontrer le théorème de convergence dominée.
+
+\begin{lem}[Fatou]
+Soit $f_n$ une suite de fonctions mesurables positives. 
+
+Alors, pour tout entier $n$:
+\[
+\displaystyle{\int} \inf \limits_{k \geq n} f_k \leq \inf \limits_{k \geq n} \displaystyle{\int} f_k \leq \sup \limits_{k \geq n} \displaystyle{\int} f_k \leq \displaystyle{\int} \sup \limits_{k \geq n} f_k
+\]
+
+\end{lem}
+
+\begin{proof}
+Pour tout $p \geq n$ et pour tout $x$:
+\[
+\inf \limits_{k \geq n} f_k(x) \leq f_p(x)
+\]
+et
+\[
+f_p(x) \leq \sup \limits_{k \geq n} f_k(x)
+\]
+En intégrant, il vient:
+\[
+\displaystyle{\int} \inf \limits_{k \geq n} f_k(x) \, \mathrm d \mu(x) \leq \displaystyle{\int} f_p(x) \, \mathrm d \mu(x)
+\]
+et
+\[
+\displaystyle{\int} f_p(x) \, \mathrm d \mu(x) \leq \displaystyle{\int} \sup \limits_{k \geq n} f_k(x) \, \mathrm d \mu(x)
+\]
+
+Et comme cela est vrai pour tout $p \geq n$, on a:
+\[
+\displaystyle{\int} \inf \limits_{k \geq n} f_k(x) \, \mathrm d \mu(x) \leq \inf  \limits_{p \geq n} \displaystyle{\int} f_p(x) \, \mathrm d \mu(x)
+\]
+et
+\[
+\sup \limits_{p \geq n} \displaystyle{\int} f_p(x) \, \mathrm d \mu(x) \leq \displaystyle{\int} \sup \limits_{k \geq n} f_k(x) \, \mathrm d \mu(x)
+\]
+
+\end{proof}
+
+\begin{theo}[Convergence dominée, pour les fonctions positives]
+Soit $f_n$ une suite de fonctions mesurables et positives.
+
+On suppose que les $f_n$ tendent vers une fonction $f$ et qu'il existe une fonction positive $g$ telle que
+\begin{itemize}
+\item[$\bullet$] pour tout $n$, $f_n \leq g$
+\item[$\bullet$] $\displaystyle{\int} g < +\infty$
+\end{itemize}
+
+Alors la fonction $f$ possède une intégrale finie et $\lim \displaystyle{\int} f_n = \displaystyle{\int} f$.
+\end{theo}
+
+\begin{proof}
+Pour tout $n$, $\sup f_n \leq g$ et par conséquent $\displaystyle{\int} \left(\sup f_n\right) \leq \displaystyle{\int} g < +\infty$.
+
+On peut donc ici utiliser le théorème de convergence monotone pour les fonctions croissantes et décroissantes et ainsi 
+
+$\lim \downarrow \displaystyle{\int} \sup f_n = \displaystyle{\int} \left(\lim \downarrow \sup f_n\right) = \displaystyle{\int} f$ car les $f_n$ convergent vers $f$.
+
+De même:
+
+$\lim \uparrow \displaystyle{\int} \inf f_n = \displaystyle{\int} \left(\lim \uparrow \inf f_n\right) = \displaystyle{\int} f$ pour la même raison.
+
+En appliquant le lemme de Fatou, on prouve la convergence des $\displaystyle{\int} f_n$ vers $\displaystyle{\int} f$.
+\end{proof}
+
+\section{Intégrale d'une fonction à valeurs réelles ou complexe}
+
+Dans toute la suite $\left(E;~\mathcal{T};~\mu\right)$ désigne un espace mesuré.
+
+\subsection{Notion de propriété $\mu-$presque partout, tribu complétée}
+
+\begin{de}[Ensemble $\mu-$négligeable]
+Un sous-ensemble $F \subset E$ est dit $\mu-$négligeable lorsqu'il existe un élément $T$ de $\mathcal{T}$ tel que $F \subset T$ et $\mu(T)=0$.
+\end{de}
+
+Soit $P(x)$ une proposition portant sur les éléments $x$ de $E$.
+
+On dit que $P$ est vraie $\mu-$presque partout si et seulement si l'ensemble $\left\{ x / \, P(x) \text{ est fausse}\right \}$ est $\mu-$négligeable.
+
+Par exemple, si $f$ et $g$ sont deux fonctions mesurables, dire $f(x)=g(x)$ $\mu-$presque partout signifie que $\mu\left\{x/  \, f(x) \neq g(x)\right\} = 0$.
+
+On rappelle les propriétés suivantes des ensembles de mesure nulle.
+
+
+\begin{prop}[Union dénombrable d'ensembles $\mu-$négligeables]
+Une union dénombrable d'ensembles $\mu-$négligeables est $\mu-$négligeable.
+\end{prop}
+
+\begin{proof}
+C'est évident d'après les propriétés sur les sommes de nombres positifs.
+\end{proof}
+
+
+\begin{de}[Tribu complétée]
+L'ensemble $\tilde{\mathcal{T}}=\left\{T \cup N, \, T \in \mathcal{T} \text{ et }N \text{ négligeable}\right\}$ est une tribu appelée tribu complétée de $\mathcal{T}$. De plus, on peut sur cette tribu étendre la mesure $\mu$ en posant
+\[\mu\left(T \cup N\right) = \mu(T)\]
+\end{de}
+
+\begin{proof}
+$\tilde{\mathcal{T}}$ contient $E$ et est stable par union dénombrable.
+
+Reste à prouver la stabilité par passage au complémentaire. Soit $N$ un ensemble négligeable, inclus dans $S$ élément de $\mathcal{T}$ de mesure nulle.
+
+Soit enfin $T$ un élément de $\mathcal{T}$. On veut montrer que le complémentaire de $T \cup N$ est dans $\tilde{\mathcal{T}}$.
+
+Mais on a $\overline{T \cup N} = \overline{T \cup S} \cup \left(S \cap \overline{T \cup N}\right)$.
+
+Or $S \cap \overline{T \cup N}$ est négligeable car inclus dans $S$.
+
+$\tilde{\mathcal{T}}$ est donc bien stable par passage au complémentaire.
+\end{proof}
+
+\subsection{Intégrabilité}
+
+On considérera dans ce paragraphe les fonctions mesurables de $\left(E;~\mathcal{T};~\mu\right)$ dans $\R$ ou $\C$.
+
+\begin{de}[Intégrabilité sur $\R$]
+Soit $f$ une fonction mesurable de $E$ dans $\R$.
+
+On dit que $f$ est intégrable lorsque $\displaystyle{\int} \abs{f(x)} < +\infty$.
+
+Dans ce cas, $f^{+}$ et $f^{-}$ ont des intégrales finies et on pose
+\[\displaystyle{\int} f = \displaystyle{\int} f^{+}-\displaystyle{\int} f^{-}\]
+\end{de}
+
+\begin{proof}
+C'est évident car $f^{+}$ et $f^{-}$ sont des fonctions positives mesurables et majorées par $\abs{f}$.
+\end{proof}
+
+\begin{de}[Mesurabilité et intégrabilité sur $\C$]
+Sur $\C$ on définit la tribu produit des boréliens; celle qui rend mesurable les applications partie réelle et partie imaginaire.
+
+En raison de la caractérisation par les cylindres, une fonction $f$ à valeur complexe est mesurable si et seulement si sa partie réelle et sa partie imaginaire sont mesurables.
+
+De plus, dans ce cas, on dira que $f$ est intégrable si et seulement si $\displaystyle{\int} \abs{f} < +\infty$.
+
+En particulier, on pourra définir sans équivoque:
+\[
+\displaystyle{\int} f = \displaystyle{\int} \mathcal{R}(f)+\im \displaystyle{\int} \mathcal{I}(f)
+\]
+
+\end{de}
+
+
+\begin{proof}
+Encore une fois, $\abs{f} \geq \abs{\mathcal{R}(f)}$ et $\abs{f} \geq \abs{\mathcal{R}(f)}$.
+
+Cela permet de conclure.
+\end{proof}
+
+\subsection{Propriétés de l'intégrale des fonctions à valeurs réelles ou complexes}
+
+
+Pour alléger les notations, on définit:
+\begin{de}[Intégration sur une partie de $E$]
+Soit $T \in \mathcal{T}$. Lorsqu'elle existe, on définit 
+\[
+\displaystyle{\int_T} f = \displaystyle{\int} \left(\mathbb{1}_T f\right)
+\]
+\end{de}
+
+
+
+\begin{prop}[Linéarité]
+Soient deux fonctions $f$ et $g$ mesurables de $E$ dans $\R$ ou $\C$. Soit $\lambda$ un scalaire.
+
+Si $f$ et $g$ sont intégrables alors $f+g$ est intégrable et 
+\[
+\displaystyle{\int} \left(f+g\right) = \displaystyle{\int} f + \displaystyle{\int} g
+\]
+
+De plus $\lambda g$ est également intégrable et 
+\[
+\displaystyle{\int} \left(\lambda g\right)  = \lambda \displaystyle{\int} g
+\]
+\end{prop}
+
+\begin{proof}
+On va considérer que $f$ et $g$ sont à valeurs réelles puis on généralisera aux complexes.
+
+On a va commencer par prouver que $\lambda g$ est intégrable. On sait que $\displaystyle{\int} \abs{\lambda g} \leq \abs{\lambda} \displaystyle{\int} \abs{g} < +\infty$. Bien sûr, cela fonctionne aussi si $\lambda$ est complexe.
+
+Si $\lambda < 0$, $\left(\lambda g\right)^{+} = -\lambda g^{-}$ et $\left(\lambda g\right)^{-} = -\lambda g^{+}$.
+
+Ainsi,
+\[
+\displaystyle{\int} \left(\lambda g\right) = \displaystyle{\int} \left(-\lambda g^{-}\right) - \displaystyle{\int} \left(-\lambda g^{+}\right) = -\lambda \displaystyle{\int}  g^{-} +\lambda \displaystyle{\int}  g^{+} = \lambda \displaystyle{\int}  g
+\]
+
+D'autre part $f+g$ est intégrable (sur $\R$ ou $\C$) en raison de l'inégalité triangulaire. Et là encore l'intégrabilité se généralise aux complexes puisque l'inégalité triangulaire s'applique également au module.
+
+Reste maintenant à analyser les parties positives et négatives de $f+g$.
+
+On va noter $E^{+} = \left \{ x / \, f(x)+g(x) \geq 0 \right \} = (f+g)^{-1} \left<[0;~+\infty[\right> \in \mathcal{T}$ car $f+g$ est mesurable.
+
+Puis $E^{-} = E-E^{+}$.
+
+Ainsi, $(f+g)^{+} = \mathbb{1}_{E^{+}} (f+g)$ et $(f+g)^{-} = \mathbb{1}_{E^{-}} (f+g)$.
+
+Ce que l'on peut réécrire, $(f+g)^{+} = \mathbb{1}_{E^{+}} \left[\left(f^{+}+g^{+}\right)-\left(f^{-}+g^{-}\right)\right]$. Les fonctions $(f^{+}+g^{+})$ et $(f^{-}+g^{-})$ sont positives et vérifient, sur $E^{+}$, $(f^{+}+g^{+}) \geq (f^{-}+g^{-})$. On peut donc utiliser la propriété sur l'intégration d'une différence de fonctions mesurables positives. Finalement:
+
+$\displaystyle{\int} (f+g)^{+}  = \displaystyle{\int}_{E^{+}} (f^{+}+g^{+}) - \displaystyle{\int}_{E^{+}} (f^{-}+g^{-})$. En réarrangeant et en utilisant la linéarité des intégrales de fonctions positives, on obtient:
+\[
+\displaystyle{\int} (f+g)^{+} = \displaystyle{\int}_{E^{+}} f + \displaystyle{\int}_{E^{+}} g
+\]
+
+De même, en utilisant ce qui précède sur la multiplication par un réel (ici $-1$)
+
+$\displaystyle{\int} (f+g)^{-}  = -\displaystyle{\int}_{E^{-}} \left[\left(f^{+}+g^{+}\right) - \left(f^{-}+g^{-}\right)\right] = \displaystyle{\int}_{E^{-}} \left[\left(f^{-}+g^{-}\right) - \left(f^{+}+g^{+}\right)\right]$. Or, sur $E^{-}$,  $(f^{-}+g^{-}) \geq (f^{+}+g^{+})$. En réarrangeant, on obtient le résultat escompté:
+\[
+\displaystyle{\int} (f+g)^{-} = -\displaystyle{\int}_{E^{-}} f - \displaystyle{\int}_{E^{-}} g
+\]
+
+
+Finalement, en calculant $\displaystyle{\int} (f+g)^{+}-\displaystyle{\int} (f+g)^{-}$ on obtient le résultat attendu.
+
+Pour l'extension de cette propriété aux complexes, on utilise la linéarité de la partie réelle et imaginaire. Ainsi, on montre que si $\lambda$ est un réel, on a:
+\[
+\displaystyle{\int} \left(f+\lambda g\right) = \displaystyle{\int} f + \lambda \displaystyle{\int} g
+\]
+
+Reste à examiner le cas de $\lambda g$ quand $\lambda$ est complexe. Pour cela, on écrit $\lambda = \alpha + \im \beta$  avec $\alpha$ et $\beta$ réels. On note également $g_r = \mathcal{R}(g)$ et $g_i = \mathcal{I}(g)$.
+
+Ainsi, $\lambda g = \left(\alpha g_r - \beta g_i\right) + \im (\alpha g_i + \beta g_r)$. En utilisant ce qui précède, et en réarrangeant, on obtient bien:
+\[
+\displaystyle{\int} \left(\lambda g\right) = \lambda \displaystyle{\int} g
+\]
+\end{proof}
+
+
+
+\begin{prop}[Positivité de l'intégrale]
+Soient $f$ et $g$ deux fonctions intégrables à valeurs réelles.
+
+Si $f \geq g$ $\mu-$presque partout alors $\displaystyle{\int} f \geq \displaystyle{\int} g$.
+\end{prop}
+
+\begin{proof}
+On raisonne sur la tribu complétée et on pose $\tilde{E} = \left \{ x/ \, f(x) \geq g(x) \right \}$.
+
+On sait que $\displaystyle{\int}_{\tilde{E}} f = \displaystyle{\int} f$ et $\displaystyle{\int}_{\tilde{E}} g = \displaystyle{\int} g$ car le complémentaire de $\tilde{E}$ est de mesure nulle.
+
+De plus, sur $\tilde{E}$, $f-g \geq 0$. On peut donc conclure en utilisant ce qui précède sur la linéarité de l'intégrale.
+\end{proof}
+
+\begin{prop}[Égalité de fonctions]
+Soient $f$ et $g$ deux fonctions intégrables à valeurs réelles.
+
+Si $f = g$ $\mu-$presque partout alors $\displaystyle{\int} f = \displaystyle{\int} g$.
+\end{prop}
+
+\begin{proof}
+Très facile à partir de ce qui précède.
+\end{proof}
+
+\begin{prop}[Valeur absolue nulle]
+Soient $f$ et $g$ deux fonctions intégrables à valeurs réelles.
+
+$\displaystyle{\int} \abs{f-g} = 0 \iff f=g \mu-$presque partout.
+\end{prop}
+
+\begin{proof}
+On se réfère à la propriété équivalente portant sur les fonctions mesurables positives. On en déduit que $\abs{f-g}(x)=0$ pour $\mu-$presque tout $x$.
+\end{proof}
+
+\subsection{Les grands théorèmes de convergence, cas général}
+
+\begin{de}[Généralisation de la définition de l'intégrale réelle]
+Soit $f$ une fonction réelle positive.
+
+Si $\displaystyle{\int} f^{+} < +\infty$ ou$\displaystyle{\int} f^{-} < +\infty$, on pose
+\[
+\displaystyle{\int} f = \displaystyle{\int} f^{+}- \displaystyle{\int} f^{-}
+\]
+
+On utilise alors les conventions habituelles sur les calculs portant sur l'infini.
+
+En revanche, il faut utiliser avec précaution les propriétés établies au paragraphe précédent.
+\end{de}
+
+
+\begin{theo}[Convergence monotone, pour les fonctions à valeurs réelles]
+Soit $f_n$ une suite croissante de fonctions mesurables à valeurs réelles.
+
+S'il existe $n$ tel que $\displaystyle{\int} f_n^{-} < +\infty$ alors
+\[\lim \uparrow \displaystyle{\int} f_n =  \displaystyle{\int} \left(\lim \uparrow f_n\right)\].
+
+\medskip
+De même, soit $g_n$ une suite décroissante de fonctions mesurables à valeurs réelles.
+
+S'il existe $n$ tel que $\displaystyle{\int} f_n^{+} < +\infty$ alors
+\[\lim \downarrow \displaystyle{\int} f_n =  \displaystyle{\int} \left(\lim \downarrow f_n\right)\].
+\end{theo}
+
+\begin{proof}
+On va juste étudier la première situation. 
+
+$f_n^{+}$ est une suite croissante de fonctions mesurables positives.
+
+$f_n^{-}$ est une suite décroissante de fonctions mesurables positives.
+
+Comme $\displaystyle{\int} f_n^{-}<+\infty$ à partir d'un certain rang, on peut utiliser le théorème de convergence monotone sur les suites de fonctions mesurables positives.
+
+Ainsi, à partir d'un certain rang, $\displaystyle{\int} f_n$ existe et on a
+\[
+\displaystyle{\int} f_n = \displaystyle{\int} f_n^{+} - \displaystyle{\int} f_n^{-}
+\]
+
+On peut passer à la limite et on obtient le résultat escompté.
+\end{proof}
+
+
+\begin{theo}[Convergence dominée, cas général]
+Soit $f_n$ une suite de fonctions mesurables.
+
+On suppose que les $f_n$ tendent vers une fonction $f$ $\mu-$presque partout et qu'il existe une fonction positive $g$ telle que
+\begin{itemize}
+\item[$\bullet$] pour tout $n$, $\abs{f_n} \leq g$ $\mu-$presque partout;
+\item[$\bullet$] $\displaystyle{\int} g < +\infty$.
+\end{itemize}
+
+Alors la fonction $f$ est intégrable et $\lim \displaystyle{\int} f_n = \displaystyle{\int} f$.
+\end{theo}
+
+
+\begin{proof}
+On va le prouver dans le cas réel dans un premier temps. On raisonne encore une fois sur la tribu complétée.
+
+On considère l'ensemble $\tilde{E} = \left\{x/ \,\forall n \,  \abs{f_n(x)} \leq g(x) \text{ et } f_n(x) \to f(x)\right\}$.
+
+Le complémentaire de cet ensemble est de mesure nulle car c'est une union dénombrable de négligeables.
+
+On raisonne donc sur $\tilde{E}$. 
+
+Considérons la suite des $f_n^{+}$. On a les hypothèses:
+\begin{itemize}
+\item[$\bullet$] $f_n^{+} \to f^{+}$
+\item[$\bullet$] pour tout $n$, $f_n^{+} \leq g$
+\end{itemize}
+
+On peut donc appliquer le théorème de convergence dominée, dans sa version positive, à la suite des $f_n^{+}$.
+
+Pour les mêmes raisons, on peut appliquer le théorème de convergence dominée, dans sa version positive, à la suite des $f_n^{-}$.
+
+Finalement, on a bien $\lim \displaystyle{\int} f_n = \displaystyle{\int} f$.
+
+On généralise au cas complexe en notant que 
+\begin{itemize}
+\item[$\bullet$]  $\mathcal{R}(f_n) \to \mathcal{R}(f)$ et, pour tout $n$, $\abs{\mathcal{R}(f_n)} \leq g$
+\item[$\bullet$]  $\mathcal{I}(f_n) \to \mathcal{I}(f)$ et, pour tout $n$, $\abs{\mathcal{I}(f_n)} \leq g$
+\end{itemize}
+\end{proof}
+
+%
+%\end{document}

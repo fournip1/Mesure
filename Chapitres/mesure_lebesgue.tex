@@ -1,0 +1,1055 @@
+
+
+\section{Théorème de Carathéodory}
+
+\subsection{Définitions et premiers lemmes}
+
+\begin{de}[Algèbre de Boole ou clan]
+Soit $E$ un ensemble et $\mathcal{C} \subset \mathcal{P}(E)$ un ensemble de parties de $E$.
+
+On dit que $\mathcal{C}$ est une \emph{algèbre de Boole} ou un \emph{clan} de $E$ lorsque $\mathcal{C}$:
+\begin{itemize}
+\item[$\bullet$] est stable par union finie;
+\item[$\bullet$] contient $E$;
+\item[$\bullet$] est stable par passage au complémentaire.
+\end{itemize}
+\end{de}
+
+\begin{de}[Mesure extérieure]
+Soit $E$ un ensemble et soit $\mu: \mathcal{P}(E) \to \R^{+}$ une application.
+
+On dit que $\mu$ est une mesure extérieure lorsque
+\begin{itemize}
+\item[$\bullet$] pour tout $A \subset B \subset E$, $\mu(A) \leq \mu(B)$;
+\item[$\bullet$] pour tout $(A_n)_{n \in \N} \in \mathcal{P}(E)^{\N}$, $\mu\left(\bigcup \limits_{n \in \N} A_n\right) \leq \displaystyle{\sum \limits_{n \in \N}} \mu(A_n)$.
+\end{itemize}
+
+\end{de}
+
+
+Avant d'aller plus loin, on va établir un lemme.
+
+\begin{lem}
+\label{lemme_caratheodory}
+Soit $E$ un ensemble sur lequel il existe une mesure extérieure $\mu$ et telle que $\mu(E)<+\infty$.
+%
+%On suppose que 
+%\begin{itemize}
+%\item[$\bullet$]  $\mu(E)<+\infty$;
+%\item[$\bullet$]  pour toute suite décroissante d'ensembles $X_n$ tels que $\lim \downarrow X_n = \emptyset$, on a $\lim \mu(X_n)=0$.
+%\end{itemize}
+
+
+Alors l'ensemble $\mathcal{T} = \left \{ A \subset E/ \, \forall X \subset E, \, \mu(A \cap X) + \mu(A^c \cap X) = \mu(X)\right \}$ est une tribu de $E$ et $\mu$ est une mesure sur cette tribu.
+\end{lem}
+
+\begin{proof}
+Il est clair que $\mathcal{T}$ est stable par complémentaire et contient $E$.
+
+On va maintenant prouver que $\mathcal{T}$ est stable par union finie d'éléments.
+
+Soient $A$ et $B$ deux éléments de $\mathcal{T}$.
+
+Pour tout $X \subset E$, on a $\mu\left((A \cup B) \cap X\right) + \mu\left((A^c \cap B^c) \cap X\right) \geq \mu(X)$ en raison de la propriété de $\sigma$-sous-additivité de la mesure extérieure.
+
+Mais d'autre part, on sait que $A \cup B = \left(A \cap B^c\right) \cup \left(A^c \cap B\right) \cup \left(A \cap B\right)$ donc on en déduit:
+
+$\mu\left((A \cup B) \cap X\right) + \mu\left((A^c \cap B^c) \cap X\right) \leq \mu(A \cap B^c \cap X) + \mu(B \cap A^c \cap X) +  \mu(B \cap A \cap X)+ \mu(A^c \cap B^c \cap X)$ toujours en raison de la $\sigma$-sous-additivité.
+
+En remarquant que $\mu(A^c \cap B^c \cap X) +  \mu(A \cap B^c \cap X) = \mu(B^c \cap X)$ et $\mu(B \cap A^c \cap X)+\mu(B \cap A \cap X) = \mu(B \cap X)$ on a ainsi:
+
+$\mu\left((A \cup B) \cap X\right) + \mu\left((A^c \cap B^c) \cap X\right) \leq \mu(B^c \cap X)
+\mu(B \cap X) = \mu(X)$.
+
+% drpierredurand@gmail.com
+% Grenoble,38
+
+Finalement, on a bien, $\mu(X) \leq \mu\left((A \cup B) \cap X\right) + \mu\left((A^c \cap B^c) \cap X\right) \leq \mu(X)$ et ainsi $A \cup B \in \mathcal{T}$.
+
+Ainsi, comme $\mathcal{T}$ est stable par union finie, et complémentaire, il est stable par différence.
+
+Reste maintenant à prouver qu'il est stable par union dénombrable.
+
+Sans nuire à la généralité, on peut considérer une union croissante d'éléments. 
+
+
+Soit $(A_n)$ une telle suite d'éléments de $\mathcal{T}$ et examinons, pour tout $X \subset E$, l'expression
+
+$\mu\left(\left(\bigcup \limits_{n \in \N} A_n\right) \cap X\right) + \mu\left(\left(\bigcap \limits_{n \in \N} A_n^c\right) \cap X\right)$. 
+Encore une fois, en raison de la sous $\sigma$-additivité, on a
+
+$\mu(X) \leq \mu\left(\left(\bigcup \limits_{n \in \N} A_n\right) \cap X\right) + \mu\left(\left(\bigcap \limits_{n \in \N} A_n^c\right) \cap X\right)$. 
+Il nous faut donc prouver également:
+
+$\mu\left(\left(\bigcup \limits_{n \in \N} A_n\right) \cap X\right) + \mu\left(\left(\bigcap \limits_{n \in \N} A_n^c\right) \cap X\right) \leq \mu(X)$. 
+
+Notons également, si $A \in \mathcal{T}$ et $B \subset E$ sont disjoints, on a:
+\[
+\mu(A \cup B) = \mu\left((A \cup B) \cap A\right)  + \mu\left((A \cup B) \cap A^c\right) = \mu(A)+\mu(B)
+\]
+
+Cette dernière remarque nous prouve que $\mu$ est additive pour tout couple de $\mathcal{T} \times \mathcal{P}(E)$.
+
+On va maintenant généraliser en montrant que $\mu$ vérifie la propriété de $\sigma$-additivité sur $\mathcal{T}$. Si $(B_n)$ est une suite d'éléments de $\mathcal{T}$ disjoints deux à deux, on a, pour tout $p$ l'encadrement:
+\[
+\displaystyle{\sum \limits_{n \leq p}} \mu(B_n)  = \mu \left ( \bigcup \limits_{n \leq p} B_n \right )\leq \mu\left(\bigcup \limits_{n \in \N} B_n\right) \leq 
+\displaystyle{\sum \limits_{n \in \N}} \mu(B_n)
+\]
+
+Cet encadrement, par passage à la limite sur $p$, nous prouve que $\displaystyle{\sum \limits_{n \in \N}} \mu(B_n) = \mu\left(\bigcup \limits_{n \in \N} B_n\right)$, c'est à dire que $\mu$ est bien $\sigma$-additive sur $\mathcal{T}$.
+
+La $\sigma$-additivité entraîne la propriété de convergence monotone sur les suites croissantes d'éléments de $\mathcal{T}$.
+
+Revenons maintenant à l'inégalité que l'on cherche à prouver. Nous savons, pour notre suite croissante $A_n$ que:
+
+$\lim \uparrow \mu\left( A_n \right) = \mu\left(\lim \uparrow A_n \right) < +\infty$ car $\mu(E)<+\infty$.
+
+Pour tout $\varepsilon > 0$, il existe  $p$ tel que $\mu\left(\bigcup \limits_{n >p} A_n\right) < \varepsilon$. On a donc, d'après ce qui précède:
+
+$
+\mu\left(\left(\bigcup \limits_{n \in \N} A_n\right) \cap X\right) + \mu\left(\left(\bigcap \limits_{n \in \N} A_n^c\right) \cap X\right) \leq \mu\left(A_p \cap X\right) + \mu\left(A_p^c \cap X\right) + \varepsilon = \mu(X) +\varepsilon 
+$
+
+
+
+Et comme cela est vrai pour tout $\varepsilon$, on en déduit que la seconde inégalité est vraie.
+
+Ainsi, $\mathcal{T}$ est stable par limite croissante, par union finie, par passage au complémentaire.
+
+C'est donc bien une tribu pour laquelle on a déjà prouvé la $\sigma$-additivité.
+\end{proof}
+
+L'hypothèse de continuité à droite est importante et elle peut se formuler de manière équivalente de différentes façons.
+
+\begin{prop}[Continuité à droite et mesure extérieure]
+\label{continuite_droite}
+Soit $\mathcal{C}$ un clan de $E$. 
+
+On suppose que $\mathcal{C}$ est muni d'une mesure $\mu$. On admet également que l'on a fabriqué une mesure extérieure $\mu^{*}$ à partir des éléments de $\mu$.
+
+Enfin, on suppose que $E$ est $\sigma$-fini pour la mesure $\mu$.
+
+Alors les trois propositions suivantes sont équivalentes:
+\begin{itemize}
+\item[$\bullet$] $\mu$ et $\mu^{*}$ coïncident sur tous les éléments de $\mathcal{C}$ de mesure finie;
+\item[$\bullet$] $\mu$ est continue à droite;
+\item[$\bullet$] pour tout élément $C$ de $\mathcal{C}$ de mesure finie et pour toute suite croissante $C_n$ de $\mathcal{C}$ telle que $\lim \uparrow C_n = C$, on a
+\[
+\lim \uparrow \mu(C_n) = \mu(C)
+\]
+\end{itemize}
+\end{prop}
+
+
+\begin{proof}
+On suppose que $\mu$ et $\mu^{*}$ coïncident sur tous les éléments de $\mathcal{C}$ de mesure finie et que $F_n$ est une suite décroissante d'éléments de $\mathcal{C}$ tels que $\mu(F_0) < +\infty$ et $\lim \downarrow F_n = \emptyset$.
+
+On réduit alors l'espace à $F_0$ et on se trouve alors dans les hypothèses du lemme \ref{lemme_caratheodory}. Ainsi, $\mu*$ vérifie la convergence monotone et en particulier $\lim \downarrow \mu^{*}(F_n) = 0$. Mais comme $\mu$ et $\mu^{*}$ coïncident, on peut conclure quant à la continuité à droite.
+
+Supposons maintenant la continuité à droite et considérons une suite $C_n$ qui vérifie les hypothèses du troisième point. Comme $\mathcal{C}$ est un clan et que $\mu$ est additive, on a
+
+$\mu(C) = \mu\left(C \cap C_n\right) + \mu\left(C \cap C_n^c\right)$.
+
+Or $\lim \downarrow C \cap C_n^c = \emptyset$ et $\mu(C \cap C_0) \leq \mu(C) < +\infty$. On utilise donc la continuité à droite pour conclure sur la limite de $\mu\left(C \cap C_n\right) = \mu(C_n)$.
+
+Supposons enfin le troisième point validé et montrons qu'alors les deux mesures coïncident sur tous les éléments de mesure finie de $\mathcal{C}$.
+
+Notons tout d'abord que tout élément $C$ de $\mathcal{C}$ se recouvre lui-même. On a donc, $\mu^{*}(C) \leq \mu(C)$.
+
+D'autre part, pour tout $\varepsilon>0$, il existe un recouvrement de $C$ par une famille $\left(D_i\right)_{i \in I}$ au plus dénombrable telle que 
+
+$\displaystyle{\sum \limits_{i \in I}} \mu(D_i) \leq \mu^{*}(C) + \varepsilon < +\infty$. 
+
+Pour simplifier ici, on suppose que la famille est dénombrable et que $I = \N$, le cas où la famille est finie étant plus simple encore.
+
+On pose alors, pour tout $n$, $C_n = C \cap \left( \bigcup \limits_{k \leq n} D_k \right)$ de telle sorte que $\lim \uparrow C_n = C$.
+
+Et comme $\mu$ est additive sur le clan, on en déduit, par croissance que, pour tout $n$,
+
+$\mu(C_n) \leq \displaystyle{\sum \limits_{i \in I}} \mu(D_i) \leq \mu^{*}(C) + \varepsilon < +\infty$. 
+
+Par passage à la limite, on a donc $\mu(C) \leq \mu^{*}(C) + \varepsilon$; ce qui permet de conclure.
+\end{proof}
+
+
+\subsection{Le théorème}
+
+\begin{theo}[Carathéodory]
+Soit $E$ un ensemble. 
+
+On suppose que
+\begin{itemize}
+\item[$\bullet$] il existe une algèbre de Boole $\mathcal{C}$ de $E$;
+\item[$\bullet$] il existe une mesure $\mu: \mathcal{C} \to \R^{+}$ additive;
+\item[$\bullet$] il existe une suite croissante $E_n$ d'éléments de $\mathcal{C}$ tels que 
+\begin{itemize}
+\item[$\bullet$] pour tout $n$, $\mu(E_n)< +\infty$;
+\item[$\bullet$] $\lim \uparrow E_n = E$; 
+\end{itemize}
+\item[$\bullet$] pour toute suite décroissante $F_n$ d'éléments de $\mathcal{C}$ tels que $\lim \downarrow F_n = \emptyset$ et $\mu(F_0) < +\infty$; on a $\lim \mu(F_n)=0$.
+\end{itemize}
+
+Alors il existe une tribu de $E$ sur laquelle $\mu$ peut être étendue. De plus, cette extension est unique.
+\end{theo}
+
+Pour prouver ce théorème, on va commencer par construire une mesure extérieure sur $E$.
+
+
+\begin{prop}[Mesure extérieure sur $E$]
+Soient $E$ un ensemble, $\mathcal{C}$ un clan sur $E$ et $\mu$ une mesure additive sur $\mathcal{C}$.
+
+Pour tout $X \subset E$, on pose 
+\[\mu^{*}(X) = \inf\left\{\displaystyle{\sum \limits_{k \in K}}\mu(C_k)/ \, \left(\bigcup \limits_{k \in K} C_k\right) \supset X \text{ et les $C_k \in \mathcal{C}$ sont au plus dénombrables}\right\}\]
+
+
+Alors $\mu^{*}$ est une mesure extérieure sur $E$.
+\end{prop}
+
+\begin{proof}
+On va commencer par prouver la croissance. Soient $X \subset Y  \subset E$.
+
+Tout recouvrement $\bigcup \limits_{k \in K} C_k$ de $Y$ recouvre aussi $X$ et on vérifie ainsi $\mu^{*}(X) \leq \displaystyle{\sum \limits_{k \in K}}\mu(C_k)$.
+
+Par passage à la borne inférieure sur les recouvrements de $Y$, on obtient bien  $\mu^{*}(X) \leq \mu^{*}(Y)$.
+
+Montrons maintenant la $\sigma$-sous-additivité.
+
+Soient $\left(A_i\right)_{i \in \N}$ un ensemble dénombrable de parties de $E$ disjointes deux à deux. 
+
+S'il existe $i \in \N$ tel que $\mu^{*}(A_i) = +\infty$, la $\sigma$-sous-additivité est évidente. 
+
+On suppose donc, pour tout $i$, $\mu^{*}(A_i)<+\infty$. Soit $\varepsilon > 0$ quelconque. 
+
+Pour tout $i \in \N$, il existe un ensemble dénombrable d'éléments $\left(C_{k}\right)_{k \in K_i}$ de $\mathcal{C}$ qui recouvre $A_i$ et tel que $\displaystyle{\sum \limits_{k \in K_i}}\mu(C_k) \leq \mu^{*}(A_i) + \dfrac{\varepsilon}{2^{i+1}}$.
+
+Mais alors, l'ensemble dénombrable $\left(C_k\right)_{k \in \bigcup \limits_{i} K_i}$ d'éléments de $\mathcal{C}$ recouvre $\bigcup \limits_{i \in \N} A_i$.
+
+On en déduit
+
+$
+\mu^{*}\left(\bigcup \limits_{i \in \N} A_i\right) \leq \displaystyle{\sum \limits_{i \in \N}}\displaystyle{\sum \limits_{k \in K_i}}\mu(C_k) \leq \displaystyle{\sum \limits_{i \in \N}} \left(\mu^{*}(A_i) + \dfrac{\varepsilon}{2^{i+1}}\right) = \displaystyle{\sum \limits_{i \in \N}} \mu^{*}(A_i) + \varepsilon
+$
+
+Et comme cela est vrai pour tout $\varepsilon > 0$, la $\sigma$-sous-additivité est bien prouvée.
+\end{proof}
+
+On peut maintenant s'attaquer à la démonstration du théorème de Carathéodory.
+
+\begin{proof}
+L'unicité de la mesure découlera directement du théorème des classes monotones (l'étude des $\lambda$-systèmes engendrés par des $\pi$-systèmes réalisée dans un chapitre précédent). 
+
+En effet, un clan est un $\pi$-système et on a l'hypothèse de $\sigma$-finitude de $E$ ($E$ est union croissante d'éléments du clan de mesures finies).
+
+Il faut donc s'attaquer à l'existence de la mesure.
+Pour tout entier $p$, on pose $\mathcal{C}_p = \left \{ C \cap E_p, \, C \in \mathcal{C}\right \}$ et  
+
+$\mathcal{T}_p = \left \{ A \subset E_p/ \, \forall X \subset E_p, \, \mu^{*}(A \cap X)+\mu^{*}\left(\left(E_p-A\right) \cap X\right) = \mu^{*}(X)\right \}$.
+
+D'après le lemme, $\mathcal{T}_p$ est une tribu sur laquelle $\mu^{*}$ est une mesure. 
+On va maintenant montrer que $\mathcal{T}_p$ contient en fait $\mathcal{C}_p$.
+
+Considérons pour cela $X \subset E_p$ et $C \in \mathcal{C}_p$. On cherche à prouver que 
+
+$\mu^{*}(C \cap X)+\mu^{*}(C^c \cap X) \leq \mu^{*}(X)$. 
+
+Par hypothèse $\mu^{*}(X)<+\infty$. 
+Pour tout $\varepsilon > 0$, il existe un recouvrement $\bigcup \limits_{n \in N} D_n$ de $X$ constitué d'éléments de $\mathcal{C}_p$ tel que:
+
+$\displaystyle{\sum \limits_{n \in N}} \mu(D_n) \leq \mu^{*}(X)+\varepsilon$.
+
+Or, $\bigcup \limits_{n \in N} D_n \cap C$ est un recouvrement de $X \cap C$ et $\bigcup \limits_{n \in N} D_n \cap C^c$ recouvre $X \cap C^c$.
+
+D'autre part, pour tout $n$, on a $\mu(D_n) = \mu(D_n \cap C) + \mu(D_n \cap C^c)$ car $\mu$ est additive sur le clan $\mathcal{C}_p$.
+
+Finalement, 
+
+$
+\mu^{*}(X)+\varepsilon \geq \displaystyle{\sum \limits_{n \in N}} \mu(D_n \cap C) + \displaystyle{\sum \limits_{n \in N}} \mu(D_n \cap C^c) \geq \mu^{*}(X \cap C) + \mu^{*}(X \cap C^c)
+$
+
+On conclut que $C \in \mathcal{T}_p$; ce qui signifie que $\mathcal{T}_p$ contient la tribu engendrée par $\mathcal{C}_p$.
+
+Reste maintenant à passer à la limite sur $p$...
+On considère donc $\mathcal{T}$ la tribu engendrée par $\mathcal{C}$.
+
+Pour tout $p$, on considère $\mathcal{T}_p = \left \{ T \cap E_p, \, T \in \mathcal{T}\right \}$.Cette tribu est en fait engendrée par les $\mathcal{C}_p$ (voir le lemme plus bas).
+
+On en déduit que, pour tout $p$ et pour toute famille dénombrable $\left(T_i\right)_{i \in \N}$ de $\mathcal{T}$,
+
+$
+\mu^{*}\left(\bigcup \limits_{i \in N} \left(T_i \cap E_p\right)\right) = \displaystyle{\sum \limits_{i \in \N}} \mu^{*}(T_i \cap E_p)
+$
+
+En utilisant le dernier lemme, on peut passer à la limite sur $p$ et on obtient
+
+$
+\mu^{*}\left(\bigcup \limits_{i \in N} T_i\right) = \displaystyle{\sum \limits_{i \in \N}} \mu^{*}(T_i)
+$
+\end{proof}
+
+Pour conclure dans la démonstration précédente on a utilisé un premier résultat.
+
+\begin{lem}[Tribu trace et tribu engendrée]
+Soit $\mathcal{C}$ un $\pi$-système qui engendre une tribu $\mathcal{T}$ d'un ensemble $E$.
+
+Soit $F \in \mathcal{C}$. On pose $\mathcal{D} = \left \{ C \cap F, \, C \in \mathcal{C}\right \}$.
+
+Alors la tribu trace de $\mathcal{T}$ sur $F$ est engendrée par $\mathcal{D}$.
+\end{lem}
+
+
+\begin{proof}
+On reprend ici des arguments portant sur les $\lambda$-systèmes engendrés par des $\pi$-systèmes.
+
+On pose $\mathcal{G}$ la tribu de $F$ engendrée par $\mathcal{D}$ et $\mathcal{H}$ la tribu trace de $\mathcal{T}$ sur $F$.
+
+Il est clair que $\mathcal{H} \supset \mathcal{D}$ et, par suite,  $\mathcal{H} \supset \mathcal{G}$.
+
+Réciproquement, posons $\tilde{\mathcal{T}} = \left \{ T \in \mathcal{T}/ \, T \cap F \in \mathcal{G}\right \}$.
+
+Il est clair que $\tilde{\mathcal{T}}$ est une sous-tribu de $\mathcal{T}$ qui contient $\mathcal{C}$. On a donc en fait $\tilde{\mathcal{T}} = \mathcal{T}$.
+
+Il en découle $\mathcal{H} \subset \mathcal{G}$.
+\end{proof}
+
+Reste maintenant à prouver le dernier lemme portant sur la convergence monotone.
+
+\begin{lem}[Famille $\sigma$-finie et convergence monotone]
+Soit $E$ un ensemble. Soit $\mathcal{C}$ un clan de $E$ muni d'une mesure additive $\mu$.
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] on a construit une mesure extérieure $\mu^{*}$ à partir de $\mu$;
+\item[$\bullet$] il existe une suite croissante $(E_p)_{p \in \N}$ d'éléments de $\mathcal{C}$ tous de mesure finies et telle que $\lim \uparrow E_p = E$;
+\item[$\bullet$] $\mu$ est continue à droite, c'est à dire que pour toute suite décroissante d'éléments $F_p$ de $\mathcal{C}$ telle que $\lim \downarrow F_p =  \emptyset$ et $\mu(F_0) < +\infty$, on a $\lim \downarrow \mu(F_p)=0$.
+\end{itemize}
+
+Alors, pour tout $X \subset E$ tel que $\mu^{*}(X)<+\infty$, on a $\lim \uparrow \mu^{*}(X \cap E_p) = \mu^{*}(X)$.
+\end{lem}
+
+La preuve de ce lemme constitue la fin de la démonstration du théorème de Carathéodory.
+
+\begin{proof}
+Pour tout $p$, on a $\mu^{*}(A_p \cap X) \leq \mu^{*}(X)$ donc $\lim \uparrow \mu^{*}(X \cap E_p) \leq \mu^{*}(X)$
+
+
+Pour prouver l'inégalité réciproque, remarquons que, pour tout $p$,
+
+$
+\mu^{*}(X) - \mu^{*}(X \cap E_p^c) \leq \mu^{*}(E_p \cap X)
+$
+
+Il suffit donc de prouver que $\lim \downarrow \mu^{*}(X \cap E_p^c) = 0$ pour conclure.
+
+Mais nous savons qu'il existe une famille dénombrable $\left(C_k\right)_{k \in \N}$ d'éléments de $\mathcal{C}$ qui recouvrent $X$ et telle que 
+
+$\mu^{*}(X) \leq \displaystyle{\sum \limits_{k \in \N}} \mu(C_k) < +\infty$.
+
+On en déduit, pour tout $p$ que,
+
+$\mu^{*}(X \cap E_p^c) \leq \displaystyle{\sum \limits_{k \in \N}} \mu(C_k \cap E_p^c) < +\infty
+$
+
+C'est là que l'on va utiliser l'argument de continuité à droite. Pour tout $k$, $\lim \downarrow \mu(C_k \cap E_p^c) = \emptyset$. On peut donc utiliser le théorème de convergence monotone, dans sa version décroissante pour conclure...
+\end{proof}
+
+%
+%\section{Application à la mesure de Lebesgue}
+%
+%\subsection{Construction de la mesure de Lebesgue}
+%
+%\begin{de}[Mesure de Lebesgue d'un intervalle]
+%Pour tous nombres $a \leq b$, on définit
+%\[\lambda\left(]a;~b[\right) = \lambda\left(]a;~b]\right)=\lambda\left([a;~b[\right)=\lambda\left([a;~b]\right)=b-a\]
+%
+%Et on pose, par convention, $\lambda\left(]a;~b[\right) = + \infty$ si $a=-\infty$ ou $b=+\infty$.
+%\end{de}
+%
+%\begin{de}[Mesure d'une réunion finie d'intervalles disjoints]
+%Pour tout ensemble fini $\left(I_k\right)_{k \in K}$ d'intervalles disjoints deux à deux, on pose 
+%\[\lambda\left(\bigcup \limits_{k \in K} I_k\right) = \displaystyle{\sum \limits_{k \in K}} \lambda(I_k)\]
+%\end{de}
+%
+%
+%\begin{prop}[Un clan sur les intervalles]
+%\label{clan_reels}
+%L'ensemble des unions finies d'intervalles quelconques forment un clan.
+%\end{prop}
+%
+%\begin{proof}
+%La stabilité par union finie et par passage au complémentaire est évidente.
+%\end{proof}
+%
+%\begin{prop}[Propriétés]
+%Soit $a$ un nombre réel.
+%
+%Pour tout intervalle $I$, on définit $I+a = \left \{x+a/ \, x \in I \right \}$.
+%
+%On a alors $\lambda\left(I+a\right) = \lambda(I)$.
+%
+%Dit autrement $\lambda$ est stable par translation.
+%
+%Soit d'autre part $\bigcup \limits_{k \in K} I_k$ et $\bigcup \limits_{l \in L} I_l$ deux réunions finies d'intervalles disjoints deux à deux.
+%
+%On suppose que $\left(\bigcup \limits_{k \in K} I_k\right)  \cap \left(\bigcup \limits_{l \in L} I_l\right) = \emptyset$
+%
+%Alors 
+%\[
+%\lambda\left(\left(\bigcup \limits_{k \in K} I_k\right) \cup\left(\bigcup \limits_{l \in L} I_l\right)\right) = \lambda\left(\bigcup \limits_{k \in K} I_k\right) + \lambda\left(\bigcup \limits_{l \in L} I_l\right) 
+%\]
+%
+%Dit autrement $\lambda$ est additive sur le clan.
+%
+%Enfin, $\R = \lim \uparrow [-n;~n]$. Ainsi, $\R$ est $\sigma$-fini pour cette mesure.
+%\end{prop}
+%
+%\begin{proof}
+%Très simple.
+%\end{proof}
+%
+%\subsection{Vérification des hypothèses du théorème}
+%
+%Le théorème de Carathéodory nécessite de choisir un clan sur $\R$ qui vérifie les bonnes hypothèses et de construire la mesure extérieure à partir de ce clan.
+%
+%Ici, on va utiliser un recouvrement par des intervalles ouverts, sachant que \emph{ces derniers ne forment pas un clan}. On vérifiera ensuite que cette mesure extérieure coïncide avec la mesure extérieure définie sur le clan des unions finies d'intervalles quelconques.
+%
+%
+%\begin{de}[Mesure extérieure de Lebesgue]
+%Soit $E \subset \R$ un sous-ensemble de réels.
+%
+%On pose 
+%\[\lambda_o^{*}(E) = \inf\left\{\displaystyle{\sum \limits_{k \in K}}\lambda(I_k)/ \, \left(\bigcup \limits_{k \in K} I_k\right) \supset E \text{ et les $I_k$ sont un ensemble dénombrable d'intervalles ouverts.}\right\}\]
+%
+%Alors $\lambda_o^{*}$ est une mesure extérieure de $\R$. On vérifie ainsi que:
+%\begin{itemize}
+%\item[$\bullet$] Si $E \subset F$ alors $\lambda_o^{*}(E) \leq \lambda_o^{*}(F)$.
+%\item[$\bullet$] Pour tous les ensembles $\left(E_i\right)_{i \in I}$ au plus dénombrables de parties de $\R$,
+%\[
+%\lambda_o^{*}\left(\bigcup \limits_{i \in I} E_i\right) \leq \displaystyle{\sum \limits_{i \in I}} \lambda_o^{*}(E_i)
+%\]
+%\end{itemize}
+%
+%
+%De plus, pour tout nombre $a$ fixé $\lambda_o^{*}(E+a)=\lambda_o^{*}(E)$; c'est à dire que $\lambda_o^{*}$ est invariante par translation.
+%\end{de}
+%
+%\begin{proof}
+%L'invariance par translation découle de l'équivalence: les $I_i+a$ recouvrent $E+a$ si et seulement si les $I_i$ recouvrent $E$.
+%
+%Les deux inégalités se prouvent de la même manière que dans la construction de la mesure extérieure établie dans le théorème de Carathéodory. En particulier, la croissance de la mesure extérieure est assez simple.
+%
+%Traitons de nouveau la $\sigma$-sous-additivité.
+%
+%Soit ainsi une famille au plus dénombrable $\left(X_i\right)_{i \in I}$ de parties de $\R$. S'il existe $i \in I$ tel que $\lambda_o^{*}(X_i) = +\infty$, l'inégalité de la $\sigma$-sous-additivité est vérifiée. On se place dans le cas contraire et on suppose $I = \N$ pour simplifier, le cas où $I$ est fini étant encore plus simple.
+%
+%Pour tout $\varepsilon > 0$, et pour tout $i \in \N$, il existe un recouvrement $\left(I_{k}\right)_{k \in K_i}$ au plus dénombrable d'intervalles ouverts tels que $ \lambda_o^{*}(X_i) + \dfrac{\varepsilon}{2^{i+1}} \geq \displaystyle{\sum \limits_{k \in K_i}} \lambda(I_{k})$.
+%
+%Or, l'ensemble $\left(I_{k}\right)_{k \in \bigcup \limits_{i} K_i}$ recouvre $\bigcup \limits_{i \in \N} X_i$.
+%
+%Ainsi, on en déduit, $\lambda_o^{*}\left(\bigcup \limits_{i \in \N} X_i\right) \leq \displaystyle{\sum \limits_{i \in \N }} \displaystyle{\sum \limits_{k \in K_i}} \lambda(I_{k}) \leq \displaystyle{\sum \limits_{i \in \N}} \lambda_o^{*}(X_i) + \varepsilon$.
+%\end{proof}
+%
+%Montrons maintenant que cette mesure extérieure coïncide avec la mesure de Lebesgue définie sur les éléments du clan de la proposition \ref{clan_reels}.
+%
+%\begin{prop}[Mesures extérieures d'intervalles, de singletons]
+%Soient $a<b$ deux réels. Alors:
+%\[
+%\begin{array}{lcl}
+%\lambda_o^{*}\left(\{a\}\right) & = & 0 \\
+%\lambda_o^{*}\left([a;~b]\right) & = & b-a \\
+%\lambda_o^{*}\left(]a;~b[\right) & = & b-a
+%\end{array}
+%\]
+%
+%Dit autrement, mesures extérieure et simple coïncident sur les intervalles ouverts ou fermés.
+%
+%De plus $\lambda_o^{*}$ et $\lambda$ coïncident également sur toutes les unions finies d'intervalles quelconque, c'est à dire sur tous les éléments du clan choisi dans la proposition \ref{clan_reels}.
+%\end{prop}
+%
+%
+%\begin{proof}
+%Pour tout entier naturel $n$, $\left]a-\dfrac{1}{n};~a+\dfrac{1}{n}\right[$ recouvre $\{a\}$. 
+%
+%Ainsi, $\lambda_o^{*}\left(\{a\}\right) \leq \dfrac{2}{n} $. On en déduit, par passage à la limite sur $n$, $\lambda_o^{*}\left(\{a\}\right)=0$.
+%
+%Considérons maintenant un intervalle fermé $[a;~b]$. Il est clair que pour tout entier naturel $n$, $]a-\dfrac{1}{n};~b+\dfrac{1}{n}[$ recouvre $[a;~b]$. Cela conduit, par passage à l'inégalité, $\lambda_o^{*}\left([a;~b]\right) \leq b-a$.
+%
+%Pour montrer l'autre inégalité, on considère $\varepsilon>0$ et un recouvrement dénombrable de $[a;~b]$ formé d'intervalles ouverts $\left(I_i\right)_{i \in I}$ et tel que $\displaystyle{\sum \limits_{i \in I}} \lambda(I_i) \leq \lambda_o^{*}\left([a;~b]\right)+\varepsilon$.
+%
+%Comme $[a;~b]$ est un compact, on peut extraire un sous-recouvrement fini $\left(I_i\right)_{i \in J}$.
+%
+%Or, il est très simple de montrer que $\displaystyle{\sum \limits_{i \in J}} \lambda(I_i) \geq \tilde{b}-\tilde{a}$ où  $\tilde{b}$ est le plus grand élément des bornes supérieures de chacun des intervalles et $\tilde{a}$ est le plus petit élément des bornes inférieures de chacun des intervalles. En notant qu'on a nécessairement $\tilde{a}<a<b<\tilde{b}$, on obtient que $\lambda_o^{*}\left([a;~b]\right)+\varepsilon \geq \displaystyle{\sum \limits_{i \in J}} \lambda(I_i) > b-a$.
+%
+%Ce qui prouve l'autre inégalité et ainsi $\lambda_o^{*}\left([a;~b]\right) = b-a$.
+%
+%Pour montrer la dernière inégalité, on peut noter que $]a;~b[$ recouvre $]a;~b[$ et ainsi $\lambda_o^{*}\left(]a;~b[\right) \leq b-a$. Mais, par la $\sigma$-sous-additivité, on a aussi:
+%
+%$\lambda_o^{*}\left(]a;~b[\right)+\lambda_o^{*}\left(\{a\}\right) + \lambda_o^{*}\left(\{b\}\right) \geq \lambda_o^{*}\left(]a;~b[\right)$, ce qui donne, d'après les deux points précédents $\lambda_o^{*}\left(]a;~b[\right) \geq b-a$. On a bien $\lambda_o^{*}\left(]a;~b[\right) = b-a$.
+%
+%Considérons maintenant une famille finie d'intervalles $\left(I_k\right)_{k \leq n}$.
+%
+%Pour tout $k$, on pose  telle que, pour tout $k \leq n-1$, $\sup I_k < \inf I_{k+1}$.
+%\end{proof}
+%
+%
+%À ce stade donc, nous sommes donc munis:
+%\begin{itemize}
+%\item[$\bullet$] d'un clan et d'une mesure additive sur ce clan;
+%\item[$\bullet$] d'une mesure extérieure qui coïncide avec la mesure sur ce même clan.
+%\end{itemize}
+%
+%
+%Afin de terminer la validation du théorème de Carathéodory, il nous faut donc valider la continuité à droite. Pour cela, nous allons prouver que la mesure extérieure définie à partir d'intervalles ouverts coïncide avec la mesure extérieure définie à partir d'intervalles quelconques. Nous conclurons ensuite à l'aide de la proposition \ref{continuite_droite}.
+%
+%\begin{prop}[Mesure extérieure définie à partir des éléments du clan]
+%La mesure extérieure définie à partir d'intervalles quelconques coïncide avec la mesure extérieure définie à partir d'intervalles ouverts.
+%\end{prop}
+%
+%\begin{proof}
+%Notons $\lambda_o^{*}$ la mesure extérieure définie à partir d'intervalles ouverts et $\lambda^{*}$ la mesure extérieure définie à partir d'intervalles quelconques.
+%
+%Il est clair que, pour tout $X \subset \R$, $\lambda^{*}(X) \leq \lambda_o^{*}(X)$ puisque les intervalles ouverts sont un sous-ensemble des intervalles quelconques.
+%
+%Dans le cas où $\lambda^{*}(X) = +\infty$ l'égalité est évidente. Nous nous plaçons donc dans le cas où $\lambda^{*}(X) < +\infty$. Soit $\varepsilon > 0$
+%
+%Considérons un ensemble dénombrable d'intervalles quelconques $\left(I_i\right)_{i \in I}$ qui recouvre $X$ et tel que $\displaystyle{\sum \limits_{i \in \N}} \lambda(I_i) \leq \lambda^{*}(X) + \varepsilon$.
+%
+%Mais, d'après ce qui précède pour tout $i \in \N$, $\lambda(I_i) = \lambda_o^{*}(I_i)$. Il existe donc un ensemble au plus dénombrable d'intervalles ouverts $\left(L_{k}\right)_{k \in K_i}$ qui recouvre $I_i$ et tel que 
+%
+%$\displaystyle{\sum \limits_{k \in K_i}} \lambda(L_k) \leq \lambda(I_i) + \dfrac{\varepsilon}{2^{i+1}}$.
+%
+%En sommant sur $i$, on obtient ainsi:
+%
+%$\displaystyle{\sum \limits_{i \in \N}} \displaystyle{\sum \limits_{k \in K_i}} \lambda(L_k) \leq \displaystyle{\sum \limits_{i \in \N}} \lambda(I_i) + \varepsilon \leq \lambda^{*}(X) + 2\varepsilon$.
+%
+%Or les $\left(L_k\right)_{k \in \bigcup \limits_{i \in \N} K_i}$ est un recouvrement de $X$ par des ouverts. On obtient donc:
+%
+%$\lambda_o^{*}(X) \leq \displaystyle{\sum \limits_{i \in \N}} \displaystyle{\sum \limits_{k \in K_i}} \lambda(L_k) \leq \lambda^{*}(X) + 2\varepsilon$, ce qui permet de conclure.
+%\end{proof}
+%
+%
+%
+
+\section{Applications}
+
+\subsection{Théorème de Stieljes}
+
+Les fonctions continues à droites et croissantes occupent un rôle central dans cette mesure.
+
+\begin{prop}[Propriétés des fonction continue à droite et croissante]
+Soit $F$ une fonction continue à droite et croissante.
+
+Alors, l'ensemble des sauts de $F$ est au plus dénombrable.
+\end{prop}
+
+\begin{proof}
+Considérons un intervalle $]n-1;~n]$. Notons $S_n$ l'ensemble des sauts de continuité de $F$ sur cet intervalle.
+
+Pour chaque réel $a$ où $F$ présente un saut de continuité, on pose $\phi(a) = F(a)-\lim \limits_{t \to a^{-}} F(t) > 0$.
+
+Et, pour tout entier $p>0$, on pose $S_{n,p} = \left \{a \in S_n/ , \phi(a) \geq \dfrac{1}{p} \right \}$.
+
+$S_{n,p}$ est conçu de telle sorte que:
+\[
+F(n)-F(n-1) \geq \displaystyle{\sum \limits_{a \in S_{n,p}}} \phi(a) \geq \dfrac{1}{p} \displaystyle{\sum \limits_{a \in S_{n,p}}} 1 = \dfrac{\#{S_{n,p}}}{n}
+\]
+
+On en déduit que le cardinal de $S_{n,p}$ est fini. Or $S_n = \lim \limits_{p \to +\infty} S_{n,p}$. Ainsi, $S_n$ est dénombrable.
+
+Or, l'ensemble des sauts s'obtient par union dénombrable des $S_n$. Ainsi, l'ensemble des sauts est dénombrable.
+\end{proof}
+
+\begin{prop}[Choix d'un clan]
+\label{clan_stieljes}
+L'ensemble des unions finies d'intervalles de la forme $]a;~b]$, $]-\infty;~a]$ ou $]b;~+\infty[$ avec $a < b$ forme un clan sur $\R$.
+\end{prop}
+
+\begin{proof}
+Assez simple.
+\end{proof}
+
+\begin{theo}[Stieljes]
+Soit une fonction $F$ définie sur $\R$, croissante et continue à droite. Soient $a <  b$ deux nombres.
+
+Soient $a \leq b$ deux nombres.
+
+En posant 
+\[
+\begin{array}{lcl}
+s\left(]a;~b]\right)  & = & F(b)-F(a) \\
+s\left(]a;~+\infty[\right)  & = & \lim \limits_{t \to +\infty} F(t)-F(a)  \\
+s\left(]-\infty;~a]\right)  & = & F(a)- \lim \limits_{t \to -\infty} F(t)
+\end{array}
+\]
+
+En étendant naturellement $s$ sur les unions finies d'éléments deux à deux disjoints, on définit une mesure sur les éléments du clan de la proposition \ref{clan_stieljes}.
+
+De plus, cette mesure peut être prolongée de manière unique à la tribu Borélienne.
+\end{theo}
+
+On construit une première mesure extérieure en utilisant les intervalles ouverts \emph{qui ne correspondent pas au clan}. On prouvera ensuite que cette mesure extérieure est égale à la mesure extérieure définie à partir d'éléments du clan.
+
+\begin{de}[Mesure extérieure de Stieljes à partir d'ouverts]
+Soient $a \leq b$ deux nombres.
+
+On pose:
+\[
+\begin{array}{lcl}
+s_o\left(]a;~b[\right) & = & F(b)-F(a) \\
+s_o(]a;~+\infty[ & = &  \lim \limits_{t \to +\infty} F(t) - F(a)\\
+s_o(]-\infty;~a[ & = & F(a)-\lim \limits_{t \to -\infty} F(t)
+\end{array}
+\]
+
+
+Puis, on fabrique une mesure extérieure à partir de $s_o$ notée $s_o^{*}$ en utilisant des recouvrements dénombrables par des intervalles ouverts. On pose ainsi, pour tout $X \subset \R$:
+\[
+s_o^{*}(X) = \inf\left(\left\{ \sum \limits_{k \in K} s_o(I_k)/ \, (I_k)_{k \in K} \text{ est un recouvrement dénombrable de $X$ par des intervalles ouverts.}\right\}\right)
+\]
+\end{de}
+
+\begin{proof}
+Il faut prouver que $s_o^{*}$ est bien une mesure extérieure.
+
+Soient $X$ et $Y$ deux sous-ensembles de $R$ tels que $X \subset Y$.
+
+Tout recouvrement de $Y$ recouvre aussi $X$. On obtient ainsi la croissance.
+
+Traitons maintenant la $\sigma$-sous-additivité.
+
+Considérons maintenant une famille $\left(X_i\right)_{i \in \N}$ d'éléments  de $\mathcal{P}(\R)$ disjoints deux à deux.
+
+S'il existe  $i \in \N$ tel que $s_o^{*}(X_i) = +\infty$, la propriété est évidente. On se place donc dans le cas contraire.
+
+Pour tout $\varepsilon > 0$ et pour tout $i \in N$, il existe une recouvrement dénombrable par des intervalles ouverts $\left(I_k\right)_{k \in K_i}$ tel que:
+
+$
+s_o^{*}(X_i) + \dfrac{\varepsilon}{2^{i+1}} \geq \displaystyle{\sum \limits_{k \in K_i}} s_o(I_k) 
+$
+
+Or, $\left(I_k\right)_{k \in \bigcup \limits_{i \in \N} K_i}$ recouvre $\bigcup \limits_{i \in \N} X_i$ et est dénombrable.
+
+On obtient donc:
+\[
+s_o^{*}\left(\bigcup \limits_{i \in \N} X_i\right) \leq \displaystyle{\sum \limits_{k \in \bigcup \limits_{i \in \N} K_i}} s_o(I_k) = \displaystyle{\sum \limits_{i \in \N}} \displaystyle{\sum \limits_{k \in K_i}} s_o(I_k) \leq \displaystyle{\sum \limits_{i \in \N}} \left(s_o^{*}(X_i) + \dfrac{\varepsilon}{2^{i+1}}\right)
+\]
+
+Cette dernière inégalité conduit à:
+\[
+s_o^{*}\left(\bigcup \limits_{i \in \N} X_i\right) \leq  \varepsilon + \displaystyle{\sum \limits_{i \in \N}} s_o^{*}(X_i)
+\]
+
+Ce qui prouve la $\sigma$-sous-additivité.
+\end{proof}
+
+
+\begin{prop}[Propriétés de la mesure extérieure de Stieljes à partir d'ouverts]
+\label{mesure_exterieure_stieljes}
+Soient $a \leq b$ deux nombres. $s_o^{*}$ désigne la mesure extérieure de Stieljes construite à partir d'une fonction $F$ vérifiant les hypothèses adaptées.
+
+Alors:
+\begin{itemize}
+\item[$\bullet$] $s_o^{*}\left(\{a\}\right) = F(a)-\lim \limits_{t \underset{<}{\to} a} F(t)$;
+\item[$\bullet$] $s_o^{*}\left([a;~b]\right) = F(b)-\lim \limits_{t \underset{<}{\to} a} F(t)$;
+\item[$\bullet$] $s_o^{*}\left(]a;~b]\right) = s\left(]a;~b]\right)$;
+\item[$\bullet$] $s_o^{*}\left(]a;~+\infty[\right) = s\left(]a;~+\infty[\right)$;
+\item[$\bullet$] $s_o^{*}\left(]a-\infty;~a]\right) = s\left(]-\infty;~a]\right)$;
+\item[$\bullet$] $s_o^{*}$ et $s$ coïncident sur tous les éléments de clan de la proposition \ref{clan_stieljes}.
+\end{itemize}
+
+\end{prop}
+
+\begin{proof}
+Pour tout entier naturel $n$, $\left]a-\dfrac{1}{n};~a+\dfrac{1}{n}\right[$ recouvre $\{a\}$ donc, par passage à la limite sur $n$, $s_o^{*}\left(\{a\}\right) \leq F(a)-F(a^{-})$ car $F$ est continue à droite.
+
+Soit $\varepsilon>0$ et un recouvrement de $\{a\}$ par des éléments du clan dont la somme des mesures est inférieure à $s_o^{*}\left(\{a\}\right)+ \varepsilon$. 
+
+Bien sûr, il existe un intervalle unique $]c;~d[$ qui recouvre $a$ et dont la mesure demeure inférieure à $s_o^{*}\left(\{a\}\right)+ \varepsilon$. Dans ce cas, on a nécessaire $d > a > c$ et ainsi 
+
+$s_o^{*}\left(\{a\}\right)+ \varepsilon \geq s_o\left(]c;~d[\right) = F(d)-F(c) \geq F(a)-F(a^{-})$ en raison de la croissance de $F$. Cela achève de prouver le premier point.
+
+Attaquons maintenant le second point. Pour tout entier naturel $n$, $\left]a-\dfrac{1}{n};~b+\dfrac{1}{n}\right[$ recouvre $[a;~b]$. Ainsi, par passage à la limite, en utilisant la continuité à droite de $F$:
+
+$s_o^{*}\left([a;~b]\right) \leq F(b)-F(a^{-})$.
+
+Réciproquement, pour tout $\varepsilon > 0$, il existe un recouvrement par un ensemble au plus dénombrable d'intervalles ouverts $\left(I_i\right)_{i \in I}$ tel que 
+
+$\displaystyle{\sum \limits_{i \in I}} s\left(I_i\right) \leq s_o^{*}\left([a;~b]\right)+ \varepsilon$.
+
+Et comme $[a;~b]$ est compact, on en déduit qu'on peut extraire un sous-recouvrement fini $\left(I_i\right)_{i \in J}$. De plus, on peut supposer sans risque que ce recouvrement est connexe.
+
+Et on a ainsi:
+
+$
+\displaystyle{\sum \limits_{i \in J}} s\left(I_i\right) \leq \displaystyle{\sum \limits_{i \in I}} s\left(I_i\right) \leq s_o^{*}\left([a;~b]\right)+ \varepsilon
+$
+
+Or, on peut montrer, en utilisant la croissance de $F$ et la connexité du recouvrement, que $\displaystyle{\sum \limits_{i \in J}} s\left(I_i\right) \geq F(\tilde{b}) - F(\tilde{a})$ avec $\tilde{b} = \max \limits_{i \in J} b_i$ et $\tilde{a} = \min \limits_{i \in J} a_i$. En particulier $\tilde{b}>b$ et $\tilde{a}<a$
+
+Et comme $F(\tilde{b}) - F(\tilde{a}) \geq F(b)-F(a^{-})$, on peut conclure concernant le second point.
+
+Le troisième point se prouve en décomposant $[a;~b]$ en $]a;~b]$ et $\{a\}$. D'une part, il est clair que, pour tout entier naturel $n$,
+
+$s_o^{*}(]a;~b]) \leq s_o\left(\left]a;~b+\dfrac{1}{n}\right[\right)$ car $\left]a;~b+\dfrac{1}{n}\right[$ recouvre $]a;~b]$. Par passage à la limite sur $n$, on obtient donc:
+
+$
+s_o^{*}(]a;~b]) \leq F(b) - F(a)
+$
+
+D'autre part, en raison de la $\sigma$-sous-additivité de la mesure extérieure:
+
+$
+s_o^{*}\left([a;~b]\right) \leq s_o^{*}\left(]a;~b]\right) + s_o^{*}\left(\{a\}\right)
+$
+
+Ainsi, $s^{*}\left(]a;~b]\right) \geq s^{*}\left([a;~b]\right) - s^{*}\left(\{a\}\right) = F(b)-F(a)$.
+
+On va maintenant s'attaquer au quatrième point. En remarquant que $]a;~+\infty[$ se couvre lui-même, il vient
+
+$
+s_o^{*}\left(]a;~+\infty[\right) \leq s\left(]a;~+\infty[\right)
+$
+
+Or, d'après le troisième point, pour tout entier naturel $n \geq a$, $s_o^{*}\left(]a;~n]\right) = s\left(]a;~n]\right)\leq s_o^{*}\left(]a;~+\infty[\right)$.
+
+Par passage à la limite sur $n$, on obtient $\lim \limits_{n \to +\infty} F(n) - F(a) = s\left(]a;~+\infty[\right) \leq s_o^{*}\left(]a;~+\infty[\right)$, ce qui permet de conclure quant à l'égalité des deux mesures pour cet intervalle.
+
+La preuve du cinquième point est similaire à celle du quatrième point et nous ne la traiterons pas ici.
+
+Pour prouver le sixième point, on considère un élément du clan. Il est composé d'une union finie d'intervalles $\left(A_k\right)_{k \in K}$ fermés à droite et ouverts à gauche ou de la forme $]-\infty;~a]$ ou $]a;~+\infty[$. De plus, on peut supposer que ces intervalles sont disjoints deux à deux et \og espacés \fg{} entre eux.
+
+Pour tout entier naturel $n$ et pour tout $k \in K$, on pose 
+
+$\widetilde{A_k}^{(n)} = \begin{cases}A_k \text{ si }\sup A_k = +\infty\\
+\left]\inf A_k;~\sup A_k + \dfrac{1}{n}\right[ \text{ sinon}\end{cases}$
+
+Les $\left(\widetilde{A_k}^{(n)}\right)_{k \in K}$ sont des ouverts qui couvrent $\bigcup \limits_{k \in K} A_k$ et, par construction, on a:
+
+$
+s_o^{*}\left(\bigcup \limits_{k \in K} A_k\right) \leq \displaystyle{\sum \limits_{k \in K}} s_o\left(\widetilde{A_k}^{(n)}\right) = s\left(\bigcup \limits_{k \in K} A_k\right) + \dfrac{\#{A_k}}{n}
+$
+
+Par passage à la limite sur $n$, on obtient:
+
+$s_o^{*}\left(\bigcup \limits_{k \in K} A_k\right) \leq s\left(\bigcup \limits_{k \in K} A_k\right)$.
+
+Pour montrer l'inégalité réciproque, on suppose que $s_o^{*}\left(\bigcup \limits_{k \in K} A_k\right)< +\infty$, le cas contraire étant trivial.
+
+On considère ensuite $\varepsilon > 0$ et un ensemble dénombrable d'intervalles ouverts, notés $\left(I_i\right)_{i \in J}$ qui recouvre $\bigcup \limits_{k \in K} A_k$ tels que
+
+$
+\displaystyle{\sum \limits_{i \in J}} s(I_i) \leq s_o^{*}\left(\bigcup \limits_{k \in K} A_k\right) + \varepsilon
+$
+
+Quitte à \og rogner \fg{} un peu sur les $I_i$, on peut partitionner $J$ en ensembles $\left(J_k\right)_{k \in K}$ tels que les familles $\left(I_i\right)_{i \in J_k}$ recouvrent les $A_k$.
+
+On obtient ainsi, $\displaystyle{\sum \limits_{i \in J}} s(I_i)  = \displaystyle{\sum \limits_{k \in K}} \displaystyle{\sum \limits_{i \in J_k}} s(I_i) \geq \displaystyle{\sum \limits_{k \in K}} s_o^{*}(A_k) = \displaystyle{\sum \limits_{k \in K}} s(A_k)$, en raison de ce qui précède.
+
+Finalement, on a:
+
+$s\left(\bigcup \limits_{k \in K} A_k\right) = \displaystyle{\sum \limits_{k \in K}} s(A_k) \leq \displaystyle{\sum \limits_{i \in I}} s(I_i) \leq s_o^{*}\left(\bigcup \limits_{k \in K} A_k\right) + \varepsilon$, ce qui permet de conclure.
+\end{proof}
+
+
+Enfin, on prouve que les mesures extérieures coïncident tout à fait.
+
+\begin{prop}[Les mesures extérieures coïncident.]
+Soit $X \subset \R$. Alors
+\[
+s_o^{*}(X)=s^{*}(X)
+\]
+\end{prop}
+
+\begin{proof}
+Soit $X \subset \R$.
+
+Avant de commencer, notons que, pour tout $a \leq b$, par construction, on a
+
+$s(]a;~b]) = s_o(]a;~b[)$.
+
+Remarquons également que si $\left(]a_n;~b_n[\right)_{n \in \N}$ couvre $X$ alors $\left(]a_n;~b_n]\right)_{n \in \N}$ couvre également $X$.
+
+Les deux remarques précédentes prouvent que $s_o^{*}(X) \geq s^{*}(X)$.
+
+Reste à prouver que $s^{*}(X) \geq s_o^{*}(X)$.
+
+Si  $s^{*}(X) = +\infty$, les deux mesures coïncident en raison de l'inégalité précédente.
+
+On sait suppose donc $s^{*}(X) < +\infty$.
+
+Soit $\varepsilon>0$. Considérons alors un recouvrement dénombrable par des éléments $\left(A_n\right)_{n \in \N}$ du clan tels que
+
+$
+s^{*}(X) + \varepsilon \geq \displaystyle{\sum \limits_{n \in \N}} s(A_n)
+$
+
+Or,d'après ce qui précède, on sait que $s(A_n) = s_o^{*}(A_n)$.
+
+En particulier, pour tout entier $n$, il existe un recouvrement dénombrable de $A_n$ par des intervalles ouverts $\left(I_k\right)_{k \in K_n}$ tel que
+
+$
+s(A_n) \geq - \dfrac{\varepsilon}{2^{n+1}} + \displaystyle{\sum \limits_{k \in K_n}} s(I_k)
+$
+
+Mais, $\left(I_k\right)_{k \in \bigcup \limits_{n \in \N} K_n}$ est un ensemble dénombrable d'intervalles ouverts qui recouvrent $X$.
+
+On en déduit, en sommant l'inégalité précédente sur $n$:
+
+\[
+s^{*}(X) + \varepsilon \geq -\varepsilon + s_o^{*}(X)
+\]
+
+Ce qui permet de conclure.
+\end{proof}
+
+
+On peut maintenant s'attaquer à la preuve du théorème de Stieljes qui devient trivial.
+
+\begin{proof}
+On dispose d'un clan définit dans la proposition \ref{clan_stieljes} et d'une mesure $s$ sur ce clan.
+
+D'autre part $\R$ est $\sigma$-fini puisque $\R = \bigcup \limits_{n \in \N} ]-n;~n]$.
+
+Enfin, la mesure $s$ vérifie la propriété de continuité à droite puisque, d'après ce qui précède, pour tous les éléments $C$ du clan, on a:
+\[
+s^{*}(C) = s_o^{*}(C)= s(C)
+\]
+
+Ainsi, la proposition \ref{continuite_droite} nous assure qu'on a bien la continuité à droite.
+
+On est donc dans les hypothèses d'application du théorème de Carathéodory, ce qui nous permet de conclure.
+\end{proof}
+
+
+\subsection{Mesure de Lebesgue}
+
+\begin{prop}[Existence et unicité de la mesure de Lebesgue]
+Il existe une unique mesure $\lambda$ sur les boréliens telle que $\lambda(]a;~b]) = b-a$ pour tous nombres $a<b$.
+\end{prop}
+
+\begin{proof}
+C'est une application du théorème de Stieljes avec $F(x)=x$.
+\end{proof}
+
+\subsection{Quelques résultats de densité dans $\mathbf{L^1}$}
+
+% parler des indicatrices d'intervalles ouverts, d'intervalles fermés.
+Pour prouver l'existence de la mesure de Stieljes, on a défini une mesure extérieure un peu particulière à l'aide d'intervalles ouverts et on a montré que cette mesure extérieure coïncide avec la mesure des éléments du clan.
+
+En interprétant cette démarche en terme d'indicatrices, on dispose donc d'un résultat de densité dans $L^1$.
+
+\begin{prop}[Densité des indicatrices d'intervalles dans $L^p$]
+\label{densite_intervalles}
+On suppose que l'on a muni $\R$ de la tribu des Boréliens et d'une mesure de Stieljes sur cette tribu.
+
+On dispose des résultats de densité suivants, pour la norme $L^1$
+\begin{itemize}
+\item[$\bullet$] l'ensemble des combinaisons linéaires finies d'indicatrices d'intervalles ouverts est dense dans l'ensemble des indicatrices d'éléments du clan;
+\item[$\bullet$] l'ensemble des combinaisons linéaires finies d'indicatrices d'éléments du clan est dense dans l'ensemble des indicatrices de borélien;
+\item[$\bullet$] l'ensemble des combinaisons linéaires finies d'indicatrices de boréliens est dense dans $L^p$.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+On reprend les hypothèses et notations du paragraphe concernant le théorème de Stieljes.
+
+Soit $C$ un élément du clan de mesure finie. On sait que $s(C)=s_o^{*}(C)$.
+
+Donc, pour $\varepsilon>0$, il existe un recouvrement dénombrable d'intervalles ouverts $\left(I_i\right)_{i \in I}$ tels que 
+\[
+s(C) \leq \displaystyle{\sum \limits_{i \in I}} s(I_i) \leq s(C) +  \varepsilon
+\]
+
+
+Et, en particulier, il existe un sous-ensemble fini $J \subset I$ tel que:
+\[
+\displaystyle{\sum \limits_{i \in I}} s(I_i)-\varepsilon \leq \displaystyle{\sum \limits_{i \in J}} s(I_i) \leq \displaystyle{\sum \limits_{i \in I}} s(I_i)
+\]
+
+On en déduit finalement:
+\[
+s(C)-\varepsilon \leq \displaystyle{\sum \limits_{i \in I}} s(I_i)-\varepsilon \leq \displaystyle{\sum \limits_{i \in J}} s(I_i) \leq \displaystyle{\sum \limits_{i \in I}} s(I_i) \leq s(C) +  \varepsilon
+\]
+
+On démontre ainsi le premier point.
+\[
+\abs{\displaystyle{\sum \limits_{i \in J}} s(I_i)-s(C)} \leq \varepsilon
+\]
+
+Le second point se montre de manière tout à fait équivalente en utilisant le théorème de Carathéodory et la mesure extérieure induite par les éléments du clan.
+
+Enfin, le troisième point est une conséquence directe de la définition de l'intégrale.
+\end{proof}
+
+\begin{prop}[Densité des fonctions continues à support compact dans $L^p$]
+L'ensemble des fonctions continues à support compact est dense dans $L^p$
+
+\end{prop}
+
+
+
+
+\subsection{Deux exemples: ensemble de Cantor, mesure non continue à droite}
+
+\subsubsection{Importance de la continuité à droite}
+
+Considérons la fonction $F: x \mapsto \begin{cases}x \text{ si }x \leq 0\\
+x+1 \text{ sinon}\end{cases}$.
+
+La mesure de Stieljes de l'intervalle $]0;~1]$ donne $s(]0;~1])=2$.
+
+Considérons maintenant la suite d'intervalles $\left]\dfrac{1}{n};~1\right]$. On vérifie aisément que 
+\[
+\lim \limits_{n \to +\infty} s\left(\left]\dfrac{1}{n};~1\right]\right) = 1 \neq s(]0;~1])
+\]
+
+Ainsi, on n'est pas dans les conditions de la proposition \ref{continuite_droite}. Une telle mesure ne satisfait pas les attentes essentielles en terme de convergence...
+
+\subsubsection{Ensemble de Cantor}
+
+On pose $T_0 = ]0;~1]$. 
+
+On suppose que l'on a construit $T_n$ et qu'il est formé d'une union de $K_n$ intervalles $\left(I_k^{(n)}\right)_{k \in K_n}$ \og espacés \fg{}.
+
+On construit $T_{n+1}$ en supprimant de chacun des $I_k^{(n)}$ un morceau central $\left]\dfrac{2 \inf I_k^{(n)} + \sup I_k^{(n)}}{3};~\dfrac{2 \sup I_k^{(n)} + \inf I_k^{(n)}}{3}\right]$. 
+
+Ainsi, $T_{n+1}$ est composé de $2 \times K_n$ intervalles séparés et on a $\lambda(T_{n+1}) = \dfrac{2}{3} \lambda(T_n)$.
+
+Par une récurrence immédiate, la suite de Boréliens ainsi construite est décroissante et, par le théorème de convergence monotone, $\lambda\left(\lim \downarrow T_n\right) = 0$.
+
+Mais pour autant $\lim \downarrow T_n$ est non dénombrable.
+
+En effet, on peut montrer que tout élément de $]0;~1]$ dont l'écriture en base 3 ne comprend pas de 1 appartient à cet ensemble. En particulier, il existe une injection de $\{0;~2\}^{\N}$ vers cet ensemble et comme $\{0;~2\}^{\N}$ n'est pas dénombrable on en déduit que $\lim \downarrow T_n$ ne l'est pas non plus.
+
+L'ensemble de Cantor montre donc qu'il existe des Boréliens de mesure nulle et non dénombrable.
+
+\section{Le théorème de Riesz}
+
+Le théorème de Riesz établit que, si l'intégrale d'une fonction est une forme linéaire positive, alors réciproquement, sous certaines conditions, on peut définir une mesure à partir d'une forme linéaire positive définie sur un espace de fonctions.
+
+\begin{theo}[Théorème de Riesz]
+Soit $(X;~d)$ un espace métrique localement compact et séparable.
+
+\medskip
+Soit $\phi$ une forme linéaire positive sur l'ensemble $\mathcal{C}_K(X;~\R)$ des fonctions continues à support compact de $X$ vers $\R$.
+
+\medskip
+Alors il existe une unique mesure $\mu$ définie sur la tribu des boréliens de $X$ et associée à $\phi$, en ce sens que 
+\[
+\phi: \, f \mapsto \displaystyle{\int} f \, \mathrm d \mu
+\]
+
+Plus précisément $\mu$ vérifie:
+\begin{itemize}
+\item[$\bullet$] 
+Pour tout ouvert $\omega$, $\mu(\omega) = \sup  \left \{ 
+\phi(f)/ \, f \in \mathcal{C}_K \text{ et } f \leq \mathbb{1}_{\omega}
+\right \}$;
+\item[$\bullet$] 
+Pour tout compact $K$, $\mu(K) = \inf \left \{ 
+\phi(f)/ \, f \in \mathcal{C}_K \text{ et } f \geq \mathbb{1}_{K}
+\right \}$.
+\end{itemize}
+
+\end{theo}
+
+
+\subsection{Le lemme d'Urysohn}
+
+Ce lemme technique permet de produire les fonctions continues à support compact qui vérifient des propriétés cruciales, en rapport avec les indicatrices mentionnées dans le théorème de Riesz.
+
+
+\begin{lem}[Urysohn]
+Soit $(X;~d)$ un espace métrique localement compact. Alors:
+\begin{itemize}
+\item[$\bullet$] 
+Pour tous fermés $F$ et $G$ disjoints, il existe deux ouverts $U$ et $V$ disjoints tels que $F \subset U$ et $G \subset V$.
+
+De plus, si $F$ est compact on peut aussi avoir $\overline{U}$ et $\overline{V}$ disjoints et $\overline{U}$ compact.
+\item[$\bullet$] 
+Pour tout ouvert $U$ non vide et $K \subset U$ compact, il existe une fonction $\varphi$ continue à support compact telle que $\mathbb{1}_K \leq \varphi \leq \mathbb{1}_U$ et telle que le support de $\varphi$ est inclus dans $U$.
+\item[$\bullet$] 
+Pour tout compact $K$ et ensemble fini d'ouverts $(U_i)_{i \in I}$ couvrant $K$, il existe une famille de fonctions continues à support compact $(\varphi_i)_{i \in I}$ telle que, pour tout $i \in I$, $\varphi_i \leq \mathbb{1}_{U_i}$, et le support de $\varphi_i$ est inclus dans $U_i$ et qui vérifie enfin:
+\[
+\mathbb{1} \geq \displaystyle{\sum \limits_{i \in I}} \varphi_i \geq \mathbb{1}_K
+\]
+\end{itemize}
+\end{lem}
+
+\begin{listremarques}
+\item
+On rappelle que si $F$ et $G$ sont deux sous-ensembles de $X$, on note:
+\[
+d(F;~G) = \inf  \limits_{(x;~y) \in F \times G} d(x;~y)
+\]
+\item
+On rappelle aussi que pour tout élément $x$, écrire $d(x;~F) = 0$ signifie que tout voisinage de $x$ rencontre $F$, ce qui revient à affirmer que $x \in \overline{F}$.
+\end{listremarques}
+
+
+\begin{proof}
+Montrons le premier point.
+
+Pour tout $x \in F$. On a $d(x;~G) > 0$ car $x \notin \overline{G} = G$. On pose donc:
+\[
+U = \bigcup \limits_{x \in F} B\left ( x;~\tfrac{d(x;~G)}{3}\right )
+\]
+
+De même, on peut poser:
+\[
+V = \bigcup \limits_{y \in G} B\left ( y;~\tfrac{d(y;~F)}{3}\right )
+\]
+
+$U$ et $V$ ainsi construits vérifient les hypothèses du premier point.
+
+Si de plus $F$ est compact, on peut trouver pour chaque $x \in F$ un voisinage compact $V_x$ qui ne rencontre pas $G$. En particulier, il existe une union finie de ces voisinages compacts qui couvre $F$ sans rencontrer $G$, ce qui permet de construire un compact $L$ qui ne rencontre pas $G$ et dont l'intérieur contient $F$. 
+
+Prouvons aussi que $d(L;~G)>0$. En effet, il existe deux suites $(x_n)$ et $(y_n)$ d'éléments de $L$ et $G$ tels que $\lim d(x_n;~y_n) = d(L;~G)$. Et comme $L$ est compact, on peut extraire une sous-suite de $(x_n)$ qui converge vers une limite $x \in L$, ce qui confirme que $d(L;~G) = d(x;~G) > 0$. 
+
+On termine en construisant $V$ de telle sorte que $L \cap \overline{V} = \emptyset$.
+\[
+V = \bigcup \limits_{y \in G} B\left ( y;~\tfrac{d(L;~G)}{3}\right )
+\]
+
+\medskip
+Montrons maintenant le second point en supposant que $U \neq X$ (qui constitue un cas trivial). Il y a alors plusieurs manières de construire la fonction $\varphi$. On peut par exemple poser pour tout $x$:
+\[
+\varphi(x) = \left [ 1-2 \, \frac{d(x;~K)}{d(K;~U^c)}\right ]^+
+\]
+
+$\varphi$ est continue, majorée par $1$ et son support (compact) est inclus dans $U$.
+
+Enfin, pour tout $x \in K$, $\varphi(x)  = 1$. 
+
+Une autre manière de construire $\varphi$ consiste à se donner un compact $L$ tel que $K \subset \mathring{L}$, et $L \subset U$, et de poser pour tout $x$:
+\[
+\varphi(x) = \frac{d(x;~L^c)}{d(x;~L^c) + d(x;~K)}
+\]
+
+L'existence de $L$ est garanti par le premier point du lemme.
+
+\medskip
+Montrons enfin le dernier point en exploitant la compacité locale de $X$. D'après le premier point, pour tout $x \in K$, on peut trouver un voisinage compact $V_x$ qui est inclus dans l'un des $U_i$. Et réciproquement pour chacun des $U_i$, on peut trouver un voisinage compact $V_x$ d'un élément $x \in K$ inclus dans $U_i$.
+
+\medskip
+Par compacité on peut avoir un recouvrement fini de $K$ par des compacts $(L_j)_{j \in J}$ tel que:
+\begin{itemize}
+\item[$\bullet$] 
+ pour tout $i \in I$, il existe $j \in J$ vérifiant $L_j \subset U_i$;
+\item[$\bullet$] 
+ pour tout $j \in J$, il existe $i \in I$ vérifiant $L_j \subset U_i$.
+ \end{itemize} 
+
+Pour tout $i \in I$, on pose $M_i = \bigcup \limits_{\substack{j \in J\\L_j \subset U_i}} L_j$. Les $(M_i)_{i \in I}$ sont des compacts qui recouvrent $K$ et on peut aussi trouver, d'après le premier point, des compacts $(N_i)_{i \in I}$ tels que, pour tout $i$, $M_i \subset \mathring{N_i} \subset N_i  \subset U_i$. 
+
+\medskip
+On construit maintenant les $(\varphi_i)$ en s'inspirant du second point et en posant, pour tout $i$ et pour tout $x \in X$:
+\[
+\varphi_i(x)  = \dfrac{d(x;~M_i^c)}{d(x;~K) + \sum \limits_{k \in I} d(x;~M_k^c)}
+\]
+
+Par construction, pour tout $x \notin M_i \subset U_i$, $\varphi_i(x) = 0$ et on vérifie aussi $\mathbb{1} \geq \displaystyle{\sum \limits_{i \in I}} \varphi_i \geq \mathbb{1}_K$.
+\end{proof}
+
+
+\subsection{Le théorème de Riesz}

@@ -1,0 +1,1700 @@
+%\documentclass[a4paper,11pt,answers]{article}
+%
+%\usepackage{paf_simple_V2}
+%
+%\title{Résultats de probabilités}
+%\date{2017}
+%
+%\begin{document}
+%\maketitle
+
+\section{Quelques résultats préliminaires}
+
+\subsection{Premières définitions, propriétés et notations}
+
+\begin{de}[Probabilité, évènement]
+Un espace mesuré $(\Omega;~\mathcal{T};~P)$ est dit \emph{probabilisé} lorsque $P(E) = 1$.
+
+Un élément de la tribu $\mathcal{T}$ d'un espace probabilisé s'appelle un \emph{évènement}.
+\end{de}
+
+\begin{prop}[Convergence monotone]
+En particulier, un espace probabilisé vérifie le théorème de convergence monotone dans sa version ascendante et descendante.
+\end{prop}
+
+
+\begin{de}[Variable aléatoire, fonction de répartition, espérance]
+Soit $(\Omega;~\mathcal{T};~P)$ un espace probabilisé. On munit $R$ de la tribu des Boréliens.
+
+On dit que $X: \Omega \to \R$ est une variable aléatoire réelle si et seulement si $X$ est mesurable.
+
+En particulier, une telle application permet de transporter une mesure de probabilité sur $R$ que l'on notera $P_X$.
+
+La fonction de répartition de $X$ est la fonction
+
+$F_X: t \mapsto P(X \leq t)$.
+
+Enfin, on dit que la variable $X$ est $\L^1$ lorsque $\displaystyle{\int_\Omega} \abs{X(\omega)} \mathrm d P(\omega) < +\infty$ et dans ce cas on note 
+\[
+E(X) = \int X(\omega) \mathrm d P(\omega)
+\]
+\end{de}
+
+\begin{de}[Notations]
+Soit $(X_n)$ une suite de variables aléatoires. Soient $X$ et $Y$ deux variables aléatoires. On suppose que toutes ces variables partagent le même espace probabilisé $\left (\Omega;~\mathcal{T};~P\right )$. Soit enfin $a$ un réel.
+
+On utilise alors les notations suivantes:
+\begin{align*}
+\{X \geq Y \} & = \left \{\omega \in \mathcal{T}/ \; X(\omega) \geq Y(\omega) \right \} &
+\{X_n \underset{n \to +\infty}{\longrightarrow} X \} & = \left \{\omega \in \mathcal{T}/ \; X_n(\omega) \underset{n \to +\infty}{\longrightarrow} X(\omega) \right \} \\
+\{\sup X_n = +\infty \} & = \left \{\omega \in \mathcal{T}/ \; \sup X_n(\omega) = +\infty \right \} &
+\{\sup X_n \leq a \} & = \left \{\omega \in \mathcal{T}/ \; \sup X_n(\omega) \leq a \right \} 
+\end{align*}
+
+On rappelle les définitions suivantes:
+\begin{align*}
+\lim \sup X_n & = \lim \limits_{n \to +\infty} \downarrow \sup \limits_{k \geq n} X_k &
+\lim \inf X_n & = \lim \limits_{n \to +\infty} \uparrow \inf \limits_{k \geq n} X_k
+\end{align*}
+
+On peut aussi exploiter les notations ensemblistes pour caractériser les évènements.
+\begin{align*}
+\{\lim \limits_{n \to +\infty} X_n = X \} & = \bigcap \limits_{\varepsilon \in \Q^+_*} \bigcup \limits_{n} \bigcap \limits_{k \geq n} \left \{ \abs{X_n-X} < \varepsilon \right \} &
+\{\sup \limits_{n \to +\infty} X_n = +\infty \} & = \bigcap \limits_{M \in \Q^+_*} \bigcup \limits_{n} \left \{ X_n \geq M \right \} \\
+\{ X_n \text{ est bornée} \} & = \bigcup \limits_{M \in \Q^+_*} \bigcap \limits_{n} \left \{ \abs{X_n} \leq M \right \} &
+\{ \lim \sup X_n < a \} & = \bigcup \limits_{n} \bigcap \limits_{k \geq n} \left \{ X_n < a \right \}
+\end{align*}
+
+\end{de}
+
+
+\begin{de}[Fonction de densité]
+Soit $X$ une variable aléatoire réelle définie sur $\Omega$.
+
+On dit que $X$ admet une densité lorsqu'il existe une fonction mesurable $f$ telle que, pour tout borélien $B$:
+\[
+P(X \in B) = \displaystyle{\int_B} f(x) \mathrm d \lambda(x)
+\]
+
+$\lambda$ désigne la mesure de Lebesgue.
+
+En particulier lorsqu'elle existe la fonction de densité est $L^1$ et est positive $\lambda-$presque partout.
+\end{de}
+
+\begin{prop}[La densité est définie de manière unique $\lambda-$presque partout]
+\label{unicite_densite}
+Soit $X$ une variable aléatoire admettant deux densités $f$ et $g$.
+
+Alors $f=g$, $\lambda-$presque partout.
+\end{prop}
+
+\begin{proof}
+Pour tout rationnel $a$ strictement positif, on pose $T_a=\left \{ x, / f(x) \geq g(x)+a \right \}$. On a
+\[
+P(X \in T) = \displaystyle{\int_T} f(x) \mathrm d \lambda(x) = \displaystyle{\int_T} g(x) \mathrm d \lambda(x)
+\]
+
+Or $\displaystyle{\int_T} f(x) \mathrm d \lambda(x) \geq \displaystyle{\int_T} f(x) \mathrm d \lambda(x) + a \lambda(T_a)$.
+
+On en déduit $\lambda(T_a)=0$. Comme cela est vrai pour tout $a$, on en déduit par convergence monotone que l'ensemble $T =\left \{ x, / f(x) > g(x) \right \}$ est $\lambda-$négligeable.
+
+Donc, par symétrie de $f$ et $g$, $f=g$ $\lambda-$presque partout.
+\end{proof}
+
+\begin{de}[Probabilité transportée]
+Soit $X$ une variable aléatoire. La probabilité transportée $P_X$ est une mesure définie sur les boréliens par:
+\[
+P_X(B) = P\left ( X^{-1}<B> \right ) \qquad \forall B \text{ borélien}
+\]
+\end{de}
+
+Un dernier résultat très important: le lemme de Borel-Cantelli.
+
+
+\begin{lem}[Borel-Cantelli]
+Soit $(A_n)$ une suite d'évènement. On suppose que:
+\[
+\displaystyle{\sum \limits_n} P(A_k) < +\infty
+\]
+
+Alors:
+\[
+P \left ( \bigcap \limits_n \bigcup \limits_{k \geq n} A_k \right ) = 0
+\]
+\end{lem}
+
+\begin{listremarques}
+\item
+On note aussi $\lim \sup A_n = \bigcap \limits_n \bigcup \limits_{k \geq n} A_k$: c'est la limite supérieure ensembliste déjà abordée auparavant.
+\item
+Dans le cas où les $(A_n)$ sont indépendants, la loi du tout ou rien, page \pageref{tout_ou_rien}, renforce cet énoncé en une équivalence.
+\end{listremarques}
+
+\begin{proof}
+Soit $n$. Notons $R_n = \displaystyle{\sum \limits_{k \geq n}} P(A_k)$. Pour tout $p$, on a:
+\[
+P \left ( \bigcup \limits_{n+p \geq k \geq n} A_k \right ) \leq \displaystyle{\sum \limits_{n+p \geq k \geq n}} P(A_k)
+\]
+
+Par passage à la limite sur $p$, cela donne $
+P \left ( \bigcup \limits_{k \geq n} A_k \right ) \leq R_n
+$.
+
+Et, par passage à la limite sur $n$, sachant que $\lim R_n = 0$, on obtient le résultat escompté.
+\end{proof}
+
+
+\subsection{Indépendance, construction de suites d'expériences indépendantes et identiquement distribuées}
+
+\begin{de}[Indépendance de deux évènements]
+Soient $A$ et $B$ deux évènements. On dit que $A$ et $B$ sont indépendants lorsque 
+\[
+P(A \cap B) = P(A) \times P(B)
+\]
+\end{de}
+
+
+\begin{prop}[Indépendance et contraire]
+Deux évènements sont indépendants si et seulement si leurs contraires le sont.
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+P(A \cap B) = P(A) \times P(B) & \iff P(B)-P(A \cap B) = P(B)-P(A) \times P(B) \\
+ & \iff P(A^c \cap B) = P(B) \left(1-P(A)\right) = P(B) \times P(A^c)
+\end{align*}
+\end{proof}
+
+
+\begin{de}[Indépendance d'une famille d'évènement]
+Soit $(A_i)_{i \in I}$ une famille d'évènements. 
+
+Dans le cas où $I$ est finie, on dit que cette famille est indépendante lorsque 
+\[
+P\left(\bigcap \limits_{i \in I} A_i\right) = \displaystyle{\prod \limits_{i \in I}} P(A_i)
+\]
+
+Dans le cas où $I$ est dénombrable, on dit que cette famille est indépendante lorsque toute sous-famille finie est indépendante.
+\end{de}
+
+\begin{prop}[Indépendance et contraire]
+Une famille est indépendante si et seulement si la famille formée des contraires l'est aussi.
+\end{prop}
+
+
+\begin{proof}
+Évident par récurrence.
+\end{proof}
+
+\begin{de}[Indépendance d'une famille de tribus]
+Soit $\left(\mathcal{T}_i\right)_{i \in I}$ une famille de sous-tribus de $\mathcal{T}$ au plus dénombrable.
+
+On dit que cette famille est indépendante lorsque toute famille d'évènements $(A_i)_{i \in I} \in \displaystyle{\prod \limits_{i \in I}} \mathcal{T}_i$ est indépendante.
+\end{de}
+
+\begin{prop}[Caractérisation de l'indépendance à l'aide de classes monotones]
+\label{classes_monotones_independance}
+On reprend les hypothèses de la définition précédente.
+
+On suppose que les $\mathcal{T}_i$ sont engendrées par des $\pi-$systèmes $\mathcal{C}_i$.
+
+Les $\mathcal{T}_i$ sont indépendantes si et seulement si toute famille d'éléments  $(C_i)_{i \in I} \in \displaystyle{\prod \limits_{i \in I}} \mathcal{C}_i$ est indépendante.
+\end{prop}
+
+
+\begin{proof}
+Le sens direct est évident puisque les $\mathcal{C}_i$ sont des sous-familles des $\mathcal{T}_i$. 
+
+On se consacre donc au sens réciproque Il suffit de le prouver dans le cas d'une famille finie. 
+
+Soient ainsi les tribus $\left(\mathcal{T}_i\right)_{1 \leq i \leq n}$ engendrée par les $\pi-$systèmes indépendants $\left(\mathcal{C}_i\right)_{1 \leq i \leq n}$. On va utiliser l'argumentaire classique des classes monotones.
+
+On pose $\mathcal{L}_1 = \left \{ T_1 \in \mathcal{T}_1 / \, \forall \left(C_i\right)_{2 \leq i \leq n} \in \displaystyle{\prod \limits_{2 \leq i \leq n}} \mathcal{C}_i, \, P\left(T_1 \cap C_2 \cap \cdots \cap C_n\right) =  P(T_1) \times P(C_2) \times \cdots \times P(C_n) \right \}$.
+
+Cet ensemble contient $\mathcal{C}_1$. De plus, c'est un $\lambda-$système car il est stable par différence et par union croissante dénombrable et il contient $\Omega$.
+
+Ainsi, $\mathcal{L}_1 = \mathcal{T}_1$.
+
+Considérons maintenant 
+
+$\mathcal{L}_2 = \left \{ T_2 \in \mathcal{T}_2 / \, \forall T_1 \in \mathcal{T}_1, \forall \left(C_i\right)_{2 \leq i \leq n} \in \displaystyle{\prod \limits_{2 \leq i \leq n}} \mathcal{C}_i, \, P(T_1 \cap T_2 \cap C_3 \cap \cdots \cap C_n) =  P(T_1) \times P(T_2) \times P(C_3) \times \cdots \times P(C_n) \right \}$.
+
+$\mathcal{L}_2$ est également un $\lambda-$système qui contient $\mathcal{C}_2$. On a donc $\mathcal{L}_2 = \mathcal{T}_2$.
+
+Par une récurrence immédiate, on arrive au résultat.
+\end{proof}
+
+\begin{de}[Variables aléatoires indépendantes]
+Soit $(X_i)_{1 \in I}$ une famille au plus dénombrable de variables aléatoires définies sur le même espace probabilisé.
+
+On dit que cette famille de variables aléatoires est indépendante lorsque les tribus réciproques de la tribu borélienne $\left(X_i^{-1}\left(<\mathcal{B}>\right>\right)_{i \in I}$ sont indépendantes.
+\end{de}
+
+\begin{prop}[Caractérisation par des classes de réels de l'indépendance de variables aléatoires]
+Soit $\mathcal{C}$ un $\pi$-système engendrant la tribu Borélienne.
+
+Alors les $(X_i)_{1 \in I}$ sont indépendantes si et seulement si les $\left(X_i^{-1}\left(<\mathcal{C}>\right>\right)_{i \in I}$ sont indépendants.
+\end{prop}
+
+
+\begin{proof}
+On a prouvé précédemment dans le cadre de l'étude de fonctions mesurables que les $X_i^{-1}\left(<\mathcal{B}>\right>$ étaient engendrées par les $X_i^{-1}\left(<\mathcal{C}>\right>$; c'est à dire que l'image réciproque d'une tribu engendrée par une classe était engendrée par l'image réciproque de cette même classe.
+
+Ainsi, on peut donc se ramener au résultat de la proposition précédente.
+\end{proof}
+
+\begin{cor}[Caractérisation de l'indépendance de variables aléatoires par leurs fonctions de répartition, par leurs espérances]
+\label{caracterisation_independance}
+Soit $(X_i)_{1 \in I}$ une famille au plus dénombrable de variables aléatoires
+
+Cette famille est indépendante si et seulement si, pour toute sous-famille finie $(X_i)_{1 \in J}$, l'une des propositions suivantes est vérifiée:
+\begin{itemize}
+\item[$\bullet$] 
+pour tout élément $(a_i)_{i \in J}$ de $\R^d$, avec $d = \abs{J}$: 
+\[P\left(\bigcap \limits_{i \in J} {X_i \leq a_i}\right)=\displaystyle{\prod \limits_{i \in J}} F_{X_i}(a_i)\]
+\item[$\bullet$] 
+pour toute pavé borélien $\Pi = \left(B_i\right)_{i \in J}$ de $\R^d$, avec $d = \abs{J}$:
+\[
+P\left((X_i)_{1 \in J} \in P\right) = \displaystyle{\prod \limits_{i \in J}} P(B_i)
+\]
+\item[$\bullet$] 
+la mesure transportée par $(X_i)_{1 \in J}$ sur $\R^d$, avec $d = \abs{J}$, est la mesure produit $\bigotimes \limits_{i \in J} P_{X_i}$;
+\item[$\bullet$] 
+pour toute famille $\left(f_i\right)_{i \in J}$ de fonctions positives mesurables:
+\[
+E\left(\displaystyle{\prod \limits_{i \in J}} f_i(X_i)\right) = \displaystyle{\prod \limits_{i \in J}} E\left(f_i(X_i)\right)
+\]
+\item[$\bullet$] 
+pour toute famille $\left(f_i\right)_{i \in J}$ de fonctions continues et bornées:
+\[
+E\left(\displaystyle{\prod \limits_{i \in J}} f_i(X_i)\right) = \displaystyle{\prod \limits_{i \in J}} E\left(f_i(X_i)\right)
+\]
+\end{itemize}
+\end{cor}
+
+On pourrait étendre ce corollaire aux fonctions continues à support compact, aux fonctions $\mathcal{C}^{\infty}$ à support compact.
+
+\begin{proof}
+C'est une conséquence directe de la proposition précédente. Le premier point s'obtient en remarquant que la famille des pavés $]-\infty;~a_i]$ est un $\pi-$système qui engendre la tribu produit de $\R^d$.
+
+Pour le second point, c'est d'autant plus vrai que les pavés boréliens engendrent eux aussi la tribu produit de $\R^d$.
+
+Puisque la mesure coïncide avec la mesure produit sur les pavés boréliens; en raison du théorème des classes monotones, elle coïncide sur la tribu produit de $\R^d$.
+
+Le quatrième point s'obtient par le théorème de Fubini-Tonelli.
+
+Le cinquième point s'obtient en raison de la densité dans $L^1$ des fonctions continues et bornées.
+\end{proof}
+
+
+
+\begin{prop}[Probabilité de somme de v.a.r. indépendantes]
+Soient $X$ et $Y$ deux variables aléatoires définies sur le même espace probabilisé. Alors:
+\[
+P_{X+Y} = P_X * P_Y
+\]
+
+La probabilité transportée de $X+Y$ est la convolution des deux probabilités.
+\end{prop}
+
+\begin{proof}
+Soit $B$ un borélien. On a, en raison de l'indépendance des évènements:
+\[
+P_{X+Y}(B) = \displaystyle{\int_\R} \displaystyle{\int_\R}  \mathbb{1}_{B} (y+x) \mathrm d P_X(x)  \mathrm d P_Y(y)
+\]
+
+
+Avec le changement de variable $z = x+y$ dans la seconde intégrale et l'application du théorème de Fubini-Tonelli, on obtient bien:
+\[
+P_{X+Y}(B) = \displaystyle{\int_\R} \displaystyle{\int_\R}  \mathbb{1}_{B} (z) \mathrm d P_X(x) \mathrm d P_Y(z-x) = \displaystyle{\int_\R} \mathbb{1}_{B} (z) \mathrm d P_X * P_Y (z)
+\]
+\end{proof}
+
+\begin{prop}[Indépendance et densité]
+Soient une famille de variables $(X_i)_{1 \in I}$ au plus dénombrables admettant des densités respectives $(f_i)_{1 \in I}$.
+
+Alors ces variables sont indépendante si et seulement si, toute sous famille finie $(X_i)_{1 \in J}$ admettant sur $\R^d$, avec $d = \abs{J}$, une fonction de densité 
+\[
+(t_i)_{i \in J}
+\mapsto
+\displaystyle{\prod \limits_{i \in J}} f_i(t_i)
+\]
+\end{prop}
+
+\begin{proof}
+Évident en utilisant la proposition \ref{unicite_densite} et le corollaire \ref{caracterisation_independance}.
+\end{proof}
+
+\subsection{Loi du tout ou rien, tribu asymptotique}
+
+Abordons maintenant la loi dite du tout ou rien que l'on doit à Kolmogorov. Avant cela, un résultat préliminaire très simple.
+
+
+\begin{lem}[Évènement indépendant de lui-même]
+Soit $A$ un évènement.
+
+$A$ est indépendant de lui-même si et seulement si $P(A)=0$ ou $P(A)=1$.
+\end{lem}
+
+
+\begin{proof}
+La condition d'indépendance s'écrit $P(A)^2=P(A) \iff P(A)=0 ou P(A)=1$.
+\end{proof}
+
+\begin{de}[Tribu asymptotique]
+Soit $\left(\mathcal{T}_n\right)_{n \in \N}$ une suite de tribus. On définit la tribu asymptotique par:
+\[
+\mathcal{A}_{\infty} 
+=
+\bigcap \limits_{n \in \N} \sigma\left(\bigcup \limits_{k \geq n} \mathcal{T}_k \right)
+\]
+\end{de}
+
+
+Cette définition est assez abstraite et on dispose d'une caractérisation plus commode.
+
+\begin{prop}[Caractérisation]
+On note $\mathcal{B}_{\infty} = \sigma\left(\bigcup \limits_{k \geq 0} \mathcal{T}_k \right)$. Alors un évènement de $\mathcal{B}_{\infty}$ n'appartient pas à $\mathcal{A}_{\infty}$ si et seulement s'il s'obtient à partir d'évènements d'un sous-ensemble fini de tribus $(\mathcal{T}_k)$.
+\end{prop}
+
+\begin{listremarques}
+\item
+Cela signifie que la tribu asymptotique ne contient que les évènements de $\mathcal{B}_{\infty}$ qui ne s'obtiennent qu'à partir d'évènements choisis dans un nombre infinis de $(\mathcal{T}_k)$.
+\item
+En pratique, les évènements qui sont construits un nombre infini de tribus $(\mathcal{T}_k)$ sont donc dans $\mathcal{A}_{\infty}$.
+\item
+Dans le cas où la suite $\left (\mathcal{T}_n\right ))$ est constituée des réciproques de la tribu borélienne par une suite de variables aléatoires $(X_n)$, des évènements portant sur $\displaystyle{\sum \limits_{n \in \N}} X_n$, ou sur $\lim \sup X_n$ appartiendront à $\mathcal{A}_{\infty}$.
+\end{listremarques}
+
+
+\begin{theo}[Loi du tout ou rien]
+\label{tout_ou_rien}
+On considère $\left(\mathcal{T}_n\right)_{n \in \N}$ une suite de sous-tribus indépendantes d'un espace probabilisé $(\Omega;~\mathcal{T};~P)$.
+
+Alors la tribu asymptotique est presque sûrement grossière.
+\end{theo}
+ 
+%TODO: vérifier les notations
+
+\begin{proof}
+On va utiliser la caractérisation par les classes monotones pour prouver que cette tribu est indépendante d'elle même.
+
+Posons $\mathcal{T}_{\infty} = \bigcap \limits_{n \in \N} \sigma\left(\bigcup \limits_{k \geq n} \mathcal{T}_k \right)$ et $\mathcal{S}_{\infty} =  \sigma\left(\bigcup \limits_{n \in \N} \mathcal{T}_n \right)$.
+
+Il est clair que $\mathcal{T}_{\infty} \subset \mathcal{S}_{\infty}$.
+
+Pour tout entier naturel $n$, on va noter $\mathcal{U}_n =\sigma\left(\bigcup \limits_{k < n} \mathcal{T}_k \right)$ et $\mathcal{V}_n =\sigma\left(\bigcup \limits_{k \geq n} \mathcal{T}_k \right)$.
+
+On considère d'autre part les ensembles $\mathcal{C}_n = \left \{\bigcap \limits_{k < n} T_k, \, T_k \in \mathcal{T}_k \right \}$ et $\mathcal{D}_n = \left \{\bigcap \limits_{n+m \geq k \geq n} T_k, \, m \in \N, \, T_k \in \mathcal{T}_k \right \}$.
+
+Les $\mathcal{C}_n$ et $\mathcal{D}_n$ sont des $\pi-$systèmes respectivement inclus dans $\mathcal{U}_n$ et $\mathcal{V}_n$ et qui contiennent respectivement $\bigcup \limits_{k < n} \mathcal{T}_k$ et $\bigcup \limits_{k \geq n} \mathcal{T}_k$. 
+
+Ainsi, ces $\pi-$systèmes engendrent respectivement $\mathcal{U}_n$ et $\mathcal{V}_n$.
+
+Or, on vérifie aisément que pour tout $(C_n;~D_n) \in \mathcal{C}_n \times \mathcal{D}_n$, $C_n$ et $D_n$ sont indépendants.
+
+En exploitant la proposition \ref{classes_monotones_independance} sur l'indépendance et les classes monotones, on a ainsi prouvé que les éléments de $\mathcal{V}_n$ sont indépendants des éléments de $\mathcal{C}_n$.
+
+Considérons maintenant un évènement $A \in \mathcal{T}_{\infty}$. 
+
+$A$ est, pour tout $n$, dans $\mathcal{V}_n$ donc est indépendant des éléments de $\mathcal{C}_n$ pour tout $n$.
+
+Ainsi, $A$ est indépendant des éléments de  $\bigcup \limits_{n \in \N^{*}} \mathcal{C}_n$.
+
+Or ce dernier ensemble est un $\pi-$système qui contient $\bigcup \limits_{n \in \N^{*}} \mathcal{T}_n$ et qui appartient à $\mathcal{S}_{\infty}$. Il engendre donc $\mathcal{S}_{\infty}$. 
+
+Toujours en raison du résultat sur les classes monotones, on en déduit que $A$ est indépendant de $\mathcal{S}_{\infty}$ donc de lui-même.
+\end{proof}
+
+
+L'une des conséquences de ce théorème est le théorème probabiliste de Borel-Cantelli.
+
+\begin{theo}[Borel-Cantelli]
+\label{borel_cantelli_fort}
+Soit $(\Omega;~\mathcal{T};~P)$ un espace probabilisé.
+
+Soit $(A_n)_{n \in \N}$ une suite d'évènements indépendants de $\mathcal{T}$. Alors:
+\[
+\begin{array}{lcl}
+\displaystyle{\sum \limits_{n \in \N}} P(A_n) < +\infty & \iff & P\left(\bigcap \limits_{n \in \N} \bigcup \limits_{p \geq n} A_p\right) = 0\\
+\displaystyle{\sum \limits_{n \in \N}} P(A_n) = +\infty & \iff & P\left(\bigcap \limits_{n \in \N} \bigcup \limits_{p \geq n} A_p\right) = 1
+\end{array}
+\]
+\end{theo}
+
+
+\begin{proof}
+On considère la suite de tribus $\mathcal{T}_n = \left \{ A_n;~A_n^c;~\Omega;~\emptyset\right  \}$.
+
+Par construction cette suite est indépendante. Or l'évènement $\limsup \limits_{n \to +\infty} A_n  = \bigcap \limits_{n \in \N} \bigcup \limits_{p \geq n} A_p$ appartient à $\mathcal{T}_{\infty}$ en reprenant les notations précédentes.
+
+On a donc $P\left(\limsup \limits_{n \to +\infty} A_n\right)=0$ ou bien $P\left(\limsup \limits_{n \to +\infty} A_n\right)=1$.
+
+Dans le cas où $\displaystyle{\sum \limits_{n \in \N}} P(A_n) < +\infty$, le lemme classique de Borel-Cantelli nous dit que $P\left(\limsup \limits_{n \to +\infty} A_n\right)=0$.
+
+Dans le cas contraire, si $\displaystyle{\sum \limits_{n \in \N}} P(A_n) = +\infty$, on va montrer que $P\left(\liminf \limits_{n \to +\infty} A_n^c\right)=0$.
+
+Or, pour tout $n \in \N$, $P\left(\bigcap \limits_{k \geq n} A_k^c\right) = \displaystyle{\prod \limits_{k \geq n}} \left(1-P(A_k)\right)$.
+
+Par passage au logarithme sur cette dernière expression:
+\begin{align*}
+\ln\left(\displaystyle{\prod \limits_{k \geq n}} \left(1-P(A_k)\right)\right) & = \displaystyle{\sum \limits_{k \geq n}} \ln\left(1-P(A_k)\right) \\
+ & \leq -\displaystyle{\sum \limits_{k \geq n}} P(A_k) = -\infty
+\end{align*}
+
+Ainsi, $P\left(\bigcap \limits_{k \geq n} A_k^c\right) = 0$. Par convergence monotone, on obtient le résultat escompté.
+\end{proof}
+
+\subsection{Variables aléatoires $\mathbf{\L^p}$}
+
+Dans toute la suite $\left (\Omega;~\mathcal{T};~P\right )$ désigne un univers probabilisé.
+
+\begin{de}[Moments d'ordre $\mathbb{p}$]
+Soit $p \in [1;~+\infty[$. Soit $X$ une variable aléatoire définie sur $\Omega$. On dit que $X$ admet un moment d'ordre $p$ lorsque:
+\[
+E\left ( \abs{X}^p\right ) = \displaystyle{\int_{\Omega}} \abs{X(\omega)}^p \, \mathrm d P(\omega) <+\infty
+\]
+
+On note $\L^p$ l'ensemble des variables aléatoires définies sur $\Omega$ et qui admettent un moment d'ordre $p$. 
+
+En fait, $\L^p$ désigne un ensemble des classes de variables aléatoires pour la relation d'équivalence d'égalité presque partout.
+\end{de}
+
+
+\begin{prop}[Propriétés des espaces $\L^p$]
+Soient $X$ et $Y$ deux variables aléatoires définies sur $\Omega$ et de classe $\L^p$. Soient $\lambda$ un réel. Alors:
+\begin{itemize}
+\item[$\bullet$] 
+$\lambda X$ est de classe $\L^p$.
+\item[$\bullet$] 
+$\max\left (\abs{X};~\abs{Y}\right )$ est de classe $\L^p$.
+\item[$\bullet$] 
+$X+Y$ est de classe $\L^p$.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+Le premier point est facile. Considérons le second  point. 
+
+Pour tout $\omega \in \Omega$, $\max\left (\abs{X};~\abs{Y}\right )^p = \mathbb{1}_{\abs{X} \geq \abs{Y}} \abs{X(\omega)}^p + \mathbb{1}_{\abs{X} < \abs{Y}} \abs{Y(\omega)}^p$.
+
+On en déduit:
+\[
+E\left ( \max\left (\abs{X};~\abs{Y}\right )^p \right ) \leq E\left ( \abs{X}^p\right ) + E\left ( \abs{Y}^p\right ) < +\infty
+\]
+
+Le dernier point est une conséquence du second. 
+
+En effet, pour tout $\omega \in \Omega$, $\abs{X(\omega)+Y(\omega)}^p \leq \abs{\max\left (\abs{X};~\abs{Y}\right ) + \max\left (\abs{X};~\abs{Y}\right )}^p = 2^p \max\left (\abs{X};~\abs{Y}\right )^p$, ce qui permet d'obtenir:
+\[
+E\left ( \abs{X+Y}^p \right ) \leq 2^p E\left (\max\left (\abs{X};~\abs{Y}\right )^p\right ) < +\infty
+\]
+\end{proof}
+
+Passons maintenant aux deux inégalités classiques: Hölder et Minkowski.
+
+\begin{prop}[Inégalités de Hölder et Minkowski]
+Soient $p$ et $q$ deux réels positifs tels que $\frac{1}{p} + \frac{1}{q} = 1$. Soient $X$, $Y$ et $Z$ trois variables aléatoires de classes respectives $\L^p$, $\L^q$ et $\L^p$. Alors:
+\begin{itemize}
+\item[$\bullet$] 
+$XY$ est de classe $\L^1$ et $E\left ( \abs{XY}\right ) \leq E\left (\abs{X}^p\right )^{1/p} E\left (\abs{Y}^q\right )^{1/q}$;
+\item[$\bullet$] 
+$X+Z$ est de classe $\L^p$ et $E\left ( \abs{X+Z}^p\right )^{1/p} \leq E\left (\abs{X}^p\right )^{1/p} + E\left (\abs{Z}^p\right )^{1/p}$.
+\end{itemize}
+
+En particulier, cette dernière inégalité montre que $\L^p$ est un espace vectoriel normé, muni de la norme $\norm{X}_p = E\left (\abs{X}^p\right )^{1/p}$.
+\end{prop}
+
+\begin{proof}
+Si $X$ ou $Y$ est nul presque partout les deux inégalités sont triviales. On se place donc dans le cas contraire. Posons $\tilde{X} = \frac{\abs{X}^p}{E\left (\abs{X}^p\right )}$ et $\tilde{Y} = \frac{\abs{Y}^q}{E\left (\abs{Y}^q\right )}$. D'après l'inégalité de Young, pour tout $\omega$, on a:
+\[
+\frac{1}{p} \tilde{X}(\omega) + \frac{1}{q} \tilde{Y}(\omega) \geq \tilde{X}(\omega)^{1/p}\tilde{Y}(\omega)^{1/q} \iff \frac{1}{p} \tilde{X}(\omega) + \frac{1}{q} \tilde{Y}(\omega) \geq \frac{\abs{XY}}{E\left (\abs{X}^p\right )^{1/p} E\left (\abs{Y}^q\right )^{1/q}}
+\]
+
+En intégrant cette dernière inégalité, sachant que $\tilde{X}$ et $\tilde{Y}$ sont normalisés, on obtient:
+\[
+\frac{1}{p} + \frac{1}{q} \geq \frac{1}{E \left (\abs{X}^p\right )^{1/p} E\left (\abs{Y}^q\right )^{1/q}}\displaystyle{\int} \abs{XY}(\omega) \, \mathrm d P(\omega) \text{ soit } \displaystyle{\int} \abs{XY}(\omega) \, \mathrm d P(\omega) \leq E \left (\abs{X}^p\right )^{1/p} E\left (\abs{Y}^q\right )^{1/q} < +\infty
+\]
+
+Montrons maintenant l'inégalité de Minkowski. Remarquons que $q = \frac{p}{p-1}$ vérifie $\frac{1}{p} + \frac{1}{q} = 1$. D'autre part, si $X$ et $Z$ sont $\L^p$ alors $\abs{X+Z}^{p-1}$ est $\L^q$ car $\left (\abs{X+Z}^{p-1}\right )^q = \abs{X+Z}^p$ est intégrable. Fort de ces deux remarques, on va exploiter l'inégalité de Hölder juste établie:
+\begin{multline*}
+E\left (\abs{X+Z}^p\right ) \leq E\left (\abs{X} \abs{X+Z}^{p-1}\right ) + E\left (\abs{Z} \abs{X+Z}^{p-1}\right ) \\
+\leq E\left ( \abs{X}^p\right )^{1/p} E\left ( \left (\abs{X+Z}^{p-1}\right )^q\right )^{1/q} + E\left ( \abs{Z}^p\right )^{1/p} E\left ( \left (\abs{X+Z}^{p-1}\right )^q\right )^{1/q} < +\infty
+ \end{multline*}
+
+
+Or, $E\left ( \left (\abs{X+Z}^{p-1}\right )^q\right )^{1/q} = E\left ( \abs{X+Z}^p\right )^{(p-1)/p}$. On obtient ainsi:
+\[
+E\left (\abs{X+Z}^p\right ) \leq E\left ( \abs{X+Z}^p\right )^{1-1/p} \left (E\left ( \abs{X}^p\right )^{1/p} + E\left ( \abs{Z}^p\right )^{1/p} \right ) \text{ soit }E\left (\abs{X+Z}^p\right )^{1/p} \leq E\left ( \abs{X}^p\right )^{1/p} + E\left ( \abs{Z}^p\right )^{1/p}
+\]
+\end{proof}
+
+\begin{prop}[Autres propriétés des espaces $\mathbb{\L^p}$]
+Les espaces $\L^p$ munis de la norme définie plus haut sont complets. En outre, pour tout $p'>p$, on a $\L^{p'} \subset \L^p$.
+\end{prop}
+
+\begin{proof}
+Il est facile de constater que $X$ est $\L^{p'}$ si et seulement si $\max(1;~\abs{X})$ l'est également.
+
+\medskip
+En particulier, on a alors $\max(1;~\abs{X})^{p'} \geq \max(1;~\abs{X})^{p}$ ce qui permet de conclure.
+
+\medskip
+Pour montrer que ces espaces sont complets, on peut par exemple exploiter la caractérisation de la complétude par des séries comme on l'avait fait précédemment.
+\end{proof}
+
+
+\begin{cerveau}
+Cette inclusion des espaces intégrables se produit pour toute mesure finie. Dans le cas général, cela n'est plus valable. Par exemple la fonction $t \mapsto \mathbb{1}_{[1;~+\infty[}(t) \, \frac{1}{t}$ est $\L^2$ mais pas $\L^1$ pour la mesure de Lebesgue.
+\end{cerveau}
+
+
+\section{Convergences presque sûrement, convergence $\mathbf{\mathcal{L}^p}$, convergence en probabilité}
+
+\subsection{Convergence $\mathcal{L}^p$, convergence presque sûre}
+
+
+\begin{de}[Convergence $\mathcal{L}^p$, convergence presque sûre]
+Soit $(X_n)$ une suite de variables aléatoires réelles.
+
+Soit $X$ une variable réelle.
+
+On dit que la suite $(X_n)$ converge presque sûrement vers $X$ lorsque 
+\[
+P\left(\left \{ \omega / \, X_n(\omega) \to X(\omega) \right \}\right) = 1
+\]
+
+Si de plus les $(X_n))$ et $X$ sont $\mathcal{L}^p$, on dit que la suite $X_n$ converge vers $X$ dans $\mathcal{L}^p$ lorsque
+\[
+\lim \limits_{n \to +\infty} E\left(\abs{X_n-X}^p\right) = 0
+\]
+\end{de}
+
+\begin{prop}[Inégalités de Markov et de Bienaymé-Tchebychev]
+Soit $X$ une variable $\mathcal{L}^1$. Alors, pour tout $a>0$
+\[
+P(\abs{X}>a) \leq \dfrac{E\left(\abs{X}\right)}{a}
+\]
+
+Si de plus, $X$ est $\mathcal{L}^p$ avec $p$ un entier strictement positif, on a:
+\[
+P(\abs{X-E(X)}>a) \leq \dfrac{E\left(\abs{X-E(X)}^p\right)}{a^p}
+\]
+\end{prop}
+
+\begin{proof}
+Pour tout $a>0$, on pose $S_a = \left \{\omega/ \abs{X(\omega)}>a \right \}$.
+
+On a ainsi, $\abs{X} \geq a \mathbb{1}_{S_a}$. En intégrant, on obtient 
+
+$a P(S_a) \leq E\left(\abs{X}\right)$, ce qui donne l'inégalité de Markov.
+
+Plaçons-nous dans les hypothèses de l'inégalité de Bienaymé-Tchebychev et considérons 
+
+$T_a = \left \{\omega/ \abs{X(\omega)-E(X)}>a \right \}$.
+
+On a, de même, $\abs{X-E(X)}^p \geq a^p \mathbb{1}_{S_a}$. En intégrant, on obtient la seconde inégalité.
+\end{proof}
+
+Voici une petite propriété qui permet de caractériser une convergence presque sûre.
+
+\begin{prop}[Convergence presque sûre]
+\label{caracterisation_convergence_ps}
+Soit une suite $(X_n)$ de variables aléatoires et $X$ une autre variable aléatoire. On suppose que, pour tout $\varepsilon>0$, on a:
+\[
+\displaystyle{\sum \limits_{n}} P\left ( \abs{X_n-X} \geq \varepsilon\right ) < +\infty
+\]
+
+Alors la suite $(X_n)$ converge presque sûrement vers $X$.
+
+\medskip
+Si de plus les $(X_n)$ sont indépendantes, cette condition devient nécessaire à la convergence presque sûre.
+\end{prop}
+
+
+
+\begin{proof}
+Plaçons-nous dans les hypothèses de la proposition.
+Pour tout $\varepsilon>0$, le lemme de Borel-Cantelli entraîne que:
+\[
+P\left ( \bigcap \limits_{n} \bigcup \limits_{k \geq n} \left \{ \abs{X_n-X} \geq \varepsilon \right \} \right ) = 0
+\]
+
+Par passage au complémentaire, cela donne:
+\[
+P\left ( \bigcup \limits_{n} \bigcap \limits_{k \geq n} \left \{ \abs{X_n-X} < \varepsilon \right \} \right ) = 1
+\]
+
+Ainsi la suite $(X_n)$ converge presque sûrement vers $X$.
+
+\medskip
+Supposons maintenant que les $(X_n)$ sont indépendantes et que $\displaystyle{\sum \limits_{n}} P\left ( \abs{X_n-X} \geq \varepsilon\right ) = +\infty$. 
+
+Par le théorème de Borel-Cantelli, pour tout $\varepsilon>0$, $P\left ( \bigcap \limits_{n} \bigcup \limits_{k \geq n} \left \{ \abs{X_n-X} \geq \varepsilon \right \} \right ) = 1$, ce qui entraîne que, presque sûrement, les $(X_n)$ ne tendent pas vers $X$.
+\end{proof}
+
+
+\subsection{Convergence en probabilité}
+
+\begin{de}[Convergence en probabilité]
+Soit $(X_n)$ une suite de variables aléatoires et $X$ une variable aléatoire.
+
+On dit que $(X_n)$ converge vers $X$ en probabilité lorsque, pour tout $a>0$, 
+\[
+P\left( \abs{X_n -X}>a \right) \underset{n \to +\infty}{\longrightarrow} 0
+\]
+
+\end{de}
+
+
+\begin{prop}[Convergence en norme $\mathcal{L}^p$, convergence presque-partout et convergence en probabilité]
+Si $X_n$ converge presque partout vers $X$ alors $X$ converge en probabilité vers $X$.
+
+Si les $X_n$ converge en norme $\mathcal{L}^p$ vers $X$ alors $X_n$ converge en probabilité vers $X$.
+\end{prop}
+
+\begin{proof}
+Supposons que $X_n$ converge presque sûrement vers $X$. Alors, pour tout $a>0$, $A_n = \left \{ \omega/ \abs{X_n(\omega)-X(\omega)} > a \right \}$ est inclus dans $\tilde{A}_n = \left \{ \omega/ \sup \limits_{p \geq n} \abs{X_p(\omega)-X(\omega)} > a\right \}$. 
+
+Or la suite des $\tilde{A}_n$ décroît vers un ensemble de probabilité nulle, ce qui permet de conclure
+
+Supposons que $X_n$ converge en norme $\mathcal{L}^p$ vers $X$. On applique l'inégalité de Markov:
+\[
+P\left(\abs{X_n-X}>a\right) \leq \dfrac{E\left(\abs{X_n-X}^p\right)}{a^p} \underset{n \to +\infty}{\longrightarrow} 0
+\]
+\end{proof}
+
+\begin{prop}[Convergence en probabilité et suite de Cauchy en probabilité]
+Une suite $X_n$ converge en probabilité si et seulement si elle est de Cauchy en probabilité, c'est à dire
+\[
+\forall a>0, \, \forall p \in N, \, \lim \limits_{n \to +\infty} P\left(\abs{X_{n+p}-X_n}>a\right) = 0
+\]
+
+De plus, dans ce cas, on peut extraire une sous-suite qui converge presque partout.
+\end{prop}
+
+\begin{proof}
+Si la suite converge en probabilité, notons que pour tout $n$ et $p$ entiers,
+
+$\left \{ \abs{X_{n+p}-X_n} \leq a \right \} \supset \left(\left \{ \abs{X_{n}-X} \leq \dfrac{a}{2} \right \} \cup \left \{ \abs{X_{n+p}-X} \leq \dfrac{a}{2}\right \}\right)$.
+
+En considérant le contraire, on obtient:
+
+$P\left(\left \{ \abs{X_{n+p}-X_n} > a \right \}\right) \leq P\left(\left \{ \abs{X_{n}-X} > \dfrac{a}{2} \right \}\right) + P\left(\left \{ \abs{X_{n+p}-X} > \dfrac{a}{2}\right \}\right)$.
+
+Par passage à la limite sur $n$, on prouve que $X_n$ est de Cauchy en probabilité.
+
+Supposons maintenant que $X_n$ est de Cauchy en probabilité. On va utiliser le lemme de Borel-Cantelli. 
+
+Soit la suite extractrice $\alpha_n$ telle que, pour tout $n$,
+$
+P\left(\left \{ \abs{X_{\alpha_{n+1}}-X_{\alpha_n}} > 2^{-n} \right \}\right) < 2^{-n}
+$
+
+Notons $A_n$ l'évènement $\abs{X_{\alpha_{n+1}}-X_{\alpha_n}} > 2^{-n}$. 
+Par construction, $\displaystyle{\sum \limits_{n \to +\infty}} P(A_n) < +\infty$.
+
+Ainsi, $P\left(\lim \sup A_n\right)=0$. 
+
+Considérons maintenant le contraire de $\lim \sup A_n$. Sa probabilité vaut:
+\[
+P\left(\left\{ \omega/ \, \exists n, \, \forall p \geq n, \, \abs{X_{\alpha_{n+1}}(\omega)-X_{\alpha_n}(\omega)}\leq 2^{-n} \right \} \right)=1
+\]
+
+Or pour tout $\omega$ de cet ensemble, la suite $X_{\alpha_n}(\omega)$ est de Cauchy donc converge vers $X(\omega)$. On définit presque partout la variable aléatoire $X$ comme étant cette limite.
+
+Supposons maintenant que la suite $X_n$ est de Cauchy en probabilité et montrons que l'on peut en extraire une sous-suite convergente presque partout.
+
+Soit $\varepsilon > 0$. Comme la suite est de Cauchy, il existe un certain rang $N$ tel que pour tout $n \geq N$ et pour tout entier $p$, 
+$P\left(\abs{X_n-X_{\alpha_{n+p}}}>\dfrac{a}{2}\right) \leq \dfrac{\varepsilon}{2}$.
+
+Et de même, il existe $Q$ tel que pour $p \geq Q$, 
+$P\left(\abs{X_{\alpha_{n+p}}-X}>\dfrac{a}{2}\right) \leq \dfrac{\varepsilon}{2}$ car la suite $X_{\alpha_n}$ converge presque partout donc en probabilité vers $X$.
+
+Or:
+\[\left\{\omega/ \abs{X_n(\omega)-X(\omega)}>a \right \} \subset \left\{\omega/ \abs{X_{\alpha_{n+p}}(\omega)-X_n(\omega)}>\dfrac{a}{2} \right \} \cup \left\{\omega/ \abs{X_{\alpha_{n+p}}(\omega)-X(\omega)}>\dfrac{a}{2} \right \}
+\]
+
+On obtient donc bien que, pour tout $n \geq N$,
+$P\left(\left\{\omega/ \abs{X_n(\omega)-X(\omega)}>a \right \}\right) < \varepsilon$
+\end{proof}
+
+
+\begin{prop}[Fonction uniformément continue et convergence en probabilité]
+Soit $X_n$ une suite de variables aléatoires qui convergent en probabilité vers $X$. Soit $f$ une fonction uniformément continue.
+
+Alors $f(X_n)$ converge en probabilité vers $f(X)$.
+\end{prop}
+
+\begin{proof}
+Si $f$ est uniformément continue, notons que pour tout $a > 0$, il existe $\eta > 0$ tel que $\left\{\omega/ \, \abs{f\left(X_n(\omega)\right)-f\left(X_n(\omega)\right)}>a \right\} \subset \left\{\omega/ \, \abs{f\left(X_n(\omega)\right)-f\left(X_n(\omega)\right)}> \eta \right\}$.
+
+En prenant les probabilités, par majoration, cela prouve que les $f(X_n)$ convergent en probabilité vers $f(X)$.
+\end{proof}
+
+\begin{lem}[Suite de variables $\L^2$ et convergence en probabilité]
+\label{loi_faible_l2}
+Soit $\left(X_n\right)_{n \in \N}$ une suite de variables indépendantes, identiquement distribuées et de carré intégrable.
+
+Alors $\frac{1}{n} \displaystyle{\sum \limits_{1 \leq k \leq n}} X_k$ converge en probabilité vers $E(X_1)$.
+\end{lem}
+
+
+\begin{proof}
+Notons que
+\[
+E\left( \frac{1}{n} \displaystyle{\sum \limits_{1 \leq k \leq n}} X_k\right) = E(X_1)
+\]
+
+Donc, d'après l'inégalité de Bienaymé-Techbychev, pour tout $a>0$:
+
+\[
+P\left(\abs{\displaystyle{\sum \limits_{1 \leq k \leq n}} \dfrac{X_k}{n} - E(X_1)}>a \right) \leq \dfrac{V\left(\displaystyle{\sum \limits_{1 \leq k \leq n}} \dfrac{X_k}{n}\right)}{a^2}
+\]
+
+Or $V\left(\displaystyle{\sum \limits_{1 \leq k \leq n}} \dfrac{X_k}{n}\right) = \dfrac{V(X_1)}{n} \underset{n \to +\infty}{\longrightarrow} 0$; ce qui permet de conclure.
+\end{proof}
+
+\begin{theo}[Loi faible des grands nombres]
+Soit $\left(X_n\right)_{n \in \N}$ une suite de variables indépendantes, identiquement distribuées et intégrable.
+
+Alors $\frac{1}{n} \displaystyle{\sum \limits_{1 \leq k \leq n}} X_k$ converge en probabilité vers $E(X_1)$.
+\end{theo}
+
+\begin{proof}
+Soit $\left(X_n\right)_{n \in \N}$ une telle suite de variables indépendantes.
+
+L'indépendance des $X_n$ est équivalente à l'indépendance des $\widetilde{X}_n = X_n-E(X_0)$. On peut utiliser une caractérisation par la fonction de répartition, par exemple, pour prouver cela.
+
+Et dire que $\overline{X_n}$ converge en loi vers $E(X_1)$ est équivalent à dire que $\overline{\widetilde{X}_n}$ converge en loi vers $0$.
+
+
+On peut donc, supposer sans nuire à la généralité du problème que les $X_n$ sont centrés.
+
+Pour tout nombre $M>0$, on pose alors
+\[
+\begin{array}{lcll}
+Y_n & = & X_n \mathbb{1}_{\abs{X_n} > M}  & - E\left(X_n\mathbb{1}_{\abs{X_n} > M}\right) \\
+Z_n & = & X_n \mathbb{1}_{\abs{X_n} \leq M}  & - E\left(X_n\mathbb{1}_{\abs{X_n} \leq M}\right)
+\end{array}
+\]
+
+On a alors, par construction, $X_n = Y_n + Z_n$ et les $Y_n$ et $Z_n$ sont centrées.
+
+D'autre part, $\abs{Z_n} \leq 2M$ donc $Z_n$ est $L^\infty$.
+
+On va maintenant utiliser une technique déjà éprouvée lors de raisonnements sur la critère de Cauchy en probabilité. 
+
+Soit $\delta>0$. L'inclusion de $\left\{ \abs{\overline{X_n}}>\delta \right \}$ dans $\left\{ \abs{\overline{Y_n}}>\dfrac{\delta}{2} \right \} \cup \left\{ \abs{\overline{Z_n}}>\dfrac{\delta}{2} \right \}$ donne l'inégalité:
+\[
+P\left(\abs{\overline{X_n}}>\delta \right) \leq P\left(\abs{\overline{Y_n}}>\dfrac{\delta}{2} \right)+P\left(\abs{\overline{Z_n}}>\dfrac{\delta}{2}\right)
+\]
+
+Commençons par contrôler la valeur de $P\left(\abs{\overline{X_n}}>\dfrac{\delta}{2} \right)$.
+
+Pour tout $\varepsilon>0$ et pour tout $n$, la variable $T_n=\abs{X_n} \mathbb{1}_{\abs{X_n} > M}$ est d'espérance inférieure à $\dfrac{\delta \varepsilon}{8}$ quand $M$ est assez grand. 
+
+Ce résultat s'obtient en analysant la croissance de $E\left(\abs{X_n} \mathbb{1}_{\abs{X_n} \leq M}\right)$ vers $E\left(\abs{X_n}\right)$ quand $M$ tend vers l'infini.
+
+On obtient ainsi, en appliquant les inégalités triangulaire et de Markov, pour cette valeur de $M$ assez grande:
+\[
+P\left(\abs{\overline{Y_n}}>\dfrac{\delta}{2} \right) \leq \dfrac{2E(\abs{\overline{Y_n}})}{\delta} \leq \dfrac{2E(\abs{Y_n})}{\delta} \leq \dfrac{4E(T_n)}{\delta} \leq \dfrac{\varepsilon}{2}
+\]
+
+Maintenant, on peut contrôler la valeur de $P\left(\abs{\overline{Z_n}}>\dfrac{\delta}{2}\right)$. Comme la variable est centrée et est $L^2$, on peut utiliser le lemme \ref{loi_faible_l2} pour conclure.
+\end{proof}
+
+\subsection{Un contre exemple}
+
+Soit une suite de variables aléatoires indépendantes $X_n$ à valeurs dans $\left\{ 0;~1\right \}$ telles que $P(X_n=0) = 1-\dfrac{1}{n}$ et $P(X_n=1) = \dfrac{1}{n}$.
+
+Cette suite converge en probabilité vers $0$. En effet, pour tout $\varepsilon \in ]0;~1[$,
+\[
+P(X_n>\varepsilon) = \dfrac{1}{n} \underset{n \to +\infty}{\longrightarrow} 0
+\]
+
+Pourtant cette suite ne converge pas presque sûrement vers $0$.
+
+Soit $\omega$ un événement tel que $\lim \limits_{n \to +\infty} X_n(\omega) = 0$. 
+
+Il existe $N$ tel que pour tout $n \geq N$, $\abs{X_n(\omega)-0} < \dfrac{1}{2}$. Cela signifie que, pour tout $n \geq N$, $X_n(\omega)=0$. 
+
+Montrons maintenant que cet évènement appartient à un ensemble de probabilité nulle.
+
+Considérons $B_N = \bigcap \limits_{n \geq N} \left \{ \omega/ \, X_n(\omega) = 0 \right \}$.
+
+Pour tout $M$, la probabilité de $\bigcap \limits_{M+N\leq n \geq N} \left \{ \omega/ \, X_n(\omega) = 0 \right \}$ vaut $\displaystyle{\prod \limits_{N+M \geq n \geq  N}} \left(1-\dfrac{1}{n}\right)$. Or ce produit est télescopique et vaut:
+\[
+\displaystyle{\prod \limits_{N+M \geq n \geq  N}} \left(1-\dfrac{1}{n}\right) = \dfrac{N-1}{N+M}
+\]
+
+Pour $M$ tendant vers l'infini, la probabilité de $\bigcap \limits_{M+N\leq n \geq N} \left \{ \omega/ \, X_n(\omega) = 0 \right \}$ tend vers $0$ et, par convergence monotone, on peut conclure quant à la probabilité de $B_N$: elle est nulle.
+
+\section{Loi forte des grands nombres}
+
+
+\subsection{Version $\mathbf{\L^2}$}
+
+\begin{theo}
+Soit $(X_n)$ une suite de variables aléatoires indépendantes identiquement distribuées et de carré intégrables.
+
+\medskip
+Alors la suite définie pour tout $n \geq 1$ par $\overline{X}_n = \frac{1}{n} \displaystyle{\sum_{i=1}^n} X_i$ converge presque sûrement vers $E(X_1)$.
+\end{theo}
+
+Dans toute la suite, posons $m = E(X_1)$.
+
+\begin{listremarques}
+\item
+Remarquons que $E\left (\overline{X}_n\right ) = m$ et $V \left ( \overline{X}_n \right ) = \frac{1}{n^2} \, n V(X_1) = \frac{\sigma^2}{n}$ avec $\sigma^2 = V(X_1)$, car les $X_n$ sont indépendants.
+\item
+On peut centrer le problème en posant, pour tout $n$, $Z_n = X_n - m$. En effet, $\left (\overline{X}_n\right )$ converge vers $m$ si et seulement si  $\left (\overline{Z}_n\right )$ converge vers $0$ et d'autre part les $X_n$ sont indépendants si et seulement si les $Z_n$ le sont (on peut le montrer à l'aide des classes monotones par exemple). Enfin, 
+l'hypothèse \og identiquement distribuée et de carré intégrable \fg{} est également équivalente.
+
+
+\end{listremarques}
+
+La preuve se fait donc sur des variables centrées en exploitant éventuellement l'inégalité de Bienaymé-Tchebychev.
+
+
+\begin{proof}
+Pour tout $n$ et pour tout $m > 0$, on a $P \left ( \abs{\overline{X}_{n^2}} > m \right ) \leq \frac{\sigma^2}{n^2 m^2}$.
+
+\medskip
+En particulier, $\displaystyle{\sum \limits_{n \in \N}} P \left ( \abs{\overline{X}_{n^2}} > m \right ) < +\infty$, ce qui donne, d'après le lemme de Borel-Cantelli, par passage au complémentaire:
+\[
+P \left ( \bigcup \limits_{p} \bigcap \limits_{n \geq p} \left \{ \abs{\overline{X}_{n^2}} \leq m \right \}  \right ) = 1
+\]
+
+En exploitant le théorème de convergence monotone, on en déduit:
+\[
+P \left ( \bigcap \limits_{\substack{m>0 \\ m \in \Q}} \bigcup \limits_{p} \bigcap \limits_{n \geq p} \left \{ \abs{\overline{X}_{n^2}} \leq m \right \}  \right ) = 1
+\]
+
+Ainsi, la suite extraite $\left (\overline{X}_{n^2}\right )$ converge presque sûrement vers $0$.
+
+\medskip
+Il s'agit de montrer que $\left (\overline{X}_n\right )$ ne s'éloigne jamais trop de cette suite extraite.
+
+
+\medskip
+Soit ainsi $n \in \N^*$, et $k = \ent{\sqrt{n}}$, de sorte que $k^2 \leq n < (k+1)^2$. On va contrôler $E \left ( \left (\overline{X}_n - \overline{X}_{(k+1)^2}\right )^2\right )$:
+\begin{align*}
+E \left ( \left (\overline{X}_n - \overline{X}_{(k+1)^2}\right )^2\right ) & = E\left ( \overline{X}_n^2\right ) + E \left (\overline{X}_{(k+1)^2}^2\right ) - 2E \left ( \overline{X}_n \overline{X}_{(k+1)^2} \right ) \\
+ & = E\left ( \overline{X}_n^2\right ) + E \left ( \overline{X}_{(k+1)^2}^2\right ) - 2 \, \frac{1}{n(k+1)^2} \, \displaystyle{\sum \limits_{\substack{1 \leq i \leq n\\ 1 \leq j \leq (k+1)^2}}} E\left ( X_iX_j \right )
+\end{align*}
+
+Toujours en raison de l'indépendance des variables, pour $i \neq j$, $E\left ( X_iX_j \right ) = 0$. On obtient donc:
+\[
+E \left ( \left (\overline{X}_n - \overline{X}_{(k+1)^2}\right )^2\right ) = \left ( \frac{1}{n} + \frac{1}{(k+1)^2}- \frac{2n}{n(k+1)^2} \right ) \sigma^2 = \left ( \frac{1}{n} - \frac{1}{(k+1)^2}\right ) \sigma^2 
+\]
+
+Majorons maintenant, $\frac{1}{n} - \frac{1}{(k+1)^2} \leq \frac{1}{k^2} - \frac{1}{(k+1)^2} = \frac{2k+1}{k^2(k+1)^2} \leq \frac{2}{k^3}$. Or, on a $\frac{2}{k^3} \sim \frac{2}{n^{3/2}}$. 
+
+\medskip
+Fixons un rationnel $m>0$. En notant, pour tout $n$, $A_n = \left \{ \abs{\overline{X}_n - \overline{X}_{(k+1)^2}} > m \right \}$, on a, par application de l'inégalité de Bienaymé-Tchebychev et du lemme de Borel-Cantelli:
+\[
+P \left ( \bigcap \limits_{p} \bigcup \limits_{n \geq p} A_n \right ) = 0
+\]
+
+En particulier, par passage au complémentaire et application du théorème de convergence monotone, on en déduit que:
+\[
+P \left (\bigcap \limits_{\substack{m>0 \\ m \in \Q}}  \bigcup \limits_{p} \bigcap \limits_{n \geq p} \left \{ \abs{\overline{X}_n - \overline{X}_{(k+1)^2}} \leq m \right \} \right ) = 1
+\]
+
+L'intersection des évènements $\bigcap \limits_{\substack{m>0 \\ m \in \Q}}  \bigcup \limits_{p} \bigcap \limits_{n \geq p} \left \{ \abs{\overline{X}_n - \overline{X}_{(k+1)^2}} \leq m \right \}$ et $\bigcap \limits_{\substack{m>0 \\ m \in \Q}} \bigcup \limits_{p} \bigcap \limits_{n \geq p} \left \{ \abs{\overline{X}_{n^2}} \leq m \right \}$ est donc de probabilité $1$, ce qui permet de conclure!
+\end{proof}
+
+\subsection{Version $\mathbf{\L^1}$ (Kolmogorov)}
+
+Contrairement à la version $\L^2$, la version de Kolmogorov établit une équivalence entre la convergence en moyenne et l'intégrabilité, et il précise que, en l'absence de convergence, la moyenne n'est presque sûrement pas bornée.
+
+\begin{theo}[Loi forte des grands nombres]
+Soit $(X_n)$ une suite de variables aléatoires identiquement distribuées. On note, pour tout $n$, $\overline{X}_n = \frac{1}{n} \displaystyle{\sum_{k=1}^n} X_k$.
+
+\medskip
+Alors $X_1$ est intégrable si et seulement si la suite $\left (\overline{X}_n\right )$ converge presque sûrement.
+
+\medskip
+De plus, dans ce cas, la limite des $\left (\overline{X}_n\right )$ est unique et vaut $E(X_1)$ et la convergence a aussi lieu dans $\L^1$.
+
+\medskip
+Dans le cas contraire, la suite $\left (\overline{X}_n\right )$ n'est presque sûrement pas bornée.
+\end{theo}
+
+
+Avant d'aller plus loin, quelques remarques:
+\begin{listremarques}
+\item
+Les évènements  $\left (\overline{X}_n\right )$ n'est pas bornée ou $\left (\overline{X}_n\right )$ tend vers $\ell$ sont asymptotiques car ils ne peuvent s'écrire qu'en fonction d'un nombre infini de valeurs des $(X_n)$.
+\item
+Dans le cas particulier où les $(X_n)$ sont des variables de Bernoulli de paramètre $p$, cette loi entraîne que $\left ( \overline{X}_n \right )$ tend vers $p$. Ainsi la loi forte des grands nombres justifie qu'une probabilité correspond à la limite d'une fréquence.
+\item
+Ce théorème ne nous précise pas avec quelle vitesse \og probabiliste \fg{}, la moyenne tend vers l'espérance. Pour avoir une idée de la distribution de la moyenne, il faut se référer au théorème centrale limite.
+\end{listremarques}
+
+Nous allons maintenant démontrer ce théorème.
+
+\begin{proof}
+Commençons par le sens réciproque. Supposons que $\left ( \overline{X}_n\right )$ converge presque sûrement. Ici, nou allons prouver que $\left (\dfrac{\abs{X_n}}{n-1}\right )_{n \geq 2}$ est bornée, ce qui permettra de contrôler la valeur de $E\left ( \abs{X_1} \right )$ par majoration. En effet:
+\[
+E\left ( \abs{X_1}\right ) \leq \displaystyle{\sum \limits_{n \in \N^*}} n P \left ( \abs{X_1} \in [n-1;~n[ \right ) 
+\]
+
+Or:
+\begin{align*}
+\displaystyle{\sum \limits_{n \in \N^*}} n P \left ( \abs{X_1} \in [n-1;~n[ \right )  & = \displaystyle{\sum \limits_{n \in \N^*}} \displaystyle{\sum \limits_{k \in \N^*}} \mathbb{1}_{k \leq n} P \left ( \abs{X_k} \in [n-1;~n[ \right ) \text{ car les $(X_n)$ sont i.i.d.} \\
+ & = \displaystyle{\sum \limits_{k \in \N^*}} \displaystyle{\sum \limits_{n \in \N^*}} \mathbb{1}_{k \leq n} P \left ( \abs{X_k} \in [n-1;~n[ \right ) = \displaystyle{\sum \limits_{k \in \N^*}} P \left ( \abs{X_k} \in [k-1;~+\infty[ \right )
+\end{align*}
+
+Nous allons maintenant prouver que cette dernière somme n'est pas infinie en exploitant la loi du tout ou rien.
+
+\medskip
+Notons que, pour tout $n \geq 2$, $\dfrac{X_n}{n-1} = \frac{n}{n-1} \overline{X}_n - \overline{X}_{n-1}$. Presque sûrement, on obtient ainsi $\lim \dfrac{X_n}{n-1} = 0$
+
+\medskip
+Considérons maintenant l'évènement asymptotique $\bigcap \limits_{n \geq 2} \bigcup \limits_{k \geq n} \left \{ \frac{\abs{X_k}}{k-1} \geq 1 \right \}$. Sa probabilité est nécessairement nulle en raison de la limite de $\left (\dfrac{X_n}{n-1}\right )$ établie plus haut. La version améliorée du théorème de Borel-Cantelli (voir page  \pageref{borel_cantelli_fort}) entraîne que $\displaystyle{\sum \limits_{k \in \N^*}} P \left ( \abs{X_k} \in [k-1;~+\infty[ \right ) < +\infty$ et, par suite:
+\[
+E\left ( \abs{X_1}\right ) < +\infty
+\]
+
+\medskip
+On va maintenant prouver le sens direct. Supposons que $X_1$ est intégrable. On peut supposer que $E(X_1) = 0$ pour simplifier, quitte à centrer les variables $(X_n)$, ce qui ne change pas la généralité du problème. Notre objectif va être de prouver que, pour tout $\eta >0$, $\lim \limits_n \sup \limits_{k \geq n} \overline{X}_k \leq \eta$, ce qui permettra de prouver que $\lim \sup \overline{X}_n \leq 0$. 
+
+\medskip
+Pour ce faire, nous allons prouver par l'absurde que, pour tout $\eta > 0$, la suite $\left (\displaystyle{\sum_{i=1}^k} X_i - k \eta\right )$ est majorée. Fixons $\eta > 0$ et considérons, pour tout $n$, les suites
+\[
+\begin{cases}
+A_{n,~\eta} = \sup \limits_{1 \leq k \leq n} \left (\displaystyle{\sum_{i=1}^k} X_i - k \eta \right ) \\
+B_{n,~\eta} = \sup \limits_{1 \leq k \leq n} \left (\displaystyle{\sum_{i=2}^{k+1}} X_i - k \eta\right ) 
+\end{cases}
+\]
+
+Ces deux suites sont croissantes et, puisque les $(X_n)$ sont i.i.d., elles ont la même loi. Remarquons maintenant que:
+\[
+B_{n,~\eta} + (X_1 - \eta) = \sup \limits_{1 \leq k \leq n} \left (\displaystyle{\sum_{i=1}^{k+1}} X_i - (k+1) \eta\right ) = \sup \limits_{2 \leq k \leq n+1} \left (\displaystyle{\sum_{i=1}^k} X_i - k \eta \right )
+\]
+
+Et ainsi, lorsque $(X_1 - \eta) > B_{n,~\eta} + (X_1 - \eta)$, on a $A_{n+1,~\eta} = X_1 - \eta$ et, dans le cas contraire, $A_{n+1,~\eta} = B_{n,~\eta} + (X_1 - \eta)$, ce qui permet d'écrire:
+\[
+A_{n+1,~\eta} = B_{n,~\eta} + \max \left ( X_1 - \eta;~ X_1 - \eta - B_{n,~\eta} \right )
+\]
+
+En raison de la remarque précédente sur le sens de variation des suites et le fait qu'elles sont identiquement distribuées, on obtient, pour tout $n$, en passant à l'espérance:
+\[
+E\left (\max \left ( X_1 - \eta;~ X_1 - \eta - B_{n,~\eta} \right ) \right ) \geq 0
+\]
+
+Remarquons que l'évènement \og la suite $\left (\displaystyle{\sum_{i=1}^k} X_i - k \eta\right )$ n'est pas majorée \fg{} est asymptotique. Donc sa probabilité est nulle ou bien égale à 1. Supposons qu'elle est égale à 1. La suite $B_{n,~\eta}$ tend donc presque sûrement vers $-\infty$, ce qui signifie que $\max \left ( X_1 - \eta;~ X_1 - \eta - B_{n,~\eta} \right )$ tend presque sûrement vers $X_1 - \eta$. Or nous sommes dans les conditions d'application du théorème de convergence dominée puisque, pour tout $n$, $\abs{\max \left ( X_1 - \eta;~ X_1 - \eta - B_{n,~\eta} \right )} \leq \max \left ( \abs{X_1-\eta};~ \abs{X_1 - \eta - B_{1,~\eta}}\right )$. Finalement, on obtient, par passage à la limite sur $n$:
+\[
+E(X_1) =  0 \geq \eta
+\]
+
+Ce qui constitue une contradiction. On obtient que la suite  $\left (\displaystyle{\sum_{i=1}^k} X_i - k \eta\right )$ est presque sûrement majorée et nous permet d'écrire:
+\[
+\lim  \limits_{n} \sup \limits_{k \geq n} \frac{1}{k} \displaystyle{\sum_{i=1}^k} X_i \leq \eta
+\]
+
+Et comme $\eta>0$ est arbitraire, on obtient:
+\[
+\lim  \limits_{n} \sup \limits_{k \geq n} \frac{1}{k} \displaystyle{\sum_{i=1}^k} X_i \leq 0
+\]
+
+On prouve de même que $\lim  \limits_{n} \inf \limits_{k \geq n} \frac{1}{k} \displaystyle{\sum_{i=1}^k} X_i \geq 0$, ce qui permet de conclure.
+
+\medskip
+Reste à prouver que la convergence de $\left (\overline{X}_n\right )$ vers $E(X_1)$ a également lieu dans $\L^1$.
+
+\medskip
+Soit $\varepsilon>0$ et $M>0$ tel que $E\left ( \abs{X_1 - \mathbb{1}_{\abs{X_1} \leq M} X_1} \right ) < \frac{\varepsilon}{3}$.
+
+On pose, pour tout $n$, $Z_n = \mathbb{1}_{\abs{X_n} \leq M} X_n$ et $\overline{Z}_n = \frac{1}{n} \displaystyle{\sum_{k=1}^n} Z_k$. L'inégalité triangulaire donne:
+\[
+E\left ( \abs{\overline{X}_n - X_1}\right ) \leq E\left ( \abs{\overline{X}_n - \overline{Z_n}}\right ) + E\left ( \abs{\overline{Z}_n - E(Z_1)}\right ) + E\left ( \abs{Z_1 - X_1} \right ) < \frac{2 \varepsilon}{3} + E\left ( \abs{\overline{Z}_n - E(Z_1)}\right )
+\]
+
+On obtient ainsi:
+\[
+\lim \sup E\left ( \abs{\overline{X}_n - X_1}\right ) < \varepsilon
+\]
+
+Et comme $\varepsilon$ est arbitraire, on obtient le résultat escompté.
+\end{proof}
+
+Nous allons réaliser une seconde démonstration du sens direct.
+
+\begin{proof}
+Puisque les $(X_n)$ sont intégrables, on peut mener le raisonnement indépendamment sur les parties positives et négatives. On peut donc supposer sans risque que les $(X_n)$ sont positives. 
+
+\medskip
+Pour tout $n$, on va poser $Y_n = X_n \mathbb{1}_{[0;~n[}$, $T_n = \displaystyle{\sum_{k=1}^n} Y_k$ et $\overline{Y}_n = \frac{1}{n} T_n$. Notons que les $Y_n$ sont indépendantes et toutes $L^{\infty}$ donc en particulier $\L^2$.
+
+\medskip
+On va commencer par montrer que presque sûrement, $X_n = Y_n$ à partir d'un certain rang, c'est à dire que $P\left ( \bigcup \limits_n \bigcap \limits_{k \geq n} \{ X_k = Y_k \} \right ) = 1$, ce qui revient à prouver, par passage au complémentaire, que 
+\[
+P \left ( \bigcap \limits_n \bigcup \limits_{k \geq n} \{ X_k \neq Y_k \} \right ) = 0
+\]
+
+À partir de ce premier résultat, on en déduira que $\overline{X}_n - \overline{Y}_n$ tend presque sûrement vers $0$.
+
+\medskip
+Exploitons le lemme de Borel-Cantelli pour arriver à nos fins. Pour tout $k$, $\{X_k \neq Y_k \} = \{ X_k \in [k;~+\infty[ \}$. En particulier:
+\begin{align*}
+\displaystyle{\sum \limits_n} P\left ( X_n \neq Y_n \right ) & = \displaystyle{\sum \limits_n} P\left ( X_n \in [n;~+\infty[ \right ) \\
+ & = \displaystyle{\sum \limits_n} \displaystyle{\sum \limits_k} \mathbb{1}_{k \geq n} P\left ( X_n \in [k;~k+1[ \right ) \\
+ & = \displaystyle{\sum \limits_n} \displaystyle{\sum \limits_k} \mathbb{1}_{k \geq n} P\left ( X_k \in [k;~k+1[ \right ) \\
+ & = \displaystyle{\sum \limits_k} \displaystyle{\sum \limits_n}  \mathbb{1}_{k \geq n} P\left ( X_k \in [k;~k+1[ \right ) = \displaystyle{\sum \limits_k} k P\left ( X_k \in [k;~k+1[ \right ) \leq E(X_1) < +\infty
+\end{align*}
+
+Pour presque tout $\omega$, on en déduit qu'il existe $n_{\omega}$ tel que, pour tout $k \geq n_{\omega}$, $X_k(\omega) = Y_k(\omega)$ et en particulier:
+\[
+\overline{X}_k(\omega) - \overline{Y}_k(\omega) = \frac{1}{k} \displaystyle{\sum_{i=1}^{n_\omega-1}} \left ( X_i(\omega) - Y_i(\omega) \right ) \underset{k \to +\infty}{\longrightarrow} 0
+\]
+
+On va maintenant prouver:
+\begin{itemize}
+\item[$\bullet$] 
+que l'on peut extraire une sous-suite de $\left ( \overline{Y}_n - E\left ( \overline{Y}_n \right )\right )$ qui converge presque sûrement vers $0$;
+\item[$\bullet$] 
+que $\lim E \left ( \overline{Y}_n \right ) = E(X_1)$;
+\item[$\bullet$] 
+que $\overline{Y}_n$ tend en fait presque sûrement vers $E(X_1)$.
+\end{itemize}
+
+
+Exploitons la caractérisation sur la convergence presque sûre, page \pageref{caracterisation_convergence_ps}, pour fabriquer la suite extraite. 
+
+Soit $\varepsilon>0$. Chacune des $Y_n$ est de carré intégrable et donc, par l'inégalité de Bienaymé-Chebychev:
+\[
+P \left ( \abs{\overline{Y}_n - E \left ( \overline{Y}_n \right )} \geq \varepsilon
+ \right ) \leq \dfrac{V \left ( \overline{Y}_n \right )}{\epsilon^2}
+\]
+
+En raison de l'indépendance des $(Y_n)$, on a:
+\begin{align*}
+V \left ( \overline{Y}_n\right ) & = \frac{1}{n^2} \displaystyle{\sum_{k=1}^n} V(Y_k) \\
+ & \leq \frac{1}{n^2} \displaystyle{\sum_{k=1}^n} E(Y_k^2) =  \frac{1}{n^2} \displaystyle{\sum_{k=1}^n} \displaystyle{\int_{[0;~k[}} t^2 \mathrm d P_X(t) \text{ avec }P_X \text{ la probabilité tranportée par }X_1
+\end{align*}
+
+Pour fabriquer la suite extraite, fixons $\alpha > 1$ et posons pour tout $n$, $p_n = \plafond{\alpha^n}$. En reprenant ce qui vient d'être fait, on a:
+\[
+\displaystyle{\sum \limits_n} P \left ( \abs{\overline{Y}_{p_n} - E \left ( \overline{Y}_{p_n} \right )} \geq \varepsilon
+ \right ) \leq \displaystyle{\sum \limits_n} \frac{1}{{p_n}^2} \displaystyle{\sum_{k=1}^{p_n}} \displaystyle{\int_{[0;~k[}} t^2 \mathrm d P_X(t)
+\]
+
+Exploitons maintenant les indicatrices pour poursuivre la majoration de cette somme:
+\begin{align*}
+\displaystyle{\sum \limits_n} \frac{1}{{p_n}^2} \displaystyle{\sum_{k=1}^{p_n}} \displaystyle{\int_{[0;~k[}} t^2 \mathrm d P_X(t) & = \displaystyle{\sum \limits_n} \displaystyle{\sum \limits_k} \frac{1}{{p_n}^2} \mathbb{1}_{k \leq p_n} \displaystyle{\int_{[0;~k[}} t^2 \mathrm d P_X(t) \\
+ & = \displaystyle{\sum \limits_n} \displaystyle{\sum \limits_k} \displaystyle{\sum \limits_i} \frac{1}{{p_n}^2} \mathbb{1}_{k \leq p_n} \mathbb{1}_{i \leq k}  \displaystyle{\int_{[i-1;~i[}} t^2 \mathrm d P_X(t) \\
+ & \leq \displaystyle{\sum \limits_n} \displaystyle{\sum \limits_k} \displaystyle{\sum \limits_i} \frac{1}{{p_n}^2} \mathbb{1}_{k \leq p_n} \mathbb{1}_{i \leq k} i^2 P_X\left ([i-1;~i[ \right ) = \displaystyle{\sum \limits_i} i^2 P_X\left ([i-1;~i[ \right ) \displaystyle{\sum \limits_n} \mathbb{1}_{i \leq p_n} \frac{p_n-i+1}{{p_n}^2}
+\end{align*}
+
+Pour conclure, on va travailler sur la dernière somme:
+\begin{align*}
+\displaystyle{\sum \limits_n} \mathbb{1}_{i \leq p_n} \frac{p_n-i+1}{{p_n}^2} & \leq \displaystyle{\sum \limits_n} \mathbb{1}_{i \leq p_n} \frac{1}{p_n} =  \frac{1}{i} \displaystyle{\sum \limits_n} \mathbb{1}_{i \leq p_n} \frac{i}{p_n}
+\end{align*}
+
+Soit maintenant $n_0$ le plus petit entier tel que $\alpha^{n_0} \geq i$. On remarque que, pour tout $n$, $p_n \geq i$ entraîne $n \geq n_0$. Par construction des $p_n$, on a aussi $\frac{1}{p_n} \leq \frac{1}{\alpha^n}$. Ces deux réflexions permettent d'écrire:
+\[
+\displaystyle{\sum \limits_n} \mathbb{1}_{i \leq p_n} \frac{p_n-i+1}{{p_n}^2} \leq \frac{1}{i} \displaystyle{\sum \limits_{n \geq n_0}} \frac{1}{\alpha^{n-n_0}}  = \frac{1}{i} c_{\alpha} \text{ avec } c_{\alpha} = \frac{1}{1-\tfrac{1}{\alpha}}
+\]
+
+Revenons à notre majoration de départ et rassemblons les morceaux:
+\[
+\displaystyle{\sum \limits_n} P \left ( \abs{\overline{Y}_{p_n} - E \left ( \overline{Y}_{p_n} \right )} \geq \varepsilon
+ \right ) \leq \displaystyle{\sum \limits_i} i^2 P_X\left ([i-1;~i[ \right ) \frac{1}{i} c_{\alpha} = c_{\alpha} \displaystyle{\sum \limits_i} i P_X\left ([i-1;~i[ \right ) \leq c_{\alpha} \left (E(X_1)+1\right ) < +\infty
+\]
+
+
+Cela nous prouve que, presque sûrement, $\lim \limits_{n} \left (\overline{Y}_{p_n} - E \left ( \overline{Y}_{p_n} \right ) \right )= 0$.
+
+\medskip
+Par le théorème de Césaro, on prouve facilement que $\lim \limits_{n} E \left ( \overline{Y}_n \right ) = E(X_1)$
+
+\medskip
+Reste à prouver que $\overline{Y}_n$ ne s'éloigne pas trop de $\overline{Y}_{p_n}$. Considérons ainsi un entier $n$ suffisamment grand. Il existe ainsi un unique $l$ tel que $p_l \leq n \leq p_{l+1}$. Sachant que les $Y_n$ sont des v.a.r. positives, on obtient l'encadrement:
+\[
+\frac{T_{p_l}}{p_{l+1}} \leq \overline{Y}_n \leq \frac{T_{p_{l+1}}}{p_{l}} \iff \frac{p_l}{p_{l+1}} \overline{Y}_{p_l} \leq \overline{Y}_n \leq \frac{p_{l+1}}{p_{l}} \overline{Y}_{p_{l+1}}
+\]
+
+Par passage à la limite sur $n$, cela donne, presque sûrement:
+\[
+\frac{1}{\alpha} E(X_1) \leq \lim \inf \overline{Y}_n  \leq \lim \sup \overline{Y}_n \leq \alpha E(X_1)
+\]
+
+Et puisque $\alpha$ est arbitraire, on en déduit que $\left (\overline{Y}_n\right )$ tend presque sûrement vers $E(X_1)$.
+
+Mais puisqu'on a prouvé précédemment que $\left ( \overline{X}_n - \overline{Y}_n \right )$ tend presque sûrement vers $0$, on obtient le résultat escompté.
+\end{proof}
+
+
+\section{Fonctions caractéristiques}
+
+\subsection{Définition et premières propriétés}
+
+\begin{de}[Fonction caractéristique]
+Soit $X$ une variable aléatoire réelle. On pose:
+\[
+\psi[X]: \, \omega \mapsto E[\e^{\im \omega X}]
+\]
+
+C'est donc la transformée de Fourier de la mesure $P_X$.
+\end{de}
+
+\begin{listremarques}
+\item
+D'après ce que l'on sait des transformées de Fourier, on sait que la fonction caractéristique d'une v.a.r. est $\mathcal{C}_0$.
+\item
+Sa valeur en $0$ est $1$ (masse totale).
+%\item
+%De plus cette fonction caractéristique est de classe $\mathcal{C}^p_0$ dès lors que la v.a.r. possède un moment d'ordre $p$, c'est à dire est de classe $\L^p$.
+\end{listremarques}
+
+
+\begin{prop}[Fonction caractéristique d'une somme de v.a.r. indépendantes]
+Soient $X$ et $Y$ deux v.a.r. indépendantes. Alors:
+\[
+\psi[X+Y] = \psi[X] \psi[Y]
+\]
+\end{prop}
+
+\begin{proof}
+On sait que la probabilité transportée par $X+Y$ est la convolution de $P_X$ et $P_Y$. Le résultat final s'obtient à partir de ce que l'on sait des transformées de Fourier.
+\end{proof}
+
+
+\begin{prop}[Fonction caractéristique d'une loi normale]
+Si $N$ suit une loi normale centrée réduite alors $\psi[N] = g$ où $g: \, \omega \mapsto \e^{-\omega^2/2}$.
+\end{prop}
+
+\begin{proof}
+On a déjà prouvé ce résultat mais on va refaire une démonstration en passant par l'analyse complexe. Pour tout $\omega$:
+\begin{align*}
+\psi[N](\omega) & = \frac{1}{\sqrt{2\pi}} \displaystyle{\int_{\R}} \e^{-x^2/2 + \im \omega x} \, \mathrm d \lambda(x) \\
+ & = \frac{1}{\sqrt{2\pi}}\lim \limits_{L \to +\infty} \displaystyle{\int_{\gamma_L}} \e^{-z^2/2 + \im \omega z} \, \mathrm d z
+\end{align*}
+
+On a posé $\gamma_L$ le chemin orienté qui relie les points d'affixe $-L$ et $L$ dans le plan complexe. Travaillons sur cette dernière intégrale et réalisons un changement de variable:
+\begin{align*}
+\displaystyle{\int_{\gamma_L}} \e^{-z^2/2 + \im \omega z} \, \mathrm d z & = \displaystyle{\int_{\gamma_L}} \e^{-\tfrac{1}{2} (z-\im \omega)^2 - \tfrac{1}{2} \omega^2} \, \mathrm d z \\
+ & = \e^{- \tfrac{1}{2} \omega^2} \displaystyle{\int_{\tilde{\gamma}_L}} \e^{-s^2/2} \, \mathrm d s
+\end{align*}
+
+On a posé $\tilde{\gamma}_L$ le chemin qui relie les points d'affixe $-L - \im \omega$ et $L - \im \omega$. On va maintenant décomposer ce chemin en trois:
+\begin{itemize}
+\item[$\bullet$] 
+un chemin entre les points $-L - \im \omega$ et $-L$, noté $\gamma^-_L$, et de longueur $\abs{\omega}$;
+\item[$\bullet$] 
+le chemin entre les points $-L$ et $L$, noté $\gamma_L$;
+\item[$\bullet$] 
+le chemin entre les points $L$ et $L - \im \omega$, noté $\gamma^+_L$, et de longueur $\abs{\omega}$.
+\end{itemize}
+
+Ainsi:
+\[
+\displaystyle{\int_{\gamma_L}} \e^{-z^2/2 + \im \omega z} \, \mathrm d z  = \e^{- \tfrac{1}{2} \omega^2} \left [ \displaystyle{\int_{\gamma^-_L}} \e^{-s^2/2} \, \mathrm d s + \displaystyle{\int_{\gamma_L}} \e^{-s^2/2} \, \mathrm d s + \displaystyle{\int_{\gamma^+_L}} \e^{-s^2/2} \, \mathrm d s \right ]
+\]
+
+
+On obtient aisément les majorations suivantes, par un raisonnement sur les modules et l'inégalité triangulaire:
+\[
+\abs{\displaystyle{\int_{\gamma^-_L}} \e^{-s^2/2} \, \mathrm d s} \leq \abs{\omega} \e^{-L^2/2} \qquad \text{ et } \qquad \abs{\displaystyle{\int_{\gamma^+_L}} \e^{-s^2/2} \, \mathrm d s} \leq \abs{\omega} \e^{-L^2/2}
+\]
+
+En particulier, pour $L \to +\infty$, ces deux intégrales tendent vers $0$. Quant à l'intégrale sur $\gamma_L$, elle tend vers $\sqrt{2\pi}$, ce qui donne bien:
+\[
+\psi[N](\omega) = \e^{- \tfrac{1}{2} \omega^2}
+\]
+\end{proof}
+
+
+\subsection{Théorème Central Limite}
+
+
+\begin{prop}[Fonctions caractéristiques et moments]
+Soit $X$ une variable aléatoire de classe $\L^p$ avec $p \in \N$. Alors, pour tout $k \leq p$, $\psi[X]^{(k)}$ existe, est uniformément continue, et pour tout $\omega \in \R$:
+\[
+\psi[X]^{(k)}(\omega) = \im^k \displaystyle{\int} t^k \e^{\im t \omega} \, \mathrm d P_X(t)
+\]
+
+En particulier, $\psi[X]^{(k)}(0) = \im^k E(X^k)$
+\end{prop}
+
+\begin{proof}
+L'existence est une conséquence assez simple du théorème de convergence dominée de Lebesgue et du théorème de transfert. 
+
+
+\medskip
+Considérons $\omega_0$ un réel et montrons que $\psi[X]^{(k)}$ est continue en $\omega_0$. Soit $\varepsilon>0$.
+
+\medskip
+On choisit $A>0$ de telle sorte que $\displaystyle{\int_{\R \backslash [-A;~A]}} \abs{t}^k \, \mathrm d P_X(t) < \frac{\varepsilon}{3}$.
+
+Pour tout $\omega_1$ réel, on a:
+\[
+\abs{\psi[X]^{(k)}(\omega_1)-\psi[X]^{(k)}(\omega_0)} < \frac{2 \varepsilon}{3} + A \abs{\omega_1 - \omega_0} \displaystyle{\int_{[-A;~A]}} \abs{t}^k \, \mathrm d P_X(t) \leq \frac{2 \varepsilon}{3} + A \abs{\omega_1 - \omega_0} E\left (\abs{X}^k\right )
+\]
+
+En effet, $\abs{\displaystyle{\int_{[-A;~A]}} t^k \left (\e^{\im t \omega_1} -  \e^{\im t \omega_0} \right ) \, \mathrm d P_X(t)} \leq \displaystyle{\int_{[-A;~A]}} \abs{t}^k \abs{\e^{\im t \omega_1} -  \e^{\im t \omega_0}} \, \mathrm d P_X(t)$  et, pour tout $t \in [-A;~A]$, $\abs{\e^{\im t \omega_1} -  \e^{\im t \omega_0}} \leq A \abs{\omega_1 - \omega_0}$. En considérant maintenant $\omega_1$ tel que $\abs{\omega_1 - \omega_0} < \frac{\varepsilon}{3 A E\left (\abs{X}^k\right )}$, on obtient:
+\[
+\abs{\psi[X]^{(k)}(\omega_1)-\psi[X]^{(k)}(\omega_0)} < \varepsilon
+\]
+
+Notons que le choix de $A$ et donc de la jauge $\frac{\varepsilon}{3 A E\left (\abs{X}^k\right )}$ ne dépend pas de $\omega_0$, ce qui prouve l'uniforme continuité de $\psi[X]^{(k)}$.
+\end{proof}
+
+\begin{cor}[Développement limité en $0$ et moments]
+On reprend les mêmes hypothèses. Alors $\psi[X]$ possède en $0$ un développement limité d'ordre $n$. 
+
+Pour tout $\omega$:
+\[
+\psi[X](\omega) \underset{0}{=} \displaystyle{\sum_{k=0}^n} \frac{\im^k E(X^k)}{k!} \omega^k + o(\omega^n)
+\]
+\end{cor}
+
+\begin{proof}
+Ce résultat est un corollaire de ce qui précède, de la formule de Taylor-Lagrange, en exploitant le fait que $\psi[X]^{(n)}$ est continue.
+\end{proof}
+
+Écrivons maintenant le théorème central limite.
+
+\begin{theo}[Théorème de la limite centrale]
+Soit $(X_k)_{k \in \N^*}$ une suite de variables aléatoires de classe $\L^2$, indépendantes et identiquement distribuées. On pose $\mu = E(X_1)$ et $\sigma = \sqrt{V(X_1)}$.
+
+\medskip
+Alors la suite $\left ( \frac{S_n - n \mu}{\sqrt{n} \sigma}\right )$ converge (en loi) vers une loi normale centrée réduite, en posant, pour tout $n \geq 1$, $S_n = \displaystyle{\sum_{k=1}^n} X_k$
+\end{theo}
+
+On va exploiter la caractérisation de la convergence étroite par les transformées de Fourier.
+
+\begin{proof}
+Considérons les variables aléatoires $(Z_k)$ définies pour tout $k \in \N^*$ par $Z_k = \frac{X_k- \mu}{\sigma}$. Ces variables sont centrées réduites, indépendantes et identiquement distribuées. De plus, pour tout $n \geq 1$, $\displaystyle{\sum_{k=1}^n} Z_k = \frac{S_n - n \mu}{\sigma}$.
+
+\medskip
+On peut maintenant supposer que les $(X_k)$ sont également centrées et réduites sans nuire à la généralité. Il s'agit de montrer que $\left (\frac{S_n}{\sqrt{n}}\right )$ converge vers une loi normale centrée réduite. Or la transformée de Fourier de cette variable vaut, pour tout $\omega$, d'après le théorème du transfert:
+\[
+\psi\left [ \tfrac{S_n}{\sqrt{n}}\right ](\omega) = \displaystyle{\int} \e^{\im \omega \tfrac{t}{\sqrt{n}}} \, \mathrm d P_{S_n} (t) = \psi[S_n] \left ( \tfrac{\omega}{\sqrt{n}}\right )
+\]
+
+D'après ce que nous savons des fonctions caractéristiques de sommes de variables aléatoires indépendantes, on obtient ainsi, sachant que les variables sont identiquement distribuées:
+\[
+\psi\left [ \tfrac{S_n}{\sqrt{n}}\right ](\omega) = \displaystyle{\prod_{k=1}^n} \psi[X_k]\left ( \tfrac{\omega}{\sqrt{n}}\right ) = \psi[X_1]\left ( \tfrac{\omega}{\sqrt{n}}\right )^n
+\]
+
+Exploitons maintenant ce qui précède sur le développement limité en $0$. Il existe une fonction à valeurs complexes $\varepsilon$, continue en $0$ et telle que $\varepsilon(0) = 0$ et qui vérifie:
+\[
+\psi\left [ \tfrac{S_n}{\sqrt{n}}\right ](\omega) = \left ( 1-\frac{\omega^2}{2n} + \frac{\omega}{n} \varepsilon\left ( \tfrac{\omega}{\sqrt{n}}\right )\right )^n
+\]
+
+Considérons maintenant la série entière définie sur le disque ouvert de convergence de rayon $1$, $\ln(1+z) = \displaystyle{\sum \limits_{n \in \N^*}} \frac{(-1)^{n+1} z^n}{n}$.
+
+Pour tout $\omega$, il existe $N$ tel que, pour tout $n \geq N$, $-\frac{\omega^2}{2n} + \frac{\omega}{n} \varepsilon\left ( \tfrac{\omega}{\sqrt{n}}\right ) \in D$, où $D$ est le disque de convergence. En particulier, on obtient alors:
+\[
+\left ( 1-\frac{\omega^2}{2n} + \frac{\omega}{n} \varepsilon\left ( \tfrac{\omega}{\sqrt{n}}\right )\right )^n = \e^{n \ln \left ( 1-\tfrac{\omega^2}{2n} + \tfrac{\omega}{n} \varepsilon\left ( \tfrac{\omega}{\sqrt{n}}\right ) \right )} = \e^{-\tfrac{-\omega^2}{2} + \omega^2 \tilde{\varepsilon}\left ( \tfrac{\omega}{\sqrt{n}}\right ) }
+\]
+
+Avec $\tilde{\varepsilon}$ une autre fonction à valeur complexes, continue en $0$ avec $\tilde{\varepsilon}(0) = 0$. Par passage à la limite, cela donne:
+\[
+\psi\left [ \tfrac{S_n}{\sqrt{n}}\right ](\omega) \underset{n \to +\infty}{\longrightarrow} \e^{-\tfrac{-\omega^2}{2}}
+\]
+
+On retrouve ici la fonction caractéristique d'une loi normale centrée réduite et on peut ainsi conclure.
+\end{proof}
+
+
+\section{Quelques lois}
+
+\subsection{Lois discrètes}
+
+\subsubsection{Fonctions génératrices}
+
+\begin{de}[Fonction génératrice]
+Soit $X$ une variable aléatoire prenant des valeurs entières.
+
+On définit la fonction génératrice de $X$ comme étant la série formelle:
+\[
+g_x[S] = E(S^X) = \displaystyle{\sum \limits_{k \in \N}} P(X=k) \times S^k
+\]
+
+On vérifie $g_x[1] = 1$.
+
+En particulier le rayon de convergence de cette série est au moins égal à $1$.
+\end{de}
+
+\begin{proof}
+Évident d'après ce que l'on sait sur les séries entières.
+\end{proof}
+
+\begin{prop}[Espérance, variance et fonction génératrice]
+Avec les notations précédentes:
+\begin{align*}
+E(X) & = g_x'[1] \\
+V(X) & = g_x''[1] + g_x'[1] - g_x'[1]^2
+\end{align*}
+
+\end{prop}
+
+
+\begin{proof}
+\begin{align*}
+g_x'[S] & =  \displaystyle{\sum \limits_{k \in \N^{*}}} k P(X=k) S^{k-1} \\
+g_x''[S] & = \displaystyle{\sum \limits_{k \geq 2}} k(k-1) P(X=k) S^{k(k-1)} \\
+ & = \displaystyle{\sum \limits_{k \geq 2}} k^2 P(X=k) S^{k-1} - \displaystyle{\sum \limits_{k \geq 2}} k P(X=k) S^{k-1} \\
+ & = \displaystyle{\sum \limits_{k \geq 1}} k^2 P(X=k) S^{k-1} - \displaystyle{\sum \limits_{k \geq 1}} k P(X=k) S^{k-1} 
+\end{align*}
+
+On en déduit que $g_x'[1] = E(X)$ et $g_x''[1]=E(X^2)-E(X)$.
+
+Ce qui donne bien $g_x''[1] + g_x'[1] - g_x'[1]^2 = E(X^2)-E(X)^2 = V(X)$.
+\end{proof}
+
+Enfin, une proposition portant sur les sommes de variables aléatoires et les sommes à nombre de termes aléatoires.
+
+\begin{prop}[somme de variables aléatoires discrètes indépendantes]
+Soient $\left(X_i\right)_{i \in \N^*}$ des variables aléatoires discrètes de mêmes lois et indépendantes.
+
+Soit $m \in \N^*$ un nombre entier fixé et $N$ une variable aléatoire à valeurs dans $\N^*$ indépendantes des $\left(X_i\right)_{i \in \N^*}$.
+
+
+On note $g_x$ la fonction génératrice de $X_1$ et $g_n$ la fonction génératrice de $N$.
+
+Alors la variable $S_m = \displaystyle{\sum \limits_{1 \leq k \leq m}} X_k$ a pour fonction génératrice $g_x^m$.
+
+Et la variable aléatoire $T = \displaystyle{\sum \limits_{1 \leq k \leq N}} X_k$ a pour fonction génératrice $g_n \circ g_x$.
+\end{prop}
+
+\begin{proof}
+Soit $k \in N$ quelconque.
+
+$P\left(S_m = k\right) = P\left(\displaystyle{\sum \limits_{1 \leq i \leq m}} X_i = k\right)$. Étudions l'évènement
+
+$E_{km} = \displaystyle{\sum \limits_{1 \leq i \leq m}} X_i = k$. 
+
+On a $E_{km} = \bigcup \limits_{\substack{i_1, \cdots,i_m\\
+i_1 + \cdots + i_m = k}} \left\{X_1 = i_1 \right \} \cap \cdots \cap \left\{X_m = i_m \right \}$.
+
+On en déduit:
+\begin{align*}
+P\left(S_m = k\right) & = \displaystyle{\sum \limits_{\substack{i_1, \cdots,i_m\\
+i_1 + \cdots + i_m = k}}} P(X_1 = i_1) \times \cdots \times P(X_m = i_m) \\
+ & = \displaystyle{\sum \limits_{\substack{i_1, \cdots,i_m\\
+i_1 + \cdots + i_m = k}}} a_{i_1} \times \cdots \times a_{i_m}
+\end{align*}
+avec $a_i$ qui sont les coefficients de $g_x$.
+
+Donc, par définition, $P(S_m=k)$ correspond au terme de degré $k$ de la série $g_x^m$.
+
+Reste à prouver le dernier résultats.
+
+$P(T=k) = P\left(\displaystyle{\sum \limits_{1 \leq i \leq N}} X_i = k\right)$. On utilise la formule des probabilités totales:
+\begin{align*}
+P(T=k) & = \displaystyle{\sum \limits_{n \in N}} P\left(\displaystyle{\sum \limits_{1 \leq i \leq N}} X_i = k | N=n\right) \times P(N=n) \\
+ & = \displaystyle{\sum \limits_{n \in N}} P\left(\displaystyle{\sum \limits_{1 \leq i \leq n}} X_i = k\right) \times P(N=n)
+\end{align*}
+
+Notons $\left(b_i\right)$ les coefficients de $g_N$ et remarquons que $P\left(\displaystyle{\sum \limits_{1 \leq i \leq n}} X_i = k\right)$ correspond au coefficient de degré $k$ de la série $g_x^n$, noté $a_k^{(n)}$.
+
+Nous avons donc:
+\[
+P(T=k) = \displaystyle{\sum \limits_{n \in N}} a_k^{(n)}b_n \times P(N=n)
+\]
+
+Cette expression correspond effectivement bien au coefficient de degré $k$ de la série $g_n \circ g_x$.
+\end{proof}
+
+\subsubsection{Lois de Bernoulli et binomiale}
+
+\begin{de}[Loi de Bernoulli, loi binomiale]
+On dit qu'une variable $B$ suit une loi de Bernoulli de paramètre $p \in ]0;~1[$ lorsque $P(X=0)=1-p$ et $P(X=1)=p$.
+
+On dit qu'une variable $X$ suit une loi binomiale de paramètres $n$ et $p$ lorsque $X$ est la somme de $n$ variables de Bernoulli indépendantes de paramètre $p$.
+
+En particulier, on a alors, pour tout $k \in \intint{0}{n}$, $P(X=k) = {n \choose k} p^k(1-p)^{n-k}$.
+\end{de}
+
+\begin{proof}
+La fonction génératrice de $B$ est $g_b[S] = 1-p+pS$ donc la fonction génératrice de $X$ est $g_x[S] = \left(1-p+pS\right)^n = \displaystyle{\sum \limits_{0 \leq k \leq n}} {n \choose k}p^k(1-p)^{n-k}S^k$.
+
+On obtient ainsi $P(X=k) = {n \choose k}p^k(1-p)^{n-k}$.
+\end{proof}
+
+
+\begin{prop}[Espérance et variance]
+On reprend les mêmes notations.
+
+\begin{align*}
+E(B) & =p \\
+V(B) & =p(1-p) \\
+E(X) & =np \\
+V(X) & = np(1-p
+\end{align*}
+
+\end{prop}
+
+\begin{proof}
+Pour $B$, on applique la formule. Pour $X$, on utilise la linéarité de l'espérance et la linéarité de la variance dans le cas de somme de variables aléatoires indépendantes.
+
+On peut aussi utiliser les fonctions génératrices...
+\end{proof}
+
+\subsubsection{Loi géométrique et loi de poisson}
+
+\begin{de}[Loi géométrique]
+On dit qu'une variable $T$ suit une loi géométrique de paramètre $\theta \in ]0;~1[$ lorsque pour tout $k \in \N^{*}$, $P(T=k) = \theta \times (1-\theta)^{k-1}$.
+\end{de}
+
+\begin{cerveau}
+Cette loi donne le rang d'obtention du premier succès dans le cas d'une suite infinie de Bernoulli de paramètres $\theta$.
+
+Elle est se prolonge dans le continu en loi exponentielle.
+\end{cerveau}
+
+\begin{prop}[Fonction génératrice, espérance, variance d'une loi géométrique]
+Avec les mêmes notations et hypothèses:
+\begin{align*}
+g_T[S] & = \dfrac{\theta S}{1-(1-\theta)S}\\
+E(T) & = \dfrac{1}{\theta} \\
+V(T) & = \dfrac{1}{\theta^2}-\dfrac{1}{\theta}
+\end{align*}
+\end{prop}
+
+
+\begin{proof}
+On écrit la formule de la fonction génératrice:
+\begin{align*}
+g_t[S] & = \displaystyle{\sum \limits_{k \geq 1}} \theta (1-\theta)^{k-1} S^k \\
+ & = \theta S \displaystyle{\sum \limits_{k \geq 1}} \theta \left((1-\theta)S\right)^{k-1} \\
+ & = \dfrac{\theta S}{1-(1-\theta)S}
+\end{align*}
+
+
+L'espérance de $T$ est donnée par:
+\begin{align*}
+E(T) & = \displaystyle{\sum \limits_{k \geq 1}}  k \theta (1-\theta)^{k-1} \\
+ &  = \theta \displaystyle{\sum \limits_{k \geq 1}}  k (1-\theta)^{k-1}
+\end{align*}
+On reconnaît dans la somme, l'opposée de la dérivée de la série $\displaystyle{\sum \limits_{k \geq 0}}  (1-\theta)^k = \dfrac{1}{\theta}$. On obtient ainsi
+\[
+E(T) = \theta \times \dfrac{1}{\theta^2} = \dfrac{1}{\theta}
+\]
+
+On calcule maintenant:
+\begin{align*}
+E(T^2) & = \displaystyle{\sum \limits_{k \geq 1}}  k^2 \theta (1-\theta)^{k-1}
+\end{align*}
+
+En particulier:
+\begin{align*}
+E(T^2)-E(T) & = \displaystyle{\sum \limits_{k \geq 1}}  k(k-1) \theta (1-\theta)^{k-1} \\
+ & = \theta (1-\theta) \displaystyle{\sum \limits_{k \geq 2}}  k(k-1) \theta (1-\theta)^{k-2}
+\end{align*}
+
+On reconnaît dans la somme la dérivée seconde de la série $\displaystyle{\sum \limits_{k \geq 0}}  (1-\theta)^k = \dfrac{1}{\theta}$. On obtient donc
+\[
+E(T^2)-E(T) = \theta (1-\theta) \times \dfrac{2}{\theta^3} = \dfrac{2}{\theta^2}-\dfrac{2}{\theta}
+\]
+
+Finalement, $E(T^2) = \dfrac{2}{\theta^2}-\dfrac{1}{\theta}$ et donc $V(T)=E(T^2)-E(T)^2 = \dfrac{1}{\theta^2}-\dfrac{1}{\theta}$.
+\end{proof}
+
+\begin{de}[Loi de Poisson]
+On dit qu'une variable $N$ suit une loi de Poisson de paramètre $\lambda > 0$ lorsque, pour tout $k \in \N$, $P(N=k) = \e^{-\lambda} \dfrac{\lambda^k}{k!}$.
+\end{de}
+
+
+\begin{prop}[Fonction génératrice, espérance, variance d'une loi de Poisson]
+Avec les mêmes notations et hypothèses:
+\begin{align*}
+g_n[S] & = \e^{-\lambda+\lambda S}\\
+E(N) & = \lambda \\
+V(N) & = \lambda
+\end{align*}
+\end{prop}
+
+\begin{proof}
+On calcule la fonction génératrice:
+\begin{align*}
+g_n[S] & = \displaystyle{\sum \limits_{k \geq 1}} \e^{-\lambda} \dfrac{\lambda^k}{k!} S^k \\
+& = \e^{-\lambda} \displaystyle{\sum \limits_{k \geq 1}} \dfrac{(\lambda S)^k}{k!} S^k \\
+& = e^{-\lambda} \times \e^{\lambda S}  = \e^{-\lambda + \lambda S}
+\end{align*}
+
+On obtient $g_n'[S] = \lambda g_n[S]$ et $g_n''[S] = \lambda^2 g_n[S]$. 
+
+Ainsi, $E[N] = g_n'[1] = \lambda$ et $V[N] = g_n''[1] + E[N] - E[N]^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
+\end{proof}
+
+
+\begin{prop}[Convergence de binomiales vers Poisson]
+Soit $\lambda > 0$
+
+Pour $n> \lfloor \lambda \rfloor$, on pose $X_n$ une variable aléatoire suivant une loi binomiale de paramètres $n$ et $\dfrac{\lambda}{n}$.
+
+Alors la suite $X_n$ converge en loi vers une variable $N$ suivant une loi de Poisson de paramètre $\lambda$.
+\end{prop}
+
+
+\begin{proof}
+Pour tous entiers $k$ et $n$:
+\begin{align*}
+P(X_n = k) & = {n \choose k} \left(\frac{\lambda}{n}\right)^k \left(1-\frac{\lambda}{n}\right)^{n-k} \\
+ & = \left(1-\frac{\lambda}{n}\right)^{n-k} \times \dfrac{\lambda^k}{k!} \times \dfrac{n \times (n-1) \times (n-k+1)}{n^k}
+\end{align*}
+
+On utilise un développement limité pour $\dfrac{1}{n} \underset{n \to +\infty}{\longrightarrow} 0$:
+\[\left(1-\frac{\lambda}{n}\right)^{n-k}  = \e^{(n-k)\ln\left(1-\frac{\lambda}{n}\right)}=\e^{-\lambda + o(1)}\]
+
+D'autre part:
+\[
+\dfrac{n \times (n-1) \times (n-k+1)}{n^k} = 1 \times \left(1-\dfrac{1}{n}\right) \times \left(1-\dfrac{2}{n}\right) \times \cdots \times \left(1-\dfrac{k-1}{n}\right) \underset{n \to +\infty}{\longrightarrow} 1
+\]
+
+Finalement, $P(X_n=k) \underset{n \to +\infty}{\longrightarrow} \e^{-\lambda} \times \dfrac{\lambda^k}{k!}$, ce qui achève de prouver la convergence en loi vers une $\mathcal{P}(\lambda)$.
+\end{proof}
+
+
+\subsection{Lois gamma}
+
+\subsubsection{Fonction gamma}
+
+\begin{de}[Fonction Gamma]
+La fonction $\Gamma$ définie sur $\R^{+}_{*}$ associe à tout $x$
+\[
+\Gamma(x) = \displaystyle{\int_{\R^+}} \e^{-t} t^{x-1} \mathrm d \lambda(t)
+\]
+
+De plus, cette fonction est $\mathcal{C}^{\infty}$.
+\end{de}
+
+
+\begin{proof}
+La fonction $ \phi: (t,~r) \mapsto \e^{-t} t^{r-1}$ est $\mathcal{C}^{\infty}$ sur $\R^{+} \times \R^{+}_{*}$.
+
+De plus, cette fonction est intégrable par rapport à $t$ sur $\R^+$. En effet, on peut utiliser deux arguments:
+\begin{itemize}
+\item[$\bullet$] $t^2 \phi(t) \underset{t \to +\infty}{\longrightarrow} 0$ qui prouve l'intégrabilité sur $[1;~+\infty[$;
+\item[$\bullet$] pour tout $0 < t \leq 1$, $0 \leq \phi(t,~r) \leq t^{r-1}$ qui prouve l'intégrabilité sur $]0;~1]$.
+\end{itemize}
+
+On va maintenant encore utiliser des arguments de domination pour prouver la dérivabilité de $\Gamma$.
+
+Pour tout $n$, $\dfrac{\partial^n }{\partial r^n} \: \phi(t,~r) = \ln(t)^n \times \phi(t,~n)$.
+
+Soit $[a;~b] \subset \R^{+}_{*}$. Pour tout $r \in [a;~b]$, si $t \geq 1$, $t^{b-1} \geq t^{r-1}$ et si $t \leq 1$, $t^{a-1} \geq t^{r-1}$.
+
+
+Ainsi, en posant $\psi_n: t \mapsto \begin{cases} \ln(t)^n \e^{-t} t^{b-1} \text{ si }t \geq 1 \\ \abs{\ln(t)}^n \e^{-t} t^{a-1} \text{ si }0 \leq t \leq 1\end{cases}$, on a pour tout $t \geq 0$:
+\[
+\abs{\dfrac{\partial^n }{\partial r^n} \: \phi(t,~r)} \leq \psi_n(t)
+\]
+
+Or, pour tout $0 < t \leq 1$, $\psi_n(t) = t^{a/2} \abs{\ln(t)}^n \e^{-t} t^{a/2-1}$, et on sait que $t^{a/2} \abs{\ln(t)}^n = o(1)$ ce qui prouve l'intégrabilité de $\psi_n$ sur $]0;~1]$.
+
+D'autre part, pour tout $t \geq 1$, $t^2 \psi_n(t) = \abs{\ln(t)}^n \e^{-t} t^{b+1} \underset{t \to +\infty}{\longrightarrow} 0$, ce qui prouve l'intégrabilité de $\psi_n$ sur $[1;~+\infty[$.
+
+Finalement, par le théorème de convergence dominée, $\Gamma$ est $n-$fois dérivable. Donc $\Gamma$ est bien $\mathcal{C}^{\infty}$.
+\end{proof}
+
+\begin{prop}[Lien entre $\Gamma$ et factorielle]
+Pour tout $x>0$:
+\[\Gamma(x+1)=(x+1) \Gamma(x)\]
+
+En particulier, pour tout entier $n$, $\Gamma(n)=(n-1)!$
+\end{prop}
+
+\begin{proof}
+On procède par intégration par parties, sachant que, dans ce cas, l'intégrale de Riemann impropre et l'intégrale de Lebesgue sont confondues (on intègre une fonction positive):
+\begin{align*}
+\Gamma(x+1) & = \displaystyle{\int_{\R^+}} \e^{-t} t^{x} \mathrm d \lambda(t) \\
+ & = \left[-t^x\e^{-t}\right]_0^{+\infty} + x \displaystyle{\int_{\R^+}} \e^{-t}t^{x-1} \mathrm d \lambda(t) \\
+ & = x \Gamma(x)
+\end{align*}
+
+On peut vérifier aisément que $\Gamma(1) = 1 = 0!$ d'où $\Gamma(2)=1 \times \Gamma(1)=1!$ puis $\Gamma(3)=2 \times \Gamma(2) = 2!$ et ainsi de suite par une récurrence immédiate.
+\end{proof}
+
+\subsubsection{Loi gamma}
+
+\begin{de}[Variable suivant une loi gamma]
+Soit $X$ une variable aléatoire et soit $r>0$ un nombre.
+
+On dit que $X$ suit une loi gamma de paramètre $r$ lorsque $X$ admet une fonction densité \[\phi_r: t \mapsto \dfrac{t^{r-1}\e^{-t} \mathbb{1}_{\R^+}(t)}{\Gamma(r)}\]
+
+On note $X \sim \gamma(r)$
+\end{de}
+
+\begin{proof}
+Il est clair que la fonction $\phi_r$ est normée et positive par définition de la fonction $\Gamma$
+\end{proof}
+
+\begin{prop}[Cas particuliers de la loi gamma]
+$X$ suit une loi exponentielle de paramètre $\lambda$ si et seulement si $\lambda X$ suit une loi gamma de paramètre $1$.
+
+Si $U$ suit une loi normale centrée réduite alors $\dfrac{U^2}{2}$ suit une loi gamma de paramètre $\dfrac{1}{2}$.
+\end{prop}
+
+\begin{proof}
+Soit $X \sim \exp(\lambda)$
+
+On va utiliser la caractérisation de la densité par des fonctions continues bornées.
+
+Soit $f$ une fonction continue bornée. Par la formule du transfert et un changement de variable, on obtient:
+\begin{align*}
+E\left[f\left(\lambda X\right)\right] & = \displaystyle{\int} \lambda f(\lambda t) \e^{-\lambda t} \mathbb{1}_{\R^+}(t) \mathrm d t \\
+ & = \displaystyle{\displaystyle{\int}} f(u) \e^{-u} \mathrm d u
+\end{align*}
+
+Donc la densité de $\lambda X$ est bien la densité d'une variable suivant une loi $\gamma(1)$.
+
+Soit $U \sim \mathcal{N}(0;~1)$. On utilise la même technique ainsi que la parité:
+\begin{align*}
+E\left[f\left(\dfrac{U^2}{2}\right)\right] & = \dfrac{1}{\sqrt{2 \pi}}\displaystyle{\int} f\left(\dfrac{t^2}{2}\right) \e^{-t^2/2} \mathrm d t \\
+& = \dfrac{2}{\sqrt{2 \pi}}\displaystyle{\int} f\left(\dfrac{t^2}{2}\right) \e^{-t^2/2} \mathbb{1}_{\R^+}(t) \mathrm d t \\
+& = \dfrac{2}{\sqrt{2 \pi}}\displaystyle{\int} f(u) \e^{-u} \mathbb{1}_{\R^+}(u) \dfrac{\sqrt{2}\mathrm d u}{2\sqrt{u}} \\
+& = \dfrac{1}{\sqrt{\pi}}\displaystyle{\int} f(u) u^{-1/2}\e^{-u} \mathbb{1}_{\R^+}(u) \mathrm d u
+\end{align*}
+
+On retrouve que $\dfrac{U^2}{2}$ suit une loi $\gamma\left(\frac{1}{2}\right)$ et, au passage, on trouve la valeur de $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$.
+\end{proof}
+
+
+\begin{prop}[Fonction caractéristique d'une loi gamma]
+Soit $r>0$ et $X$ une variable aléatoire suivant une loi $\gamma(r)$.
+
+Alors la fonction caractéristique de $X$ est:
+\[
+\psi_X: \omega \mapsto \dfrac{1}{(\im\omega -1)^r}
+\]
+\end{prop}
+
+\begin{proof}
+Cela se prouve avec un changement de variable dans l'intégrale.
+\end{proof}
+
+
+\begin{prop}[Somme de deux lois gamma]
+Si $X$ et $Y$ sont indépendantes et suivent des lois gamma de paramètres $r$ et $s$ alors $X+Y$ suit une loi gamma de paramètre $r+s$.
+\end{prop}
+
+
+\begin{proof}
+Cela se prouve très facilement en utilisant la fonction caractéristique.
+\end{proof}
+
+\begin{de}[Loi du $\chi^2$ à $n$ degrés de libertés]
+Soient $U_1$, $U_2$, $\cdots$, $U_n$, $n$ variables indépendantes qui suivent toutes des lois normales centrées réduites.
+
+On dit que $U_1^2+U_2^2+ \cdots + U_n^2$ suit une loi du $\chi^2$ à $n$ degrés de liberté.
+
+En particulier, une variable $X$ suit une loi du $\chi^2$ à $n$ degré de libertés si et seulement si $\dfrac{X}{2}$ suit une loi $\gamma\left(\dfrac{n}{2}\right)$.
+\end{de}
+
+\begin{proof}
+Évident d'après ce qui précède concernant l'étude des lois gamma. 
+
+En effet, par linéarité, $\dfrac{X}{2}$ est une somme de $n$ variables indépendantes suivant des lois $\gamma$ de paramètre $\frac{1}{2}$. Il suit donc une loi $\gamma\left(\dfrac{n}{2}\right)$.
+
+La réciproque est évidente, par construction.
+\end{proof}
+%
+%\end{document}

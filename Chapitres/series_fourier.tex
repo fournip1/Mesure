@@ -1,0 +1,410 @@
+
+Dans ce document, on va exploiter les résultats portant sur la convolution ainsi que sur les espaces de Hilbert.
+
+Remarquons que les fonctions $\L^2$ $2\pi$-périodiques à valeurs dans $\C$, que l'on notera $\L^2_{2\pi}$ dans la suite, forment un espace de Hilbert pour cette forme sesquilinéaire définie positive:
+\[
+\begin{array}{llcl}
+\varphi: & \left ( \L^2_{2\pi}\right )^2 & \to & \C \\
+ & (f;~g) & \mapsto & \scal{f}{g} = \int_{[0;~2\pi]} f(t) \overline{g(t)} \, \mathrm{d} \lambda(t) 
+\end{array} \quad \text{ avec $\lambda$ la mesure de Lebesgue sur $\R$}
+\]
+
+De plus, la famille $(e_n)_{n \in \Z}$ avec $e_n: \, t \mapsto \frac{1}{\sqrt{2\pi}} \e^{\im n t}$ est une famille orthonormée.
+
+On va montrer que cette famille est une base de notre espace.
+
+
+\section{Polynômes trigonométriques}
+
+\subsection{Propriétés}
+
+On rappelle quelques propriétés des fonctions $\R \to \C$. Soit ainsi $\varphi$ définie sur un intervalle réel ouvert $I$ et à valeurs dans $\C$. On note $f = \Re(\varphi)$ et $g = \Im(\varphi)$.
+\begin{itemize}
+\item[$\bullet$]
+$\varphi$ est continue lorsque $f$ et $g$ sont continues;
+\item[$\bullet$]
+$\varphi$ est dérivable lorsque $f$ et $g$ sont dérivables; dans ce cas
+\[
+\varphi' = f' + \im g'
+\]
+\item[$\bullet$]
+les formules de dérivée d'une combinaison linéaire et d'un produit sont les mêmes;
+\item[$\bullet$]
+la dérivée des fonctions usuelles polynômes, fonctions rationnelles est identique à la dérivée des polynômes et fonctions rationnelles à coefficients réels.
+\end{itemize}
+
+
+De plus, pour toute fonction holomorphe $h$, $h \circ \varphi$ est dérivable lorsque $\varphi$ est dérivable et on a
+\[
+(h \circ \varphi)' = \varphi' \times h' \circ \varphi
+\]
+
+En particulier, pour tout complexe $a$, $t \mapsto \e^{at}$ est dérivable et de dérivée $t \mapsto a \e^{at}$.
+
+\begin{de}[Polynôme trigonométrique de degré au plus $n$]
+Soit $f: \R \to \C$ une fonction réelle. On dit que $f$ est un polynôme trigonométrique de degré $n$ lorsqu'il existe $2n+1$ coefficients complexes $(a_k)_{-n \leq k \leq n}$ tels que, pour tout $t$:
+\[
+f(t) = \displaystyle{\sum \limits_{-n \leq k \leq n}} a_k \e^{\im k t} \quad \text{ avec } a_n \neq 0 \text{ ou }a_{-n} \neq 0
+\]
+
+En particulier $f$ est périodique et sa période est un diviseur de $2\pi$.
+\end{de}
+
+On peut faire quelques remarques:
+\begin{itemize}
+\item[$\bullet$]
+les polynômes trigonométriques sont de classe $\mathcal{C}^{\infty}$;
+\item[$\bullet$]
+la dérivée d'un polynôme trigonométrique est un polynôme trigonométrique;
+\item[$\bullet$]
+un produit, une combinaison linéaire de deux polynômes trigonométriques est un polynôme trigonométrique.
+\item[$\bullet$]
+les coefficients $(a_k)$ sont définis de manière unique (proposition plus bas).
+\end{itemize}
+
+\begin{prop}[Base orthonormée des polynômes trigonométriques de degré au plus $n$]
+La famille  $(e_k)_{k \in \intint{-n}{n}}$ avec $e_k: \, t \mapsto \frac{1}{\sqrt{2\pi}} \e^{\im k t}$ constitue une base orthonormée des polynômes trigonométriques pour le produit scalaire défini en préambule.
+
+En particulier, les coefficients $(a_k)$ d'un polynôme trigonométrique $f$ valent
+\[
+a_k = \scal{f}{e_k}
+\]
+\end{prop}
+
+\begin{proof}
+Assez évident.
+\end{proof}
+
+\begin{prop}[Convolution de fonctions $L^1$ $2-\pi$ périodiques]
+Dans toute la suite, on définit une convolution sur l'ensemble des fonctions $2-\pi$ périodiques intégrables sur $[-\pi;~\pi]$ par:
+\[
+f * g: x \mapsto \displaystyle{\int_{[-\pi;~\pi]}} f(x-t)g(t) \, \mathrm d \lambda(t)
+\]
+
+Ce produit est:
+\begin{itemize}
+\item[$\bullet$]
+commutatif;
+\item[$\bullet$]
+distributif sur l'addition;
+\item[$\bullet$]
+la convolée de deux fonctions $L^1$ et $2-\pi$ périodiques donne une fonction $L^1$ et $2-\pi$ périodique.
+\item[$\bullet$]
+la convolée d'une fonction non périodique, $L^1$ sur $[-\pi;~\pi]$ et d'une fonction $L^1$ périodique est périodique;
+\item[$\bullet$]
+la convolée d'une fonction non périodique, $L^1$ sur $[-\pi;~\pi]$ et d'un polynôme trigonométrique est un polynôme trigonométrique.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+Montrons uniquement le dernier point:
+\[
+x \mapsto \displaystyle{\int_{[-\pi;~\pi]}} \e^{\im k (x-t)}g(t) \, \mathrm d \lambda(t) = \e^{\im k x}\displaystyle{\int_{[-\pi;~\pi]}} \e^{-\im k t}g(t) \, \mathrm d \lambda(t) \quad \text{ est un polynôme trigonométrique}
+\]
+\end{proof}
+
+\subsection{Convergence uniforme d'un polynôme trigonométrique vers une fonction continue}
+
+On considère une fonction $f$, $2\pi$-périodique et continue.
+
+Soit $c$ la fonction définie par $c(x)=\dfrac{\cos(x)+1}{2}$. Notons que $c$ est paire, positive, de maximum 1, atteint pour $x=2k\pi$ avec $k \, \in \, \Z$. 
+
+Pour tout entier naturel $n$, on pose
+
+$g_n = \dfrac{c^n}{\displaystyle{\int_{[-\pi;~\pi]}} c^n}$, de sorte que $\displaystyle{\int_{[-\pi;~\pi]}} g^n = 1$.
+
+Enfin, on considère la suite de polynômes trigonométriques $f_n = g_n*f$.
+
+Alors $f_n$ converge uniformément vers $f$. Pourquoi?
+
+Notons tout d'abord que, pour tout $x$,
+
+$f_n(x)-f(x) = \displaystyle{\int_{[-\pi;~\pi]}} (f(x-t)-f(x))g_n(t) \, \mathrm d \lambda(t)$. Cela provient de l'égalité
+
+$f(x)=f(x) \displaystyle{\int_{[-\pi;~\pi]}} g_n = \displaystyle{\int_{[-\pi;~\pi]}} f(x)g_n(t) \, \mathrm d \lambda(t)$.
+
+
+On considère maintenant $\varepsilon > 0$ quelconque et on utilise l'uniforme continuité de $f$. 
+
+On sait qu'il existe $\eta>0$ indépendant de $x$ tel que, pour tout $\abs{t}<\eta$, $\abs{f(x-t)-f(x)} \leq \dfrac{\varepsilon}{2}$.
+
+On en déduit:
+
+\begin{align*}
+\abs{f_n(x)-f(x)} & \leq \displaystyle{\int_{[-\pi;~\pi]}} \abs {f(x-t)-f(x)}g_n(t) \, \mathrm d  \lambda(t)\\
+\abs{f_n(x)-f(x)} & \leq \dfrac{\varepsilon}{2} \displaystyle{\int_{[-\pi;~\pi] \cap \left\{\abs{t}<\eta\right\}}} g_n(t) \, \mathrm d \lambda(t) + 2 \norm{f}_{\infty} \displaystyle{\int_{[-\pi;~\pi] \cap \left\{\abs{t} \geq \eta\right\}}} g_n(t) \, \mathrm d \lambda(t)
+\end{align*}
+
+Il reste maintenant à prouver que $\lim \limits_{n \to +\infty} \displaystyle{\int_{[-\pi;~\pi] \cap \left\{\abs{t} \geq \eta\right\}}} g_n(t) \, \mathrm d \lambda(t) = 0$.
+
+On peut considérer que $0 < \eta \leq \pi$. Notons alors que $c\left(\dfrac{\eta}{2}\right)>c\left(\eta\right)$.
+
+Revenons maintenant à l'expression:
+\[
+\displaystyle{\int_{[-\pi;~\pi] \cap \left\{\abs{t} \geq \eta\right\}}} g_n(t) \, \mathrm d \lambda(t) = \dfrac{\displaystyle{\int_{[-\pi;~\pi] \cap \left\{\abs{t} \geq \eta\right\}}} c^n(t) \, \mathrm d \lambda(t)}{\displaystyle{\int_{[-\pi;~\pi]}} c^n(t) \, \mathrm d \lambda(t)} 
+\leq \dfrac{c^n(\eta)  \lambda\left([-\pi;~\pi] \cap \left\{\abs{t} \geq \eta \right\}\right) }{c^n\left (\frac{\eta}{2}\right )  \lambda\left([-\pi;~\pi] \cap \left\{\abs{t} \leq \frac{\eta}{2} \right\}\right) }
+\leq \left (\dfrac{c(\eta)}{c\left (\frac{\eta}{2}\right ) }\right )^n \times \dfrac{\lambda\left([-\pi;~\pi] \cap \left\{\abs{t} \geq \eta \right\}\right)}{\lambda\left([-\pi;~\pi] \cap \left\{\abs{t} \leq \frac{\eta}{2} \right\}\right)}
+\]
+
+Cette dernière inégalité permet de conclure.
+
+\section{Séries de Fourier, noyau de Dirichlet}
+
+\subsection{Introduction, convergence en norme deux}
+
+Soit $f$ une fonction de classe $\L^2$ sur $[-\pi;~\pi]$ et $2\pi$ périodique.
+
+On appelle série de Fourier de $f$ de degré $n$ la projection de $f$ sur l'ensemble des polynômes trigonométriques de degré au plus $n$. On notera ainsi:
+\[
+S_n[f] = \displaystyle{\sum \limits_{-n \leq k \leq n}} \scal{f}{e_k} e_k
+\]
+
+D'après le paragraphe précédent, pour toute fonction continue et $2\pi$-périodique $f$ et pour tout polynôme trigonométrique de degré au plus $n$ noté $g_n$, on a
+\[
+\norm{g_n-f}_{2} \leq 2 \pi \norm{g_n-f}_{\infty}
+\]
+
+Par suite, l'ensemble des polynômes trigonométriques est dense dans l'ensemble des fonctions continues pour la norme deux. Et comme l'ensemble des fonctions continues est dense dans l'ensemble des fonctions $L^2$ et $2-\pi$ périodiques, on en déduit que l'ensemble des polynômes trigonométriques est dense dans l'ensemble des fonctions $L^2$ et $2-\pi$ périodiques pour la norme deux. 
+
+D'autre part, on sait que $\norm{S_n[f]-f}_{2}$ réalise la distance minimale entre les polynômes trigonométriques de degré au plus $n$ et les $f$. 
+
+On en déduit que $S_n[f]$ converge vers $f$ en norme deux. En particulier, l'ensemble des $(e_k)_{k \in \Z}$ constitue une base hilbertienne des fonctions $\L^2$ $2-\pi$ périodiques.
+
+\subsection{Noyau de Dirichlet: définition et étude}
+
+Pour tout $x$, on a
+\begin{align*}
+S_n[f](x) & = \displaystyle{\sum \limits_{-n \leq k \leq n}} \int_{[-\pi;~\pi]} f \overline{e_k} e_k(x) \\
+ & =  \displaystyle{\int_{[-\pi;~\pi]}}  f(t) \times \frac{1}{2\pi}\sum \limits_{-n \leq k \leq n} \e^{\im k(x-t)} \, \mathrm d t \\
+ & = f * d_n(x)
+\end{align*}
+
+En posant $d_n: t \mapsto \frac{1}{2\pi}\sum \limits_{-n \leq k \leq n} \e^{\im kt}$.
+
+Ainsi, la série de Fourier de $f$ de degré $n$ s'analyse comme la convolution de $f$ et de la fonction $d_n$ qu'on appelle le noyau de Dirichlet de degré $n$.
+
+On \og lit \fg{} assez rapidement que $d_n$ est une fonction à valeurs réelles. Utilisons nos connaissances sur les sommes de termes de suite géométrique pour déterminer plus précisément l'expression de $d_n$.
+
+Ainsi, pour $t=0$, on a $d_n(0) = 2n+1$. Et pour $t \notin 2\pi \Z$:
+\begin{align*}
+2\pi d_n(t) & = \e^{-\im n t} \sum \limits_{0 \leq k \leq 2n} \e^{\im kt} \\
+ & = \e^{-\im n t} \times \dfrac{1-\e^{(2n+1) \im t}}{1-\e^{\im t}} \\
+ & = \e^{-\im n t} \times \dfrac{\e^{\im (n+1/2)t}}{\e^{\im t/2}} \times \dfrac{\e^{-\im (n+1/2)t} - \e^{\im (n+1/2)t}}{\e^{-\im t/2}- \e^{\im t/2}} \\
+ & = \e^{-\im n t} \times \e^{\im n t} \times \dfrac{\sin\left ((n+1/2)t \right )}{\sin \left ( \frac{t}{2}\right )}  \\
+ & = \dfrac{\sin \left ( \frac{(2n+1)t}{2}\right )}{\sin \left ( \frac{t}{2}\right )}
+\end{align*}
+
+
+On obtient donc:
+\[
+d_n: t \mapsto \begin{cases}
+\frac{2n+1}{2\pi} \text{ si }t \in 2\pi\Z \\
+\frac{1}{2\pi} \frac{\sin \left ( \frac{(2n+1)t}{2}\right )}{\sin \left ( \frac{t}{2}\right )} \text{ sinon }
+\end{cases}
+\]
+
+La dérivée de $d_n$ s'obtient après de longs calculs:
+\[
+2 \pi d_n': t \mapsto \dfrac{n \sin\left ((n+1)t \right ) - (n+1) \sin(n t)}{2\sin^2 \left ( \frac{t}{2}\right )}
+\]
+
+Il faut étudier le numérateur de cette fonction. On pose donc:
+\[
+\varphi: t \mapsto n \sin\left ((n+1)t \right ) - (n+1) \sin(n t)
+\]
+
+La dérivée de cette fonction est, après calculs, $\varphi': t \mapsto -2n(n+1)\sin \left ( \frac{(2n+1)t}{2}\right ) \sin \left (\frac{t}{2} \right )$. 
+
+Sur $]0;~\pi]$, la dérivée s'annule et change de signe en $(\alpha_k)_{1 \leq k \leq n}$ avec $\alpha_k = \dfrac{2k\pi}{2n+1}$.
+
+La fonction $\varphi$ possède donc des extrema en $(\alpha_k)_{0 \leq k \leq n}$. On calcule
+\[
+\varphi(\alpha_k) = (-1)^k(2n+1)\sin\left ( \frac{\pi k}{2n+1}\right ) \quad \text{ qui est du signe de }(-1)^k
+\]
+
+Par suite, $d_n'$ change de signe entre chacun des $\alpha_k$. 
+
+On note ainsi $(\beta_k)_{0 \leq k \leq n-1}$ les lieux des extrema de $d_n$. On a $\beta_0 = 0$, et pour tout $1 \leq k \leq n-1$, $\beta_k \in ]\alpha_k;~\alpha_{k+1}[$. 
+
+Là encore l'analyse du signe de $\varphi$ nous indique que pour $k$ pair, le lieu est un maximum et pour $k$ impair le lieu est un minimum.
+
+On va maintenant chercher à majorer $\abs{d_n(\beta_k)}$ pour $1 \leq k \leq n-1$, sachant que 
+\begin{itemize}
+\item[$\bullet$]
+$d_n(\beta_0) = 2n+1$
+\item[$\bullet$]
+entre $\alpha_k$ et $\alpha_{k+1}$ la fonction $t \mapsto \abs{\sin \left ( \frac{(2n+1)t}{2}\right )}$ est maximale en $\dfrac{\alpha_k+\alpha_{k+1}}{2} = \dfrac{(2k+1)\pi}{(2n+1)}$ et son maximum est 1;
+\item[$\bullet$]
+sur $[0;~\pi]$ la fonction $t \mapsto \sin \left ( \frac{t}{2}\right )$ est positive et croissante. 
+
+De plus, cette fonction est minorée sur $[0;~\pi]$ par sa corde $t \mapsto \frac{x}{\pi}$.
+\end{itemize}
+
+On a ainsi le contrôle suivant:
+\[
+2\pi \abs{d_n(\beta_k)} \leq \dfrac{1}{\sin \left (\frac{\alpha_k}{2}\right )} = \dfrac{1}{\sin \left (\frac{k \pi}{2n+1}\right )} \leq \dfrac{2n+1}{k}
+\]
+
+Ce dernier résultat nous indique la forme de la courbe de $d_n$ sur $[-\pi;~\pi]$ qui possède
+\begin{itemize}
+\item[$\bullet$]
+un maximum en $0$;
+\item[$\bullet$]
+des extrema locaux secondaires d'amplitudes atténuées plus on se rapproche des extremités du segment $[-\pi;~\pi]$.
+\end{itemize}
+
+\subsection{Le cas $C^1$}
+
+\subsubsection{Cas simple}
+
+On suppose maintenant que $f$ est dérivable et que sa dérivée est de classe $L^2$, ce qui bien sûr inclus le cas $C^1$ que l'on retrouvera en pratique.
+
+On va montrer dans ce paragraphe que la série de Fourier de $f$ converge normalement vers $f$.
+
+
+\begin{prop}[Coefficient de Fourier des dérivées n-èmes]
+Soit $f$ une fonction de classe $C^n$. Alors, pour tout $k \leq n$ et pour tout $m \in \Z$, on a
+\[
+\scal{f^{(k)}}{e_m} = (\im m)^k \scal{f}{e_m}
+\]
+\end{prop}
+
+\begin{proof}
+Très facile à prouver par IPP et récurrence.
+\end{proof}
+
+
+\begin{prop}[Convergence normale de la série de Fourier dans le cas d'une fonction de classe $C^1$]
+Tout est dans le titre! La série de Fourier converge normalement vers $f$.
+\end{prop}
+
+
+\begin{proof}
+On raisonne en norme deux. On sait, d'après l'inégalité de Parseval que:
+\[
+\displaystyle{\sum \limits_{k \in \Z}} \abs{\scal{f'}{e_k}}^2 < +\infty
+\]
+
+Or, $\abs{\scal{f'}{e_k}}^2 = k^2 \abs{\scal{f}{e_k}}^2$.
+
+On exploite maintenant l'inégalité de Cauchy-Schwarz, pour tout $n \in \N^*$:
+\[
+\displaystyle{\sum \limits_{\substack{-n \leq k \leq n \\ k \neq 0}}} \abs{\frac{1}{k}} \abs{ k \scal{f}{e_k}} \leq \sqrt{\displaystyle{\sum \limits_{k \in \Z^*}} \abs{k}^2 \abs{\scal{f}{e_k}}^2} \sqrt{\displaystyle{\sum \limits_{k \in \Z^*}} \abs{k}^2 \abs{\frac{1}{k^2}}} < +\infty
+\]
+
+On en déduit que $\displaystyle{\sum \limits_{k \in \Z}} \abs{\scal{f}{e_k}}$ est convergente, ce qui achève la démonstration.
+\end{proof}
+
+\subsubsection{Théorème de Dini-Dirchlet et applications}
+
+On va maintenant essayer d'établir sous des conditions légèrement moins strictes un résultat de convergence simple de la série de Fourier d'une fonction $f$ de classe $L^1$ en un point $x$ vers une limite $\ell$.
+
+On cherche donc à étudier la limite de:
+\begin{align*}
+Sn[f](x) - \ell & = \int_{[-\pi;~\pi]} f(x-t)d_n(t) \; \mathrm d t - \ell \\
+ & = \int_{[-\pi;~\pi]} (f(x-t)-\ell)d_n(t) \; \mathrm d t \\
+ & = \int_{[0;~\pi]} (f(x-t)-\ell)d_n(t) \; \mathrm d t + \int_{[0;~\pi]} (f(x+t)-\ell)d_n(-t) \; \mathrm d t \\
+ & = \int_{[0;~\pi]} (f(x-t)+f(x+t)-2\ell)d_n(t) \; \mathrm d t \text{ avec un changement de variable et par parité de }d_n\\
+ & = \frac{1}{2\pi} \displaystyle{\int_{[0;~\pi]}} \dfrac{f(x-t)+f(x+t)-2\ell}{\sin\left(\frac{t}{2}\right)} \sin \left ( \frac{(2n+1)t}{2}\right ) \; \mathrm d t \\
+ & = \frac{1}{2\pi} \Img \left ( \widehat{g}\left ( \frac{(2n+1)}{2}\right ) \right )
+\end{align*}
+
+En posant $g: t \mapsto \dfrac{f(x-t)+f(x+t)-2\ell}{\sin\left(\frac{t}{2}\right)} \mathbb{1}_{[0;~\pi]}$ et en notant $\widehat{g}$ la transformée de Fourier de $g$.
+
+Il suffit donc de montrer $\widehat{g}\left ( \frac{(2n+1)}{2}\right ) \underset{n \to +\infty}{\longrightarrow} 0$.
+
+Mais pour cela, nous savons qu'il suffit que $g$ soit $L^1$. Cela nous offre un critère de convergence.
+
+\begin{theo}[Critère de Dirichlet-Dini]
+On reprend les mêmes hypothèses.
+
+Si $ \displaystyle{\int_{[0;~\pi]}} \abs{\dfrac{f(x-t)+f(x+t)-2\ell}{t}} \; \mathrm d t < +\infty$ alors 
+\[
+S_n[f](x) \underset{n \to +\infty}{\longrightarrow} \ell
+\]
+\end{theo}
+
+
+\begin{proof}
+C'est le critère de Riemann. En effet, $g(t) \underset{0}{\sim} 2 \times \left (\dfrac{f(x-t)+f(x+t)-2\ell}{t}\right )$. Ainsi, si la fonction $t \mapsto \dfrac{f(x-t)+f(x+t)-2\ell}{t}$ est $L^1$ sur $[0;~\pi]$ alors $g$ l'est aussi. Or on a vu dans le développement précédent que:
+\[
+S_n[f](x) - \ell = \frac{1}{2\pi} \Img \left ( \widehat{g}\left ( \frac{(2n+1)}{2}\right ) \right )
+\]
+
+On en déduit le résultat escompté en raison de la limite de la transformée de Fourier d'une fonction $L^1$ en $+\infty$.
+\end{proof}
+
+
+Nous en déduisons un corollaire très pratique.
+
+\begin{cor}[Convergence simple de la série de Fourier dans le cas $\mathcal{C}^1$ par morceaux]
+Soit $f$ une fonction $2\pi$ périodique et $\mathcal{C}^1$ par morceaux. 
+
+On pose $\tilde{f}: x \mapsto \begin{cases}
+f(x) \text{ si x n'est pas un saut} \\
+\frac{f(x^+)+f(x^-)}{2} \text{ si x est un saut}
+\end{cases}$
+
+Alors $S_n[f]$ converge simplement vers $\tilde{f}$.
+\end{cor}
+
+\begin{proof}
+Soit $x \in ]-\pi;~\pi]$. 
+
+D'après le critère de Dini-Dirichlet, il suffit de vérifier si $g: t \mapsto \dfrac{f(x-t)+f(x+t)-2\tilde{f}(x)}{t}$ est $L^1$ sur $[0;~\pi]$.
+
+Dans le cas où $x$ est un saut, on a $g(t) = \dfrac{f(x+t)+f(x-t)-f(x^+)-f(x^-)}{t}$. Quand $t$ tend vers $0$ cette fonction tend vers $f'_d(x) + f'_g(x)$ avec $f'_d$ et $f'_g$ les dérivées à droite et à gauche, ce qui permet de conclure. La fonction $g$ est bien intégrable.
+
+Le cas où $x$ n'est pas un saut est encore plus simple.
+
+Dans les deux cas, le critère de Dini s'applique et cela permet de conclure.
+\end{proof}
+
+\subsubsection{Deux exemples en dents de scie}
+
+Soit la fonction $s$, $2\pi$ périodique telle que $s_{|]-\pi;~\pi]} = \id_{|]-\pi;~\pi]}$.
+
+On note pour tout $k\in \Z$, $c_k$ les coefficients de Fourier des éléments $e_k$, $c_k = \scal{s}{e_k}$.
+
+On a $c_0 = 0$ cas $s$ est impaire. De plus, pour tout $k \neq 0$, on obtient après calcul:
+\begin{align*}
+c_k & = \frac{1}{2\pi} \int_{]-\pi;~\pi]} t\e^{-\im k t} \, \mathrm d \lambda(t) \\
+ & = \cdots \\
+  & = \dfrac{\im (-1)^k}{k}
+\end{align*}
+
+On en déduit aisément l'expression de la série de Fourier associée à $s$. Pour tout $n \in \N^*$:
+\[
+S_n[s]: x \mapsto \displaystyle{\sum \limits_{1 \leq k \leq n}} \frac{2 \times (-1)^{k+1} \sin(kx)}{k} 
+\] 
+
+L'égalité de Parseval donne:
+\[
+\lim \limits_{n \to +\infty} \displaystyle{\sum_{k=-n}^n} \abs{c_k}^2 = \norm{s}_2^2 = \dfrac{1}{2\pi} \int_{]-\pi;~\pi]} t^2  \, \mathrm d \lambda(t)
+\]
+
+Un peu de calcul permet d'obtenir l'identité:
+\[
+\displaystyle{\sum \limits_{k \in \N^*}} \frac{1}{k^2} = \dfrac{\pi^2}{6}
+\]
+
+
+Considérons également la fonction $u$, $2\pi$ périodique telle que, pour tout $t \in ]-\pi;~\pi]$, $u(t) = \abs{t}$. On note $(b_k)$ les coefficients de Fourier associés.
+
+On a $b_0 = \dfrac{\pi}{2}$ (valeur moyenne) et pour tout $k \in \Z^*$, après calcul:
+\[
+b_k = \begin{cases}
+ \dfrac{-2}{k^2 \pi} \text{ si $k$ est impair} \\
+ 0 \text{ sinon}
+\end{cases}
+\]
+
+La série de Fourier associée à $u$ est donc, pour tout $n \in \N^*$:
+\[
+S_{2n+1}[u]: x \mapsto \frac{\pi}{2} - \frac{4}{\pi} \displaystyle{\sum \limits_{0 \leq k \leq n}} \frac{\cos\left ((2k+1)x\right )}{(2k+1)^2}
+\]
+
+La convergence simple de cette série en $0$ vers $s(0) = 0$ donne l'identité:
+\[
+\displaystyle{\sum \limits_{k \in \N^*}} \frac{1}{(2k+1)^2} = \dfrac{\pi^2}{8}
+\]

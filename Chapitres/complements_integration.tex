@@ -1,0 +1,466 @@
+
+
+\section{Tribu, mesure produit, théorème de Fubini-Tonelli}
+
+
+\subsection{Théorème d'unicité de mesure}
+
+\begin{de}[$\pi-$système]
+Un ensemble $\mathcal{C}$ de parties de $E$ est appelé $\pi-$système lorsque $\forall C_1, \, C_2 \, \in \mathcal{C}, \, C_1 \cap C_2 \, \in \mathcal{C}$.
+\end{de}
+
+\begin{de}[$\lambda-$système]
+Un ensemble $\mathcal{L}$ de parties de $E$ est appelé $\lambda-$système lorsque:
+\begin{itemize}
+\item[$\bullet$] $E \in \mathcal{L}$;
+\item[$\bullet$] $\mathcal{L}$ est stable par union dénombrable croissante; i.e. $\forall \left(L_i\right)_{i \in \N} / \, \forall i, \, L_{i+1} \supset L_i, \, \bigcup \limits_{i \in \N} L_i \in \mathcal{L}$;
+\item[$\bullet$] $\mathcal{L}$ est stable par différence, i.e. $\forall L, \, M \in \mathcal{L}/ \, L \subset M, \, M-L \in \mathcal{L}$.
+\end{itemize}
+\end{de}
+
+On peut de la même manière fabriquer des $\lambda-$système engendrés par des sous-ensembles de parties de $E$ exactement comme avec les tribus. La notion de $\lambda-$système trouve son intérêt dans les preuves d'unicité de mesures; comme exposé plus bas.
+
+\begin{prop}[$\lambda-$système engendré par un $\pi-$système]
+Soit $\mathcal{C}$ un $\pi-$système de $E$ contenant $E$. Soit d'autre part $\mathcal{L}$ le $\lambda-$système engendré par $\mathcal{C}$.
+
+Alors $\mathcal{L}$ est la tribu engendrée par $\mathcal{C}$.
+\end{prop}
+
+\begin{proof}
+On va considérer $\mathcal{T}$ la tribu engendrée par $\mathcal{C}$. Il est évident qu'une tribu est un $\lambda-$système donc $\mathcal{L} \subset \mathcal{T}$.
+
+
+Pour prouver l'inclusion réciproque on va prouver que $\mathcal{L}$ est une tribu. Il nous faut donc prouver pour cela qu'elle est stable par réunion dénombrable, la stabilité par complémentaire étant évidente.
+
+Ainsi, considérant une famille $\left(L_i\right)_{i \in \N}$, on veut prouver que $\bigcup \limits_{i \in \N} L_n \in \mathcal{L}$. Mais, si, pour tout entier $i$, on pose $\hat{L_i} = \bigcup \limits_{0 \leq n \leq i} L_n$, et que l'on montre que $\hat{L_i} \in \mathcal{L}$, c'est gagné car alors les $\hat{L_i}$ constituent une famille dénombrable et croissante d'éléments de $\mathcal{L}$. Il s'agit donc de montrer que $\mathcal{L}$ est stable par réunion finie, ce qui est équivalent à prouver que $\mathcal{L}$ est stable par intersection finie, en faisant la remarque que $L_1 \cup L_2 = \overline{\overline{L_1} \cap \overline{L_2}}$.
+
+Pour ce faire, on procède en deux temps:
+\begin{itemize}
+\item on montre que $\mathcal{L}$ est stable par intersection avec les éléments de $\mathcal{C}$;
+\item puis on en déduit que $\mathcal{L}$ est stable par intersection finie.
+\end{itemize}
+
+Considérons donc dans un premier temps l'ensemble $\mathcal{M} = \left \{ L \in \mathcal{L}/ \, \forall C \in \mathcal{C}, \, L \cap C \in \mathcal{L} \right \}$. On sait que $\mathcal{C} \subset \mathcal{M} \subset  \mathcal{L}$. 
+
+De plus, pour tout famille dénombrable et croissante de $\left(L_i\right)_{i \in \N}$ de $\mathcal{M}$, $\bigcup \limits_{i \in \N} L_i \in \mathcal{M}$ car, pour tout $C$ de $\mathcal{C}$, $\left(\bigcup \limits_{n \in \N} L_i\right) \cap C = \bigcup \limits_{n \in \N} \left(L_i \cap C\right)$ et les $L_i \cap C$ sont aussi une famille croissante et dénombrable de $\mathcal{L}$. Enfin, de la même manière, $\mathcal{M}$ est stable par différence car pour tous les éléments $M$ et $L$ de $\mathcal{M}$ tels que $L \subset M$, on a $\left(M-L\right) \cap C = \left(M \cap C\right) - \left(L \cap C\right)$ Ainsi, $\mathcal{M}$ est un $\lambda-$système. En particulier, cela prouve que $\mathcal{L} \subset \mathcal{M}$. 
+
+On a donc prouvé que $\mathcal{L} = \mathcal{M}$ en raison de la double inclusion.
+
+Dans un second temps, considérons  $\mathcal{N} = \left \{ L \in \mathcal{L}/ \, \forall  M \in \mathcal{L}, \, L \cap M \in L\right \}$. D'après ce que l'on vient d'établir, $\mathcal{C} \subset \mathcal{N}$. De plus, on peut, en répétant le même raisonnement montrer que $\mathcal{N}$ est un $\lambda-$système et ainsi en déduire $\mathcal{L} = \mathcal{N}$. Finalement, $\mathcal{L}$ est bien stable par intersection finie, ce qui achève la démonstration.
+\end{proof}
+
+\begin{theo}[Unicité de la mesure]
+Soit un ensemble mesurable $(E;~\mathcal{T})$ dotée de deux mesures $\mu_1$ et $\mu_2$.
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] $\mathcal{T}$ est engendrée par un $\pi-$système $\mathcal{C}$;
+\item[$\bullet$] il existe une suite $E_n$ croissante d'éléments de $\mathcal{C}$ telle que $E = \lim \uparrow E_n$ et pour tout $n$, $\mu_1(E_n)<+\infty$ et $\mu_2(En)<+\infty$;
+\item[$\bullet$] pour tout $C \in \mathcal{C}$, $\mu_1(C) = \mu_2(C)$.
+\end{itemize}
+
+Alors les mesures $\mu_1$ et $\mu_2$ sont identiques.
+\end{theo}
+
+
+\begin{proof}
+Pour tout $n$, on pose $\mathcal{C}_n = \left \{C \cap E_n, \, C \in \mathcal{C} \right \}$, $\mathcal{L}_n = \left \{ T \in \mathcal{T} / \, \mu_1(T)=\mu_2(T) \text{ et }T \subset E_n \right \}$ et enfin $\mathcal{T}_n = \left \{ T \in \mathcal{T}/ \, T \subset E_n\right \}$
+
+En raison des propriétés des mesures $\mu_1$ et $\mu_2$, $\mathcal{L}_n$ est stable par différence, par union croissante dénombrable et contient $E_n$. C'est donc un $\lambda-$système qui contient $\mathcal{C}_n$.
+
+Donc, d'après le théorème précédent, $\mathcal{L}_n$ contient $\mathcal{T}_n$.
+
+Finalement, pour tout élément $T$ de $\mathcal{T}$ et pour tout $n$, $\mu_1\left(T \cap E_n\right)=\mu_1\left(T \cap E_n\right)$. 
+
+On conclut ensuite par passage à la limite sur $n$.
+\end{proof}
+
+\subsection{Définition de la tribu produit}
+
+On considère deux ensembles mesurés $(E_1;~\mathcal{T}_1;~\mu_1)$ et $(E_2;~\mathcal{T}_2;~\mu_2)$.
+
+Alors, on peut construire la tribu produit de $E_1 \times E_2$ en considérant la tribu engendrée les cylindres $\left \{ \left(T_1;~E_2\right), \, \left(E_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$. On note $\mathcal{T}_1 \otimes \mathcal{T}_2$ cette tribu produit.
+
+C'est la plus petite tribu qui rende les applications \og coordonnées \fg{} mesurables. De plus, cette tribu est également engendrée par un $\pi-$système:
+
+\begin{prop}
+La tribu engendrée par $\left \{ \left(T_1;~E_2\right), \, \left(E_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$ est également la tribu engendrée par $\left \{ \left(T_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$.
+\end{prop}
+
+Ce dernier ensemble constitue d'ailleurs un $\pi-$système.
+
+\begin{proof}
+On note $\mathcal{T}$, la tribu engendrée par $\left \{ \left(T_1;~E_2\right), \, \left(E_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$ et $\mathcal{T}'$ celle engendrée par $\left \{ \left(T_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$.
+
+Remarquons que $\left \{ \left(T_1;~E_2\right), \, \left(E_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \} \subset \left \{ \left(T_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$ donc $\mathcal{T} \subset \mathcal{T}'$.
+
+Pour montrer l'implication réciproque, il suffit de constater que $\left(T_1;~E_2\right) \cap \left(E_1;~T_2\right) = \left(T_1,~T_2\right)$. Ainsi, tous les éléments de $\left \{ \left(T_1;~T_2\right), \, T_1 \in \mathcal{T}_1 \text{ et }T_2 \in \mathcal{T}_2\right \}$ sont dans $\mathcal{T}$ et, par suite, $\mathcal{T}' \subset \mathcal{T}$.
+\end{proof}
+
+\subsection{Définition de la mesure produit}
+
+Pour définir une mesure sur cette tribu produit, il nous faut énoncer le théorème de Fubini-Tonelli que nous démontrerons en utilisant les $\lambda-$systèmes.
+
+\begin{theo}[Fubini-Tonelli, définition de la mesure produit]
+Soient $(E_1;~\mathcal{T}_1;~\mu_1)$ et $(E_2;~\mathcal{T}_2;~\mu_2)$ deux espaces mesurés et $\mathcal{T}_1 \otimes \mathcal{T}_2$ la tribu produit associée.
+
+On suppose que $E_1 = \lim \limits_{n \to +\infty} \uparrow E_1^{(n)}$ et que $E_2 = \lim \limits_{n \to +\infty} \uparrow E_2^{(n)}$ avec pour tout $n$, $\mu_1\left(E_1^{(n)}\right)<+\infty$ et $\mu_2\left(E_2^{(n)}\right)<+\infty$.
+
+Alors, pour tout $T \in \mathcal{T}_1 \otimes \mathcal{T}_2$:
+\begin{itemize}
+\item[$\bullet$] la fonction $x_2 \mapsto \displaystyle{\int_{E_1}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \,  \mathrm d \mu_1(x_1)$ est mesurable;
+\item[$\bullet$] la fonction $x_1 \mapsto \displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \,  \mathrm d \mu_2(x_2)$ est mesurable;
+\item[$\bullet$] et on a l'égalité:
+\[
+\displaystyle{\int_{E_2}} \left(\displaystyle{\int_{E_1}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \, \mathrm d \mu_1(x_1)\right)  \, \mathrm d \mu_2(x_2) 
+= \displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \,  \mathrm d \mu_2(x_2)\right)  \,  \mathrm d \mu_1(x_1)
+\]
+\end{itemize}
+
+On note $\mu(T) = \displaystyle{\int_{E_2}} \left(\displaystyle{\int_{E_1}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \,  \mathrm d \mu_1(x_1)\right) \,  \mathrm d \mu_2(x_2) 
+= \displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \, \mathrm d \mu_2(x_2)\right)  \, \mathrm d \mu_1(x_1)$ et $\mu$ constitue la \emph{mesure produit} sur $\mathcal{T}_1 \otimes \mathcal{T}_2$.
+\end{theo}
+
+\begin{proof}
+On considère l'ensemble $\mathcal{C}$ des pavés de $E_1 \times E_2$; c'est à dire les éléments de la forme $(T_1;~T_2) \in \mathcal{T}_1 \times \mathcal{T}_=2$. 
+
+Pour tout $(T_1;~T_2)$ de cet ensemble:
+\begin{itemize}
+\item[$\bullet$]  $x_2 \mapsto \displaystyle{\int_{E_1}} \displaystyle{\mathbb{1}}_{(T_1;~T_2)}(x_1;~x_2)  \,   \mathrm d \mu_1(x_1)$ est la fonction $\mathbb{1}_{T_2} \mu_1(T_1)$ et est donc mesurable.
+\item[$\bullet$]  $x_1 \mapsto \displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{(T_1;~T_2)}(x_1;~x_2)  \, \mathrm d \mu_2(x_2)$ est la fonction $\mathbb{1}_{T_1} \mu_2(T_2)$ et est donc mesurable.
+\item[$\bullet$]  et on vérifie:
+\[
+\displaystyle{\int_{E_2}} \left(\displaystyle{\int_{E_1}} \displaystyle{\mathbb{1}}_{(T_1;~T_2)}(x_1;~x_2)  \, \mathrm d \mu_1(x_1)\right)  \, \mathrm d \mu_2(x_2) = \mu_1(T_1) \times \mu_2(T_2)
+\]
+et 
+\[
+\displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \,  \mathrm d \mu_2(x_2)\right)  \, \mathrm d \mu_1(x_1) = \mu_2(T_2) \times \mu_1(T_1) 
+\]
+Ce qui prouve que:
+\[
+\displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \, \mathrm d \mu_2(x_2)\right)  \, \mathrm d \mu_1(x_1) = \displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \, \mathrm d \mu_2(x_2)\right) \,  \mathrm d \mu_1(x_1)
+\]
+\end{itemize}
+
+On définit d'autre part $P_n = (E_1^{(n)}, E_2^{(n)})$ et on pose, pour tout $n$, 
+
+$\mathcal{L}_1^{(n)}=\left\{ T \subset P_n/ \, x_2 \mapsto \displaystyle{\int_{E_1}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \, \mathrm d \mu_1(x_1) \text{ est mesurable}\right \}$
+
+et
+
+$\mathcal{L}_2^{(n)}=\left\{ T \subset P_n/ \, x_1 \mapsto \displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x_1;~x_2)  \, \mathrm d \mu_2(x_2) \text{ est mesurable}\right \}$
+
+$\mathcal{L}_1^{(n)}$ et $\mathcal{L}_2^{(n)}$ sont stables par union croissante, par différence, et contiennent le $\pi-$système 
+
+$\mathcal{C}^{(n)} = \left \{ C \cap P_n/ \, C \in \mathcal{C} \right \}$.
+
+C'est donc, d'après les résultats sur les $\lambda-$systèmes, la tribu trace de $\mathcal{T}_1 \otimes \mathcal{T}_2$ sur $P_n$. Le théorème de convergence monotone et les résultats sur les limites de suites de fonctions permet ensuite d'étendre ce résultat, ce qui prouve la mesurabilité des intégrales des deux premiers points du théorème.
+
+Consacrons-nous maintenant au troisième point du théorème.
+
+Pour tout $T \in \mathcal{T}_1 \otimes \mathcal{T}_2$, on pose
+
+$\tilde{\mu}(T)= \displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x;~y)  \, \mathrm d \mu_1(x)\right)  \, \mathrm d \mu_2(y)$ et $\check{\mu}(T)= \displaystyle{\int_{E_1}} \left(\displaystyle{\int_{E_2}} \displaystyle{\mathbb{1}}_{T}(x;~y)  \, \mathrm d \mu_1(x)\right) \,  \mathrm d \mu_2(y)$
+
+$\tilde{\mu}(T)$ et $\check{\mu}(T)$ sont des mesures en raison des propriétés de l'intégrale et des fonctions indicatrices.
+
+Tous les éléments $C$ de $\mathcal{C}$ vérifient $\tilde{\mu}(C) = \check{\mu}(C)$. D'autre part, $\mathcal{C}$ forme un $\pi-$système. Enfin, tous les $P_n$ sont dans $\mathcal{C}$, de mesures finies et on a $\lim \uparrow P_n = E_1 \times E_2$.
+
+Ainsi, d'après le théorème d'unicité de la mesure, on peut conclure que $\check{\mu} = \tilde{\mu}$ sur $\mathcal{T}_1 \otimes \mathcal{T}_2$.
+\end{proof}
+
+\subsection{Théorème de Fubini-Tonelli, cas général}
+
+\begin{theo}[Fubini-Toneli]
+Soient $(E_1;~\mathcal{T}_1;~\mu_1)$ et $(E_2;~\mathcal{T}_2;~\mu_2)$ deux espaces mesurés et $\mathcal{T}_1 \otimes \mathcal{T}_2$ la tribu produit associée.
+
+On suppose que $E_1 = \lim \limits_{n \to +\infty} \uparrow E_1^{(n)}$ et que $E_2 = \lim \limits_{n \to +\infty} \uparrow E_2^{(n)}$ avec pour tout $n$, $\mu_1\left(E_1^{(n)}\right)<+\infty$ et $\mu_2\left(E_2^{(n)}\right)<+\infty$.
+
+Dans ce cas, on peut définir la mesure produit $\mu$ sur $\mathcal{T}_1 \otimes \mathcal{T}_2$.
+
+On considère enfin $g$ une fonction mesurable de $E_1 \times E_2$ dans $\R$ (ou $\C$).
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] Pour $\mu_1-$presque tout $x_1$ de $E_1$, la fonction  $g_2: x_2 \mapsto g(x_1;~x_2)$ est $\mu_2-$intégrable.
+\item[$\bullet$] Pour $\mu_2-$presque tout $x_2$ de $E_2$, la fonction  $g_1: x_1 \mapsto g(x_1;~x_2)$ est $\mu_1-$intégrable.
+\end{itemize}
+
+Alors, les fonctions $x_2 \mapsto \displaystyle{\int}_{E_1} g(x_1;~x_2) \, \mathrm d \mu_1(x_1)$ et $x_1 \mapsto \displaystyle{\int}_{E_1} g(x_1;~x_2) \, \mathrm d \mu_1(x_1)$ sont mesurables et on a l'équivalence entre les trois propositions suivantes:
+\begin{itemize}
+\item[$\bullet$] $x_2 \mapsto \displaystyle{\int}_{E_1} \abs{g(x_1;~x_2)} \, \mathrm d \mu_1(x_1)$ est $\mu_2-$intégrable;
+\item[$\bullet$] $x_1 \mapsto \displaystyle{\int}_{E_1} \abs{g(x_1;~x_2)} \, \mathrm d \mu_1(x_1)$ est $\mu_1-$intégrable;
+\item[$\bullet$] $g$ est intégrable.
+\end{itemize}
+
+Et, dans ce cas, on a:
+\[
+\displaystyle{\iint} g(x_1;~x_2) \, \mathrm d \mu(x_1;~x_2) = \displaystyle{\int}_{E_2} \mathrm d \mu_2(x_2) \displaystyle{\int}_{E_1} g(x_1;~x_2) \, \mathrm d \mu_1(x_1) = \displaystyle{\int}_{E_1} \mathrm d \mu_1(x_1) \displaystyle{\int}_{E_2} g(x_1;~x_2) \, \mathrm d \mu_2(x_2)
+\]
+\end{theo}
+
+\begin{proof}
+Dans cette démonstration, on va adopter la démarche suivante:
+\begin{enumerate}
+\item prouver les résultats pour les fonctions positives en passant à la limite sur les suites croissantes de fonctions échelonnées;
+\item étendre les résultats à $\R$ en utilisant les parties positives et négatives;
+\item étendre les résultats à $\C$ en utilisant les parties réelles et imaginaires.
+\end{enumerate}
+
+On va commencer par supposer que $g$ est mesurable et à valeurs positives sans faire l'hypothèse de l'intégrabilité.
+
+Dans ce cas $g$ est limite croissante de fonctions échelonnées positives. Mais la première version du théorème de Fubini-Tonelli nous montre que les fonctions échelonnées vérifient les trois points du théorème (mesurabilités et égalités d'intégrales).
+
+D'autre part, en raison du théorème de convergence monotone, ces trois points restent valides par passage à la limite croissante. 
+
+On en déduit que le théorème de Fubini-Tonelli peut s'appliquer aux fonctions mesurables positives, sans d'ailleurs condition particulière sur l'intégrabilité!
+
+On va étendre le résultat aux réels en considérant les parties positives et négatives de la fonction. C'est ici que le critère d'intégrabilité intervient.
+
+On commence par définir $M = \left\{ (x_1;~x_2)/ g_2 \text{ est $\mu_2-$intégrable et }g_1 \text{ est $\mu_1-$intégrable}\right \}$. Le complémentaire de $M$ est négligeable. On peut donc, à partir de maintenant, raisonner sur $M \subset E_1 \times E_2$.
+
+Les fonctions $x_2 \mapsto \displaystyle{\int}_{E_1} g(x_1;~x_2) \, \mathrm d \mu_1(x_1)$ et $x_1 \mapsto \displaystyle{\int}_{E_1} g(x_1;~x_2) \, \mathrm d \mu_1(x_1)$ sont effectivement mesurables. Il suffit pour prouver cela d'écrire $g=g^{+}-g^{-}$ et d'exploiter ce qui précède.
+
+Reste à prouver l'équivalence des trois points suivants.
+
+On suppose que $x_2 \mapsto \displaystyle{\int}_{E_1} \abs{g(x_1;~x_2)} \, \mathrm d \mu_1(x_1)$ est $\mu_2-$intégrable. 
+
+Cela signifie que:
+
+$\displaystyle{\int}_{E_2} \mathrm d \mu_2(x_2) \displaystyle{\int}_{E_1} \abs{g(x_1;~x_2)} \, \mathrm d \mu_1(x_1) < +\infty$.
+
+Ce qui précède concernant les fonctions positives permet d'inverser les signes d'intégration. On en déduit ainsi le second point et le troisième point.
+
+Les égalités finales découlent des intégrales des parties positives et négatives de $g$.
+
+Enfin, le passage aux complexes se fait par l'étude des parties réelles et imaginaires.
+\end{proof}
+
+
+\section{Inégalités, espaces $\mathbf L^p$, dérivation}
+
+\subsection{Inégalités de Hölder et de Minkowski}
+
+\label{holder}
+
+On se réfère ici au petit document sur la convexité dans lequel on a prouvé ces deux inégalités dans le cas des sommes finies.
+
+\begin{prop}[Inégalité de Hölder et de Minkowski dans le cas des fonctions positives]
+Soient $f$ et $g$ deux fonctions mesurables de $(E;~\mathcal{T};~\mu)$ à valeurs positives.
+
+Soient $p$ et $q$ deux nombres positifs tels que $\dfrac{1}{p} + \dfrac{1}{q}$
+
+Alors
+\[
+\displaystyle{\int} \left(f \times g\right) \leq \left(\displaystyle{\int} f^p\right)^{1/p} \times \left(\displaystyle{\int} g^q\right)^{1/q} \hfill \text{(Hölder)}
+\]
+et
+\[
+\left(\displaystyle{\int} \left(f + g\right)^p\right)^{1/p} \leq \left(\displaystyle{\int} f^p\right)^{1/p} + \left(\displaystyle{\int} g^p\right)^{1/p}
+\hfill \text{(Minkowski)}
+\]
+\end{prop}
+
+\begin{proof}
+Si $\displaystyle{\int} f =0$ ou $\displaystyle{\int} g =0$ alors l'inégalité de Hölder devient $0 \leq 0$ et elle est vraie.
+
+Si $\displaystyle{\int} f =+\infty$ ou $\displaystyle{\int} g =+\infty$ alors l'inégalité de Hölder est également vraie.
+
+On se placera donc dans le cas où $0< \displaystyle{\int} f < +\infty$ et $0< \displaystyle{\int} g < +\infty$.
+
+Le principe est le même que pour le cas des sommes discrètes.
+
+On part de l'inégalité de Young et on \og normalise \fg{}.
+
+Ainsi, on pose $\tilde{f} = \dfrac{f^p}{\displaystyle{\int} f^p}$ et $\tilde{g} = \dfrac{g^q}{\displaystyle{\int} g^q}$.
+
+L'inégalité de Young donne donc, pour tout $x$ de $E$:
+\[
+\widetilde{f(x)}^{1/p} \widetilde{g(x)}^{1/q} \leq \dfrac{1}{p} \widetilde{f(x)} + \dfrac{1}{q} \widetilde{g(x)}
+\]
+
+On intègre cette inégalité sur $E$ en remarquant que $\left(f^p\right)^{1/p} \times \left(g^q\right)^{1/q} = fg$ et que $\displaystyle{\int} \tilde{f} = \displaystyle{\int} \tilde{g} = 1$. On obtient ainsi:
+\[
+\dfrac{\displaystyle{\int} \left(fg\right)}{\left(\displaystyle{\int} f^p\right)^{1/p}\left(\displaystyle{\int} g^q\right)^{1/q}} \leq 
+\dfrac{1}{p} + \dfrac{1}{q} = 1
+\]
+
+Maintenant, on peut prouver l'inégalité de Minkowski.
+
+Pour tout $p \geq 1$, on a en effet, $(f+g)^p = (f+g)^{p-1} (f+g) = f(f+g)^{p-1}+g(f+g)^{p-1}$. 
+
+Il suffit alors de poser $q = \dfrac{p}{p-1}$ et d'appliquer l'inégalité de Hölder à $f(f+g)^{p-1}$ puis à $g(f+g)^{p-1}$, en remarquant que $q(p-1)=p$  pour obtenir l'inégalité de Minkowski. Plus précisément, Hölder donne
+\[
+\displaystyle{\int} \left(f(f+g)^{p-1}\right) \leq \left(\displaystyle{\int} f^p \right)^{1/p} \left(\displaystyle{\int} (f+g)^{(p-1)q} \right)^{1/q}
+\]
+ce que l'on peut réécrire
+\[
+\displaystyle{\int} \left(f(f+g)^{p-1}\right) \leq  \left(\displaystyle{\int} f^p \right)^{1/p} \left(\displaystyle{\int} (f+g)^{p} \right)^{1/q}
+\]
+
+Et de la même manière:
+\[
+\displaystyle{\int} \left(g(f+g)^{p-1}\right) \leq  \left(\displaystyle{\int} g^p \right)^{1/p} \left(\displaystyle{\int} (f+g)^{p} \right)^{1/q}
+\]
+
+En sommant ces deux inégalités et en divisant par $\left(\displaystyle{\int} (f+g)^{p} \right)^{1/q}$ (avec toutes les mesures de prudence qui s'imposent), il vient
+\[
+\left(\displaystyle{\int} (f+g)^p\right)^{1-1/q} \leq \left(\displaystyle{\int} f^p \right)^{1/p} + \left(\displaystyle{\int} g^p \right)^{1/p}
+\]
+
+En remarquant que $1-\dfrac{1}{q} = \dfrac{1}{p}$, on retrouve le résultats recherché.
+\end{proof}
+
+\subsection{Notion d'espaces $\mathbf L^p$}
+
+\begin{de}[Espaces $\mathbf L^p$]
+Soit $f$ une fonction mesurable de $\left(E;~\mathcal{T};~\mu\right)$ à valeurs dans $\R$ (ou $\C$ $\C$)).
+
+On dit que $f$ appartient à l'ensemble $\mathcal{L}^p$ lorsque $f^p$ est intégrable.
+
+Par ailleurs, sur l'ensemble $\mathcal{L}^p$, on définit une relation d'équivalence
+\[
+f \sim g \iff \displaystyle{\int} \abs{f-g} =0
+\]
+
+Les classes d'équivalences de $\mathcal{L}^p$ forment un espace vectoriel sur lequel on définit une norme.
+\[
+\norm{f}_p = \left(\displaystyle{\int} \abs{f}^p\right)^{1/p}
+\]
+\end{de}
+
+\begin{proof}
+L'inégalité de Minkowski nous offre une preuve de la stabilité par addition et de la définition de la norme.
+\end{proof}
+
+Examinons maintenant les convergences dans les espaces $L^p$ pour lesquels on dispose de théorèmes équivalents.
+
+\begin{prop}[Convergence dominée dans les espaces $L^p$]
+Soit $p \geq 1$. On considère une suite $f_n$ de fonctions telles que:
+\begin{itemize}
+\item[$\bullet$] les $f_n$ sont $L^p$;
+\item[$\bullet$] il existe une fonction $g$ de classe $L^p$ qui domine chacun des $f_n$ $\mu$-presque partout;
+\item[$\bullet$] les $f_n$ converge simplement $\mu$-presque partout vers une fonction $f$. 
+\end{itemize}
+
+Alors $f$ est de classe $L^p$ et $\lim \displaystyle{\int} f_n = \displaystyle{\int} \lim f_n$
+\end{prop}
+
+\begin{proof}
+Soit la suite de fonctions $\delta_n = \abs{f_n-g}$. 
+
+On veut montrer que $f$ est de classe $L^p$ et que $\delta_n$ tend vers $0$ pour la norme $L^p$.
+
+Le fait que $f$ soit de classe $L^p$ provient de l'application du théorème de convergence dominée aux fonctions intégrables $f_n^p$ dominées par la fonction intégrable $g^p$ et qui tendent simplement vers $f^p$ $\mu$-presque partout.
+
+On peut donc examiner la quantité $\norm{\delta_n}_p^p$. Un tout petit peu de calcul montre que:
+\[
+\abs{\delta_n}^p \leq 2^p g^p
+\]
+
+On en déduit que $(\delta_n)^p$ est dominée par $2^p g^p$ $\mu$-presque partout. Or $\delta_n$ converge simplement vers $0$ $\mu$-presque partout.
+
+Le théorème de convergence dominée entraîne ainsi que $\norm{\delta_n}_p \to 0$, ce qui achève la démonstration.
+\end{proof}
+
+\begin{theo}[Les espaces $L^p$ sont complets]
+Soit $p \geq 1$.
+
+Alors $L^p$ est complet.
+\end{theo}
+
+Avant de démontrer ce théorème, il faut établir un lemme.
+
+\begin{lem}[Caractérisation de la complétude grâce aux séries]
+Soit un espace vectoriel normé $E$.
+
+Alors $E$ est complet si et seulement si pour toute série $\displaystyle{\sum \limits_{n \in N}} u_n$, la série converge si elle est absolument convergence.
+\end{lem}
+
+\begin{proof}
+Si $E$ est complet et que la série est absolument convergente alors la suite $S_n = \displaystyle{0 \leq k \leq n} u_k$ est de Cauchy. En effet:
+\[
+\abs{S_{n+p}-S_n} \leq \displaystyle{\sum \limits_{n+1 \leq k \leq n+p}} \abs{u_k}
+\]
+Ce qui entraîne la convergence de la suite $S_n$.
+
+Réciproquement, si on a la propriété de convergence absolue, on va considérer une suite $u_n$ de Cauchy. On peut donc, en utilisant une extractrice $\varphi$ fabriquer une série téléscopique $u_{\varphi{n+1}} - u_{\varphi{n}}$ telle que, pour tout $n$:
+\[
+\abs{u_{\varphi{n+1}} - u_{\varphi{n}}} \leq \dfrac{1}{2^{n}}
+\]
+
+En particulier cette série est absolument convergente donc convergente, ce qui prouve que la suite $u_{\varphi(n)}$ converge simplement. Et donc, $u_n$ également.
+\end{proof}
+
+Prouvons maintenant le théorème précédent.
+
+\begin{proof}
+On va utiliser le lemme. On va donc considérer une série $\displaystyle{\sum \limits_{n \in \N}} f_n$ absolument convergente dans $L^p$.
+
+On pose, pour tout $n$, $G_n = \displaystyle{\sum \limits_{k \leq n}} \abs{f_k}$. 
+
+Pour tout $n$, $\norm{G_n}_p \leq \displaystyle{\sum \limits_{k \in \N}} \norm{f_k}_p < +\infty$.
+
+Par le théorème de convergence monotone, on en déduit que $\norm{G_{\infty}}_p < +\infty$. 
+
+Ainsi, pour presque tout $x$, $G_{\infty}(x) < +\infty$, ce qui prouve que la série $\displaystyle{\sum \limits_{k \in \N}} f_k(x)$ est absolument convergente donc convergente.
+
+Enfin, le théorème de convergence dominée s'applique ici. En effet, pour tout $n$, $\abs{\displaystyle{\sum \limits_{k \leq n}} f_k} \leq G_{\infty}$ qui est $L^p$.
+
+On en déduit que la série $\displaystyle{\sum \limits_{k \leq n}} f_k$ converge dans $L^p$.
+\end{proof}
+
+
+
+
+\subsection{Dérivation et intégrale}
+
+\begin{theo}[Dérivation sous le signe intégrale]
+On considère $(E;~\mathcal{T};~\mu)$ un espace mesuré et $I \subset \R$ un intervalle ouvert.
+
+Soit $f: E \times I \to \R$ une fonction.
+
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] pour tout $y$ de $I$, $x \mapsto f(x;~y)$ est mesurable et $\mu-$intégrable;
+\item[$\bullet$] pour $\mu-$presque tout $x$ de $E$, $y \mapsto f(x;~y)$ est dérivable sur $I$;
+\item[$\bullet$] il existe une fonction $g: E \to \R^{+}$ mesurable et intégrable telle que
+\[
+\forall y \in I, \abs{\dfrac{\partial f(x;~y)}{\partial y}} \leq g(x)
+\]
+\end{itemize}
+
+Alors:
+\begin{itemize}
+\item[$\bullet$] pour tout $y$ de $I$, $x \mapsto \dfrac{\partial f(x;~y)}{\partial y}$ est mesurable et $\mu-$intégrable;
+\item[$\bullet$] la fonction $y \mapsto \displaystyle{\int}_E f(x;~y) \, \mathrm d \mu(x)$ est dérivable sur $I$;
+\item[$\bullet$] on a l'égalité:
+\[
+\dfrac{\partial}{\partial y} \displaystyle{\int}_E f(x;~y) \, \mathrm d \mu(x) = \displaystyle{\int}_E \dfrac{\partial f(x;~y)}{\partial y} \, \mathrm d \mu(x)
+\]
+\end{itemize}
+
+\end{theo}
+
+\begin{proof}
+On considère un élément $y$ quelconque de $I$, et une suite $\alpha_n$ d'éléments de $I$ qui vérifie $\alpha_n \to y$ et $\forall n, \, \alpha_n \neq y$.
+
+On pose alors $\varphi_{n}: x \mapsto \dfrac{f\left(x;~\alpha_n\right)-f\left(x;~y\right)}{\alpha_n-y}$.
+
+La suite des $\varphi_{n}$ est une suite de fonctions mesurables de $E$ dans $\R$. 
+
+Par ailleurs, cette suite converge pour $\mu-$presque tout $x$ vers $x \mapsto \dfrac{\partial f(x;~y)}{\partial y}$.
+
+Enfin, en raison de l'égalité des accroissements finis, les valeurs absolues des termes de cette suite sont toutes dominées par une fonction $g$ intégrable.
+
+On est donc dans les hypothèses du théorème de convergence dominée.
+
+Ainsi, on en déduit que $x \mapsto \dfrac{\partial f(x;~y)}{\partial y}$ est mesurable et $\mu-$intégrable et, par linéarité de l'intégrale, que 
+\[
+\lim \limits_{n \to +\infty} \dfrac{\displaystyle{\int}_E  f\left(x;~\alpha_n\right) \, \mathrm d \mu(x) - \displaystyle{\int}_E  f\left(x;~y\right) \, \mathrm d \mu(x)}{\alpha_n-y} = \displaystyle{\int}_E  \dfrac{\partial f(x;~y)}{\partial y}  \, \mathrm d \mu(x)
+\]
+
+Comme la suite des $\alpha_n$ est a priori quelconque, cela prouve la dérivabilité de $y \mapsto \displaystyle{\int}_E f(x;~y) \, \mathrm d \mu(x)$ ainsi que la dernière égalité.
+\end{proof}
+
+

@@ -1,0 +1,391 @@
+%\documentclass[a4paper,11pt,answers]{article}
+%
+%\usepackage{paf}
+%
+%\title{Introduction à la théorie de la mesure}
+%\date{2017}
+%
+%\begin{document}
+%\maketitle
+
+\section{Cardinaux, sommes dénombrables, nouveau formalisme sur les ensembles}
+
+\subsection{Cardinalité}
+
+On note $\abs{E}$ le cardinal de $E$.
+
+Deux ensembles $E$ et$F$ sont de même cardinal s'il existe une bijection entre eux.
+
+Par ailleurs, on a $\abs{E} \leq \abs{F}$ lorsqu'il existe une injection de $E$ dans $F$. C'est bien une relation d'ordre sur les cardinaux.
+
+On définit de plus $\abs{E}<\abs{F}$ lorsque $\abs{E} \neq \abs{F}$ et $\abs{E} \leq \abs{F}$.
+
+Un ensemble $E$ est dit dénombrable lorsque $\abs{E} = \abs{\N}$.
+
+On dispose du résultat fondamental suivant:
+\begin{prop}[Cardinalité de l'ensemble des parties de $E$]
+On a $\abs{\mathcal{P}(E)} > \abs{E}$.
+\end{prop}
+
+\begin{proof}
+C'est un argument de Cantor.
+
+Il existe une injection de $E$ dans $\mathcal{P}(E)$: l'injection canonique
+
+$x \mapsto \left\{ x \right\}$.
+
+Supposons maintenant qu'il existe une injection de $\mathcal{P}(E)$ dans $E$. 
+
+Notons $f: \mathcal{P}(E) \to E$ cette injection.
+
+Considérons $X=\left\{ x \in E / \, x \notin f^{-1}(x) \right\}$. On peut ici parler de $f^{-1}(x)$ en tant que partie de $E$ car $f$ est injective.
+
+Dans ce cas, que dire de $y=f(X)$? Si $y \in X$, on aboutit à une absurdité car $y \in f^{-1}(y)$ donc $y \notin X$. De même, si $y \notin X$, cela entraîne $y \in X$. $f$ ne peut donc pas exister.
+\end{proof}
+
+Les ensembles $\Z$, $\Q$ sont dénombrables. De manière générale, pour tout entier $p$ et pour tout ensemble $E$ dénombrable, $E^p$ est dénombrable. Il suffit pour cela d'utiliser un ordre de type alphabétique sur les p-uplets.
+
+En utilisant la fonction bijective $\tanh$, on peut montrer que $]-1;~1[$ est de même cardinal que $\R$.
+
+De même, en utilisant les écritures binaires des nombres de $]-1;~1[$, on peut montrer que $]-1;~1[$ est de même cardinal que $\left \{ 0,~1\right\}^{\N}$.
+
+Et enfin, toute partie de $\N$ pouvant être désignée par un unique élément de $\left \{ 0,~1\right\}^{\N}$, on a la série d'égalités:
+
+\[
+\abs{\mathcal{P}\left(\N\right)} = \abs{\left \{ 0,~1\right\}^{\N}} = \abs{]-1;~1[} = \abs{\R}
+\]
+
+De même, si les $\left(E_n\right)_{n \in \N}$ sont tous dénombrables alors $\bigcup \limits_{n \in \N} E_n$ l'est aussi. Il suffit pour cela de noter qu'un élément de $\bigcup \limits_{n \in \N} E_n$ peut être désigné par un couple d'entiers.
+
+\subsection{Sommes de nombres positifs}
+
+\begin{prop}[Somme bornée de nombres positifs]
+Si $\displaystyle{\sum \limits_{i \in I}} x_i < +\infty$ et si, pour tout $i \in I$, $x_i \geq 0$ alors l'ensemble $K = \left\{ i / x_i>0\right\}$ est au plus dénombrable.
+\end{prop}
+
+\begin{proof}
+Notons que $K \bigcup \limits_{n \in \N^{*}} K_n$ avec $K_n = \left\{ i / x_i > \dfrac{1}{n}\right\}$.
+
+On sait d'autre part que 
+
+\[
+\displaystyle{\sum \limits_{i \in I}} x_i \geq \displaystyle{\sum \limits_{i \in K_n}} x_i \geq \dfrac{\abs{K_n}}{n}
+\]
+
+En particulier, pour tout $n$, $\abs{K_n} \leq n \displaystyle{\sum \limits_{i \in I}} x_i < +\infty$. Ainsi, les $K_n$ sont tous de cardinaux finis. Cela permet de conclure!
+\end{proof}
+
+\begin{prop}[Permutations des termes d'une somme dénombrable de réels positifs]
+
+On considère la somme $\displaystyle{\sum \limits_{n \in \N}} x_n$ où les $x_n$ sont tous positifs ou nuls.
+
+Soit une permutation $\sigma$ de $\displaystyle{\sigma}\left(\N\right)$.
+
+Alors 
+\[\displaystyle{\sum \limits_{n \in \N}} x_n = \displaystyle{\sum \limits_{n \in \N}} x_{\sigma(n)}\]
+\end{prop}
+
+\begin{proof}
+On pose $S=\displaystyle{\sum \limits_{n \in \N}} x_n$
+
+On va commencer par supposer $S=+\infty$.
+
+Soit $M \in R$. Il existe $N$ tel que $\displaystyle{\sum \limits_{0 \leq n \leq N}} x_n > M$. 
+
+Il nous faut prouver qu'il existe aussi $N'$ tel que $\displaystyle{\sum \limits_{0 \leq n \leq N'}} x_{\sigma(n)} > M$.
+
+Considérons pour cela l'ensemble $E_n = \left\{\sigma^{-1}(n)/ \, 1 \leq n \leq N\right\}$. Cet ensemble admet un maximum noté $N'$. En particulier, $\intint{0}{N'} \supset E_n$ et donc $\sigma\left(\intint{0}{N'}\right) \supset \intint{0}{N}$. On a donc:
+
+$\displaystyle{\sum \limits_{0 \leq n \leq N'}} x_{\sigma(n)} \geq \displaystyle{\sum \limits_{0 \leq n \leq N}} x_n > M$.
+
+Ce qui prouve bien que $\displaystyle{\sum \limits_{n \in \N}} x_{\sigma(n)} = +\infty$.
+
+Le cas où $S<+\infty$ se traite de la même manière.
+\end{proof}
+
+\begin{prop}[Réarrangement de termes dans une somme dénombrable]
+Soit $\left(I_i\right)_{i \in \N}$ une partition dénombrable de $\N$ et une somme $\displaystyle{\sum \limits_{n \in \N}} x_n$ où les $x_n$ sont tous positifs ou nuls.
+
+Alors,
+\[
+\displaystyle{\sum \limits_{n \in \N}} x_n = \displaystyle{\sum \limits_{i \in \N}} \sum \limits_{k \in I_i} x_k
+\]
+\end{prop}
+
+\begin{proof}
+Cela se prouve selon le même principe que précédemment. Pour changer, on va considérer que $\displaystyle{\sum \limits_{n \in \N}} x_n = S < +\infty$.
+
+Pour tout $n$ et $p$, on a, $\displaystyle{\sum \limits_{i \in \intint{0}{p}}} \sum \limits_{k \in I_i \cap \intint{0}{n}} x_k \leq S$.
+
+Ainsi, par passage à la limite sur $n$ puis sur $p$, $\displaystyle{\sum \limits_{i \in \N}} \sum \limits_{k \in I_i} x_k \leq S$.
+
+De plus, pour tout $\varepsilon > 0$, il existe un rang $n$ tel que $S-\varepsilon \leq \displaystyle{\sum \limits_{k \in \intint{0}{n}}} x_k$. 
+
+Mais dans ce cas, il existe un rang $p$ tel que $\intint{0}{n} \subset \bigcup \limits_{i \in \intint{0}{p}} I_i$. Et ainsi, pour tout $m \geq p$, $S-\varepsilon \leq \displaystyle{\sum \limits_{i \in \intint{0}{m}}} \sum \limits_{k \in I_i} x_k \leq S$.
+\end{proof}
+
+\begin{prop}[Théorème de convergence absolue pour les séries]
+Soit une série $\displaystyle{\sum \limits_{n \in N}} x_n$ de nombres quelconques.
+
+Si $\displaystyle{\sum \limits_{n \in N}} \abs{x_n} < \infty$ alors cette série converge.
+\end{prop}
+
+\begin{proof}
+Cela se prouve en considérant $S_n = S_n^{+}+S_n^{-}$ où les $S_n^{+}$ et les $S_n^{-}$ sont les sous-séries de termes positifs (resp. négatifs).
+\end{proof}
+
+\subsection{Limites d'ensembles, nouveau formalisme}
+
+Soit $\left(E_n\right)_{n \in \N}$ une suite d'ensembles tous inclus dans un ensemble $E$.
+
+On pose $\sup E_n = \bigcup \limits_{k \geq n} E_k$ et $\inf E_n = \bigcap \limits_{k \geq n} E_k$.
+
+La suite des $\sup E_n$ est une suite décroissante en ce sens que, pour tout $n$, $\sup E_n \supset \sup E_{n+1}$.
+
+La suite des $\inf E_n$ est une suite croissante en ce sens que, pour tout $n$, $\inf E_n \subset \inf E_{n+1}$.
+
+On remarque également que, pour tout $n$, $\inf E_n \subset E_n \subset \sup E_n$.
+
+Enfin, on utilise la notation $\limsup E_n = \bigcap \limits_{n \in \N} \sup E_n = \bigcap \limits_{n \in \N} \bigcup \limits_{k \geq n} E_k$ 
+
+et $\liminf E_n = \bigcup \limits_{n \in \N} \inf E_n = \bigcup \limits_{n \in \N} \bigcap \limits_{k \geq n} E_k$.
+
+Dans le cas où $\limsup E_n = \liminf E_n$, on dit que la suite $E_n$ converge.
+
+Notons que $x \in \limsup E_n \iff \forall n, \ \exists p \geq n/ \, x \in E_p$ et que
+
+$x \in \liminf E_n \iff \exists n/ \, \forall p \geq n, \, x \in E_p$.
+
+En pratique, dire que les $E_n$ convergent signifie que si $x$ appartient à une infinité de $E_p$ alors, à partir d'un certain rang $x$ appartient à tous les $E_p$. C'est la traduction de $\limsup E_n \subset \liminf E_n$.
+
+
+\section{Tribu, mesure}
+
+\subsection{Tribu}
+
+\subsubsection{Définition}
+
+Une tribu $\mathcal{T}$ sur $E$ est un ensemble de parties de $E$:
+\begin{itemize}
+\item[$\bullet$] stable par union dénombrable;
+\item[$\bullet$] stable par passage au complémentaire;
+\item[$\bullet$] qui contient $\emptyset$.
+\end{itemize}
+
+À partir de ces trois hypothèses, on en déduit que $\mathcal{T}$ 
+\begin{itemize}
+\item[$\bullet$] est également stable par intersection dénombrable;
+\item[$\bullet$] contient $E$.
+\end{itemize}
+
+Un ensemble $E$ muni d'une tribu $\mathcal{T}$ s'appelle un espace mesurable.
+
+\subsubsection{Exemples}
+
+$\mathcal{P}(E)$, $\left\{E;~\emptyset \right \}$ sont des tribus appelées respectivement discrète et grossière.
+
+Si $\mathcal{T}$ est une tribu sur $E$ et si $F \subset E$ alors l'ensemble des $\left \{ T \cap F, \, T \in \mathcal{T}\right \}$ est une tribu sur $F$ appelée tribu trace.
+
+
+\subsubsection{Tribu engendrée}
+
+Soit $\mathcal{S} \subset \mathcal{P}(E)$. Alors il existe une tribu $\mathcal{T}$ qui contient $\mathcal{S}$ et qui est la plus petite en ce sens que n'importe quelle tribu $\mathcal{T'}$ qui contient $\mathcal{S}$ contient également $\mathcal{T}$.
+
+On construit cette tribu $\mathcal{T}$ par l'extérieur, en posant
+\[
+\mathcal{T} = \bigcap  \limits_{\substack{\mathcal{T'} \text{ est une tribu}\\ \mathcal{S} \subset \mathcal{T'}}} \mathcal{T'}
+\]
+
+Un exemple classique s'appelle la tribu borélienne. C'est la tribu sur $\R$ engendrée par les ouverts.
+
+
+\subsection{Mesure}
+
+\subsubsection{Définition}
+
+On considère un espace mesurable $\left(E;~\mathcal{T}\right)$. Une mesure $\mu$ est une application de $\mathcal{T}$ dans $\R^{+}$ qui vérifie:
+\begin{itemize}
+\item[$\bullet$]  $\mu(\emptyset)=0$.
+\item[$\bullet$] Pour tout les $(X_i)_{i \in I}$, famille dénombrable d'éléments de $\mathcal{T}$ deux à deux disjoints, \[\mu\left(\bigcup \limits_{i \in I} X_i\right) = \displaystyle{\sum \limits_{i \in I}} \mu(X_i)\]
+\end{itemize}
+
+Cette dernière propriété s'appelle la $\sigma-$additivité. Le triplet $\left(E;~\mathcal{T};~\mu\right)$ ainsi construit s'appelle un espace mesuré.
+
+Dans le cas où $\mu(E) < +\infty$, on dit que la mesure est finie.
+
+Dans le cas où $\mu(E) = 1$, on parle de mesure de probabilité.
+
+\subsubsection{Propriétés de la mesure}
+
+Dans tout ce paragraphe, $\left(E;~\mathcal{T};~\mu\right)$ désigne un espace mesuré.
+
+\begin{prop}[Soustraction]
+Soient $L$ et $M$ deux éléments de $\mathcal{T}$ tels que $L \subset M$.
+
+Alors
+\[
+\mu(M-L) + \mu(L)=\mu(M)
+\]
+\end{prop}
+
+
+\begin{proof}
+Il suffit de constater que $L$ et $M-L$ forment une partition de $M$. Par conséquent, $\mu(L)+\mu(M-L) = \mu(M)$.
+\end{proof}
+
+
+\begin{nota}
+On aimerait écrire $\mu(M-L)=\mu(M)-\mu(L)$ mais la soustraction par $\mu(L)$ n'a de sens que si $L$ est de mesure finie. Cette hypothèse est très importante!
+\end{nota}
+
+On en déduit la propriété très simple:
+
+\begin{prop}[Inclusion]
+Soient $L$ et $M$ deux éléments de $\mathcal{T}$ tels que $L \subset M$. Alors
+\[
+\mu(M) \geq  \mu(L)
+\]
+\end{prop}
+
+\begin{prop}[Formule de l'union simple]
+Soient $T_1$ et $T_2$ deux éléments de $\mathcal{T}$ tels que $\mu\left(T_1 \cap T_2\right)<+\infty$. 
+
+Alors
+\[
+\mu\left(T_1 \cup T_2\right)+\mu\left(T_1 \cap T_2\right)=\mu(T_1)+\mu(T_2)
+\]
+\end{prop}
+
+\begin{proof}
+Il suffit de constater que $T_1-\left(T_1 \cap T_2\right)$, $T_2-\left(T_1 \cap T_2\right)$ et $T_1 \cap T_2$ sont trois ensembles disjoints qui vérifient:
+
+\begin{itemize}
+\item[$\bullet$] $T_1=\left(T_1-\left(T_1 \cap T_2\right)\right) \cup \left(T_1 \cap T_2\right)$
+\item[$\bullet$] $T_2=\left(T_2-\left(T_1 \cap T_2\right)\right) \cup \left(T_1 \cap T_2\right)$
+\item[$\bullet$] $T_1 \cup T_2 =\left(T_2-\left(T_1 \cap T_2\right)\right) \cup \left(T_2-\left(T_1 \cap T_2\right)\right) \cup \left(T_1 \cap T_2\right)$
+\end{itemize}
+
+En suite, on applique les formules de réarrangement de sommes.
+\end{proof}
+
+\begin{prop}[Formule de l'union généralisée]
+Soient $\left(T_i\right)_{1 \leq i \leq n}$  des éléments de $\mathcal{T}$ tels que pour tout $1 \leq i < j \leq n$, $\mu\left(T_i \cap T_j\right)<+\infty$. 
+
+Alors:
+\begin{multline*}
+\mu\left(\bigcup \limits_{1 \leq i \leq n} T_i\right) = \displaystyle{\sum \limits_{1 \leq i \leq n}} \mu(T_i) - \displaystyle{\sum \limits_{1 \leq i_1 < i_2 \leq n}} \mu\left(T_{i_1} \cap T_{i_2}\right) + \cdots + (-1)^{k+1} \displaystyle{\sum \limits_{1 \leq i_1 < i_2 < \cdots < i_k \leq n}} \mu\left( \bigcap \limits_{1 \leq j \leq k} T_{i_j} \right) + \cdots \\
++ (-1)^{n+1} \mu\left( \bigcap \limits_{1 \leq j \leq n} T_j \right)
+\end{multline*}
+\end{prop}
+
+\begin{proof}
+C'est évident pour $n=1$ et $n=2$. On va raisonner par récurrence sur $n$.
+
+Au rang $n+1$, notons que $\bigcup \limits_{1 \leq i \leq n+1} T_i = \left(\bigcup \limits_{1 \leq i \leq n} T_i\right) \cup T_{n+1}$ et utilisons la formule qui précède:
+\[
+\mu\left(\bigcup \limits_{1 \leq i \leq n+1} T_i\right) = \mu\left(\bigcup \limits_{1 \leq i \leq n} T_i\right)+\mu(T_{n+1})-\mu\left(\bigcup \limits_{1 \leq i \leq n} T_i \cap T_{n+1}\right)
+\]
+
+En utilisant l'hypothèse de récurrence, on peut conclure:
+\begin{multline*}
+\mu\left(\bigcup \limits_{1 \leq i \leq n+1} T_i\right) = \displaystyle{\sum \limits_{1 \leq k \leq n}}(-1)^{k+1}\displaystyle{\sum \limits_{1 \leq i_1 < \cdots < i_k \leq n}}\mu\left(\bigcap \limits_{1 \leq j \leq k} T_{i_j}\right)+\mu(T_{n+1})\\
+-\displaystyle{\sum \limits_{1 \leq k \leq n}}(-1)^{k+1}\displaystyle{\sum \limits_{1 \leq i_1 < \cdots < i_k \leq n}}\mu\left(\bigcap \limits_{1 \leq j \leq k} (T_{i_j} \cap T_{n+1})\right)
+\end{multline*}
+
+En effet, cette somme correspond à la version éclatée de $\displaystyle{\sum \limits_{1 \leq k \leq n+1}}(-1)^{k+1}\displaystyle{\sum \limits_{1 \leq i_1 < \cdots < i_k \leq n+1}}\mu\left(\bigcap \limits_{1 \leq j \leq k} T_{i_j}\right)$ selon que $i_k=n+1$ ou non.
+\end{proof}
+
+
+Enfin, nous pouvons établir quelques résultats concernant les limites d'ensembles.
+
+\begin{prop}[Convergence monotone, version simple]
+Soit $\left(E_n\right)_{n \in N}$ une suite croissante d'éléments de $\mathcal{T}$.
+
+Alors $\lim \uparrow \mu(E_n) = \mu\left( \lim \uparrow E_n\right)$
+
+\medskip
+Soit $\left(F_n\right)_{n \in N}$ une suite décroissante d'éléments de $\mathcal{T}$.
+
+On suppose de plus qu'il existe un rang $p$ tel que $\mu(F_p)<+\infty$.
+
+Alors $\lim \downarrow \mu(F_n) = \mu\left( \lim \downarrow F_n\right)$
+\end{prop}
+
+
+\begin{proof}
+Pour tout $n$, on pose $I_n = E_{n+1}-E_n$, de sorte que $\lim \uparrow E_n = \bigcup \limits_{n \in N} I_n$. 
+
+Cette famille est ainsi une partition de $\lim \uparrow E_n$.
+Ainsi, $\mu\left( \lim \uparrow E_n  \right) = \displaystyle{\sum \limits_{n \in N}} \mu(I_n)$. 
+
+Or, par construction, $\displaystyle{\sum \limits_{1 \leq k \leq n}} \mu(I_k) = \mu(E_n)$ et ainsi $\mu\left( \lim \uparrow E_n  \right) = \lim \uparrow \mu(E_n)$.
+
+\medskip
+Intéressons-nous au cas décroissant.
+
+Pour tout $n \geq p$, on considère la suite des $\left(F_p-F_n\right)_{n \geq p}$. C'est une suite croissante et on peut conclure à l'aide du théorème de convergence monotone classique. En effet,
+
+D'une part, $\lim \uparrow \mu\left(F_p-F_n\right)=\mu(F_p) - \lim \downarrow \left(\mu(F_n)\right)$ car $\mu(F_p)<+\infty$.
+
+D'autre part, $\lim \uparrow \mu\left(F_p-F_n\right) = \mu\left(\lim \uparrow (F_p-F_n)\right) = \mu\left(F_p-\lim \downarrow F_n\right) = \mu(F_p)-\mu\left( \lim \downarrow F_n \right)$ en raison de la convergence monotone et de l'hypothèse $\mu(F_p)<+\infty$.
+
+Finalement, on obtient bien $\lim \downarrow \left(\mu(F_n)\right) = \mu\left( \lim \downarrow F_n \right)$
+\end{proof}
+
+De la cas décroissant l'hypothèse de mesure finie est importante.
+
+Par exemple, pour la mesure de comptage, si on considère $F_n = \left [0;~ \dfrac{1}{n} \right ]$, pour tout $n$, 
+
+$\mu(F_n) =+\infty$ or $\mu\left(\lim \downarrow F_n\right) = 1$ car $\lim \downarrow F_n = {0}$.
+
+\begin{prop}[Majoration de $\mu\left(\bigcup \limits_{n \in \N} E_n\right)$]
+Pour toute famille dénombrable $\left(E_n\right)_{n \in \N}$ de $\mathcal{T}$, telle que, pour tout $n$, $\mu(E_n)<+\infty$, on a:
+\[
+\mu\left(\bigcup \limits_{n \in \N} E_n\right) \leq \displaystyle{\sum \limits_{n \in \N}} \mu(E_n)
+\]
+\end{prop}
+
+\begin{proof}
+On va le montrer dans le cas discret par récurrence sur le cardinal. 
+
+On considère une famille finie $(E_k)_{1 \leq k \leq p}$. Si $p=1$, le résultat est évident.
+
+Notons maintenant que $\bigcup \limits_{1 \leq k \leq p+1} E_k = \left( \bigcup \limits_{1 \leq k \leq p} E_k \right) \cup E_{p+1}$.
+
+Ainsi,
+\[
+\mu\left( \bigcup \limits_{1 \leq k \leq p+1} E_k \right) + \mu\left( \left( \bigcup \limits_{1 \leq k \leq p} E_k \right) \cap E_{p+1}  \right) = \mu\left( \bigcup \limits_{1 \leq k \leq p} E_k \right) + \mu(E_{p+1}) 
+\]
+
+Finalement, en utilisant l'hypothèse de récurrence:
+\[
+\mu\left( \bigcup \limits_{1 \leq k \leq p+1} E_k \right) \leq \mu\left( \bigcup \limits_{1 \leq k \leq p} E_k \right) + \mu(E_{p+1}) \leq \displaystyle{\sum \limits_{1 \leq k \leq p}} \mu(E_k) + \mu(E_{p+1})
+\]
+
+Par passage à la limite, pour $p \to +\infty$, sachant que la famille $\left( \bigcup \limits_{1 \leq k \leq p} E_k\right)_{p \in \N}$ est croissante, on peut utiliser le théorème de convergence monotone.
+\end{proof}
+
+\begin{prop}
+On reprend les mêmes hypothèses.
+
+Si $\displaystyle{\sum \limits_{n \in \N}} \mu(E_n)<+\infty$ alors $\mu\left(\limsup E_n\right) = 0$
+\end{prop}
+
+\begin{proof}
+On suppose que $\displaystyle{\sum \limits_{n \in \N}} \mu(E_n)<+\infty$. 
+
+On pose alors $R_n = \displaystyle{\sum \limits_{p \geq n}} \mu(E_n)$. Par hypothèse, on a donc $R_n \to 0$.
+
+Or, $\mu\left(\bigcup \limits_{p \geq n} E_n\right) \leq R_n$ et ainsi $\lim \downarrow \mu\left(\bigcup \limits_{p \geq n} E_n\right) = 0$.
+
+En utilisant la version décroissante du théorème de convergence monotone on peut conclure.
+\end{proof}
+
+\subsubsection{Exemples}
+
+La mesure de comptage, à tout ensemble associe son cardinal.
+
+La mesure de Lebesgue qui à tout intervalle $[a;~b]$ associe $b-a$ constitue également une mesure mais il n'est pas aisé de construire l'extension de la mesure des intervalles à la mesure de n'importe quel élément de la tribu borélienne.
+
+%
+%\end{document}

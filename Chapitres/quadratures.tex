@@ -1,0 +1,970 @@
+
+
+
+\section{Autour de la formule d'Euler Mac Laurin}
+
+\subsection{Première version}
+
+Dans ce paragraphe nous allons établir et donner des premières applications d'une célèbre formule.
+
+\begin{prop}[Formule de Euler-Mac Laurin, polynômes et nombres de Bernoulli]
+
+Soit $f$ une fonction de classe $\mathcal{C}^n$, avec $n \geq 2$, définie sur $[0;~1]$.
+
+Alors:
+\begin{equation}
+\label{euler_mac-laurin}
+\displaystyle{\int_0^1} f  = \frac{1}{2}\left (f(0)+f(1)\right ) + \displaystyle{\sum_{k=1}^{n-1}} \frac{(-1)^k b_{k+1}}{(k+1)!} \left (f^{(k)}(1)-f^{(k)}(0) \right ) + \frac{(-1)^n}{n!}\displaystyle{\int_0^1} B_n \, f^{(n)}
+\end{equation}
+
+avec $(B_n)$ les polynômes de Bernoulli définis par:
+\begin{itemize}
+\item[$\bullet$] 
+$B_0 = 1$;
+\item[$\bullet$] 
+$\forall n, \, B_{n+1}' = (n+1) B_n$ et $\displaystyle{\int_0^1}B_{n+1} = 0$.
+\end{itemize}
+\end{prop}
+
+\begin{proof}
+On le montre par récurrence.
+
+Notons que $B_1(X) = X-\frac{1}{2}$ est une primitive de $1$ et que $\frac{1}{2}B_2$ est une primitive de $B_1$. Supposons que $f$ est de classe $\mathcal{C}^2$. On réalise une double intégration par parties:
+\begin{align*}
+\displaystyle{\int_0^1} f & = [B_1f]_0^1 - \displaystyle{\int_0^1}B_1 f'  
+ = \frac{1}{2} \left (f(0)+f(1)\right ) - \frac{1}{2} [B_2f']_0^1 + \frac{1}{2} \displaystyle{\int_0^1} B_2f'' \\
+ &  = \frac{1}{2} \left (f(0)+f(1)\right ) - \frac{b_2}{2} \left ( f'(1) - f'(0) \right ) + \frac{1}{2} \displaystyle{\int_0^1} B_2f'' \text{ car }B_2(1) = B_2(0) = b_2
+\end{align*}
+
+La formule est donc initialisée.
+
+Si on suppose maintenant que $f$ est de classe $\mathcal{C}^{n+1}$ avec $n \geq 2$, on peut réaliser une intégration par parties du reste intégral.
+\begin{align*}
+\frac{(-1)^n}{n!} \displaystyle{\int_0^1} B_nf^{(n)} & = \frac{(-1)^n}{(n+1)!}\left [B_{n+1}f^{(n)}\right ]_0^1 + \frac{(-1)^{n+1}}{(n+1)!} \displaystyle{\int_0^1} B_{n+1}f^{(n+1)} \\
+ & = \frac{(-1)^nb_{n+1}}{(n+1)!} \left ( f^{(n)}(1) - f^{(n)}(0) \right ) + \frac{(-1)^{n+1}}{(n+1)!} \displaystyle{\int_0^1} B_{n+1}f^{(n+1)}
+\end{align*}
+
+
+En regroupant avec l'hypothèse de récurrence, on obtient bien:
+\begin{align*}
+\displaystyle{\int_0^1} f  & = \frac{1}{2}\left (f(0)+f(1)\right ) + \displaystyle{\sum_{k=1}^{n-1}} \frac{(-1)^k b_{k+1}}{(k+1)!} \left (f^{(k)}(1)-f^{(k)}(0) \right ) + \frac{(-1)^n}{n!}\displaystyle{\int_0^1} B_n \, f^{(n)} \\
+ & = \frac{1}{2}\left (f(0)+f(1)\right ) + \displaystyle{\sum_{k=1}^{n-1}} \frac{(-1)^k b_{k+1}}{(k+1)!} \left (f^{(k)}(1)-f^{(k)}(0) \right ) + \frac{(-1)^nb_{n+1}}{(n+1)!} \left ( f^{(n)}(1) - f^{(n)}(0) \right ) + \frac{(-1)^{n+1}}{(n+1)!} \displaystyle{\int_0^1} B_{n+1}f^{(n+1)} \\
+   & = \frac{1}{2}\left (f(0)+f(1)\right ) + \displaystyle{\sum_{k=1}^{n}} \frac{(-1)^k b_{k+1}}{(k+1)!} \left (f^{(k)}(1)-f^{(k)}(0) \right ) + \frac{(-1)^{n+1}}{(n+1)!} \displaystyle{\int_0^1} B_{n+1}f^{(n+1)}  
+\end{align*}
+\end{proof}
+
+
+\subsection{Étude des polynômes de Bernoulli}
+
+\begin{de}[Polynômes et nombres de Bernoulli]
+\label{poly_bernoulli}
+On définit une suite de polynômes $(B_n)$ par $B_0 = 1$ et, pour tout $n \geq 1$:
+\begin{itemize}
+\item[$\bullet$] 
+$(B_{n})' = n B_{n-1}$;
+\item[$\bullet$] 
+$\displaystyle{\int_0^1} B_n = 0$;
+\end{itemize}
+
+Enfin, on pose pour tout $n$, $b_n = B_n(0)$.
+\end{de}
+
+\begin{listremarques}
+\item
+Un petit calcul donne:
+\[
+\begin{array}{|c|c|}
+\hline
+n & B_n(X) \\ \hline \hline
+0 & 1 \\
+1 & X - \frac{1}{2} \\
+2 & X^2-X+\frac{1}{6} \\
+3 & X^3 - \frac{3}{2} \, X^2 + \frac{1}{2} \, X \\
+4 & X^4 - 2X^3 + X^2 - \frac{1}{30}
+\end{array}
+\]
+\item
+On montre facilement que, pour tout $n$, $B_n$ est unitaire, de degré $n$ et à coefficients rationnels.
+\end{listremarques}
+
+\begin{prop}[Propriétés des polynômes de Bernoulli]
+Pour tout $n \geq 2$, $B_n(1) = B_n(0)$.
+
+\medskip
+Pour tout $n$, les coefficients des polynômes de Bernoulli s'expriment en fonction des $B_n$:
+\[
+B_n(X) = \displaystyle{\sum_{k=0}^n} {n \choose k} b_k X^{n-k}
+\]
+
+\medskip
+On a aussi, pour tout $n \geq 2$, une formule qui permet d'obtenir les $(b_n)$ par récurrence:
+\[
+b_n =  \displaystyle{\sum_{k=0}^n} {n \choose k} b_k
+\]
+
+\medskip
+On a également:
+\[
+B_n(1-X) = (-1)^nB_n(X)
+\]
+
+\medskip
+Et ainsi, pour tout entier impair $n \geq 3$, on vérifie $b_n = 0$.
+
+\medskip
+Pour finir, on prouve que, pour tout $n$, $\frac{1}{n+1}\left (B_{n+1}(X+1) - B_{n+1}(X)\right ) = X^n$, ce qui entraîne pour tout $(n;~p) \in \left (\N^*\right )^2$:
+\[
+\displaystyle{\sum_{k=1}^n} k^p = \frac{1}{p+1} \left (B_{p+1}(n+1) -  B_{p+1}(0) \right )
+\]
+\end{prop}
+
+\begin{proof}
+Pour tout $n \geq 2$, $B_n(1) - B_n(0) = \displaystyle{\int_0^1} B_n' = n \displaystyle{\int_0^1} B_{n-1} = 0$ donc $B_n(1) = B_n(0)$.
+
+\medskip
+La seconde formule se montre par récurrence. L'initialisation est vraie. Supposons-la vraie au rang $n$. Notons qu'au rang $n+1$, le coefficient constant vaut $B_{n+1}(0) = b_{n+1}$ et tous les autres coefficients s'obtiennent par intégration à partir de la relation $B_{n+1}' = (n+1)B_n$. Ainsi:
+\begin{align*}
+B_{n+1}(X) & = (n+1) \displaystyle{\sum_{k=0}^n} \frac{1}{n+1-k} b_k {n \choose k} X^{n+1-k} + b_{n+1} \\ & = \displaystyle{\sum_{k=0}^n} b_k {n+1 \choose k} X^{n+1-k} + b_{n+1} = \displaystyle{\sum_{k=0}^{n+1}} b_k {n+1 \choose k} X^{n+1-k} \text{ car } \frac{n+1}{n+1-k} {n \choose k} = {n+1 \choose k}
+\end{align*}
+
+\medskip
+La troisième formule s'obtient en écrivant, pour tout $n \geq 2$, $b_n = B_n(0) = B_n(1)$ et en exploitant la seconde.
+
+\medskip
+La troisième formule se montre par récurrence. Elle est vraie aux rangs $0$ et $1$.
+
+\medskip
+Supposons-la vraie jusqu'à un certain rang $n$. 
+
+Au rang suivant, au sait que $\left (B_{n+1}(1-X)\right )' = -B_{n+1}'(1-X) = -(n+1) B_n(1-X) = (n+1) (-1)^{n+1}B_n(X)$. 
+
+Et d'autre part $\left ((-1)^{n+1}B_{n+1}(X)\right )' = (n+1)(-1)^{n+1}B_n'(X)$. On en déduit que $B_{n+1}(1-X)$ et $(-1)^{n+1}B_{n+1}(X)$ sont égaux à une constante près. Or, on a aussi $\displaystyle{\int_0^1}B_{n+1}(1-t) \, \mathrm d t = \displaystyle{\int_0^1}(-1)^{n+1} B_{n+1}(t) \, \mathrm d t = 0$. 
+
+Ce qui permet de conclure: ces deux polynômes sont égaux.
+
+
+%On calcule maintenant $B_n(1-X)$ à l'ancienne, à partir de la seconde formule, en exploitant les indicatrices:
+%\begin{align*}
+%B_n(1-X) & = \displaystyle{\sum_{k=0}^n} b_k {n \choose k} (1-X)^{n-k} = \displaystyle{\sum_{k=0}^n} b_k {n \choose k} \displaystyle{\sum_{j=0}^{n-k}} {n-k \choose j} (-1)^j X^j \\
+% & = \displaystyle{\sum_{k=0}^n} \displaystyle{\sum_{j=0}^n} \mathbb{1}_{j \leq n-k} b_k {n \choose k}  {n-k \choose j} (-1)^j X^j \text{ or }{n \choose k}  {n-k \choose j} = {n \choose j} {n-j \choose k} \text{ (coefficient multinomial)} \\
+% & = \displaystyle{\sum_{k=0}^n} \displaystyle{\sum_{j=0}^n} \mathbb{1}_{k \leq n-j} b_k {n \choose j} {n-j \choose k} (-1)^j X^j = \displaystyle{\sum_{j=0}^n}  (-1)^j X^j {n \choose j}\underbrace{\displaystyle{\sum_{k=0}^n} \mathbb{1}_{k \leq n-j} b_k  {n-j \choose k}}_{ = b_{n-j}} \\
+% & = \displaystyle{\sum_{j=0}^n}  (-1)^j X^j {n \choose j} b_{n-j} 
+%\end{align*}
+%
+%On réalise maintenant un changement d'indice $i = n-j$:
+%\begin{align*}
+%B_n(1-X) = \displaystyle{\sum_{j=0}^n} b_i (-1)^{n-i}X^{n-i} {n \choose i} = B_n(-X)
+%\end{align*}
+%
+%Il y a une erreur!
+
+La dernière formule est vraie au rang $0$. En effet, $\frac{1}{1}(B_1(X+1) - B_1(X)) = 1 = X^0$.
+
+\medskip
+Supposons-la vraie jusqu'à un certain rang $n$. Au rang $n+1$, on vérifie que $\frac{1}{n+2}(B_{n+2}(X+1) - B_{n+2}(X))' = \frac{n+2}{n+2} \left (B_{n+1}(X+1) - B_{n+1}(X)\right ) = (n+1) X^n$, par hypothèse de récurrence. Et on a aussi $(X^{n+1})' = (n+1)X^n$. On en déduit que les polynômes $\frac{1}{n+2} \left (B_{n+2}(X+1) - B_{n+2}(X)\right )$ et $X^{n+1}$ sont égaux à une constante près. Et pour $X=0$, on a $B_{n+2}(1) - B_{n+2}(0) = 0$ et $0^{n+1} = 0$ donc ces deux polynômes sont en fait égaux.
+
+\medskip
+La toute dernière formule s'obtient grâce à une somme télescopique.
+\begin{align*}
+\displaystyle{\sum_{k=1}^n} k^p & = \displaystyle{\sum_{k=0}^n} k^p = \frac{1}{p+1}\displaystyle{\sum_{k=0}^n} \left (B_{p+1}(k+1) - B_{p+1}(k)\right ) \\
+ & = \frac{1}{p+1} \left ( B_{p+1}(n+1) - B_{p+1}(0) \right )
+\end{align*}
+
+\end{proof}
+
+
+\begin{prop}[Coefficients de Fourier des polynômes de Bernoulli]
+Pour tout $(k;~n) \in \Z \times \N^*$, on note $c_k^{(n)} = \displaystyle{\sum_0^1} B_n(x) \e^{-2\im k \pi x} \, \mathrm d x$.
+
+\medskip
+Alors:
+\begin{itemize}
+\item[$\bullet$] 
+pour tout $n \geq 1$, $c_0^{(n)} = 0$;
+\item[$\bullet$] 
+pour tout $k \in \Z^*$, $c_k^{(n+1)} = \frac{n+1}{2 \im k \pi} c_k^{(n)}$;
+\item[$\bullet$] 
+les coefficients de Fourier de $B_1$ notés $\left (c_k^{(1)}\right )_{k \in \N}$ valent:
+\[
+c_k^{(1)} = \frac{-1}{2 \im k \pi} \text{ pour }k \in \Z^*
+\]
+\end{itemize}
+
+À partir des deux dernières relations, on obtient:
+\begin{itemize}
+\item[$\bullet$] 
+pour tout $p \in \N^*$ et pour tout $k \in \Z^*$, $c_k^{(2p)} = \frac{(-1)^{p+1} \, (2p)!}{(2\pi k)^{2p}}$, ce qui donne, pour tout $x$:
+\[
+\tilde{B}_{2p}(x) = 2 \, (-1)^{p+1} \, (2p)! \displaystyle{\sum \limits_{k \in \N^*}} \frac{1}{(2\pi k)^{2p}} \, \cos(2 \pi k x)
+\]
+\item[$\bullet$] 
+pour tout $p \in \N^*$ et pour tout $k \in \Z^*$, $c_k^{(2p+1)} = \frac{(-1)^{p+1} \, (2p+1)!}{\im (2\pi k)^{2p+1}}$, ce qui donne, pour tout $x$:
+\[
+\tilde{B}_{2p+1}(x) = 2 \, (-1)^{p+1} \, (2p+1)! \displaystyle{\sum \limits_{k \in \N^*}} \frac{1}{(2\pi k)^{2p+1}} \, \sin(2 \pi k x)
+\]
+\end{itemize}
+
+On \og périodicise \fg{} les polynômes de Bernoulli, en posant $\tilde{B}_n: \, x \mapsto B_n\left ( x - \ent{x}\right )$, la version périodique des Bernoulli qui est de classe $\mathcal{C}^1$ à partir de $n=2$ et de classe $\mathcal{C}^1$ par morceaux pour $n=1$.
+\end{prop}
+
+
+\begin{proof}
+La première relation provient de $c_0^{(n)} = \displaystyle{\int_0^1} B_n = 0$
+
+\medskip
+La seconde relation se déduit de l'égalité valable pour tout $n$, $B_{n+1}' = (n+1) B_n$.
+
+\medskip
+Reste maintenant à calculer les coefficients de Fourier de $B_1$. On réalise un changement de variable $t = x- \frac{1}{2}$ puis une intégration par parties:
+\begin{align*}
+c_k^{(1)} & = \displaystyle{\int_0^1} \left (x-\frac{1}{2}\right ) \e^{-2 \im k \pi x} \, \mathrm d x = \displaystyle{\int_{-1/2}^{1/2}} t \e^{-2 \im k \pi (t+1/2)} \, \mathrm d t \\
+ & = \e^{-\im k \pi} \displaystyle{\int_{-1/2}^{1/2}} t \e^{-2 \im k \pi t} \, \mathrm d t \\
+ & = (-1)^k \, \frac{(-1)}{2 \im k \pi} \left ( \left [ t \e^{-2\im k \pi t}\right ]_{-1/2}^{1/2} - \displaystyle{\int_{-1/2}^{1/2}} \e^{-2 \im k \pi t} \, \mathrm d t \right ) \\
+ & = (-1)^k \, \frac{(-1)}{2 \im k \pi}  \left ( \frac{1}{2} \left ( \e^{\im k \pi} +  \e^{-\im k \pi}\right ) - 0\right ) \\
+ & = (-1)^k \, \frac{(-1)}{2 \im k \pi} \, (-1)^k = \frac{-1}{2 \im k \pi}
+\end{align*}
+
+\medskip
+Montrons par récurrence sur $n$ que, pour tout $k \in \Z^*$, $c_k^{(n)} = \frac{-n!}{\left ( 2 \im \pi k \right )^n}$. Cette relation est vraie pour $n = 1$. 
+
+
+Et au rang suivant:
+\[
+c_k^{(n+1)} = \left (\frac{n+1}{2 \im k \pi}\right ) c_k^{(n)} = \left (\frac{n+1}{2 \im k \pi}\right ) \, \frac{-n!}{\left ( 2 \im \pi k \right )^n} = \frac{-(n+1)!}{\left ( 2 \im \pi k \right )^{n+1}}
+\]
+
+Dans le cas où $n = 2p$ avec $p \geq 1$, cela donne $c_k^{(2p)} = \frac{-(2p)!}{\left ( 2 \im \pi k \right )^{2p}} = \frac{(-1)^{p+1} \, (2p)!}{\left ( 2 \pi k \right )^{2p}}$. Et dans le cas où $n = 2p+1$, on obtient $c_k^{(2p+1)} = \frac{(-1)^{p+1} \, (2p+1)!}{\im \left ( 2 \pi k \right )^{2p+1}}$.
+
+\medskip
+Enfin les toutes dernières formules s'obtiennent en remarquant que, pour tout $k \in \N^*$, et pour tout $x$ réel:
+\[
+c_k^{(n)} \e^{2 \im \pi k x} + c_{-k}^{(n)} \e^{-2 \im \pi k x} = 2 \Re\left ( c_k^{(n)} \e^{2 \im \pi k x} \right )
+\]
+\end{proof}
+
+\begin{listremarques}
+\item
+Au moyen des sommes de Fourier, on retrouve $b_{2p+1} = 0$ et on obtient aussi, dans le cas pair, une expression des coefficients de Bernoulli au moyen de la fonction zêta de Riemann.
+\end{listremarques}
+
+\begin{cor}[Expression des coefficients de Bernoulli]
+Pour tout $p$ non nul:
+\begin{equation}
+\label{bernoulli_zeta}
+b_{2p} = \frac{2 \, (-1)^{p+1} \, (2p)!}{(2\pi)^{2p}} \zeta(2p)
+\end{equation}
+
+
+
+On rappelle que, pour tout $s>1$, $\zeta(s) = \displaystyle{\sum \limits_{k \in \N^*}} \frac{1}{k^s}$.
+
+\medskip
+En considérant les propriétés de la fonction $\zeta$, on obtient:
+\begin{equation}
+\label{equivalent_bernoulli}
+b_{2p} \underset{p \to +\infty}{\sim} \frac{2 \, (-1)^{p+1} \, (2p)!}{(2\pi)^{2p}}
+\end{equation}
+
+Enfin, on dispose de la majoration pour le polynôme périodicisé:
+\begin{equation}
+\label{majoration_bernoulli}
+\abs{\tilde{B}_{2p}} \leq b_{2p}
+\end{equation}
+\end{cor}
+
+\subsection{Version améliorée de la formule d'Euler-Mac-Laurin}
+
+\begin{nota}
+Dans toute la suite, les notations $(B_n)$ désigneront les fonctions polynômiales de Bernoulli périodicisées
+$
+x \mapsto B_n \left ( x - \ent{x}\right )
+$.
+\end{nota}
+
+
+Fort de l'étude des polynômes de Bernoulli, nous pouvons réécrire une version améliorée de la formule d'Euler-Mac-Laurin que nous allons exploiter pour deux applications.
+
+\begin{theo}[Formule d'Euler-Mac-Maurin, version définitive]
+Soient $a < b$ deux entiers et $f$ une fonction de classe $\mathcal{C}^{2n}$ sur $[a;~b]$. Alors:
+\begin{equation}
+\label{euler_mac-laurin_def}
+\displaystyle{\sum_{k=a}^b} f(k) = \frac{1}{2}\left ( f(a) + f(b) \right )+ \displaystyle{\int_a^b} f + \displaystyle{\sum_{j=1}^n} \frac{b_{2j}}{(2j)!} \, \left ( f^{(2j-1)}(b) - f^{(2j-1)}(a)\right ) - \frac{1}{(2n)!} \, \displaystyle{\int_a^b} B_{2n} f^{(2n)}
+\end{equation}
+
+
+Dans le cas où $f$ est de classe $\mathcal{C}^{2n+1}$, on améliore l'ordre du reste:
+\begin{equation}
+\label{euler_mac-laurin_ordre}
+\displaystyle{\sum_{k=a}^b} f(k) = \frac{1}{2}\left ( f(a) + f(b) \right )+ \displaystyle{\int_a^b} f + \displaystyle{\sum_{j=1}^n} \frac{b_{2j}}{(2j)!} \, \left ( f^{(2j-1)}(b) - f^{(2j-1)}(a)\right ) + \frac{1}{(2n+1)!} \, \displaystyle{\int_a^b} B_{2n+1} f^{(2n+1)}
+\end{equation}
+\end{theo}
+
+\begin{proof}
+On reprend la formule \ref{euler_mac-laurin} d'origine en tirant parti de la nullité des $(b_{2i+1})_{i \geq 1}$. Pour tout $k \in \intint{a}{b-1}$:
+\[
+\displaystyle{\int_k^{k+1}} f = \frac{1}{2}\left ( f(k) + f(k+1) \right ) - \displaystyle{\sum_{j=1}^{n}} \frac{b_{2j}}{(2j)!} \, \left ( f^{(2j-1)}(k+1) - f^{(2j-1)}(k)\right ) + \frac{1}{(2n)!} \, \displaystyle{\int_k^{k+1}} B_{2n} f^{(2n)}
+\]
+
+En sommant pour tous les $k$, on obtient:
+\[
+\displaystyle{\int_a^{b}} f = \displaystyle{\sum_{k=a}^b} f(k) - \frac{1}{2}\left ( f(a) + f(b) \right ) - \displaystyle{\sum_{j=1}^{n}} \frac{b_{2j}}{(2j)!} \, \left ( f^{(2j-1)}(b) - f^{(2j-1)}(a)\right ) + \frac{1}{(2n)!} \, \displaystyle{\int_a^b} B_{2n} f^{(2n)}
+\]
+
+En réarrangeant, on obtient l'égalité \ref{euler_mac-laurin_def}.
+
+\medskip
+Et toujours parce que $b_{2n+1} = 0$, on déduit facilement la formule améliorée.
+\end{proof}
+
+\subsection{Approximation asymptotique de sommes}
+
+\subsubsection{Résultat général}
+
+\begin{theo}[Approximation asymptotique de sommes]
+On suppose que:
+\begin{itemize}
+\item[$\bullet$] 
+$a<b$ sont deux entiers $f$ une fonction de classe $\mathcal{C}^{\infty}$ sur $[a;~+\infty[$;
+\item[$\bullet$] 
+il existe $n_0 \in \N$ et $\alpha \in \R$ tel que pour tout $k \geq n_0$, $f^{(k)}$ ne change pas de signe sur $[\alpha;~+\infty[$ et $\lim \limits_{+\infty} f^{(k)} = 0$.
+\end{itemize}
+
+On pose enfin $T_b(f) = \displaystyle{\sum_{k=a}^b} f(k)$. 
+
+\medskip
+Alors, pour tout entier $b \geq \alpha$ et pour tout $n > \frac{n_0}{2}$, on a:
+\begin{equation}
+\label{approximation_asymptotique}
+T_b(f) = \displaystyle{\int_a^{b}} f + \frac{1}{2} \, f(b) + \displaystyle{\sum_{j=1}^{n-1}} \frac{b_{2j}}{(2j)!} \, f^{(2j-1)}(b) + C_n + R_{n,b}
+\end{equation}
+
+Avec:
+\begin{align*}
+C_n & = \frac{1}{2} f(a) - \displaystyle{\sum_{j=1}^{n}} \frac{b_{2j}}{(2j)!} \, f^{(2j-1)}(a) - \frac{1}{(2n)!} \, \displaystyle{\int_a^{+\infty}} B_{2n} f^{(2n)}\\
+R_{n,b} & = \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) + \frac{1}{(2n)!} \, \displaystyle{\int_b^{+\infty}} B_{2n} f^{(2n)}
+\end{align*}
+
+De plus, on vérifie que:
+\begin{itemize}
+\item[$\bullet$] 
+$C_n$ ne dépend que de $a$;
+\item[$\bullet$] 
+il existe $\theta \in [0;~1]$ tel que $R_{n,b} = \theta \, \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b)$.
+\end{itemize}
+\end{theo}
+
+\begin{proof}
+Commençons par prouver la convergence des intégrales. D'après l'inégalité \ref{majoration_bernoulli}, il est clair que, pour tout $N \geq b$, $\displaystyle{\int_b^N} \abs{B_{2n} f^{(2n)}} \leq \abs{b_{2n}} \displaystyle{\int_b^N} \abs{f^{(2n)}} = \abs{b_{2n} \displaystyle{\int_b^N} f^{(2n)}}$ car $f^{(2n)}$ ne change pas de signe. On obtient donc:
+\[
+\displaystyle{\int_b^N} \abs{B_{2n} f^{(2n)}} \leq \abs{b_{2n}} \abs{f^{(2n-1)}(N) - f^{(2n-1)}(b)}
+\]
+
+Et par passage à la limite, cela donne $\displaystyle{\int_b^N} \abs{B_{2n} f^{(2n)}} \leq \abs{b_{2n} f^{(2n-1)}(b)} < +\infty$.
+
+\medskip
+Nous allons maintenant prouver que $C_n$ est constant. Pour ce faire, on écrit la formule au rang $n+1$. On obtient:
+\[
+T_b(f) = \displaystyle{\int_a^{b}} f + \frac{1}{2} \, f(b) + \displaystyle{\sum_{j=1}^{n-1}} \frac{b_{2j}}{(2j)!} \, f^{(2j-1)}(b) + \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) + C_{n+1} + R_{n+1,b}
+\]
+
+Et ainsi, on extrait $\frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) + C_{n+1} + R_{n+1,b} = C_n + R_{n,b}$, soit $C_{n+1} - C_n = R_{n,b} - R_{n+1,b} - \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b)$.
+
+L'inégalité sur l'intégrale établie plus haut ainsi que les hypothèses sur les dérivés successives de $f$ permet de prouver que $\lim \limits_{b \to +\infty} R_{n,b} - R_{n+1,b} - \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) = 0$ ce qui montre que $C_{n+1} = C_n$.
+
+\medskip
+Pour finir, on va montrer que $R_{n,b} = \theta  \theta \, \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b)$ avec $\theta$ un nombre de $[0;~1]$. Sachant que $f^{2n}$ ne change pas de signe et que $\displaystyle{\int_b^{+\infty}} f^{(2n)} = - f^{(2n-1)}(b)$, on peut invoquer l'égalité de la moyenne généralisée pour écrire:
+\[
+R_{n,b} = \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) + \frac{1}{(2n)!} \, \displaystyle{\int_b^{+\infty}} B_{2n} f^{(2n)} = \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) \left ( 1 - \frac{\overline{B_{2n}}}{b_{2n}}\right )
+\]
+
+Le nombre $\overline{B_{2n}}$ désigne la valeur moyenne de $B_{2n}$ sur $[b;~+\infty[$, pondéré par $f^{(2n)}$. En particulier, à partir de la majoration \ref{majoration_bernoulli}, on sait que $\theta = 1 - \frac{\overline{B_{2n}}}{b_{2n}} \in [0;~2]$. 
+
+\medskip
+Pour affiner le contrôle de $\theta$, procédons à une analyse de signe en reprenant la relation entre $R_{n,b}$ et $R_{n+1,b}$ établie plus haut.
+
+On a montré que $R_{n,b} = R_{n+1,b} + \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b)$. On vient de prouver que $R_{n,b}$ est de même signe que $\frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b)$, ce qui entraîne que $R_{n+1,b}$ est du signe de $\frac{b_{2n+2}}{(2n+2)!} \, f^{(2n+1)}(b)$. Mais on sait que $f^{(2n+1)}(b)$ est du même signe que $f^{(2n-1)}(b)$ et que $b_{2n+2}$ est du signe opposé de $b_{2n}$ en raison de la formule \ref{bernoulli_zeta}, sur les coefficients de Bernoulli.
+
+\medskip
+Finalement, $R_{n+1,b}$ est du signe opposé à $\frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b)$, ce qui prouve que $\theta \in [0;~1]$ et achève cette démonstration.
+\end{proof}
+
+
+\subsubsection{Formule de Stirling}
+
+Nous allons appliquer la formule qui précède à la fonction $f = \ln$ avec $a=1$ et $b > 1$ quelconque. 
+
+\medskip
+Soit ainsi $n \in \N^*$, la formule donne 
+\[
+T_b(f) = \ln(b!) = \frac{1}{2} \ln(b) + \displaystyle{\int_1^b} \ln(t) \, \mathrm d t + \displaystyle{\sum_{j=1}^{n-1}} \frac{b_{2j}}{(2j)!} \, f^{(2j-1)}(b) + C + R_{n,b}
+\]
+ 
+On vérifie assez facilement que, pour tout entier $k \geq 1$, $f^{(k)}(b) =  \frac{(-1)^{k-1} (k-1)!}{b^{k}}$ ce qui simplifie le terme général de la somme $\frac{b_{2j}}{(2j)!} \, f^{(2j-1)}(b) = \frac{(-1)^{2j-2} \, (2j-2)! b_{2j}}{(2j)! b^{2j-1}} = \frac{b_{2j}}{2j(2j-1)b^{2j-1}}$.
+
+\medskip
+En outre, on a $R_{n,b} = \theta \, \frac{b_{2n}}{(2n)!} \, f^{(2n-1)}(b) = \theta \,\frac{b_{2n}}{2n(2n-1)b^{2n-1}}$.
+
+\medskip
+Le calcul de l'intégrale donne:
+\[
+\displaystyle{\int_1^b} \ln(t) \, \mathrm d t = b \ln (b) - b = \ln(b^b) - \ln(\e^b) = \ln \left ( \left (\frac{b}{e}\right )^b\right )
+\]
+
+\medskip
+On obtient ainsi, par passage à l'exponentielle, la formule de Stirling:
+\begin{equation}
+\label{stirling_prov}
+b! = \e^C \sqrt{b} \left ( \frac{b}{e}\right )^b \exp\left ( \displaystyle{\sum_{j=1}^{n-1}} \frac{b_{2j}}{2j(2j-1)b^{2j-1}} + \theta \, \frac{b_{2n}}{2n(2n-1)b^{2n-1}} \right )
+\end{equation}
+
+
+
+Pour $n=4$, cela donne:
+\[
+b! = \e^C \sqrt{b} \left ( \frac{b}{e}\right )^b \exp\left ( \frac{1}{12 b} - \frac{1}{360b^3} + \frac{1}{1260 b^5} - \theta \, \frac{1}{1680 b^7} \right )
+\]
+
+\subsubsection{Évaluation de la constante de Stirling: intégrales de Wallis}
+
+
+\begin{de}[Intégrales de Wallis]
+Pour tout $n$, on pose $I_n = \displaystyle{\int_0^{\pi/2}} \sin^n (t) \, \mathrm d t$.
+
+\medskip
+On définit ainsi la suite des intégrales de Wallis
+\end{de}
+
+\begin{listremarques}
+\item
+Il est clair que $\lim \downarrow I_n = 0$.
+\item
+On calcule $I_0 = \frac{\pi}{2}$, $I_1 = 1$, $I_2 = \displaystyle{\int_0^{\pi/2}} \sin^2 (t) \, \mathrm d t = \displaystyle{\int_0^{\pi/2}} \frac{1-\cos(2t)}{2} \, \mathrm d t = \frac{\pi}{4}$.
+\end{listremarques}
+
+\begin{prop}[Relation de récurrence, formule explicite]
+Pour tout $n$, $(n+2) I_{n+2} = (n+1) I_n$. On en déduit:
+\begin{align*}
+I_{2n} & =  \frac{\prod \limits_{1 \leq k \leq n} (2k-1)}{\prod \limits_{1 \leq k \leq n} 2k} \; I_0 &
+I_{2n+1} & = \frac{\prod \limits_{1 \leq k \leq n} 2k}{\prod \limits_{1 \leq k \leq n} (2k+1)} \; I_1
+\end{align*}
+\end{prop}
+
+
+\begin{proof}
+On réalise une intégration par parties
+\begin{align*}
+I_{n+2} & = \displaystyle{\int_0^{\pi/2}} \sin^{n+2} (t) \, \mathrm d t \\
+ & = \left [ -\cos(t) \sin^{n+1}(t) \right ]_0^{\pi/2} + (n+1) \displaystyle{\int_0^{\pi/2}} \cos^2(t) \, \sin^{n} (t) \, \mathrm d t \\
+ & = (n+1) I_n - (n+1) I_{n+2}
+\end{align*}
+
+Cela donne le résultat attendu $(n+2) I_{n+2} = (n+1) I_n$.
+
+\medskip
+Le reste se montre facilement par récurrence à partir de cette formule.
+\end{proof}
+
+\begin{prop}[Autres propriété des intégrales de Wallis]
+On a, pour tout $p$, $I_{2p} I_{2p+1} = \frac{\pi}{2(2p+1)}$.
+
+\medskip
+On vérifie également les comportements asymptotiques suivants:
+\begin{align*}
+I_{2p-1} & \sim I_{2p} \sim I_{2p+1} &
+\left (I_{2p}\right )^2 & \sim \frac{\pi}{4p}
+\end{align*}
+\end{prop}
+
+
+\begin{proof}
+On calcule $I_{2p} I_{2p+1} = \frac{\prod \limits_{1 \leq k \leq n} (2k-1)}{\prod \limits_{1 \leq k \leq n} 2k} \times \frac{\prod \limits_{1 \leq k \leq n} 2k}{\prod \limits_{1 \leq k \leq n} (2k+1)} \; I_0 I_1 = \frac{(2p)!}{(2p+1)!} \; I_0 I_1 = \frac{\pi}{2(2p+1)}$.
+
+\medskip
+D'après la relation de récurrence des intégrales de Wallis et leurs sens de variation, on a $\frac{n+1}{n+2} = \frac{I_{n+2}}{I_{n}} \leq \frac{I_{n+1}}{I_{n}} \leq 1$. On en déduit que:
+$I_{n+1} \sim I_n$.
+
+\medskip
+En combinant les deux résultats précédents, on obtient:
+\[
+I_{2p} I_{2p+1} = \frac{\pi}{2(2p+1)} \sim \frac{\pi}{4p} \quad \text{et} \quad I_{2p} I_{2p+1} \sim \left ( I_{2p}\right )^2
+\]
+
+Ce qui prouve $\left (I_{2p}\right )^2 \sim \frac{\pi}{4p}$
+\end{proof}
+
+\begin{prop}[Version définitive de la formule de Stirling]
+On a:
+\[
+b! \sim \sqrt{2\pi b} \left ( \frac{b}{e}\right )^b
+\]
+\end{prop}
+
+Cette formule s'obtient à partir de la formule \ref{stirling_prov} et de ce que l'on vient de prouver sur les intégrales de Wallis.
+
+\begin{proof}
+Reprenons la formule \ref{stirling_prov}, que l'on peut réécrire, sachant que le terme en exponentielle tend vers $1$ lorsque $b$ tend vers l'infini.
+\[
+b! \sim K \sqrt{b} \left ( \frac{b}{e}\right )^b \text{ en notant }K = \e^C
+\]
+
+Maintenant nous pouvons travailler sur $I_{2p} = \frac{\prod \limits_{1 \leq k \leq n} (2k-1)}{\prod \limits_{1 \leq k \leq n} 2k} \; I_0 = \frac{(2k)!}{\left ( \prod \limits_{1 \leq k \leq n} 2k \right )^2} \; I_0 = \frac{(2k)!}{2^{2p} (p!)^2} \; I_0$.
+
+On a donc:
+\[
+I_{2p} \sim \dfrac{K \sqrt{2p} \left ( \tfrac{2p}{e}\right )^{2p}}{2^{2p} K^2 p \left ( \tfrac{p}{e}\right )^{2p}} \; \frac{\pi}{2} = \frac{1}{K} \; \sqrt{\frac{2}{p}} \; \frac{\pi}{2}
+\]
+
+Cela donne $I_{2p}^2 \sim \frac{1}{K^2} \; \frac{\pi^2}{2p}$. Compte-tenu de l'équivalence $I_{2p}^2 \sim \frac{\pi}{4p}$, on en déduit:
+\[
+K = \sqrt{2\pi}
+\]
+\end{proof}
+
+
+\section{Premiers résultats sur les quadratures}
+
+\subsection{Résultats et notations préliminaires}
+
+\begin{prop}[Égalité de la moyenne généralisée]
+Soit $\mu$ une mesure non triviale définie sur un intervalle $[a;~b]$ et $f$ une fonction continue sur ce même intervalle. Alors, il existe $\gamma \in [a;~b]$ tel que:
+\[
+f(\gamma) = \frac{1}{\mu \left ( [a;~b]\right )} \displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu 
+\]
+
+
+On dit que $\frac{1}{\mu \left ( [a;~b]\right )} \displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu$ est la moyenne de $f$ sur $[a;~b]$.
+\end{prop}
+
+\begin{proof}
+C'est une application du théorème des valeurs intermédiaires et de l'encadrement:
+\[
+m \mu \left ( [a;~b]\right ) \leq \displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu \leq M \mu \left ( [a;~b]\right )
+\]
+
+Avec $m$ et $M$ les extrema de $f$ sur $[a;~b]$.
+\end{proof}
+
+
+\begin{listremarques}
+\item
+En particulier, si $\mu$ admet une densité notée $g$, la moyenne vaut:
+\[
+\frac{1}{\int_a^b g(t) \, \mathrm d t} \displaystyle{\int_a^b} f(t) g(t) \, \mathrm d t
+\]
+\item
+Ce résultat demeure vrai si $a>b$.
+\end{listremarques}
+
+
+\begin{prop}[Formule de Taylor avec reste intégrale, ou Taylor-Laplace]
+Soit $f$ une fonction de classe $\mathcal{C}^{n+1}(I)$ où $I$ est un intervalle et $n$ un entier naturel. Alors, pour tout $(a;~x) \in I^2$:
+\[
+f(x) = \displaystyle{\sum_{k=0}^n} \dfrac{f^{(k)}(a)}{k!} (x-a)^k + \displaystyle{\int_a^x} \dfrac{(x-t)^n}{n!} f^{(n+1)}(t) \, \mathrm d t
+\]
+
+Dans la suite on notera $T_n: \, x \mapsto \displaystyle{\sum_{k=0}^n} \dfrac{f^{(k)}(a)}{k!} (x-a)^k$ et $R_n: \, x \mapsto \displaystyle{\int_a^x} \dfrac{(x-t)^n}{n!} f^{(n+1)}(t) \, \mathrm d t$. Ce sont les polynômes de Taylor et le reste associés à la formule de Taylor en $a$.
+\end{prop}
+
+\begin{proof}
+Facile à prouver par récurrence sur $n$ et en réalisant une intégration par parties.
+\end{proof}
+
+\begin{listremarques}
+\item
+Sous cette hypothèse un peu plus contraignante, on peut ainsi retrouver les formules de Taylor-Young et de Taylor-Lagrange. 
+
+En notant $K_{n+1}$ le maximum local de $\abs{f^{(n+1)}}$, on montre $\abs{R_n(x)} \leq \frac{K_{n+1}}{((n+1)!} \abs{x-a}^{n+1}$ et donc $R_n(x) = o(x-a)^n$ (Taylor-Young).
+
+Mais, grâce à l'égalité de la moyenne généralisée, on a aussi:
+\[
+\exists \gamma \in [a;~x]/ \; R_n(x) = \dfrac{f^{(n+1)}(\gamma)}{(n+1)!} (x-a)^{n+1} \qquad \text{(Taylor-Lagrange)}
+\]
+\end{listremarques}
+
+\begin{de}[Approximation d'intégrales par quadrature]
+Soit $f$ une fonction définie sur un intervalle $[a;~b]$ et $\mu$ une mesure définie sur les boréliens.
+
+\medskip
+On choisit $n+1$ points $a_0 = a < a_1 < \cdots < a_n = b$ avec $a_0 = a$ et $a_n = b$ et pour tout $i \in \intint{0}{n-1}$, on choisit $l_i$ points $\left (\xi_{ij}\right ) \in [a_i;~a_{i+1}[^{l_i}$ et $l_i$ poids $\left (\omega_{ij}\right ) \in \left (\R^+_* \right )^{l_i}$ tels que $\displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} = 1$. Enfin, on pose:
+\[
+\Phi(f) = \displaystyle{\sum_{i=0}^{n-1}} (a_{i+1}-a_i) \displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} f\left ( \xi_{ij}\right )
+\]
+
+En notant $h = \max \limits_{0\leq i \leq n-1} a_{i+1}-a_i$, on a, sous certaines conditions:
+\[
+\Phi(f) \underset{h \to 0}{\longrightarrow} \displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu 
+\]
+
+On dit que $\Phi(f)$ est une approximation de $\displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu$ par quadrature.
+\end{de}
+
+
+\begin{listremarques}
+\item
+Dans la plupart des cas, $\mu$ sera la mesure de Lebesgue ou une mesure à densité et la fonction considérée sera intégrable au sens de Riemann.
+\item 
+On obtient une bonne quadrature en choisissant avec soin les points et les poids.
+\end{listremarques}
+
+\begin{prop}[Cas où $f$ est continue, pour la mesure de Lebesgue]
+Dans le cas où la fonction est continue et où $\mu$ est la mesure de Lebesgue, on a convergence pour $h$ tendant vers $0$.
+\end{prop}
+
+\begin{proof}
+Soit $\varepsilon>0$. Par l'uniforme continuité de $f$ il existe $\eta>0$ tel que, pour tout $\abs{x-y}<\eta$, $\abs{f(x)-f(y)} < \frac{\varepsilon}{b-a}$.
+
+\medskip
+Considérons maintenant $h < \eta$. Pour tout $i \in \intint{0}{n-1}$, il existe $\gamma_i \in [a_i;~a_{i+1}]$ tel que $\displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} f\left ( \xi_{ij}\right ) = f(\gamma_i)$. Cela s'obtient par application du théorème de valeurs intermédiaires compte-tenu du fait que $\displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} f\left ( \xi_{ij}\right )$ est une valeur moyenne de $f$, donc située entre son maximum et son minimum du sous-intervalle considéré. Mais alors, on obtient, par intégration:
+\[
+\abs{\displaystyle{\int_{a_i}^{a_{i+1}}} f - \displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} f\left ( \xi_{ij}\right )} < \dfrac{\varepsilon}{b-a} \, (a_{i+1}-a_i)
+\]
+
+En sommant sur tous les $i$, cela donne:
+
+\[
+\abs{\displaystyle{\int_{a}^{b}} f - \Phi(f)} < \varepsilon
+\]
+\end{proof}
+
+\begin{de}[Ordre d'une méthode]
+On dit qu'une méthode d'approximation est d'ordre $n \in \N$ lorsque $\Phi(P) = \displaystyle{\int_{a}^{b}} P$ pour tout polynôme $P$ de degré inférieur ou égal à $n$ et $\Phi(Q) \neq \displaystyle{\int_{a}^{b}} Q$ pour un polynôme de degré $n+1$.
+\end{de}
+
+\begin{listremarques}
+\item
+Toutes les méthodes sont d'ordre au moins $0$.
+\item
+On définira les méthodes (points et poids) en fonction de l'ordre souhaité.
+\end{listremarques}
+
+
+\subsection{Calcul de l'erreur}
+
+On conserve les notations établies juste avant.
+
+\begin{de}[Fonction erreur]
+On pose $E(f) = \displaystyle{\int_{a}^{b}} f - \Phi(f)$.
+\end{de}
+
+\begin{listremarques}
+\item
+$\Phi$ et $E$ sont des formes linéaires sur l'ensemble des fonctions intégrables sur $[a;~b]$.
+\end{listremarques}
+
+
+\begin{prop}[Calcul de l'erreur, noyau de Peano]
+Soit $f$ une fonction de classe $\mathcal{C}^{n+1}$ sur $[a;~b]$. On suppose que $\Phi$ est d'ordre $n$. Alors:
+\[
+E(f) = \displaystyle{\int_a^b} \frac{f^{(n+1)}(t)}{n!} \, K(t) \, \mathrm d t
+\]
+
+Avec, pour tout $t$, $K(t) = E\left ( x \mapsto \left ((x-t)^+\right )^n \right )$, fonction appelée \emph{noyau de Peano}.
+
+\medskip
+On utilise la notation, pour tout $x$ et $t$ réels, $(x-t)^+ = \begin{cases}x-t  \text{ si } x-t \geq 0 \\
+0 \text{ sinon}
+\end{cases}$.
+\end{prop}
+
+\begin{proof}
+On exploite la formule de Taylor-Laplace en $a$ et la linéarité de l'erreur:
+\begin{align*}
+E(f) & =  E\left (T_n(f)\right ) + E\left (R_n(f) \right ) \\
+ & = E\left (R_n(f) \right ) \text{ car la méthode est d'ordre }n
+\end{align*}
+
+Calculons maintenant plus spécifiquement l'erreur sur le reste.
+\[
+E\left (R_n(f) \right ) = \displaystyle{\int_a^b} \displaystyle{\int_a^x} \frac{(x-t)^n}{n!} \, f^{(n+1)}(t) \, \mathrm d  t \, \mathrm d x - \displaystyle{\sum_{i=0}^{n-1}} (a_{i+1}-a_i) \displaystyle{\sum_{j=1}^{l_i}} \omega_{ij}  \displaystyle{\int_a^{\xi_{ij}}} \frac{(\xi_{ij}-t)^n}{n!} \, f^{(n+1)}(t) \, \mathrm d  t
+\]
+
+Avec la notation introduite plus haut, on peut exploiter le théorème de Fubini:
+\begin{align*}
+E\left (R_n(f) \right ) & = \displaystyle{\int_a^b} \displaystyle{\int_a^b} \frac{\left ((x-t)^+\right )^n}{n!} \, f^{(n+1)}(t) \, \mathrm d  t \, \mathrm d x - \displaystyle{\sum_{i=0}^{n-1}} (a_{i+1}-a_i) \displaystyle{\sum_{j=1}^{l_i}} \omega_{ij}  \displaystyle{\int_a^b} \frac{\left ((\xi_{ij}-t)^+\right )^n}{n!} \, f^{(n+1)}(t) \, \mathrm d  t \\
+ & = \displaystyle{\int_a^b} \displaystyle{\int_a^b} \frac{\left ((x-t)^+\right )^n}{n!} \, f^{(n+1)}(t) \, \mathrm d x \, \mathrm d  t -  \displaystyle{\int_a^b} f^{(n+1)}(t) \displaystyle{\sum_{i=0}^{n-1}} (a_{i+1}-a_i) \displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} \frac{\left ((\xi_{ij}-t)^+\right )^n}{n!} \, \mathrm d  t \\
+ & = \displaystyle{\int_a^b} \frac{f^{(n+1)}(t)}{n!} \left [ \displaystyle{\int_a^b} \left ((x-t)^+\right )^n \, \mathrm d x - \displaystyle{\sum_{i=0}^{n-1}} (a_{i+1}-a_i) \displaystyle{\sum_{j=1}^{l_i}} \omega_{ij} \left ((\xi_{ij}-t)^+\right )^n\right ] \, \mathrm d  t
+\end{align*}
+
+On reconnaît que le terme entre crochets représente l'erreur pour la fonction $x \mapsto \left ((x-t)^+\right )^n$ et on obtient la formule attendue.
+\end{proof}
+
+\subsection{Polynômes orthogonaux}
+
+\begin{de}[Polynômes orthogonaux]
+Soit $\mu$ une mesure finie sur l'ensemble des boréliens d'un intervalle $[a;~b]$. 
+
+\medskip
+On suppose que, pour tout borélien $B$, si $\mu(B) = \mu([a;~b])$ alors $B$ est de cardinal infini.
+
+\medskip
+Pour tous polynômes $P$ et $Q$ à coefficients réels, on pose:
+\[
+\scal{P}{Q} = \displaystyle{\int_{[a;~b]}} PQ \, \mathrm d \mu
+\]
+
+On définit ainsi un produit scalaire sur les polynômes.
+\end{de}
+
+
+\begin{proof}
+On montre assez facilement que cette forme est bilinéaire, définie et positive car $\displaystyle{\int_{[a;~b]}} P^2 \, \mathrm d \mu = 0$ lorsque $P$ s'annule sur un ensemble de mesure $\mu\left ( [a;~b]\right )$, ce qui entraîne que $P$ possède une infinité de racines donc est nul.
+\end{proof}
+
+
+\begin{prop}[Base orthogonale de polynômes]
+On peut fabriquer une famille $(T_n)_{n \in \N^*}$ de polynômes tels que:
+\begin{itemize}
+\item[$\bullet$] 
+pour tout $n \in \N$, $\deg(T_n) = n$;
+\item[$\bullet$] 
+pour tout $i \neq j$, $\scal{T_i}{T_j} = 0$.
+\end{itemize}
+
+En particulier les $(T_k)_{0 \leq k \leq n}$ forment une base de $\R_n[X]$.
+\end{prop}
+
+\begin{proof}
+On peut construire une telle famille par le procédé d'orthogonalisation de Graham-Schmidt. On pose $T_0 = 1$ et, pour tout $n \in \N^*$:
+\[
+T_n = X^n - \displaystyle{\sum_{k=0}^{n-1}} \tfrac{1}{\norm{T_k}^2} \, \scal{X^n}{T_k} \, T_k
+\]
+\end{proof}
+
+La propriété qui suit aura son importance pour la définition des méthodes de Gauss.
+
+\begin{prop}[Racines des polynômes orthogonaux]
+On reprend les mêmes hypothèses et notations. Alors, pour tout $n \in \N^*$, $T_n$ possède $n$ racines distinctes dans $[a;~b]$.
+\end{prop}
+
+
+\begin{proof}
+Notons $(\alpha_i)_{1 \leq i \leq p}$ les racines distinctes de $T_n$ situées dans $[a;~b]$. Si on suppose $p < n$ alors on peut trouver un polynômes $Q$ tel que:
+\begin{itemize}
+\item[$\bullet$] 
+$\deg(Q) < n$;
+\item[$\bullet$] 
+les racines de $T_n Q$ situées dans l'intervalle $[a;~b]$ sont de multiplicités paires.
+\end{itemize}
+
+Il suffit pour cela de poser $Q = \displaystyle{\prod \limits_{i \in I}} (x-\alpha_i)$ avec $I \subset \intint{1}{p}$ défini de telle sorte que, pour tout $i \in I$, la multiplicité de $\alpha_i$ dans le polynôme $T_n$ est impaire.
+
+\medskip
+En particulier, $Q \in \Vect{(T_k)_{0 \leq k \leq n-1}}$ donc $\scal{T_n}{Q} = \displaystyle{\int_{[a;~b]}} T_n Q \, \mathrm d \mu = 0$, ce qui est absurde puisque le polynôme $T_nQ$ ne change pas de signe sur $[a;~b]$.
+\end{proof}
+
+\section{Description et propriétés des méthodes}
+
+Dans tout ce qui suit, on va s'intéresser uniquement à l'approximation de l'intégrale sur l'un des sous-intervalles $[a_i;~a_{i+1}]$. On écrira donc plus simplement la formule de quadrature:
+\[
+\Phi(f) = \displaystyle{\sum_{i=0}^{n-1}}  \omega_i f(a_i) \text{ avec } a \leq a_0 < a_1 <  \cdots < a_{n-1} \leq b \text{ et } \forall i, \, \omega_i > 0
+\]
+
+Et cette formule servira à approximer $\displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu$.
+
+\medskip
+Pour la mesure de Lebesgue, on peut se ramener à l'intervalle $[-1;~1]$ en considérant le changement de variable $t \mapsto u = \frac{2}{b-a} \left ( t - \frac{a+b}{2} \right )$.
+
+\subsection{Newton-Cotes}
+
+En exploitant la remarque précédente, on se place sur $[-1;~1]$.
+
+\begin{de}[Méthode de Newton-Cotes]
+On choisit les $(a_i)$ uniformément répartis sur $[-1;~1]$ avec $a_0 = -1$  et $a_{n-1} = b$. 
+
+\medskip
+Dans ce cas, la méthode est d'ordre au moins $n-1$ si et seulement si les $(\omega_i)$ valent, pour tout $i$:
+\[
+\omega_i = \displaystyle{\int_{[a;~b]}} L_i
+\]
+
+Avec les $(L_i)$ qui sont les polynômes de Lagrange définis pour tout $i \leq n-1$ par:
+\[
+L_i(X) = \frac{1}{\displaystyle{\prod \limits_{j \neq i}} (a_i-a_j)} \, \displaystyle{\prod \limits_{j \neq i}} (X-a_j)
+\]
+\end{de}
+
+\begin{proof}
+Soit $P$ un polynôme de degré inférieur ou égal à $n-1$. On a $P = \displaystyle{\sum \limits_{i \leq n-1}} P(a_i) L_i$. Donc les $(\omega_i)$ ainsi définis donnent bien une méthode d'ordre au moins $n-1$. De plus, ils sont définis de manière unique. En effet, on a, pour tout $i$ et de manière univoque, $\Phi(L_i) = \omega_i$.
+\end{proof}
+
+\begin{listremarques}
+\item
+Il est clair que, pour tout $i$, $a_{n-1-i} = -a_i$ et ceci entraîne que $\omega_i = \omega_{n-1-i}$ car les courbes de $L_i$ et $L_{n-1-i}$ sont symétriques par rapport à l'axe des ordonnées.
+\end{listremarques}
+
+\begin{prop}[Augmentation de l'ordre]
+Lorsque $n-1$ est pair, la méthode est d'ordre $n$.
+\end{prop}
+
+\begin{proof}
+Dans ce cas, le polynôme $P = X^n$ est impair donc $\Phi(P) = \displaystyle{\int_{[-1;~1]}} P = 0$ en raison de la remarque précédente sur la symétrie des poids $\omega_i$.
+
+\medskip
+Ainsi, par linéarité, la méthode est d'ordre $n$.
+\end{proof}
+
+
+\begin{listremarques}
+\item
+En pratique, on choisira un nombre $n$ impair de points afin d'atteindre un ordre $n$.
+\end{listremarques}
+
+\subsection{Gauss}
+
+On reprend les hypothèses et notations du paragraphe sur les polynômes orthogonaux.
+
+\begin{prop}[Méthode de Gauss]
+Soit $n \in \N$. Il existe une unique manière de choisir $n+1$ points $(a_i)_{0 \leq i \leq n}$ dans $[a;~b]$ associés à des poids $(\omega_i)_{0 \leq i \leq n}$ telle que la quadrature suivante approxime $\displaystyle{\int_{[a;~b]}} f \, \mathrm d \mu$ avec un ordre $2n+1$.
+\[
+\Phi(f) = \displaystyle{\sum_{i=0}^n} \omega_i f(a_i)
+\]
+
+En particulier:
+\begin{itemize}
+\item[$\bullet$] 
+les $(a_i)$ sont les racines du polynôme $T_{n+1}$ orthogonal à $\R_n[X]$ et de degré $n+1$;
+\item[$\bullet$] 
+les poids valent $
+\omega_i = \displaystyle{\int_{[a;~b]}} L_i \, \mathrm d \mu
+$ avec $L_i$ le polynôme de Lagrange associé au point $a_i$:
+\[
+L_i(X) = \frac{1}{\displaystyle{\prod \limits_{j \neq i}} (a_i-a_j)} \, \displaystyle{\prod \limits_{j \neq i}} (X-a_j)
+\]
+\end{itemize} 
+\end{prop}
+
+
+\begin{proof}
+Supposons qu'une telle méthode existe. Posons $P(X) = \displaystyle{\prod \limits_{i}} (X-a_i)$. On a $\deg(P) = n+1$ donc pour tout $Q$ de degré inférieur ou égal à $n$, on vérifie $\scal{P}{Q} = \displaystyle{\int_{[a;~b]}} PQ \, \mathrm d \mu = \displaystyle{\sum_{i=0}^n} \omega_i P(a_i)Q(a_i) = 0$ car $\deg(PQ) \leq 2n+1$.
+
+Cela prouve que $P$ est un polynôme orthogonal à l'espace $\R_n[X]$. 
+
+\medskip
+Réciproquement, on sait, d'après le paragraphe sur l'orthogonalité, qu'un tel polynôme $P$ existe, est défini à un multiple scalaire non nul près, et possède $n+1$ racines distinctes dans $[a;~b]$. En notant $(a_i)$ ces racines, il nous faut maintenant prouver que la quadrature fonctionne et calculer les poids $(\omega_i)$. Soit un polynôme $A$ de degré maximal $2n+1$. Réalisons la division euclidienne de $A$ par $P$. Il existe un polynôme $D$ et un polynôme $R$ tels que $A = PD + R$ avec $\deg(R) \leq n$. On a aussi $\deg(D) \leq n$ ce qui entraîne $\scal{P}{D} = 0$ et par suite $\displaystyle{\int_{[a;~b]}} A \, \mathrm d \mu = \displaystyle{\int_{[a;~b]}} R \, \mathrm d \mu$. De plus, pour tout $i$, $A(a_i) = R(a_i)$ car $P(a_i) = 0$ et on a ainsi $R(X) = \displaystyle{\sum \limits_{i}} R(a_i) L_i(X) = \displaystyle{\sum \limits_{i}} A(a_i) L_i(X)$, ce qui entraîne $\displaystyle{\int_{[a;~b]}} A \, \mathrm d \mu = \displaystyle{\int_{[a;~b]}} R \, \mathrm d \mu = \displaystyle{\sum \limits_{i}} A(a_i) \displaystyle{\int_{[a;~b]}} L_i \, \mathrm d \mu$. Les poids $(\omega_i)$ définis par $\omega_i = \displaystyle{\int_{[a;~b]}} L_i \, \mathrm d \mu$ conviennent et ce sont les seuls. Pour s'en convaincre, il suffit d'appliquer la formule de quadrature aux $(L_i)$.
+
+\medskip
+Reste maintenant à prouver que l'ordre de la méthode ne dépasse pas $2n+1$. Mais cela est facile par l'absurde en reprenant les arguments de début de démonstration. En effet, le polynôme $P(X) = \displaystyle{\prod \limits_{i}} (X-a_i)$ de degré $n+1$ serait orthogonal à $\R_{n+1}[X]$ donc orthogonal à lui-même, ce qui conduit à une contradiction.
+\end{proof}
+
+
+\subsection{Accélération de Romberg-Richardson}
+
+Voici le principe général de la méthode:
+\begin{itemize}
+\item[$\bullet$] 
+Moyennant une transformation affine sur les abscisses, la formule d'Euler-Mac-Laurin nous offre un développement limité de la quadrature des trapèzes dont le terme constant est $\int f$.
+\item[$\bullet$] 
+Avec une astuce de calcul, on élimine de manière récursive les termes polynomiaux non constants du développement limité, \emph{sans recalculer de points intermédiaires dans notre quadrature.}
+\end{itemize}
+
+Dans tout ce paragraphe, on se donne $(n;~p) \in \left (\N^*\right )^2$ et $f$ une fonction de classe $\mathcal{C}^{2p+1}$ sur un intervalle $[a;~b]$. 
+
+\medskip
+Commençons par réaliser la transformation qui nous permettra d'exploiter la formule d'Euler-Mac-Laurin.
+Pour tout $n$, on pose $\varphi_n: \, s \mapsto f\left ( a + s \, \tfrac{b-a}{n}\right )$, de sorte que:
+\begin{itemize}
+\item[$\bullet$] 
+$\varphi_n$ est de classe $\mathcal{C}^{2p+1}$ sur $[0;~n]$;
+\item[$\bullet$] 
+$\displaystyle{\int_a^b} f = \frac{b-a}{n} \displaystyle{\int_0^n} \varphi_n$.
+\end{itemize}
+
+Dans toute la suite, on posera:
+\[
+T_n = \frac{b-a}{n} \displaystyle{\sum_{k=0}^{n-1}} \tfrac{1}{2}\left ( f\left ( a + k \, \tfrac{b-a}{n}\right ) + f\left ( a + (k+1) \, \tfrac{b-a}{n}\right ) \right ) = \frac{b-a}{n} \displaystyle{\sum_{k=0}^{n-1}} \tfrac{1}{2} \left ( \varphi_n(k) + \varphi_n(k+1)\right )
+\]
+
+C'est l'approximation par la méthode des trapèzes de $\displaystyle{\int_a^n} f$ en réalisant $n$ subdivisions.
+
+\medskip
+La formule d'Euler-Mac-Laurin appliquée à $\varphi_n$ donne:
+\[
+T_n = \frac{b-a}{n}\left [ \displaystyle{\int_0^n} \varphi_n +\displaystyle{\sum_{k=1}^p} \tfrac{b_{2k}}{(2k)!} \, \left ( \varphi_n^{(2k-1)}(n) - \varphi_n^{(2k-1)}(0) \right ) - \frac{1}{(2p+1)!} \displaystyle{\int_0^n} B_{2p+1} \varphi_n^{(2p+1)} \right ]
+\]
+
+Or, pour tout $0 \leq k \leq 2p+1$ et pour tout $s \in [0;~n]$, $\varphi_n^{(k)}(s) = \left ( \frac{b-a}{n}\right )^k f^{(k)} \left ( a + s \, \tfrac{b-a}{n} \right )$, ce qui permet de réécrire:
+\[
+T_n = \displaystyle{\int_a^b} f + \displaystyle{\sum_{k=1}^p} \left (\tfrac{b_{2k}}{(2k)!}\right ) \, \left ( f^{2k-1}(b) - f^{2k-1}(a) \right ) \, \tfrac{(b-a)^{2k}}{n^{2k}} + \tfrac{1}{(2p+1)!} \, \left ( \displaystyle{\int_0^n} B_{2p+1}(s) \, f^{(2p+1)} \left ( a + s \, \tfrac{b-a}{n} \right )  \,  \mathrm d s \right ) \, \tfrac{(b-a)^{2p+1}}{n^{2p+2}}
+\]
+
+Remarquons que $\displaystyle{\int_0^n} B_{2p+1}(s) \, f^{(2p+1)} \left ( a + s \, \tfrac{b-a}{n} \right )  \,  \mathrm d s = O\left (n  \right )$, ce qui prouve que le reste intégral est un $O\left ( \frac{(b-a)^{2p+1}}{n^{2p+1}}\right )$.
+
+Cette remarque permet de construire cette proposition.
+
+\begin{prop}[Développement limité de l'approximation des trapèzes]
+On reprend les mêmes hypothèses et notations. Alors:
+\[
+T_n = c_0 + \displaystyle{\sum_{k=1}^p} c_k \, \frac{(b-a)^{2k}}{n^{2k}} + O\left ( \frac{(b-a)^{2p+1}}{n^{2p+1}} \right )
+\]
+
+Avec, pour tout $1 \leq k \leq p$, $c_k = \left (\tfrac{b_{2k}}{(2k)!}\right ) \, \left ( f^{2k-1}(b) - f^{2k-1}(a) \right )$ et $c_0 = \displaystyle{\int_a^b} f$
+\end{prop}
+
+L'objectif du paragraphe suivant est d'obtenir, en jouant sur les différentes valeurs de $n$, une approximation fine du terme constant $\displaystyle{\int_a^b} f$ sans devoir recalculer des points.
+
+\medskip
+Remarquons que, en formant la quantité $2^2T_{2n} - T_n$, le terme de degré $2$ s'élimine. Sur ce principe d'élimination, nous allons construire l'algorithme de Romberg-Richardson qui élimine les termes de degré $2k$ par ordre croissant.
+
+\medskip
+Posons pour tout $0 \leq j \leq p$, on pose $R_j = T_{2^j}$. On a ainsi:
+\[
+\begin{array}{llll}
+R_0 & = c_0 & +\displaystyle{\sum_{k=1}^p} c_k \, (b-a)^{2k} & + O\left ((b-a)^{2p+1}\right ) \\
+R_1 & = c_0 & +\displaystyle{\sum_{k=1}^p} c_k \, \tfrac{(b-a)^{2k}}{2^{2k}} & + O\left (\tfrac{(b-a)^{2p+1}}{2^{2p+1}}\right ) \\
+R_2 & = c_0 & +\displaystyle{\sum_{k=1}^p} c_k \, \tfrac{(b-a)^{2k}}{2^{4k}} & + O\left (\tfrac{(b-a)^{2p+1}}{2^{4p+2}}\right ) \\
+\cdots \\
+R_j & = c_0 & +\displaystyle{\sum_{k=1}^p} c_k \, \tfrac{(b-a)^{2k}}{2^{2jk}} & + O\left (\tfrac{(b-a)^{2p+1}}{2^{j(2p+1)}}\right ) \\
+R_{j+1} & = c_0 & +\displaystyle{\sum_{k=1}^p} c_k \, \tfrac{(b-a)^{2k}}{2^{2(j+1)k}} & + O\left (\tfrac{(b-a)^{2p+1}}{2^{(j+1)(2p+1)}}\right ) \\
+\cdots \\
+R_{p} & = c_0 & +\displaystyle{\sum_{k=1}^p} c_k \, \tfrac{(b-a)^{2k}}{2^{2pk}} & + O\left (\tfrac{(b-a)^{2p+1}}{2^{p(2p+1)}}\right ) \\
+\end{array}
+\]
+
+Pour tout $0 \leq j \leq p-1$, formons la quantité $\frac{4R_{j+1} - R_j}{3}$:
+\[
+\frac{4R_{j+1} - R_j}{3} = c_0 + \displaystyle{\sum_{k=2}^p} c_k \, (b-a)^{2k} \, \tfrac{1}{3} \, \left ( \tfrac{1}{2^{2(j+1)k-2}}-\tfrac{1}{2^{2jk}}\right ) + O\left (\tfrac{(b-a)^{2p+1}}{2^{(j+1)(2p+1)-2}}\right ) + O\left (\tfrac{(b-a)^{2p+1}}{2^{j(2p+1)}} \right )
+\]
+
+Commençons par examiner les restes. On a $(j+1)(2p+1) - 2 = j(2p+1) + 2p-1 > j(2p+1)$ ce qui montre que $O\left (\tfrac{(b-a)^{2p+1}}{2^{(j+1)(2p+1)-2}}\right ) + O\left (\tfrac{(b-a)^{2p+1}}{2^{j(2p+1)}} \right ) = O\left (\tfrac{(b-a)^{2p+1}}{2^{j(2p+1)}} \right )$.
+
+\medskip
+Calculons maintenant le terme général:
+\[
+\frac{1}{2^{2(j+1)k-2}}-\frac{1}{2^{2jk}} = \frac{1}{2^{2jk + 2(k-1)}} - \frac{1}{2^{2jk}} = \frac{1}{2^{2jk}} \, \frac{\left ( 1-2^{2(k-1)}\right ) }{2^{2(k-1)}} 
+\]
+
+On en déduit:
+\[
+\frac{4R_{j+1} - R_j}{3} = c_0 + \displaystyle{\sum_{k=2}^p} c_k \, (b-a)^{2k} \, \tfrac{\left ( 1-2^{2(k-1)}\right ) }{3 \times 2^{2(k-1)}}  \, \tfrac{1}{2^{2jk}} + O\left (\tfrac{(b-a)^{2p+1}}{2^{j(2p+1)}} \right )
+\]
+
+Pour tout $2 \leq k \leq p$, les nouveaux coefficients sont $c_k^{(1)} = c_k \, \tfrac{\left ( 1-2^{2(k-1)}\right ) }{3 \times 2^{2(k-1)}}$ et sont indépendants de $j$.
+
+\medskip
+Nous voici munis de l'initialisation et de la première étape de la méthode de Romberg-Richardson. Reste à éliminer le terme de degré 4, puis le terme de degré 6 et ainsi de suite. Le théorème suivant nous fourni l'algorithme complet.
+
+\begin{theo}[Algorithme d'accélération de Romberg Richardson]
+On reprend les notations et hypothèses du paragraphe. On considère l'algorithme suivant:
+\begin{tabbing}
+\qquad\=\qquad\=\qquad\=\qquad\=\qquad\=\qquad\\
+Pour $0 \leq i \leq p$: \\
+\>On assigne $R_i^{(0)} = T_{2^i}$ \\
+Fin pour \\
+Pour $1 \leq k \leq p$: \\
+\>Pour $0 \leq i \leq p-k$: \\
+\>\>On assigne $R_i^{(k)} = \frac{1}{4^{k}-1} \left ( 4^k R_{i+1}^{(k-1)}-R_{i}^{(k-1)}\right )$ \\
+\>Fin pour \\
+Fin pour \\
+On renvoie $R_0^{(p)}$
+\end{tabbing}
+
+Alors cet algorithme renvoie $\displaystyle{\int_a^b} f$ avec un reste négligeable devant $(b-a)^{2p}$.
+\end{theo}
+
+ 
+\begin{proof}
+Cela se fait par récurrence sur $p$ en généralisant ce que l'on vient de faire au paragraphe précédent.
+\end{proof}
+
+
+

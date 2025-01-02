@@ -1,0 +1,164 @@
+\babel@toc {french}{}\relax 
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction à la théorie de la mesure}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Cardinaux, sommes dénombrables, nouveau formalisme sur les ensembles}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Cardinalité}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Sommes de nombres positifs}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Limites d'ensembles, nouveau formalisme}{3}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Tribu, mesure}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Tribu}{3}{subsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.1.1}Définition}{3}{subsubsection.1.2.1.1}%
+\contentsline {subsubsection}{\numberline {1.2.1.2}Exemples}{3}{subsubsection.1.2.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1.3}Tribu engendrée}{4}{subsubsection.1.2.1.3}%
+\contentsline {subsection}{\numberline {1.2.2}Mesure}{4}{subsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.2.1}Définition}{4}{subsubsection.1.2.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2.2}Propriétés de la mesure}{4}{subsubsection.1.2.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.2.3}Exemples}{7}{subsubsection.1.2.2.3}%
+\contentsline {chapter}{\numberline {2}L'intégrale de Lebesgue}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Fonctions mesurables}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Fonctions et ensembles: résultat préliminaire}{9}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Définition}{10}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Compléments sur les tribus}{11}{subsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.3.1}Transport de tribu, tribu engendrée}{11}{subsubsection.2.1.3.1}%
+\contentsline {subsubsection}{\numberline {2.1.3.2}Propriétés des boréliens}{11}{subsubsection.2.1.3.2}%
+\contentsline {subsection}{\numberline {2.1.4}Fonctions mesurables à valeurs réelles}{12}{subsection.2.1.4}%
+\contentsline {section}{\numberline {2.2}Fonctions échelonnées positives}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Définition}{14}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Intégrale de fonction échelonnée positive}{14}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Intégrale d'une fonction positive}{15}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Définition}{15}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Propriétés de base}{16}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Les grands théorèmes de convergence, cas positif}{16}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Intégrale d'une fonction à valeurs réelles ou complexe}{19}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Notion de propriété $\mu -$presque partout, tribu complétée}{19}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Intégrabilité}{20}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Propriétés de l'intégrale des fonctions à valeurs réelles ou complexes}{20}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Les grands théorèmes de convergence, cas général}{22}{subsection.2.4.4}%
+\contentsline {chapter}{\numberline {3}La mesure de Lebesgue}{25}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Théorème de Carathéodory}{25}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Définitions et premiers lemmes}{25}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Le théorème}{27}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Applications}{29}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Théorème de Stieljes}{29}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Mesure de Lebesgue}{33}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Quelques résultats de densité dans $\mathbf {L^1}$}{33}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Deux exemples: ensemble de Cantor, mesure non continue à droite}{34}{subsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4.1}Importance de la continuité à droite}{34}{subsubsection.3.2.4.1}%
+\contentsline {subsubsection}{\numberline {3.2.4.2}Ensemble de Cantor}{34}{subsubsection.3.2.4.2}%
+\contentsline {section}{\numberline {3.3}Le théorème de Riesz}{35}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Le lemme d'Urysohn}{35}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Le théorème de Riesz}{36}{subsection.3.3.2}%
+\contentsline {chapter}{\numberline {4}L'intégrale de Riemann}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Définition}{37}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Fonctions en escalier}{37}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Intégrale de fonctions}{39}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Applications}{41}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Comparaison séries-intégrales}{41}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Intégrale de Riemann et suites}{41}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Le cas des dimensions finies}{42}{subsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.3.1}Le cas réel}{42}{subsubsection.4.2.3.1}%
+\contentsline {subsubsection}{\numberline {4.2.3.2}Extension aux espaces de dimensions finies}{45}{subsubsection.4.2.3.2}%
+\contentsline {subsubsection}{\numberline {4.2.3.3}Formules de changement de variable}{46}{subsubsection.4.2.3.3}%
+\contentsline {chapter}{\numberline {5}Méthodes de quadratures}{49}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Autour de la formule d'Euler Mac Laurin}{49}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Première version}{49}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Étude des polynômes de Bernoulli}{50}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Version améliorée de la formule d'Euler-Mac-Laurin}{53}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Approximation asymptotique de sommes}{54}{subsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.4.1}Résultat général}{54}{subsubsection.5.1.4.1}%
+\contentsline {subsubsection}{\numberline {5.1.4.2}Formule de Stirling}{55}{subsubsection.5.1.4.2}%
+\contentsline {subsubsection}{\numberline {5.1.4.3}Évaluation de la constante de Stirling: intégrales de Wallis}{55}{subsubsection.5.1.4.3}%
+\contentsline {section}{\numberline {5.2}Premiers résultats sur les quadratures}{57}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Résultats et notations préliminaires}{57}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Calcul de l'erreur}{59}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Polynômes orthogonaux}{60}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Description et propriétés des méthodes}{61}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Newton-Cotes}{61}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Gauss}{62}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Accélération de Romberg-Richardson}{62}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}Compléments sur l'intégration}{65}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Tribu, mesure produit, théorème de Fubini-Tonelli}{65}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Théorème d'unicité de mesure}{65}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Définition de la tribu produit}{66}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Définition de la mesure produit}{67}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Théorème de Fubini-Tonelli, cas général}{68}{subsection.6.1.4}%
+\contentsline {section}{\numberline {6.2}Inégalités, espaces $\mathbf L^p$, dérivation}{69}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Inégalités de Hölder et de Minkowski}{69}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Notion d'espaces $\mathbf L^p$}{70}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Dérivation et intégrale}{72}{subsection.6.2.3}%
+\contentsline {chapter}{\numberline {7}Convolution et transformée de Fourier}{73}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Convolution}{73}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Définition, premières propriétés}{73}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Régularisation}{74}{subsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.2.1}Une fonction $\mathbf {\mathcal {C}^{\infty }}$ à support compact}{74}{subsubsection.7.1.2.1}%
+\contentsline {subsubsection}{\numberline {7.1.2.2}Approximations de l'unité}{75}{subsubsection.7.1.2.2}%
+\contentsline {subsubsection}{\numberline {7.1.2.3}Le cas des fonctions à support compact}{75}{subsubsection.7.1.2.3}%
+\contentsline {subsubsection}{\numberline {7.1.2.4}Densité des fonctions $\mathcal {C}^{\infty }$ à support compact dans $L^p$}{77}{subsubsection.7.1.2.4}%
+\contentsline {subsubsection}{\numberline {7.1.2.5}Étude de l'opérateur de translation}{78}{subsubsection.7.1.2.5}%
+\contentsline {subsubsection}{\numberline {7.1.2.6}Résultats généraux sur les approximations de l'unité}{78}{subsubsection.7.1.2.6}%
+\contentsline {subsection}{\numberline {7.1.3}Des cas plus généraux}{79}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Transformée de Fourier: définitions et premières propriétés}{80}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Définition générale}{80}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Transformée de Fourier d'une fonction: propriétés}{81}{subsection.7.2.2}%
+\contentsline {chapter}{\numberline {8}Espace de Schwartz, transformée de Fourier et mesures}{85}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Généralités sur l'espace de Schwartz}{85}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Notations}{85}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Définition: l'espace de Schwartz}{85}{subsection.8.1.2}%
+\contentsline {section}{\numberline {8.2}Transformée de Fourier dans $\mathbf {\mathcal {S}}$}{88}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Définition et premières propriétés}{88}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Théorème d'inversion}{91}{subsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.2.1}Approximation de l'unité}{91}{subsubsection.8.2.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2.2}Théorème d'inversion}{91}{subsubsection.8.2.2.2}%
+\contentsline {section}{\numberline {8.3}Étude des suites de mesures finies}{92}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Transformée de Fourier de mesures finies}{92}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Différents types de convergence}{95}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Convergence de mesures et transformée de Fourier}{98}{subsection.8.3.3}%
+\contentsline {chapter}{\numberline {9}Probabilites}{101}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Quelques résultats préliminaires}{101}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Premières définitions, propriétés et notations}{101}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Indépendance, construction de suites d'expériences indépendantes et identiquement distribuées}{103}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.1.3}Loi du tout ou rien, tribu asymptotique}{106}{subsection.9.1.3}%
+\contentsline {subsection}{\numberline {9.1.4}Variables aléatoires $\mathbf { \mathrm {L} ^p}$}{108}{subsection.9.1.4}%
+\contentsline {section}{\numberline {9.2}Convergences presque sûrement, convergence $\mathbf {\mathcal {L}^p}$, convergence en probabilité}{110}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Convergence $\mathcal {L}^p$, convergence presque sûre}{110}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Convergence en probabilité}{111}{subsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.2.3}Un contre exemple}{113}{subsection.9.2.3}%
+\contentsline {section}{\numberline {9.3}Loi forte des grands nombres}{114}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Version $\mathbf { \mathrm {L} ^2}$}{114}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Version $\mathbf { \mathrm {L} ^1}$ (Kolmogorov)}{115}{subsection.9.3.2}%
+\contentsline {section}{\numberline {9.4}Fonctions caractéristiques}{119}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Définition et premières propriétés}{119}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Théorème Central Limite}{120}{subsection.9.4.2}%
+\contentsline {section}{\numberline {9.5}Quelques lois}{122}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Lois discrètes}{122}{subsection.9.5.1}%
+\contentsline {subsubsection}{\numberline {9.5.1.1}Fonctions génératrices}{122}{subsubsection.9.5.1.1}%
+\contentsline {subsubsection}{\numberline {9.5.1.2}Lois de Bernoulli et binomiale}{123}{subsubsection.9.5.1.2}%
+\contentsline {subsubsection}{\numberline {9.5.1.3}Loi géométrique et loi de poisson}{124}{subsubsection.9.5.1.3}%
+\contentsline {subsection}{\numberline {9.5.2}Lois gamma}{126}{subsection.9.5.2}%
+\contentsline {subsubsection}{\numberline {9.5.2.1}Fonction gamma}{126}{subsubsection.9.5.2.1}%
+\contentsline {subsubsection}{\numberline {9.5.2.2}Loi gamma}{127}{subsubsection.9.5.2.2}%
+\contentsline {chapter}{\numberline {10}Séries de Fourier}{129}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Polynômes trigonométriques}{129}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Propriétés}{129}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Convergence uniforme d'un polynôme trigonométrique vers une fonction continue}{130}{subsection.10.1.2}%
+\contentsline {section}{\numberline {10.2}Séries de Fourier, noyau de Dirichlet}{131}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Introduction, convergence en norme deux}{131}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Noyau de Dirichlet: définition et étude}{131}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}Le cas $C^1$}{133}{subsection.10.2.3}%
+\contentsline {subsubsection}{\numberline {10.2.3.1}Cas simple}{133}{subsubsection.10.2.3.1}%
+\contentsline {subsubsection}{\numberline {10.2.3.2}Théorème de Dini-Dirchlet et applications}{133}{subsubsection.10.2.3.2}%
+\contentsline {subsubsection}{\numberline {10.2.3.3}Deux exemples en dents de scie}{134}{subsubsection.10.2.3.3}%
+\contentsline {chapter}{\numberline {11}Intégrale de Kurtzweil-Henstock}{137}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Définition et premières propriétés de l'intégrale de Kurzweil-Henstock}{137}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}Définitions}{137}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}Les propriétés habituelles de l'intégrale}{139}{subsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.1.3}Critère de Cauchy et relation de Chasles}{140}{subsection.11.1.3}%
+\contentsline {subsection}{\numberline {11.1.4}Le théorème fondamental de l'analyse}{143}{subsection.11.1.4}%
+\contentsline {subsubsection}{\numberline {11.1.4.1}Énoncé et preuve}{143}{subsubsection.11.1.4.1}%
+\contentsline {subsubsection}{\numberline {11.1.4.2}Un exemple pathologique}{144}{subsubsection.11.1.4.2}%
+\contentsline {section}{\numberline {11.2}Des résultats de convergence}{144}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Un premier exemple}{144}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}Lemme de Henstock}{144}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Intégrales généralisées}{146}{subsection.11.2.3}%
+\contentsline {subsection}{\numberline {11.2.4}Convergence monotone}{149}{subsection.11.2.4}%
+\contentsline {subsection}{\numberline {11.2.5}Convergence dominée}{150}{subsection.11.2.5}%

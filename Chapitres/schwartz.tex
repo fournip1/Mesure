@@ -1,0 +1,916 @@
+
+\section{Généralités sur l'espace de Schwartz}
+
+\subsection{Notations}
+
+On se place dans $\R^d$ que l'on munit de la mesure $\tilde{\lambda}_d = \frac{1}{(2\pi)^{n/2}} \lambda_d$ où $\lambda_d$ est la mesure de Lebesgue. Grâce à cette manipulation, le noyau gaussien noté $g: \, x \mapsto \e^{-\norm{x}^2/2}$ vérifie $\norm{g}_1 = 1$.
+
+
+\medskip
+Pour tout $t \in \R^d$, on pose $e_t: \, x \mapsto \e^{\im  x \cdot t}$ où \og $\cdot$ \fg{} désigne le produit scalaire \og classique \fg{} sur $\R^d$.
+
+\medskip
+Pour tout $x = (x_1;~x_2;~\cdots;~x_d) \in \R^d$ et pour tout multi-indice $\alpha  = (\alpha_1;~\alpha_2;~\cdots;~\alpha_d) \in \N^d$, on note $x^\alpha = \displaystyle{\prod_{i=1}^d} x_i^{\alpha_i}$.
+
+\medskip
+Concernant la dérivation, pour tout multi-indice $\alpha  = (\alpha_1;~\alpha_2;~\cdot;~\alpha_d) \in \N^d$, on note $D^\alpha = \dfrac{\partial^{\alpha_1} \partial^{\alpha_2} \cdots \partial^{\alpha_d}}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \cdots \partial x_d^{\alpha_d}}$.
+
+Et on notera aussi $D_{\alpha} = \frac{1}{(\im)^{\abs{\alpha}}} D^{\alpha}$ où $\abs{\alpha} = \alpha_1 + \alpha_2 + \cdot + \alpha_d$.
+
+\medskip
+Ces notations seront utiles lorsque nous établirons un lien entre polynômes, dérivation et transformée de Fourier.
+
+\medskip
+Enfin, si $P$ est un polynôme de $\C[X_1,~X_2,\cdots,~X_d]$ dont les coefficients sont $(c_{\alpha})_{\alpha  \in \N^d}$, on notera 
+
+$P(D) = \displaystyle{\sum \limits_{\alpha \in \N^d}} c_{\alpha} D_{\alpha}$.
+
+
+\subsection{Définition: l'espace de Schwartz}
+
+\begin{de}[Espace de Schwartz]
+On dit qu'une fonction $f: \, \R^d \to \C$ appartient à l'espace de Schwartz, noté $\mathcal{S}$, lorsque:
+\begin{itemize}
+\item[$\bullet$] 
+$f \in \mathcal{C}^{\infty}$;
+\item[$\bullet$] 
+$\forall (\alpha;~p) \in  \N^d \times \N$, $\sup \limits_{x \in \R^d} \left ( 1+\norm{x}^2\right )^{p} \norm{D^{\alpha} f(x)} < +\infty$.
+\end{itemize}
+
+Dans ce cas, pour tout $(\alpha;~p) \in  \N^d \times \N$, on notera $N_{\alpha;~p} (f) = \sup \limits_{x \in \R^d} \left ( 1+\norm{x}^2\right )^{p} \norm{D^{\alpha} f(x)}$.
+\end{de}
+
+Notons que la famille $N_{\alpha;~p}$ est une famille dénombrable et séparatrice de semi-normes puisque, pour $\alpha = 0$, il s'agit en fait d'une norme. On travaillera donc avec la topologie induite par cette famille, telle qu'elle a été définie dans le document \emph{normes}. 
+
+
+\begin{cerveau}
+On rappelle qu'une base d'ouverts de cette topologie est formée des intersections finies de boules $V_{N_{\alpha;~p};~q_{\alpha;~p}} = \left \{f \in \mathcal{S}/ \, N_{\alpha;~p}(f) < \frac{1}{q_{\alpha;~p}} \right \}$, avec $(\alpha;~p) \in \N^d \times \N$ et  $q_{\alpha;~p} \in \N^*$.
+\end{cerveau}
+
+
+\begin{listremarques}
+\item
+Notons que $\mathcal{S} \subset \mathcal{C}_0$, l'ensemble des fonctions continues qui tendent vers $0$ en $+\infty$. En effet, toute fonction $f \in \mathcal{S}$ est dominée par $x \mapsto \dfrac{1}{1+\norm{x}^2}$. 
+
+\medskip
+On rappelle au passage que $\mathcal{C}_0 \subset \mathcal{C}_b$, les fonctions continues et bornées.
+
+\item
+Remarquons aussi que, pour deux entiers $p \geq q$, et pour tout $x \in \R^d$, on a 
+
+$(1+\norm{x}^2)^p \geq (1+\norm{x}^2)^q$, ce qui entraîne, pour tout multi-indice $\alpha$, $N_{\alpha;~p} \geq N_{\alpha;~q}$.
+
+\item
+On appelle aussi \emph{fonctions à décroissance rapide} cet ensemble.
+\end{listremarques}
+
+\begin{lem}[Majoration grossière pour un polynôme]
+Pour tout $x \in \R^d$ et pour tout $\alpha \in \N^d$:
+\[
+\abs{x^\alpha} = \displaystyle{\prod_{i=1}^d} \abs{x_i}^{\alpha_i} \leq \left (1+\norm{x}^2\right )^{\abs{\alpha}}
+\]
+
+\medskip
+On en déduit que, si $P$ est un polynôme de degré $q$, il existe un réel positif $M_P$, tel que, pour tout $x \in \R^d$:
+\[
+\abs{P(x)} \leq M_P (1+\norm{x}^2)^{q}
+\]
+\end{lem}
+
+\begin{proof}
+La première majoration n'est pas difficile à condition de distinguer deux cas. 
+\begin{itemize}
+\item[$\bullet$] 
+Si $\max \limits_{i} \abs{x_i}<1$, dans ce cas $\abs{x^\alpha} < 1$ et donc la majoration est triviale.
+\item[$\bullet$] 
+Si $\max \limits_{i} \abs{x_i} \geq 1$, dans ce cas, $\norm{x} \geq 1$  et, pour tout $i$, $\abs{x_i} \leq \norm{x} \leq (1+\norm{x}^2)$. On en déduit que $\abs{x^\alpha} \leq (1+\norm{x}^2)^{\abs{\alpha}}$
+\end{itemize}
+
+Pour la seconde majoration, remarquons que pour tout multi-indice $\beta$ tel que $\abs{\beta} \leq q$, 
+
+$\abs{x^\beta} \leq (1+\norm{x}^2)^{\abs{\beta}} \leq (1+\norm{x}^2)^{q}$. Ainsi, en posant $K = \max \limits_{\beta} \abs{c_{\beta}}$ avec $c_{\beta}$ les coefficients de $P$, on a la majoration grossière suivante:
+\[
+\abs{P(x)} \leq \displaystyle{\sum \limits_{\beta \in \N^d}} \abs{c_{\beta}} \abs{x^{\beta}} \leq (1+q)^d K (1+\norm{x})^q
+\]
+
+En effet, $(1+q)^d$ est une majoration grossière du nombre de coefficients non nuls.
+\end{proof}
+
+Cela nous permet d'en déduire facilement la propriété suivante.
+
+\begin{prop}[Caractérisation équivalente]
+Pour toute fonction $f$, on a:
+
+\medskip
+$f \in \mathcal{S}$ si et seulement si $f$ est de classe $\mathcal{C}^{\infty}$ et, pour tout $\alpha \in \N^d$ et pour tout polynôme $P$, $P D^{\alpha} f$ est borné.
+\end{prop}
+
+Un second lemme qui nous sera utile pour la suite.
+
+\begin{lem}[Formule de Liebnitz en dimension finie]
+Soit $\alpha \in \N^d$ et soient $f$ et $h$ deux fonctions définies sur $\R^d$ et à valeurs dans $\C$. 
+
+\medskip
+On suppose que $D^{\alpha} f$ et $D^{\alpha} h$ existent.
+
+\medskip
+Alors $D^{\alpha} (fh)$ existe. Plus précisément il existe des coefficients entiers naturels $(c_{\beta,~\gamma})_{\beta  + \gamma= \alpha}$ tels que:
+\[
+D^{\alpha} (fh) = \displaystyle{\sum \limits_{\beta + \gamma = \alpha}} c_{\beta,~\gamma} D^{\beta} f D^{\gamma} h
+\]
+\end{lem}
+
+
+\begin{proof}
+Ce lemme se montre sans trop de difficulté par récurrence sur $d$, la dimension de l'espace de départ. Je ne le fais pas car les notations multi-indices sont lourdingues. L'idée est simple: appliquer $\dfrac{\partial^{\alpha_1}}{\partial x_1^{\alpha_1}}$ à $\dfrac{\partial^{\alpha_2} \cdots \partial^{\alpha_d}}{\partial x_2^{\alpha_2} \cdots \partial x_d^{\alpha_d}} (fh)$ en appliquant l'hypothèse de récurrence à cette dernière expression.
+\end{proof}
+
+
+\begin{prop}[Propriétés des fonctions de Schwartz]
+$\mathcal{S}$ forme une $\C$-algèbre. Muni de la topologie évoquée plus haut, $\mathcal{S}$ est un espace complet. 
+
+
+\medskip
+En outre, pour $h \in \mathcal{S}$, pour $P$ un polynôme et pour $\alpha \in \N^d$, les applications linéaires suivantes sont des endomorphismes continus:
+\begin{align*}
+f & \mapsto hf &
+f & \mapsto Pf &
+f & \mapsto D^{\alpha} f
+\end{align*}
+\end{prop}
+
+
+\begin{proof}
+On sait que $\mathcal{C}^{\infty}$ est une algèbre. Il nous faut donc montrer les propriétés associées aux semi-normes.
+
+\medskip
+Il est clair que si $(f;~h) \in \mathcal{S}^2$ et si $\lambda$ et $\mu$ sont des complexes alors, pour tout $(\alpha;~p) \in \N^d \times N$, $N_{\alpha;~p}(\lambda f + \mu h) \leq \abs{\lambda} N_{\alpha;~p}(f) + \abs{\mu} N_{\alpha;~p}(h) < +\infty$ donc $\mathcal{S}$ est bien un espace vectoriel.
+
+\medskip
+De plus, sous les mêmes hypothèses, en reprenant les notations de la formule de Liebnitz énoncée plus haut, on a:
+\[
+N_{\alpha;~p}(fh) \leq  \displaystyle{\sum \limits_{\beta + \gamma = \alpha}} c_{\beta,~\gamma} N_{\beta;~p} (f) N_{\gamma;~p} (h) < +\infty
+\]
+
+Cela confirme que $\mathcal{S}$ est une algèbre.
+
+\medskip
+Montrons maintenant que $\mathcal{S}$ est complet. Considérons une suite de Cauchy $(f_n)$ d'éléments de $\mathcal{S}$. Pour tout multi-indice $\alpha$, $D^{\alpha} f_n$ est de Cauchy pour la norme infinie (celle de la convergence uniforme).
+
+En particulier, on en déduit que $(f_n)$ converge uniformément vers une fonction $f$ et que $\left (D^{\alpha} f_n\right )$ converge également uniformément vers $D^{\alpha} f$. Et cela prouve au passage que cette limite $f$ est $\mathcal{C}^{\infty}$. Il ne nous reste plus qu'à prouver:
+\begin{itemize}
+\item[$\bullet$] 
+$f \in \mathcal{S}$;
+\item[$\bullet$] 
+$(f_n)$ converge vers $f$ pour la topologie de $\mathcal{S}$.
+\end{itemize}
+
+Soit ainsi $p \in \N$ quelconque et soit $\varepsilon >  0$. Il existe un rang $N$ tel que, pour tout $q \in \N$ et pour tout $n \geq N$, on a $N_{\alpha;~p} (f_{n+q} - f_n) < \varepsilon$. En particulier, pour $q \to +\infty$, on obtient $N_{\alpha;~p} (f - f_n) \leq \varepsilon$, ce qui achève la démonstration. En effet, cela prouve d'une part que  $N_{\alpha;~p} (f) < +\infty$ et d'autre part la convergence pour la topologie de $\mathcal{S}$, quitte à éventuellement réitérer la manipulation pour plusieurs valeurs de $\alpha$ et $p$ et à considérer le maximum des rangs obtenus.
+
+\medskip
+D'après les deux lemmes plus haut, il est clair que les trois applications considérées sont des endomorphismes. 
+
+\medskip
+La continuité concernant la dérivation est triviale. En effet, pour tout multi-indices $\alpha$ et $\beta$ et, pour tout $p \in \N$, on a $N_{\beta;~p} \left (D^{\alpha} f\right ) = N_{\beta+\alpha;~p} (f)$. La convergence des $(f_n)$ vers $(f)$ dans $\mathcal{S}$ entraîne donc la convergence des $\left (D^{\alpha} f_n\right )$ vers $D^{\alpha} f$.
+
+\medskip
+Prouvons maintenant la continuité des deux autres applications considérées. Soit $(f_n)$ une suite de fonctions qui converge vers $f$ dans $\mathcal{S}$. Pour tout $(\alpha;~p) \in \N^d \times \N$, on a, en reprenant les notations de la formule de Liebnitz:
+\[
+N_{\alpha;~p}(h(f_n-f)) \leq \displaystyle{\sum \limits_{\beta + \gamma = \alpha}} \abs{c_{\beta,~\gamma}} N_{\beta;~p} (f_n-f) N_{\gamma;~0} (h)
+\]
+
+On en déduit en particulier que $\lim \limits_{n} N_{\alpha;~p}(h(f_n-f)) = 0$, ce qui prouve que $f \mapsto hf$ est continue.
+
+\medskip
+La continuité de $f \mapsto Pf$ est un peu plus pénible. On suppose que $P$ est de degré $q$. Pour tout $x \in \R^d$:
+\[
+\abs{(1+\norm{x}^2)^p D^{\alpha} [Pf] (x)} \leq (1+\norm{x}^2)^p \displaystyle{\sum \limits_{\beta + \gamma = \alpha}} \abs{c_{\beta,~\gamma}} \abs{D^{\beta} [f] (x)} \abs{D^{\gamma} [P] (x)}
+\]
+
+Or $D^{\gamma}[P]$ est un polynôme de degré inférieur ou égal à $q$, ce qui permet, d'après le lemme de majoration grossière, l'existence d'un réel positif $M_{\gamma}$ tel que, pour tout $x$, $\abs{D^{\gamma}[P](x)} \leq M_{\gamma} (1+\norm{x}^2)^q$. On obtient donc:
+\[
+\abs{(1+\norm{x}^2)^p D^{\alpha} [Pf] (x)} \leq (1+\norm{x}^2)^{p+q} \displaystyle{\sum \limits_{\beta + \gamma = \alpha}} M_{\gamma} \abs{c_{\beta,~\gamma}} \abs{D^{\beta} [f] (x)} 
+\]
+
+De cette inégalité, on déduit:
+\[
+N_{\alpha;~p} (Pf) \leq \displaystyle{\sum \limits_{\beta + \gamma = \alpha}} M_{\gamma} \abs{c_{\beta,~\gamma}} N_{\beta;~p+q} (f)
+\]
+
+Ce qui permet de conclure. Pour toute suite $(f_n)$ qui converge vers $f$ dans $\mathcal{S}$, alors $(Pf_n)$ converge vers $Pf$ dans $\mathcal{S}$.
+\end{proof}
+
+Énonçons quelques propriétés simples sur l'intégrabilité de fonctions de $\mathcal{S}$.
+
+\begin{prop}[$\mathcal{S}$ et l'intégration]
+Soit $f \in \mathcal{S}$. Alors, pour tout $p \in [1;~+\infty]$, et pour tout multi-indice $\alpha$, $D^{\alpha} f \in \L^p$.
+
+\medskip
+En outre, $\mathcal{S}$ est dense dans $\L^p$ pour $p \in [1;~+\infty[$.
+\end{prop}
+
+\begin{proof}
+La première affirmation est facile car $D^{\alpha} f$ est continue (donc mesurable) et dominée par $\frac{1}{1+\norm{x}^2}$ qui est $\L^p$.
+
+\medskip
+Remarquons pour la seconde affirmation que les fonctions $\mathcal{C}^{\infty}$ à support compact sont incluses dans $\mathcal{S}$. Or ces premières fonctions sont denses dans $\L^p$\footnote{Nous l'avions montré dans le document \emph{mesure}}.
+\end{proof}
+
+\section{Transformée de Fourier dans $\mathbf{\mathcal{S}}$}
+
+\subsection{Définition et premières propriétés}
+
+On s'appuie ici sur les notations établies en introduction.
+
+\begin{de}[Transformée de Fourier]
+Soit $f \in \mathcal{S}$. 
+
+\medskip
+On pose $\widehat{f}: \, t \mapsto \displaystyle{\int}_{\R^d} \e^{-i t \cdot x} f(x) \, \mathrm d \tilde{\lambda}_d(x) = \displaystyle{\int}_{\R^d} \e_t(x) f(x) \, \mathrm d \tilde{\lambda}_d(x)$. 
+
+\medskip
+$\widehat{f}$ est une application de $\R^d$ vers $\C$.
+\end{de}
+
+On sait que $\mathcal{S} \subset \L^1$ donc cette application est bien définie. Quelques rappels concernant la transformée de Fourier dans $\L^1$.
+
+\begin{prop}[Transformée de Fourier de fonction $\L^1$]
+Pour tout $f \in \L^1$, $\widehat{f} \in \mathcal{C}_0$. En outre, l'application suivante est un morphisme continu:
+\[
+\begin{array}{llcl}
+\psi: \, & \L^1 & \to & \mathcal{C}_0 \\
+ & f & \mapsto & \widehat{f}
+\end{array}
+\]
+\end{prop}
+
+\begin{proof}
+Nous l'avions prouvé dans le document \emph{mesure.}
+\end{proof}
+
+\begin{prop}[Transformée de Fourier du noyau Gaussien]
+On rappelle que $g: \, t \mapsto \e^{-\norm{t}^2/2}$ est le noyau Gaussien. Alors:
+\[
+\widehat{g} = g
+\]
+\end{prop}
+
+\begin{proof}
+Fait dans le document \emph{mesure}, de deux manières différentes.
+\end{proof}
+
+
+
+\begin{de}[Translation  et dilatation]
+Pour tout $x \in \R^d$ et pour tout fonction $f$ définie sur $\R^d$, on pose $\tau_x[f]$ la fonction:
+\[
+\tau_x[f]: \, t \mapsto f(t-x)
+\]
+
+Pour tout $\alpha > 0$, on pose $\delta_{\alpha}[f]$ la fonction:
+\[
+\delta_{\alpha}[f]: \, t \mapsto f\left (\frac{t}{\alpha}\right )
+\]
+\end{de}
+
+
+\begin{prop}[Premières propriétés de la transformée de Fourier]
+Soit $P$ un polynôme, $x \in \R^d$ et $f$ et $h$ deux fonctions de $\mathcal{S}$.
+
+Alors:
+\begin{align*}
+\widehat{\tau_x[f]} & = \e_{-x} \widehat{f} & 
+\widehat{\delta_{\alpha}[f]} & = \alpha^n \delta_{\tfrac{1}{\alpha}} \left [\widehat{f}\right ] &
+\widehat{P(D)[f]} & = P \widehat{f} \\
+\widehat{\e_x f} & = \tau_x\left [ \widehat{f}\right ] &
+\widehat{f*h} & = \widehat{f} \widehat{h} &
+\widehat{Pf} & = P(-D)\left [\widehat{f} \right ] 
+\end{align*}
+
+Enfin, l'application $\psi: \, f \mapsto \widehat{f}$ est un endomorphisme continu sur $\mathcal{S}$.
+\end{prop}
+
+\begin{proof}
+Dans toute cette démonstration $t \in \R^d$ est quelconque.
+
+\medskip
+Petit changement de variable pour la première.
+\begin{align*}
+\widehat{\tau_x[f]}(t) & = \displaystyle{\int} \e^{-\im t \cdot y} f(y-x) \, \mathrm d \tilde{\lambda}_d(y) = \displaystyle{\int} \e^{-\im t \cdot (z+x)} f(s) \, \mathrm d \tilde{\lambda}_d(z) \\
+ & = \e^{-\im t \cdot x} \displaystyle{\int} \e^{-\im t \cdot z} f(s) \, \mathrm d \tilde{\lambda}_d(z) = \e_{-x}(t) \widehat{f}(t)
+\end{align*}
+
+Inutile pour montrer la seconde. Cela s'obtient directement:
+\begin{align*}
+\widehat{\e_x f}(t) & = \displaystyle{\int} \e^{-\im t \cdot y} \e^{\im x \cdot y} f(y) \, \mathrm d \tilde{\lambda}_d(y) = \displaystyle{\int} \e^{-\im (t-x) \cdot y} f(y) \, \mathrm d \tilde{\lambda}_d(y) = \tau_x\left [ \widehat{f}\right ](t)
+\end{align*}
+
+Encore un changement de variable pour la troisième:
+\begin{align*}
+\widehat{\delta_{\alpha}[f]}(t) & = \displaystyle{\int} \e^{-\im t \cdot y} f\left (\tfrac{y}{\alpha} \right ) \, \mathrm d \tilde{\lambda}_d(y) = \alpha^n \displaystyle{\int} \e^{-\im \alpha t \cdot z} f(z) \, \mathrm d \tilde{\lambda}_d(y) = \alpha^n \delta_{\tfrac{1}{\alpha}} \left [\widehat{f}\right ] (t)
+\end{align*}
+
+Pour la propriété portant sur le produit de convolution, il faut réaliser un changement de variable puis appliquer le théorème de Fubini-Tonelli:
+\begin{align*}
+\widehat{f*h}(t) & = \displaystyle{\int}  \e^{-\im t \cdot y}  \displaystyle{\int} f(z) h (y-z) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) = \displaystyle{\int}\displaystyle{\int}  \e^{-\im t \cdot y} \e^{-\im t \cdot z} \e^{\im t \cdot z}  f(z) h (y-z) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) \\
+ & = \displaystyle{\int}\displaystyle{\int} \e^{- \im t \cdot (y-z)} f(z) h(y-z)  \e^{-\im t \cdot z} \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) = \displaystyle{\int}\displaystyle{\int} \e^{- \im t \cdot u} h(u)  \e^{-\im t \cdot z} f(z) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(u) \\
+ & = \left (\displaystyle{\int} \e^{- \im t \cdot u} h(u)  \, \mathrm d \tilde{\lambda}_d(u)\right ) \left (\displaystyle{\int} \e^{-\im t \cdot z} f(z) \, \mathrm d \tilde{\lambda}_d(z) \right ) = \widehat{h}(t)  \widehat{f}(t)
+\end{align*}
+
+Maintenant, concernant la propriété portant sur la dérivation, on va réaliser la transformée de Fourier de $\dfrac{\partial}{\partial x_1} f$, la généralisation étant très simple pour $D^{\alpha} f$ et enfin, par combinaison linéaire, pour $P(D)[f]$. 
+
+Ici, il s'agit de réaliser une intégration par parties, en identifiant l'intégrale de Riemann avec l'intégrale de Lebesgue (cas d'une fonction continue et intégrable). En pratique, on écrira, pour tout $y = (y_1,~y_2,~\cdots,~y_d) \in \R^d$, $y = \left (y_1,~\tilde{y}\right )$ avec $\tilde{y} \in \R^{d-1}$, et on utilisera la même convention pour $t$, de sorte que:
+\begin{align*}
+\widehat{\frac{\partial f}{\partial x_1}}(t) & =  \displaystyle{\int}  \e^{-\im t \cdot y} \frac{\partial f}{\partial x_1} (y) \, \mathrm d \tilde{\lambda}_d(y) \\
+ & = \frac{1}{\sqrt{2\pi}} \displaystyle{\int_{\R^{d-1}}} \e^{-\im \tilde{t} \cdot \tilde{y}} \left ( \lim \limits_{N \to +\infty} \displaystyle{\int_{-N}^N} \e^{-\im t_1 y_1} \frac{\partial f}{\partial x_1} \left (y_1,~\tilde{y}\right ) \, \mathrm d y_1 \right ) \, \mathrm d \mu_{d-1} \left ( \tilde{y}\right )
+\end{align*}
+
+On traite à part, avec une intégration par parties, l'intégrale portant sur $y_1$:
+\[
+\displaystyle{\int_{-N}^N} \e^{-\im y_1 t_1} \frac{\partial f}{\partial x_1} \left (y_1,~\tilde{y}\right ) \, \mathrm d y_1 = \left [ \e^{-\im t_1 y_1} f\left (y_1,~\tilde{y}\right ) \right ]_{-N}^N + \im t_1 \displaystyle{\int_{-N}^N} \e^{-\im y_1 t_1} f\left (y_1,~\tilde{y}\right ) \, \mathrm d y_1
+\]
+
+On obtient ainsi, compte-tenu de la propriété de décroissance rapide de $f$:
+\[
+\lim \limits_{N \to +\infty} \displaystyle{\int_{-N}^N} \e^{-\im t_1 y_1} \frac{\partial f}{\partial x_1} \left (y_1,~\tilde{y}\right ) \, \mathrm d y_1 = \im t_1 \displaystyle{\int_{\R}} \e^{-\im y_1 t_1} f\left (y_1,~\tilde{y}\right ) \, \mathrm d y_1
+\]
+
+En réinjectant, cela donne:
+\[
+\widehat{\frac{\partial f}{\partial x_1}}(t) = (\im t_1) \widehat{f}(t)
+\]
+
+Compte-tenu de la définition de $D_{\alpha}$, en réitérant ce que l'on fait pour la première variable à des variables quelconques et autant de fois que nécessaire, on obtient bien $\widehat{D_{\alpha} f}(t) = t^{\alpha} \widehat{f}(t)$ et cela se généralise avec $P(D)$, par linéarité!
+
+\medskip
+La dernière égalité se montre en appliquant le théorème de convergence dominée de Lebesgue dont on vérifie aisément que les conditions d'application sont réunies.
+
+\medskip
+En effet, en reprenant les mêmes notations et supposant que le polynôme considéré est $P = X_1$
+\[
+\widehat{Pf}(t) = \displaystyle{\int}  y_1 \e^{-\im t \cdot y} f(y) \, \mathrm d \tilde{\lambda}_d(y)  = \displaystyle{\int} \frac{-1}{\im} \frac{\partial}{\partial t_1} \e^{-\im t \cdot y} f(y) \, \mathrm d \tilde{\lambda}_d(y) = \frac{-1}{\im} \frac{\partial}{\partial t_1} \displaystyle{\int} \e^{-\im t \cdot y} f(y) \, \mathrm d \tilde{\lambda}_d(y)
+\]
+
+En réitérant l'opération sur autant de variables et autant de fois que nécessaire et en exploitant la linéarité, on retrouve le résultat escompté.
+
+\medskip
+Reste maintenant à prouver que la transformée de Fourier est un endomorphisme continu! D'après la dernière égalité prouvée, il est clair que, pour $f \in \mathcal{S}$, $\widehat{f}$ est $\mathcal{C}^{\infty}_b$, c'est à dire l'ensemble des fonctions indéfiniment dérivables et dont toutes les dérivées sont bornées. 
+
+
+Montrons qu'elle aussi à décroissance rapide. Soit $\alpha \in \N^d$ et $p \in \N$. Posons $Q(x) = (1+\norm{x}^2)^p$ et $P=X^{\alpha}$. 
+
+D'après ce que l'on vient de montrer, $Q(D) P f \in \mathcal{S}$ et $\widehat{Q(D) P f} \in \mathcal{S} = (-1)^{\abs{\alpha}} Q D_{\alpha}\widehat{f}$. Or, nous savons que $\widehat{Q(D) P f \in \mathcal{S}}$ est bornée, ce qui prouve que $\widehat{f}$ est à décroissance rapide.
+
+\medskip
+Reste enfin à prouver la continuité. Soit ainsi une suite de fonctions $(f_n)$ qui tend vers $f$ dans $\mathcal{S}$. Pour tout $t$, et pour tout $n$, on a:
+\[
+\abs{Q D_{\alpha}\widehat{f_n}(t) - Q D_{\alpha}\widehat{f}(t)} = \abs{\widehat{Q(D) P (f_n-f) } (t)}
+\]
+
+Posons  $g_n = Q(D) P f_n$ et $g = Q(D) P f$. D'après ce qui précède, on sait que les opération de multiplication par un polynôme et de dérivation sont des endomorphismes continus de $\mathcal{S}$, on en déduit ainsi que $g_n$ tend vers $g$ dans $\mathcal{S}$. Il suffit donc de prouver que, pour $g_n$ tendant vers $g$ avec la topologie de $\mathcal{S}$, $\widehat{g_n-g}$ converge uniformément vers $0$. Mais cela est facile, en effet:
+\[
+\abs{\widehat{g_n-g}(t)} \leq \displaystyle{\int} \frac{1}{1+\norm{y}^2} (1+\norm{y}^2) \abs{g_n-g}(y) \, \mathrm d \tilde{\lambda}_d(y) \leq K N_{0,~1}(g_n-g)
+\]
+
+Avec $K = \displaystyle{\int} \frac{1}{1+\norm{y}^2} \, \mathrm d \tilde{\lambda}_d(y)$. 
+
+\medskip
+Finalement, la transformée de Fourier est bien un endomorphisme continu de $\mathcal{S}$.
+\end{proof}
+
+\subsection{Théorème d'inversion}
+
+\subsubsection{Approximation de l'unité}
+
+On rappelle la définition du noyau Gaussien, $g: \, t \mapsto \e^{-\norm{t}^2/2}$. On rappelle plus bas quelques résultats minimaux dont on aura besoin pour la suite.
+
+\begin{prop}[Approximation de l'unité]
+Pour tout $n$, on note $g_n: \, t \mapsto n^d g(nt)$.
+
+\medskip
+Alors, pour toute fonction $f$ de classe $\L^1$, $g_n*f$ tend vers $f$ dans $\L^1$.
+\end{prop}
+
+
+\begin{proof}
+Fait dans le document \emph{mesure}.
+\end{proof}
+
+\begin{listremarques}
+\item
+Il y a beaucoup d'autres choses à dire. D'abord, $g_n*f$ est de classe $\mathcal{C}^{\infty}$. D'autre part, dans le cas où $f$ est continue, on aussi convergence uniforme de $g_n*f$ vers $f$.
+\end{listremarques}
+
+
+\subsubsection{Théorème d'inversion}
+
+\begin{de}[Un nouvel opérateur]
+Soit $f$ une fonction de classe $\L^1$. Alors, on définit:
+\[
+\check{f}: \, t \mapsto \widehat{f}(-t)
+\]
+\end{de}
+
+\begin{listremarques}
+\item 
+Par composition, cet opérateur est continu et linéaire de $\L^1$ vers $\mathcal{C}_0$, munis de leurs topologies usuelles.
+\item 
+Cet opérateur est également un endomorphisme continu et linéaire de $\mathcal{S}$.
+\end{listremarques}
+
+
+\begin{theo}[Inversion de la transformée de Fourier]
+Soit $f$ une fonction de classe $\L^1$ telle que $\widehat{f}$ est aussi de classe $\L^1$. Alors:
+\[
+\check{\widehat{f}} = f
+\]
+
+En particulier, la transformée de Fourier est un isomorphisme continu de $\mathcal{S}$ dont $g$ est un élément neutre.
+\end{theo}
+
+\begin{proof}
+Pour tout $x$ et pour tout $n$, calculons, $\check{\widehat{g_n*f}}(x)$, sachant que cette quantité existe puisque $\widehat{g_n*f}$ est de classe $\L^1$. On peut aussi exploiter le théorème de Fubini-Tonnelli:
+\begin{align*}
+\check{\widehat{g_n*f}}(x) & = \displaystyle{\int} \e^{\im x \cdot y} \displaystyle{\int} \e^{-\im y \cdot t} \displaystyle{\int} g_n(t-z)f(z) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(t) \, \mathrm d \tilde{\lambda}_d(y) \\
+ & = \displaystyle{\int} \displaystyle{\int} \displaystyle{\int} \e^{-\im y \cdot (t-x)} g_n(t-z)f(z) \, \mathrm d \tilde{\lambda}_d(t)\, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) \\ 
+ & = \displaystyle{\int} \displaystyle{\int} \displaystyle{\int} \e^{-\im y \cdot (z+u-x)} g_n(u)f(z) \, \mathrm d \tilde{\lambda}_d(u) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) \\
+ & = \displaystyle{\int} \displaystyle{\int} \e^{-\im y \cdot (z-x)} f(z) \displaystyle{\int} \e^{-\im y \cdot u} g_n(u) \, \mathrm d \tilde{\lambda}_d(u) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) \text{ on a posé }u=t-z \\ 
+ & = \displaystyle{\int} \displaystyle{\int} \e^{-\im y \cdot (z-x)} f(z) \widehat{g_n}(y) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) \text{ on sait que }\widehat{g_n}(y) = g\left ( \frac{y}{n}\right ) \\  
+ & = \displaystyle{\int} \displaystyle{\int} \e^{-\im (z-x)} f(z) g\left ( \frac{y}{n} \right ) \, \mathrm d \tilde{\lambda}_d(z) \, \mathrm d \tilde{\lambda}_d(y) \\ 
+ & = \displaystyle{\int} \displaystyle{\int} \e^{-\im y \cdot v} f(v+x)  g\left ( \frac{y}{n} \right ) \, \mathrm d \tilde{\lambda}_d(v) \, \mathrm d \tilde{\lambda}_d(y) \text{ on a posé }v=z-x \\
+ & = \displaystyle{\int}  f(v+x)  \displaystyle{\int} \e^{-\im y \cdot v} g\left ( \frac{y}{n} \right ) \, \mathrm d \tilde{\lambda}_d(y) \, \mathrm d \tilde{\lambda}_d(v) \\ 
+ & = \displaystyle{\int}  f(v+x)  \widehat{\delta_n[g]} (v) \, \mathrm d \tilde{\lambda}_d(v) \text{ on rappelle que }\delta \text{ est la dilatation} \\  
+ & = \displaystyle{\int}  f(v+x)  n^d g(nv) \, \mathrm d \tilde{\lambda}_d(v) \\
+ & = \displaystyle{\int}  f(x-w)  g_n(w) \, \mathrm d \tilde{\lambda}_d(w) \text{ on a posé }w=-v\text{ sachant que }g\text{ est paire}\\
+ & = f*g_n(x)
+\end{align*}
+
+Ainsi, $\check{\widehat{g_n*f}}$ converge vers $f$ dans $\L^1$. 
+
+\medskip
+Il nous faut maintenant prouver que $\widehat{g_n*f}$ tend aussi vers $\widehat{f}$ dans $\L^1$.
+
+On sait que $\widehat{g_n*f} = \widehat{g_n} \widehat{f} = \delta_n[g] \widehat{f}: \, t \mapsto \widehat{t} g\left ( \frac{t}{n}\right )$. Cette fonction est dominée par $\abs{\widehat{f}}$ qui est de classe $\L^1$ et on a convergence simple de $\delta_n[g] \widehat{f}$ vers $\widehat{f}$. 
+
+Par le théorème de convergence dominée, on obtient la convergence de $\widehat{g_n*f}$ vers $\widehat{f}$ dans $\L^1$.
+
+\medskip
+Exploitons maintenant la remarque faite sur la continuité de l'opérateur $f \mapsto \check{f}$ pour écrire, dans $\L^1$:
+\[
+\lim \limits_{n \to +\infty} \check{\widehat{g_n*f}} = \check{\widehat{f}} = f
+\]
+
+\medskip
+Considérons maintenant $f \in \mathcal{S} \subset \L^1$. Il est clair que $\widehat{f} \in \L^1$ car $\widehat{f} \in \mathcal{S}$. Nous sommes donc dans les conditions d'application du résultat précédent. On sait ainsi que, pour presque tout $x$, $\check{\widehat{f}}(x) = f(x)$. Or ces deux fonctions sont dans $\mathcal{S}$. On en déduit que l'égalité est valable pour tout $x$, ce qui prouve que la transformée de Fourier est un automorphisme continu de $\mathcal{S}$ dont la réciproque est $f \mapsto \check{f}$.
+\end{proof}
+
+\section{Étude des suites de mesures finies}
+
+Ce premier paragraphe nous donne des outils pour aborder les suites de mesures finies sous un angle fréquentiel.
+
+\subsection{Transformée de Fourier de mesures finies}
+
+
+\begin{de}[Transformée de Fourier d'une mesure]
+Soit $\mu$ une mesure finie définie sur $\left ( \R^d;~\mathcal{B}\right )$ avec $\mathcal{B}$ la tribu borélienne. On pose:
+\[
+\begin{array}{llcl}
+\widehat{\mu} & \R & \to & \C \\
+ & x & \mapsto & \displaystyle{\int} \e^{- \im x \cdot t} \mathrm d \mu(t)
+\end{array}
+\]
+\end{de}
+
+\begin{listremarques}
+\item
+La fonction $t \mapsto \e^{\im t \cdot x}$ est $\mu$-intégrable car $\mu$ est finie;
+\item
+On a, pour tout $x$, $\abs{\widehat{\mu}(x)} \leq \widehat{\mu}(0) = \mu\left ( \R^d\right )$.
+\end{listremarques}
+
+
+\begin{theo}[Cette transformée est injective]
+\label{injectivite_Fourier}
+Soit $\mu$ et $\nu$ deux mesures finies. 
+
+\medskip
+On a $\mu = \nu$ si et seulement si $\widehat{\mu} = \widehat{\nu}$.
+
+\medskip
+De plus, si $f$ et $g$ sont deux fonctions $\L^1$ et positives, on a aussi $f = g$, $\lambda$-presque partout, si et seulement si $\widehat{f} = \widehat{g}$.
+\end{theo}
+
+\begin{proof}
+La seconde partie se montre facilement à partir de la première. En effet, il suffit de considérer $\mu$ et $\nu$ les mesures dont $f$ et $g$ sont les fonctions de densité.
+
+\medskip
+Pour montrer la première partie de cette proposition, on va exploiter encore une fois les noyaux gaussiens et la densité des fonctions continues à support compact $\mathcal{C}_K$ dans $\L^1$.
+\end{proof}
+
+
+Commençons par établir un lemme.
+
+\begin{lem}[Convolution de mesures, et convergence]
+On rappelle que $g$ est le noyau gaussien et que, pour tout $n$, $g_n: \, t \mapsto n^d g(nt)$ constitue une suite approximante de l'unité.
+
+\medskip
+Pour toute mesure finie $\mu$, on pose:
+\[
+g_n * \mu: \, x \mapsto \displaystyle{\int} g_n(x-t) \mathrm d \mu(t) 
+\]
+
+
+\medskip
+Alors, pour toute fonction $f$ continue à support compact, on a:
+\[
+\lim \limits_{n \to +\infty} \displaystyle{\int} f(x) g_n * \mu (x) \, \mathrm d \tilde{\lambda}_d(x) = \displaystyle{\int} f(x) \mathrm d \mu(x)
+\]
+\end{lem}
+
+\begin{proof}
+Il est clair que ces deux intégrales existent et satisfont les conditions d'application du théorème de Fubini-Tonelli. En effet, $g_n * \mu$ est une fonction bornée car $g_n$ est bornée et $\mu$ est finie.
+
+Calculons, pour tout $n$:
+\begin{align*}
+\displaystyle{\int} f(x) g_n * \mu (x) \, \mathrm d \tilde{\lambda}_d(x) - \displaystyle{\int} f(x) \mathrm d \mu(x) & = \displaystyle{\int} \displaystyle{\int} f(x) g_n(x-t) \, \mathrm d \mu(t) \mathrm d \tilde{\lambda}_d(x) -  \displaystyle{\int} f(x) \displaystyle{\int} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x) \\
+  & = \underbrace{\displaystyle{\int} \displaystyle{\int} f(u+t) g_n(u) \, \mathrm d \tilde{\lambda}_d(u) \mathrm d \mu(t)}_{\text{on  pose } u = x-t} -  \displaystyle{\int} f(x) \displaystyle{\int} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x) \\
+  & = \underbrace{\displaystyle{\int} \displaystyle{\int} f(t+x) g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x)}_{\text{on  pose } x = t  \text{ puis } t = u} -  \displaystyle{\int} f(x) \displaystyle{\int} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x) \\  
+  & = \displaystyle{\int} \displaystyle{\int} (f(t+x) - f(x)) g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x)  
+\end{align*}
+
+On va maintenant exploiter l'uniforme continuité de $f$. Notons $M = \max(\mu(\R^d);~1)$. Soit $\varepsilon>0$. Il existe $\eta$ tel que pour tout $\abs{t}<\eta$, $\abs{f(t+x) - f(x)} < \frac{\varepsilon}{2M}$. À l'aide de l'inégalité triangulaire, on obtient ainsi:
+\begin{multline*}
+\abs{\displaystyle{\int} f(x) g_n * \mu (x) \, \mathrm d \tilde{\lambda}_d(x) - \displaystyle{\int} f(x) \mathrm d \mu(x)} \leq \frac{\varepsilon}{2M} \displaystyle{\int} \displaystyle{\int}  \mathbb{1}_{\abs{t}<\eta} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x) + 2 \norm{f}_{\infty} \displaystyle{\int} \displaystyle{\int}  \mathbb{1}_{\abs{t} \geq \eta} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x) \\
+\leq \frac{\varepsilon}{2} + 2 \norm{f}_{\infty} \displaystyle{\int} \displaystyle{\int}  \mathbb{1}_{\abs{t} \geq \eta} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x)
+\end{multline*}
+
+On sait que $\lim \limits_{n \to +\infty} \displaystyle{\int}  \mathbb{1}_{\abs{t} \geq \eta} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) = 0$ donc il existe un rang $N$ tel que, pour tout $n \geq N$,\\
+$\displaystyle{\int} \displaystyle{\int}  \mathbb{1}_{\abs{t} \geq \eta} g_n(t) \, \mathrm d \tilde{\lambda}_d(t) \mathrm d \mu(x) < \frac{\varepsilon}{2\max\left ( 2\norm{f}_{\infty} \mu(\R^d);~1\right )}$. Ce qui donne:
+\[
+\abs{\displaystyle{\int} f(x) g_n * \mu (x) \, \mathrm d \tilde{\lambda}_d(x) - \displaystyle{\int} f(x) \mathrm d \mu(x)} \leq \varepsilon
+\]
+\end{proof}
+
+Ce second lemme nous permettra de démontrer le théorème sur l'injectivité.
+
+\begin{lem}
+On reprend les notations précédentes. Alors, pour tout $n$:
+\[
+\check{\widehat{g_n*\mu}} = g_n*\mu
+\]
+
+En définissant l'opérateur suivant, pour tout $h$ de $\L^1$ par $\check{h}: \, x \mapsto \displaystyle{\int} \e^{\im x \cdot t} h(t) \, \mathrm d \tilde{\lambda}_d(t)$.
+\end{lem}
+
+\begin{listremarques}
+\item
+On montre assez facilement que $\widehat{g_n * \mu} = \widehat{g_n} \widehat{\mu}$. Mais comme $\widehat{\mu}$ est bornée et $\widehat{g_n} \in \mathcal{S}$, cela nous prouve que $\widehat{g_n * \mu}$ est intégrable.
+\end{listremarques}
+
+Montrons maintenant ce second lemme.
+
+\begin{proof}
+Pour tout $y$, avec les précautions d'usage pour l'application du théorème de Fubini-Tonelli
+\begin{align*}
+\check{\widehat{g_n*\mu}}(y) & = \displaystyle{\int} \e^{\im y \cdot x} \displaystyle{\int} \e^{-\im x \cdot t} \displaystyle{\int} g_n(t-u) \, \mathrm d \mu(u) \mathrm d \tilde{\lambda}_d(t) \mathrm d \tilde{\lambda}_d(x) \\
+ & = \displaystyle{\int} \e^{\im y \cdot x} \displaystyle{\int} \e^{-\im x \cdot t} \displaystyle{\int} g_n(t-u) \, \mathrm d \mu(u) \mathrm d \tilde{\lambda}_d(t) \mathrm d \tilde{\lambda}_d(x) \\
+ & = \displaystyle{\int}  \displaystyle{\int}  \displaystyle{\int} \e^{\im x \cdot (y-t)} g_n(t-u) \,  \mathrm d \tilde{\lambda}_d(t) \mathrm d \tilde{\lambda}_d(x) \mathrm d \mu(u)
+\end{align*}
+
+Calculons séparément l'intégrale centrale:
+\begin{align*}
+\displaystyle{\int} \e^{\im x \cdot (y-t)} g_n(t-u) \,  \mathrm d \tilde{\lambda}_d(t) & = \displaystyle{\int} \e^{\im x \cdot (y-u-v)} g_n(v) \,  \mathrm d \tilde{\lambda}_d(v) \\
+ & = \e^{\im x \cdot (y-u)} \displaystyle{\int} \e^{-\im x \cdot v} g_n(v) \,  \mathrm d \tilde{\lambda}_d(v) \\
+ & = \e^{\im x \cdot (y-u)} \widehat{g_n}(x) = \e^{\im x \cdot (y-u)} g\left ( \frac{x}{n}\right )
+\end{align*}
+
+Ainsi:
+\begin{align*}
+\check{\widehat{g_n*\mu}}(y) & = \displaystyle{\int}  \displaystyle{\int}  \e^{\im x \cdot (y-u)} g\left ( \frac{x}{n}\right )  \, \mathrm d \tilde{\lambda}_d(x) \mathrm d \mu(u) \\
+ & = \displaystyle{\int}  \displaystyle{\int}  \e^{-\im x \cdot (y-u)} g\left ( \frac{x}{n}\right )  \, \mathrm d \tilde{\lambda}_d(x) \mathrm d \mu(u) \text{ car $g$ est paire}\\
+  & = \displaystyle{\int}   \widehat{\delta_{n}[g]}(y-u)  \mathrm d \mu(u) \text{ avec }\delta\text{ l'opérateur de dilatation}\\
+  & = \displaystyle{\int} n^d g(n(y-u)) \mathrm d \mu(u) = g_n*\mu(y)
+\end{align*}
+\end{proof}
+
+Voici maintenant la preuve du théorème de l'injectivité de la transformée de Fourier.
+
+\begin{proof}
+On suppose ainsi que deux mesures finies $\mu$ et $\nu$ vérifient $\widehat{\mu} = \widehat{\nu}$. Dans ce cas, on a, pour tout $n$:
+\[
+\widehat{g_n}\widehat{\mu} = \widehat{g_n}\widehat{\nu} \text{ donc }\widehat{g_n * \mu} = \widehat{g_n * \nu}
+\]
+
+Ainsi, d'après le second lemme, $g_n*\mu = g_n*\nu$. On en déduit, à l'aide du premier lemme et par passage à la limite que, pour toute fonction $f$ continue à support compact:
+\[
+\displaystyle{\int} f \mathrm d \mu = \displaystyle{\int} f \mathrm d \nu 
+\]
+
+On peut, pour tout compact $K$ fabriquer une suite de fonctions $(f_n)$ continues à support compact, bornée, et qui tendent vers $\mathbb{1}_K$, ce qui prouve, par passage à la limite et application du théorème de convergence dominée, $\mu(K) = \nu(K)$.
+
+\medskip
+On conclut enfin avec le théorème des classes monotones pour en déduire $\mu = \nu$.
+\end{proof}
+
+\subsection{Différents types de convergence}
+
+Dans toute la suite $d$ désigne un entier naturel. On munit $\R^d$ de la tribu borélienne produit.
+
+\begin{de}[Convergence d'une suite de mesures bornées]
+Soit $\left(\mu_n\right)_{n \in \N}$ une suite de mesures bornées sur $\R^d$.
+
+Soit $\mu$ une mesure sur $\R^d$.
+
+On dit que la suite de mesures $(\mu_n)$ converge étroitement (resp. faiblement, vaguement) vers $\mu$ lorsque, pour toute fonction $f$ de $\mathcal{C}_b\left(\R^d,\R\right)$ (resp. $\mathcal{C}_0\left(\R^d,\R\right)$, $\mathcal{C}_K\left(\R^d,\R\right)$):
+\[
+\lim \limits_{n \to +\infty} \displaystyle{\int} f(x) \mathrm d \mu_n(x) = \displaystyle{\int} f(x) \mathrm d \mu(x)
+\]
+\end{de}
+
+
+
+
+\begin{listremarques}
+\item
+Notons que, si $\mu$ n'est pas finie, on ne peut pas avoir de convergence étroite. Pour s'en convaincre, considérer la fonction bornée $\mathbb{1}$.
+\item
+Dans tout ce qui suit, nous allons établir des liens entre ces différents types de convergence.
+\end{listremarques}
+
+\begin{prop}[Lien entre les différents types de convergence]
+De la série d'inclusions $\mathcal{C}_b\left(\R^d,\R\right) \supset \mathcal{C}_0\left(\R^d,\R\right) \supset \mathcal{C}_K\left(\R^d,\R\right)$, nous déduisons que la convergence étroite entraîne la convergence faible qui elle-même entraîne la convergence vague.
+\end{prop}
+
+\begin{prop}[La limite vague d'une suite de mesures est unique]
+Tout est dans le titre!
+\end{prop}
+
+\begin{proof}
+Supposons qu'il existe deux limites (pour la convergence vague) $\mu$ et $\nu$. Soit $P \subset \R^d$ un pavé compact.
+
+\medskip
+Posons, pour tout $p \in \N^*$, $\varphi_p: \, x \mapsto \left ( 1-\mathrm{d}(x;~P)\right )^+$ où $\mathrm d$ désigne la distance.
+
+Le support de $\varphi_p$ est un compact. De plus, $\lim \limits_{p \in \N} \downarrow \varphi_p = \mathbb{1}_P$.
+
+Par passage à la limite sur $n$, on a, pour tout $p$, $\int \varphi_p \mathrm d \mu = \int \varphi_p \mathrm d \nu$.
+
+Par passage à la limite sur $p$, on en déduit $\mu(P) = \nu(P)$. On peut ensuite conclure à l'aide du théorème des classes monotones: $\mu = \nu$.
+\end{proof}
+
+Les résultats suivants précisent un peu le lien entre les différents types de convergence.
+
+\begin{theo}[Lien entre convergence faible et étroite]
+Réciproquement, si $(\mu_n)$ converge faiblement vers $\mu$ et si $\lim \limits_{n \to +\infty} \mu_n\left(\R^d\right) = \mu(\R^d)$, alors $\mu_n$ converge étroitement vers $\mu$.
+\end{theo}
+
+Cette dernière condition s'appelle la convergence des masses totales.
+
+\begin{cerveau}
+En pratique, lorsqu'on examine une suite de probabilités, convergence étroite et convergence faible sont équivalentes. Un second résultat nous montrera que la convergence vague sera elle-aussi équivalente.
+\end{cerveau}
+
+\begin{proof}
+L'inclusion de  $\mathcal{C}_0\left(\R^d,\R\right)$ dans $\mathcal{C}_b\left(\R^d,\R\right)$ rend évident la première implication.
+
+Étudions la réciproque.
+
+Considérons une fonction $f$ continue et bornée. Sans réduire les hypothèses, on peut montrer le résultat en supposant $f$ positive. 
+
+En effet, $f$ est bornée et continue si et seulement si $f^{+}$ et $f^{-}$ le sont.
+
+Et, par définition de l'intégrale, la convergence des intégrales de $f^{+}$ et $f^{-}$ entraînera bien la convergence de l'intégrale de $f$.
+
+Pour tout $q \in \N$, on définit sur $\R$ la fonction $\varphi_q: x \mapsto \begin{cases} 1 \text{ si $x \leq p$}\\ p+1-x \text{ si $x \in ]p;~p+1]$}\\0 \text{ sinon} \end{cases}$.
+
+Cette fonction est continue. On définit également sur $\R^d$ la fonction $\Pi_p: x \mapsto \varphi_q\left(\norm{x}\right)$, peu importe le choix de la norme.
+
+Cette fonction est continue, comme composée de fonctions continues et elle est à support le disque fermé de centre $0$ et de rayon $p+1$ qui est compact. 
+
+En particulier, pour tout $q$ et pour tout $n$, toutes les intégrales de l'égalité suivante sont bien définies et bornées:
+\begin{multline*}
+\displaystyle{\int} f(x) \mathrm d \mu_n(x) - \displaystyle{\int} f(x) \mathrm d \mu(x) = \displaystyle{\int} \Pi_q(x)f(x) \mathrm d \mu_n(x) - \displaystyle{\int} \Pi_q(x)f(x) \mathrm d \mu(x) + \\
+\displaystyle{\int} \left(1-\Pi_q(x)\right)f(x) \mathrm d \mu_n(x) - \displaystyle{\int} \left(1-\Pi_q(x)\right)f(x) \mathrm d \mu(x)
+\end{multline*}
+
+En notant $M>0$ un majorant de $f$, on a donc la majoration:
+\begin{multline*}
+\abs{\displaystyle{\int} f(x) \mathrm d \mu_n(x) - \displaystyle{\int} f(x) \mathrm d \mu(x)} \leq \abs{\displaystyle{\int} \Pi_q(x)f(x) \mathrm d \mu_n(x) - \displaystyle{\int} \Pi_q(x)f(x) \mathrm d \mu(x)} + \\
+M \left(\displaystyle{\int} \left(1-\Pi_q(x)\right) \mathrm d \mu_n(x) + \displaystyle{\int} \left(1-\Pi_q(x)\right)\mathrm d \mu(x)\right)
+\end{multline*}
+
+On va commencer par majorer $M \left(\displaystyle{\int} \left(1-\Pi_q(x)\right) \mathrm d \mu_n(x) + \displaystyle{\int} \left(1-\Pi_q(x)\right)\mathrm d \mu(x)\right)$.
+
+Notons que $\lim \uparrow \Pi_q = \mathbb{1}$ et comme $\mu$ est bornée, pour tout $\varepsilon>0$, il existe $q$ tel que 
+
+$M  \displaystyle{\int} \left(1-\Pi_q(x)\right)\mathrm d \mu(x) \leq \dfrac{\varepsilon}{4}$. On fixe maintenant cette valeur de $q$.
+
+Et comme $\Pi_q$ est continue à support compact, en raison de la convergence étroite et de la convergence des masses totales, il existe $N$ tel que pour tout $n \geq N$,
+
+$
+M \abs{\displaystyle{\int} \left(1-\Pi_q(x)\right) \mathrm d \mu_n(x) - \displaystyle{\int} \left(1-\Pi_q(x)\right)\mathrm d \mu(x)} \leq \dfrac{\varepsilon}{4}
+$.
+
+On en déduit, en utilisant la majoration de $M  \displaystyle{\int} \left(1-\Pi_q(x)\right)\mathrm d \mu(x)$ que 
+
+$M \displaystyle{\int} \left(1-\Pi_q(x)\right) \mathrm d \mu_n(x) \leq \dfrac{\varepsilon}{2}$.
+
+Finalement, il nous reste à majorer $\abs{\displaystyle{\int} \Pi_q(x)f(x) \mathrm d \mu_n(x) - \displaystyle{\int} \Pi_q(x)f(x) \mathrm d \mu(x)}$. Mais comme la fonction $\Pi_q \times f$ est continue et à support compact, c'est très simple! Il existe un rang $\tilde{N}$ éventuellement plus grand que $N$, tel que pour tout $n \geq \tilde{N}$,
+
+$\abs{\displaystyle{\int} \Pi_q(x) f(x) \mathrm d \mu_n(x) - \displaystyle{\int} \Pi_q(x) f(x) \mathrm d \mu(x)} \leq \dfrac{\varepsilon}{4}$.
+
+On obtient donc bien:
+\[
+\abs{\displaystyle{\int} f(x) \mathrm d \mu_n(x) - \displaystyle{\int} f(x) \mathrm d \mu(x)} \leq \dfrac{\varepsilon}{4} + \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{4} = \varepsilon
+\]
+
+Ce qui prouve la convergence étroite de $\mu_n$ vers $\mu$.
+\end{proof}
+
+\begin{cerveau}
+Pour toute fonction $f$, $\mu$-intégrable, on pose $\mu(f) = \int f \mathrm d \mu$. Notons que c'est une forme linéaire positive et que le théorème de Riesz établit que réciproquement, sous certaines conditions, on peut définir une mesure à partir d'une forme linéaire positive sur un espace de fonctions continue à support compact.
+\end{cerveau}
+
+Un premier résultat de convergence étroite.
+
+\begin{prop}[Convergence d'une suite de noyaux gaussiens]
+En utilisant la mesure de Lebesgue normalisée, pour toute suite de réels strictement positifs $(\rho_n)$ tendant vers $0$, la suite de mesures $(\mu_n)$ de densités $\frac{1}{\rho_n^d} g_{a,\rho_n}: \, t \mapsto \frac{1}{\rho_n^d} \e^{\tfrac{-\norm{t-a}^2}{2 \rho_n^2}}$ converge étroitement vers $\delta_a$ la mesure de Dirac en $a$.
+\end{prop}
+
+\begin{proof}
+Notons que $(\mu_n)$ est une suite de probabilités.
+
+\medskip
+Fixons $\eta>0$. Par un changement de variable, on a:
+\[
+\displaystyle{\int} \mathbb{1}_{\norm{x-a} \leq \eta} g_{a,\rho_n}(x) \, \mathrm d \tilde{\lambda}(x) = \displaystyle{\int} \mathbb{1}_{\norm{x} \leq \tfrac{1}{\rho_n} \eta} g(x) \, \mathrm d \tilde{\lambda}(x) \underset{n \to +\infty}{\longrightarrow}  1
+\]
+
+Pour toute fonction $f$ bornée et continue, et pour tout $\varepsilon>0$, il existe $\eta>0$ tel que, pour tout $x \in \left [ a-\eta;~a+\eta \right ]$, $f(x) \in \left [ f(a)-\varepsilon;~f(a) + \varepsilon\right ]$, ce qui donne, par découpage de l'intégrale et passage à la limite:
+\[
+f(a) - \varepsilon \leq \lim \inf  \mu_n\left ( f \right ) \leq \lim \sup \mu_n\left ( f \right ) \leq f(a) + \varepsilon
+\]
+
+$\varepsilon$ étant arbitraire on obtient $\lim \mu_n(f) = f(a) = \delta_a(f)$.
+\end{proof}
+
+\begin{cerveau}
+En fait la suite $\frac{1}{\rho_n^d} g_{a,\rho_n}$ constitue, à une translation près, une suite approximante de l'unité. D'ailleurs, on aurait pu traiter ce lemme en exploitant les convolutions.
+\end{cerveau}
+
+On va maintenant établir une petite proposition qui possède de nombreuses conséquences.
+
+\begin{prop}[Convergence faible et famille totale]
+Soit $\mathcal{F}$ une famille totale dans $\mathcal{C}_0$. Soit $(\mu_n)$ une suite de mesure.
+
+\medskip
+Alors $(\mu_n)$ converge faiblement si et seulement si:
+\begin{itemize}
+\item[$\bullet$] 
+$(\mu_n)$ est bornée;
+\item[$\bullet$] 
+pour tout $f \in \mathcal{F}$, $\mu_n(f)  = \displaystyle{\int} f  \, \mathrm d \mu_n$ converge.
+\end{itemize}
+\end{prop}
+
+\begin{listexemples}
+\item
+Les gaussiennes forment une famille totale de $\mathcal{C}_0$. Voir le document sur le théorème de Stone-Weietrass pour s'en convaincre.
+\item
+On peut préciser l'exemple précédent. 
+On dispose ainsi d'une famille totale dénombrable dans $\mathcal{C}_0$. Il suffit de considérer par exemple les fonctions $g_{a;~b}: \, x \mapsto \e^{-a\norm{x}^2+ b \cdot x}$ avec $a \in \Q^+_*$ et $b \in \Q^d$.
+\item
+Les fonctions continues à support compact $\mathcal{C}_K$ forment une famille totale de $\mathcal{C}_0$.
+\end{listexemples}
+
+
+
+\begin{proof}
+Nous allons montrer uniquement le sens réciproque, en nous appuyant sur le théorème de Riesz. Posons $M > 0$ un majorant de $\left (\mu_n(\R^d)\right )$.
+
+\medskip
+Soit $g \in \mathcal{C}_0$ et $\varepsilon>0$. Il existe une sous-famille finie $(f_i)_{i \in I} \in \mathcal{F}^I$ et des scalaires $(\lambda_i)_{i \in I}$ tous non nuls tels que la combinaison linéaire $\tilde{f} = \displaystyle{\sum \limits_{i \in I}} \lambda_i f_i$ vérifie:
+\[
+\norm{\tilde{f} - g}_{\infty} <  \frac{\varepsilon}{3M}
+\]
+
+Et, pour chaque $i \in I$, il existe $n_i$ tel que, pour tout $p$ et $q$ supérieurs à $n_i$, $\abs{\mu_p(f_i) - \mu_q(f_i)} < \frac{\varepsilon}{3 \abs{\lambda_i} \# I}$ où $\# I$ désigne le cardinal de $I$.
+
+En particulier, par construction, en exploitant la linéarité de l'intégrale et l'inégalité triangulaire, on obtient, pour tout $p$ et $q$ supérieurs à $\max \limits_i n_i$, $\abs{\mu_p \left (\tilde{f}\right ) - \mu_q \left (\tilde{f}\right )} < \frac{\varepsilon}{3}$. Ce qui permet de conclure:
+\[
+\abs{\mu_p(g) - \mu_q(g) } \leq \abs{\mu_p(g) - \mu_p\left ( \tilde{f} \right )} + \abs{\mu_p \left (\tilde{f}\right ) -  \mu_q\left ( \tilde{f} \right )} + \abs{\mu_q \left (\tilde{f}\right ) - \mu_q \left ( g\right ) } < \varepsilon
+\]
+
+La suite $\left (\mu_n(g)\right )$ est de Cauchy donc converge. On définit ainsi, pour tout $g \in \mathcal{C}_0$, la forme linéaire $\mu(g) = \lim \limits_{n} \mu_n(g)$. Par passage à la limite, on vérifie qu'il s'agit d'une forme linéaire positive.
+
+Sachant que $\mathcal{C}_K \subset \mathcal{C}_0$, on peut appliquer le théorème de Riesz et associer à la forme linéaire $\mu$ une unique mesure $\mu$ telle que $\mu(g) = \displaystyle{\int} g \, \mathrm d \mu$.
+\end{proof}
+
+
+\begin{listremarques}
+\item
+La réciproque devient fausse si on enlève l'hypothèse \og suite bornée. \fg{}
+
+Considérer par exemple la suite de mesure, définie pour tout $n > 0$, par $\mu_n = n \delta_n$ où $\delta_n$ est la mesure de Dirac qui vaut $1$ en $n$ et $0$ partout ailleurs.
+
+En effet, pour toute fonction Gaussienne $g$, $\lim \mu_n(g) = 0$. Or, pour la fonction $f: x \mapsto \begin{cases}
+1 \text{ si }x \in [-1;~1] \\
+\frac{1}{\abs{x}} \text{ sinon} 
+\end{cases}$, on a $\mu_n(f) = 1$ pour tout $n$, ce qui est contradictoire car les Gaussiennes forment une famille totale.
+\end{listremarques}
+
+Cette proposition possède un corollaire bien commode.
+
+\begin{cor}[Compacité d'une suite bornée de mesure]
+De toute suite $(\mu_n)$ de mesures bornées on peut extraire une sous-suite qui converge étroitement.
+\end{cor}
+
+
+
+\begin{proof}
+On exploite la proposition précédente. Soit $(g_n)_{n \in \N}$ une famille totale dénombrable dans $\mathcal{C}_0$.
+
+\medskip
+On construit une suite d'extractrices $(\psi_n)$ par l'algorithme suivant.
+
+\medskip
+Pour $n=0$, il existe une extractrice $\varphi_0$ telle que $\left (\mu_{\varphi_0(n)}(g_0)\right )_{n \in \N}$ converge.
+
+On pose $\psi_0 = \varphi_0$.
+
+\medskip
+Pour $p \in \N$ quelconque, on suppose que l'on a construit une extractrice $\psi_p$ telle que, pour tout $k \leq p$, la suite $\left (\mu_{\psi_p(n)}(g_k) \right )_{n \in \N}$ converge.
+
+\medskip
+Mais on sait qu'il existe une extractrice $\varphi_{p+1}$ telle que la suite $\left (\mu_{\psi_p \circ \varphi_{p+1} (n)}(g_{p+1}) \right )_{n \in \N}$ converge. On pose alors $\psi_{p+1} = \psi_p \circ \varphi_{p+1}$ et $\psi_{p+1}$ vérifie que, pour tout $k \leq p+1$, la suite $\left (\mu_{\psi_{p+1}(n)}(g_k) \right )_{n \in \N}$ converge.
+
+\medskip
+On pose ensuite, pour tout $n$, $\tilde{\psi}(n) = \psi_n(n)$. Par construction, pour tout $k \in \N$ et pour tout $n \geq k$, $\tilde{\psi}(n) = \psi_k(p)$ avec $p \geq n$. En particulier, la suite $\left ( \mu_{\tilde{\psi}(n)}(g_k)\right )$ converge. Nous sommes donc dans les conditions d'application de la proposition précédente et pouvons conclure:
+
+La suite $\left ( \mu_{\tilde{\psi}(n)}\right )_{n \in \N}$ converge étroitement.
+\end{proof}
+
+
+\subsection{Convergence de mesures et transformée de Fourier}
+
+Nous allons ici établir un résultat mettant en correspondance la convergence simple de la transformée de Fourier et la convergence étroite d'une suite de mesures.
+
+Voici un premier résultat.
+
+\begin{prop}[Premier résultat de convergence avec Fourier]
+Soit $(\mu_n)$ une suite bornée de mesures. Soit $\mu$ une mesure finie.
+
+\medskip
+Alors $(\mu_n)$ converge étroitement vers $\mu$ si et seulement si la suite des transformées de Fourier $\left (\widehat{\mu}_n\right )$ converge vers la transformée de Fourier $\widehat{\mu}$ de $\mu$.
+\end{prop}
+
+Pour réaliser cette démonstration, on pose:
+\begin{itemize}
+\item[$\bullet$] 
+pour tout $\rho>0$, l'opérateur de dilatation qui, à une fonction $f$, associe $\delta_\rho[f]: \, t \mapsto f\left ( \frac{t}{\rho}\right )$;
+\item[$\bullet$] 
+pour tout $a \in \R^d$, l'opérateur de translation qui,  à une fonction $f$, associe $\tau_a[f]: \, t \mapsto f\left ( t-a\right )$;
+\item[$\bullet$] 
+pour tout $a \in \R^d$, la fonction $\e_a: \, t \mapsto \e^{\im a \cdot t}$.
+\end{itemize}
+
+On rappelle que pour tout $f$ de classe $\L^1$:
+\[
+\widehat{\e^a f} = \tau_a\left [\widehat{f}\right ] \text{ et }\widehat{\delta_{\rho} [f]} = \rho^d \delta_{1/\rho}\left [ \widehat{f}\right ]
+\]
+
+Enfin, on sait que, pourvu que l'on normalise la mesure de Lebesgue, le noyau Gaussien $g$ vérifie $\widehat{g} = g$.
+
+\begin{proof}
+Montrons le sens réciproque de cette proposition. On va ici exploiter la densité des Gaussiennes et reprendre les mêmes hypothèses sur $\rho$ et $a$. 
+Posons:
+\[
+g_{a,\rho}: \, t \mapsto \e^{\tfrac{-\norm{t-a}^2}{2\rho^2}}
+\]
+
+Compte-tenu des remarques précédentes, $g_{a,\rho} = \rho^d \widehat{\e_a \delta_{1/\rho}[g]}$, avec $g: \, t \mapsto \e^{-\tfrac{-\norm{t}^2}{2}}$. Pour alléger, posons $\psi_{a,\rho} = \rho^d \e_a \delta_{1/\rho}[g]$. C'est une fonction de l'espace de Schwartz.
+
+\medskip
+Pour tout $n$, on a, en exploitant le théorème de Fubini-Tonelli
+\begin{align*}
+\displaystyle{\int} g_{a,\rho} \, \mathrm d \mu_n & = \displaystyle{\int} \widehat{\psi_{a,\rho}}  \, \mathrm d \mu_n = \displaystyle{\int} \displaystyle{\int} \mathrm d \mu_n(\omega) \, \mathrm d \lambda(t) \, \e^{-\im \omega \cdot t} \psi_{a,\rho} (t) \\
+ & = \displaystyle{\int} \mathrm d \lambda(t) \, \psi_{a,\rho} (t) \displaystyle{\int} \mathrm d \mu_n(\omega) \,  \, \e^{-\im \omega \cdot t} \\
+ & = \displaystyle{\int} \mathrm d \lambda(t) \, \psi_{a,\rho} (t) \widehat{\mu_n}(t)
+\end{align*}
+
+Nous sommes dans les conditions d'application du théorème de convergence monotone. Pour $n$ tendant vers l'infini, cette quantité tend vers:
+\[
+\displaystyle{\int} \mathrm d \lambda(t) \, \psi_{a,\rho} (t) \widehat{\mu}(t) = \displaystyle{\int} g_{a,\rho} \, \mathrm d \mu
+\]
+
+Ce qui prouve la convergence étroite de la suite de mesures $(\mu_n)$.
+
+\medskip
+Pour montrer le sens direct, on exploite le fait, pour tout $\omega$, la fonction $t \mapsto \e^{\im t \omega \cdot t}$ est continue et bornée, ce qui donne, en raison de la convergence étroite:
+\[
+\lim \limits_{n} \displaystyle{\int} \e^{\im t \omega \cdot t} \, \mathrm d \mu_n(t) = \displaystyle{\int} \e^{\im t \omega \cdot t} \, \mathrm d \mu(t) \text{ c'est à dire }\lim \limits_{n} \widehat{\mu_n} (\omega) = \widehat{\mu} (\omega)
+\]
+
+\end{proof}
+
+
